@@ -23,7 +23,7 @@ const Map =()=>{
     >
         <Marker
         position ={{lat:37.562457, lng:126.941089}}
-        onClick={() => {alert('여기는 신촌세브란스병원입니다.');}}
+        onClick={() => {alert('여기는 거구장의 거구입니다.');}}
         />            
 
     </NaverMap>
