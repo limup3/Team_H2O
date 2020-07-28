@@ -9,7 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import { Container } from "react-bootstrap";
-//test2
+//test
 interface Column {
   id: 'name' | 'code' | 'population' | 'size' | 'density';
   label: string;
