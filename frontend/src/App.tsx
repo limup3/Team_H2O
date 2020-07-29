@@ -6,9 +6,14 @@ import "tailwindcss/dist/base.css";
 // import globalStyles from "styles/globalStyles.css"
 
 import Page from './Page';
+import AdminPage from './AdminPage';
+
+
+
 const App = () => (
     <BrowserRouter>
       <Page />
+      <AdminPage/>
     </BrowserRouter>
 );
 
