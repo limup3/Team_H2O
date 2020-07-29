@@ -6,7 +6,7 @@ import {Map} from './pages/SearchHospital'
 import {Ambulance} from './pages/Ambulance'
 import {TeleMedicine} from './pages/TeleMedicine'
 import {Community} from './pages/Community'
-import {Login, SignUp, Mypage,User_Modify} from './pages/Account'
+import {Login, SignUp, MyPage,User_Modify} from './pages/Account'
 
 
 const Page = () => (
@@ -51,7 +51,7 @@ const Page = () => (
         
         <Route path="/MyPage">
         <NavBar/>
-        <Mypage/>
+        <MyPage/>
         <Footer/>
         </Route>
         <Route path="/User_Modify">
