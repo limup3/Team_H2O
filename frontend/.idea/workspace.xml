@@ -2,18 +2,99 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32746d49-5c9d-479e-b07a-ce460cad7c3c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/images/facebook-icon.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/footer_logo.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/github-icon.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/linkedin-icon.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/main.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/profile1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/profile2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/profile3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/twitter-icon.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/youtube-icon.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/globalStyles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/Team_H2O.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/loose-envify" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/loose-envify.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.yarn-integrity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/js-tokens/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/js-tokens/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/js-tokens/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/js-tokens/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/js-tokens/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/loose-envify/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/loose-envify/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/loose-envify/cli.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/loose-envify/custom.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/loose-envify/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/loose-envify/loose-envify.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/loose-envify/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/loose-envify/replace.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/object-assign/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/object-assign/license" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/object-assign/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/object-assign/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/css/perfect-scrollbar.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/dist/perfect-scrollbar.common.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/dist/perfect-scrollbar.common.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/dist/perfect-scrollbar.esm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/dist/perfect-scrollbar.esm.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/dist/perfect-scrollbar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/dist/perfect-scrollbar.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/src/handlers/click-rail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/src/handlers/drag-thumb.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/src/handlers/keyboard.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/src/handlers/mouse-wheel.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/src/handlers/touch.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/src/lib/class-names.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/src/lib/css.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/src/lib/dom.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/src/lib/event-manager.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/src/lib/util.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/src/process-scroll-diff.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/src/update-geometry.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/perfect-scrollbar/types/perfect-scrollbar.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/prop-types/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/prop-types/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/prop-types/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/prop-types/checkPropTypes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/prop-types/factory.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/prop-types/factoryWithThrowingShims.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/prop-types/factoryWithTypeCheckers.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/prop-types/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/prop-types/lib/ReactPropTypesSecret.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/prop-types/node_modules/.bin/loose-envify" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/prop-types/node_modules/.bin/loose-envify.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/prop-types/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/prop-types/prop-types.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/prop-types/prop-types.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-is/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-is/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-is/build-info.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-is/cjs/react-is.development.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-is/cjs/react-is.production.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-is/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-is/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-is/umd/react-is.development.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-is/umd/react-is.production.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-perfect-scrollbar/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-perfect-scrollbar/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-perfect-scrollbar/dist/css/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-perfect-scrollbar/dist/css/styles.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-perfect-scrollbar/dist/css/styles.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-perfect-scrollbar/dist/css/styles.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-perfect-scrollbar/dist/react-perfect-scrollbar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-perfect-scrollbar/dist/react-perfect-scrollbar.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-perfect-scrollbar/dist/react-perfect-scrollbar.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-perfect-scrollbar/dist/react-perfect-scrollbar.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-perfect-scrollbar/lib/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-perfect-scrollbar/lib/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-perfect-scrollbar/lib/scrollbar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-perfect-scrollbar/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-perfect-scrollbar/src/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-perfect-scrollbar/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-perfect-scrollbar/src/scrollbar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/react-perfect-scrollbar/src/styles.scss" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,7 +103,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1etOpEVotiAyKSuG0EYEy3ErEWm" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -34,7 +115,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="ts.external.directory.path" value="C:\Users\lim_1\Team_H2O_Frontend\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="C:\Users\lim_1\Team_H2O\frontend\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -87,6 +168,7 @@
       <workItem from="1595137603994" duration="1443000" />
       <workItem from="1595139184259" duration="2128000" />
       <workItem from="1595834672552" duration="671000" />
+      <workItem from="1595989262312" duration="1211000" />
     </task>
     <servers />
   </component>
@@ -98,7 +180,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
