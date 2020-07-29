@@ -1,14 +1,14 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 
-const MyPage = () => (
+const Logout = () => (
 
 <Container>
-<h1>Mypage</h1>
+<h1>Logout</h1>
 </Container>
 
 
     );
 
 
-export default MyPage
+export default Logout

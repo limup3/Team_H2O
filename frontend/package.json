@@ -4,6 +4,10 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
+<<<<<<< Updated upstream
+=======
+    "@material-ui/icons": "^4.9.1",
+>>>>>>> Stashed changes
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -15,15 +19,14 @@
     "bootstrap": "^4.5.0",
     "feather-icons": "^4.28.0",
     "framer-motion": "^1.11.1",
-    "material-table": "^1.66.0",
     "mdbreact": "^4.27.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
-    "react-circle": "^1.1.1",
-    "react-countdown": "^2.2.1",
     "react-dom": "^16.13.1",
-    "react-moment-countdown": "^0.4.1",
-    "react-naver-maps": "^0.0.13",
+    "react-map-gl": "^5.2.7",
+    "react-map-gl-directions": "^1.0.4",
+    "react-map-gl-geocoder": "^2.0.11",
+    "react-naver-maps": "0.0.13",
     "react-player": "^2.3.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
@@ -31,7 +34,12 @@
     "semantic-ui-react": "^0.88.2",
     "styled-components": "^5.1.1",
     "tailwindcss": "^1.4.6",
+<<<<<<< Updated upstream
     "twin.macro": "^1.4.1"
+=======
+    "twin.macro": "^1.4.1",
+    "underscore": "^1.10.2"
+>>>>>>> Stashed changes
   },
   "scripts": {
     "start": "react-scripts start",

@@ -5,14 +5,20 @@ import {MainTopPage, MainBottomPage} from './pages/splash-page'
 import {Map} from './pages/SearchHospital'
 import {Ambulance} from './pages/Ambulance'
 import {TeleMedicine} from './pages/TeleMedicine'
+<<<<<<< Updated upstream
 import {Community} from './pages/Community'
 import {Login, SignUp, Mypage,User_Modify} from './pages/Account'
+=======
+import {Community, Review} from './pages/Community'
+import {Login, Logout, MyPage} from './pages/Account'
+>>>>>>> Stashed changes
 
 
 const Page = () => (
 
     <Switch>
         <Route path="/" exact>
+                {/*특정한것만 불러오고싶을때*/}
         <NavBar/>
         <MainTopPage/>
         <MainBottomPage/>
@@ -22,6 +28,12 @@ const Page = () => (
         <Route path="/Ambulance">
         <NavBar/>
         <Ambulance/>
+        <Footer/>
+        </Route>
+
+        <Route path="/Review">
+        <NavBar/>
+        <Review/>
         <Footer/>
         </Route>
 
@@ -49,23 +61,23 @@ const Page = () => (
         <Footer/>
         </Route>
         
-        <Route path="/MyPage">
+        <Route path="/Logout">
         <NavBar/>
+<<<<<<< Updated upstream
         <Mypage/>
-        <Footer/>
-        </Route>
-        <Route path="/User_Modify">
-        <NavBar/>
-        <User_Modify/>
-        <Footer/>
-        </Route>
-
-        <Route path="/SignUp">
-        <NavBar/>
-        <SignUp/>
+=======
+        <Logout/>
+>>>>>>> Stashed changes
         <Footer/>
         </Route>
         
+        <Route path="/MyPage">
+        <NavBar/>
+        <MyPage/>
+        <Footer/>
+        </Route>
+
+
     </Switch>
 );
 

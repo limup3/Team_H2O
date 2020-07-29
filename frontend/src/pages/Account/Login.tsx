@@ -1,42 +1,14 @@
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
+import React from "react";
+import { Container } from "react-bootstrap";
 
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+const Login = () => (
+
+<Container>
+<h1>Login</h1>
+</Container>
 
 
-const useStyles = makeStyles((theme) => ({
-    paper: {
-        marginTop: theme.spacing(8),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    // 로그인 아이콘 중앙정렬 (Sign in 아이콘)
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
-    },
-    // 로그인 아이콘 색상
-    form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
-    },
-    // 폼 정렬
-    submit: {
-        margin: theme.spacing(3, 0, 2),
-    },
-    //SIGN IN 버튼 정렬
-}));
-
+<<<<<<< Updated upstream
 const Login = () => {
     const classes = useStyles();
     return (
@@ -100,6 +72,9 @@ const Login = () => {
                 </form>
             </div>
         </Container>
+=======
+>>>>>>> Stashed changes
     );
-}
+
+
 export default Login

@@ -3,10 +3,10 @@ import tw from "twin.macro";
 import styled from "styled-components";
 // import {Container as ContainerBase } from "components/misc/Layouts"
 import { Container } from "react-bootstrap";
-import logo from "../../helpers/images/logo.svg"
-import { ReactComponent as FacebookIcon } from "../../helpers/images/facebook-icon.svg";
-import { ReactComponent as TwitterIcon } from "../../helpers/images/twitter-icon.svg";
-import { ReactComponent as YoutubeIcon } from "../../helpers/images/youtube-icon.svg";
+import logo from "../../images/logo.svg"
+import { ReactComponent as FacebookIcon } from "../../images/facebook-icon.svg";
+import { ReactComponent as TwitterIcon } from "../../images/twitter-icon.svg";
+import { ReactComponent as YoutubeIcon } from "../../images/youtube-icon.svg";
 
 
 // const Container = tw(ContainerBase)`bg-gray-900 text-gray-100 -mx-8 -mb-8`

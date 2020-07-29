@@ -5,7 +5,18 @@ import { Container } from "react-bootstrap";
 import ReactPlayer from 'react-player'
 // import { css } from "styled-components/macro"; //eslint-disable-line
 
+import Header, { NavLink, NavLinks, PrimaryLink, LogoLink, NavToggle, DesktopNavLinks } from "../../layout/header/light";
+import ResponsiveVideoEmbed from "../../helpers/ResponsiveVideoEmbed.js";
 
+const StyledHeader = styled(Header)`
+  ${tw`pt-8 max-w-none`}
+  ${DesktopNavLinks} ${NavLink}, ${LogoLink} {
+    ${tw`text-gray-100 hover:border-gray-300 hover:text-gray-300`}
+  }
+  ${NavToggle}.closed {
+    ${tw`text-gray-100 hover:text-primary-500`}
+  }
+`;
 
 const Context = styled.div`
   background-image: url("https://img.onestore.co.kr/thumbnails/img_sac/0_0_A20_40/data6/android/201412/27/SE201412131811506170004506/0000680735/img/preview/0000680735_DP000105.png");
@@ -33,9 +44,26 @@ const Heading = styled.h1`
   }
 `;
 
+const SlantedBackground = styled.span`
+  ${tw`relative text-primary-500 px-4 -mx-4 py-2`}
+  &::before {
+    content: "";
+    ${tw`absolute inset-0 bg-gray-100 transform -skew-x-12 -z-10`}
+  }
+`;
 
 const Notification = tw.span`inline-block my-4 pl-3 py-1 text-primary-500 border-l-4 border-blue-500 font-medium text-sm`;
 
+const PrimaryAction = tw.button`px-8 py-3 mt-10 text-sm sm:text-base sm:mt-16 sm:px-8 sm:py-4 bg-gray-100 text-primary-500 font-bold rounded shadow transition duration-300 hocus:bg-primary-500 hocus:text-gray-100 focus:shadow-outline`;
+
+const StyledResponsiveVideoEmbed = styled(ResponsiveVideoEmbed)`
+  padding-bottom: 56.25% !important;
+  padding-top: 0px !important;
+  ${tw`rounded`}
+  iframe {
+    ${tw`rounded bg-black shadow-xl`}
+  }
+`;
 
 const MainTopPage = () => (
   
@@ -49,13 +77,19 @@ const MainTopPage = () => (
           <span >&nbsp;&nbsp;병원찾기</span>
           <br />
           <br/>
+          {/* <SlantedBackground>Search Hospital</SlantedBackground> */}
         </Heading>
         <Actions>
               <input type="text" placeholder="Search Hospital" />
               <button>Click !</button>
             </Actions>
+        {/* <PrimaryAction>Click !</PrimaryAction> */}
       </LeftColumn>
       <RightColumn>
+        {/* <StyledResponsiveVideoEmbed
+          url="//player.vimeo.com/video/374265101?title=0&portrait=0&byline=0&autoplay=0&responsive=1"
+          background="transparent"
+        /> */}
         <ReactPlayer
         url='https://www.youtube.com/watch?v=hSxNj8pKAZg' playing controls
         width="100%"

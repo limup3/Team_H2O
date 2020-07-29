@@ -2,18 +2,20 @@ import React from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro";
-import { Container, ContentWithPaddingXl } from "../../helpers/misc/Layouts";
-import { SectionHeading, Subheading as SubheadingBase } from "../../helpers/misc/Headings";
-import { ReactComponent as TwitterIcon} from "../../helpers/images/twitter-icon.svg";
-import { ReactComponent as LinkedinIcon} from "../../helpers/images/linkedin-icon.svg";
-import { ReactComponent as GithubIcon } from "../../helpers/images/github-icon.svg";
-import profile1 from "../../helpers/images/profile1.png"
-import profile2 from "../../helpers/images/profile2.png"
-import profile3 from "../../helpers/images/profile3.jpg"
+import { Container, ContentWithPaddingXl } from "../../misc/Layouts";
+import { SectionHeading, Subheading as SubheadingBase } from "../../misc/Headings";
+import {SectionDescription} from "../../misc/Typography";
+import { ReactComponent as TwitterIcon} from "../../images/twitter-icon.svg";
+import { ReactComponent as LinkedinIcon} from "../../images/linkedin-icon.svg";
+import { ReactComponent as GithubIcon } from "../../images/github-icon.svg";
+import profile1 from "../../images/profile1.png"
+import profile2 from "../../images/profile2.png"
+import profile3 from "../../images/profile3.jpg"
 
 const HeadingContainer = tw.div``
 const Heading = tw(SectionHeading)``
 const Subheading = tw(SubheadingBase)`text-center mb-3`
+const Description = tw(SectionDescription)`mx-auto text-center`
 
 const Cards = tw.div`flex flex-wrap flex-row justify-center sm:max-w-2xl lg:max-w-5xl mx-auto`
 const Card = tw.div`mt-24 w-full sm:w-1/2 lg:w-1/3 flex flex-col items-center`
