@@ -112,7 +112,7 @@ const AdminPage = () => {
         layout={MainLayout}
         path="/admin/SalesOverView"
       />
-      <Redirect to="/not-found" />
+      
     </Switch>
     </Router>
       </ThemeProvider>

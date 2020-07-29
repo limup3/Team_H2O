@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState }  from 'react';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -37,8 +40,45 @@ const useStyles = makeStyles((theme) => ({
     //SIGN IN 버튼 정렬
 }));
 
+const POST_LOGIN_REQUEST = 'POST_LOGIN_REQUEST'
+//액션
+
+export const loginRequestAction = data => ({type: POST_LOGIN_REQUEST, payload:data})
+//액션 생성기
+
+export const loginReducer = (state = {}, action) => {
+    switch (action.type) {
+        case 'POST_LOGIN_REQUEST' : return action.payload
+        default: return state;
+    }
+}
+//리듀서
+
+export const postLoginRequest = data => async dispatch => {
+    axios.post(`http://localhost:8080/user/login`, data)
+    .then(response => {
+        dispatch(loginRequestAction(response.data))
+        sessionStorage.setItem("userId", response.data.userId)
+    }).catch(error => { throw(error) })
+}
+// dispatch redux
+
 const Login = () => {
     const classes = useStyles();
+
+    const [userId, setUserId] = useState("");
+    const [password, setPassword] = useState("");
+
+    const history = useHistory();
+
+    const dispatch = useDispatch();
+
+    const handleLoginButton = e => {
+        e.preventDefault()
+        dispatch(postLoginRequest({userId: userId, password:password}))
+        alert(`${userId}님 안녕하세요.`)
+    }
+
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -60,6 +100,8 @@ const Login = () => {
                         name="userId"
                         autoComplete="userId"
                         autoFocus
+                        value={userId}
+                        onChange={e => setUserId(e.target.value)}                       
                     />
                     <TextField
                         variant="outlined"
@@ -71,6 +113,8 @@ const Login = () => {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
                     />
                     <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
@@ -82,6 +126,7 @@ const Login = () => {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
+                        onClick={handleLoginButton}
                     >
                         Login
                     </Button>

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 @Entity @Getter
 @Setter
 @ToString
+@Component
 @NoArgsConstructor
 @Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id"})})
 public class User {
