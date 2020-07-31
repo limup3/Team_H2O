@@ -8,7 +8,7 @@ import { combineReducers, createStore, applyMiddleware } from 'redux';
 import {loginReducer} from './pages/Account'
 import Page from './Page';
 import AdminPage from './AdminPage';
-
+//rootReducer
 const rootReducer = combineReducers({
   loginReducer
 })
