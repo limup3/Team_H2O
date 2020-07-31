@@ -5,7 +5,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
+// import Link from '@material-ui/core/Link';
+import { Link } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
 
 import Typography from '@material-ui/core/Typography';
@@ -37,6 +38,35 @@ const useStyles = makeStyles((theme) => ({
     //SIGN IN 버튼 정렬
 }));
 
+<<<<<<< Updated upstream
+=======
+const POST_LOGIN_REQUEST = 'POST_LOGIN_REQUEST'
+//액션
+
+export const loginRequestAction = data => ({type: POST_LOGIN_REQUEST, payload:data})
+//액션 생성기
+
+export const loginReducer = (state = {}, action) => {
+    switch (action.type) {
+        case 'POST_LOGIN_REQUEST' : return action.payload
+        default: return state;
+    }
+}
+//리듀서
+
+export const postLoginRequest = data => async dispatch => {
+
+    axios.post(`http://localhost:8080/user/login`, data)
+    .then(response => {
+        dispatch(loginRequestAction(response.data))
+        sessionStorage.setItem("userId", response.data.userId)
+    }).catch(error => {
+        throw(error)
+    })
+}
+// dispatch redux
+
+>>>>>>> Stashed changes
 const Login = () => {
     const classes = useStyles();
     return (
@@ -56,7 +86,7 @@ const Login = () => {
                         required
                         fullWidth
                         id="userId"
-                        label="userId"
+                        label="UserId"
                         name="userId"
                         autoComplete="userId"
                         autoFocus
@@ -87,12 +117,12 @@ const Login = () => {
                     </Button>
                     <Grid container>
                         <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Forgot password?
+                            <Link to="/User_IdFind" >
+                                {"Forgot id?"}
                             </Link>
                         </Grid>
                         <Grid item>
-                            <Link href="/admin/SignUp" variant="body2">
+                            <Link to="/SignUp" >
                                 {"Don't have an account? Sign Up"}
                             </Link>
                         </Grid>

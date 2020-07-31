@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -33,8 +34,46 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 const SignUp = () => {
   const classes = useStyles();
+
+  const [userId, setUserId] = useState("");
+  const [userName, setUserName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+
+  const handleIdCheck = e => {
+    e.preventDefault();
+    axios.get(`http://localhost:8080/user/idCheck/${userId}`)
+        .then(response => {
+          alert("아이디가 존재합니다.")
+          setUserId("")
+        }).catch(error => {
+          alert("아이디 생성 가능합니다")
+    })
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    const userJson = {
+      userId : userId,
+      password : password,
+      userName : userName,
+      email : email,
+      phoneNumber : phoneNumber
+    }
+    axios.post(`http://localhost:8080/user/signUp`, userJson)
+        .then(response => {
+            alert('성공')
+        }).catch(
+            error => {
+              alert('실패')
+              throw (error)
+            }
+    )
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -45,8 +84,36 @@ const SignUp = () => {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
-          <Grid container spacing={2}>
+        <form className={classes.form} >
+          <Grid container spacing={3}>
+            <Grid item xs={8}>
+              <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="userId"
+                  label="UserId"
+                  name="userId"
+                  autoComplete="userId"
+                  value = {userId}
+                  onChange={e => setUserId(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={4}
+                  container
+                  direction="column"
+                  alignItems="flex-end"
+            >
+              <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={handleIdCheck}
+              >
+                아이디<br/>
+                중복 확인
+              </Button>
+            </Grid>
+
             <Grid item xs={12}>
               <TextField
                 autoComplete="userName"
@@ -55,8 +122,10 @@ const SignUp = () => {
                 required
                 fullWidth
                 id="userName"
-                label="userName"
+                label="UserName"
                 autoFocus
+                value={userName}
+                onChange={e => setUserName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -64,10 +133,14 @@ const SignUp = () => {
                 variant="outlined"
                 required
                 fullWidth
-                id="userId"
-                label="userId"
-                name="userId"
-                autoComplete="userId"              
+<<<<<<< Updated upstream
+=======
+                id="phoneNumber"
+                label="PhoneNumber"
+                name="phoneNumber"
+                autoComplete="phoneNumber"
+                value={phoneNumber}
+                onChange={e => setPhoneNumber(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -75,11 +148,14 @@ const SignUp = () => {
                 variant="outlined"
                 required
                 fullWidth
+>>>>>>> Stashed changes
                 name="password"
                 label="Password"
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -91,6 +167,8 @@ const SignUp = () => {
             label="Email Address"
             name="email"
             autoComplete="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
           />
             </Grid>
             <Grid item xs={12}>
@@ -106,6 +184,7 @@ const SignUp = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={handleSubmit}
           >
             Sign Up
           </Button>

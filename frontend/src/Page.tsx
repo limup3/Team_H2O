@@ -6,7 +6,7 @@ import {Map} from './pages/SearchHospital'
 import {Ambulance} from './pages/Ambulance'
 import {TeleMedicine} from './pages/TeleMedicine'
 import {Community} from './pages/Community'
-import {Login, SignUp, MyPage,User_Modify} from './pages/Account'
+import {Login, SignUp, MyPage, User_Modify, User_IdFind, User_PwFind, Reset_Pw} from './pages/Account'
 
 
 const Page = () => (
@@ -65,6 +65,25 @@ const Page = () => (
         <SignUp/>
         <Footer/>
         </Route>
+
+        <Route path="/User_IdFind">
+        <NavBar/>
+        <User_IdFind/>
+        <Footer/>
+        </Route>
+
+        <Route path="/User_PwFind">
+        <NavBar/>
+        <User_PwFind/>
+        <Footer/>
+        </Route>
+
+        <Route path="/Reset_Pw">
+        <NavBar/>
+        <Reset_Pw/>
+        <Footer/>
+        </Route>
+
         
     </Switch>
 );
