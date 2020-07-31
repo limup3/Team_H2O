@@ -1,5 +1,5 @@
 import React, { useState }  from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import Avatar from '@material-ui/core/Avatar';
@@ -8,7 +8,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 
 import Typography from '@material-ui/core/Typography';
@@ -89,7 +88,7 @@ const Login = () => {
                 <Typography component="h1" variant="h5">
                     Login
                 </Typography>
-                <form className={classes.form} noValidate>
+                <form className={classes.form} >
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -132,12 +131,12 @@ const Login = () => {
                     </Button>
                     <Grid container>
                         <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Forgot password?
+                            <Link to="/User_FindID" >
+                                {"Forgot id?"}
                             </Link>
                         </Grid>
                         <Grid item>
-                            <Link href="/admin/SignUp" variant="body2">
+                            <Link to="/SignUp" >
                                 {"Don't have an account? Sign Up"}
                             </Link>
                         </Grid>
