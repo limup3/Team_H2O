@@ -40,7 +40,7 @@ const User_FindID = () => {
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h2" variant="h5">
           Find ID
         </Typography>
         <form className={classes.form} >

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
+import axios from 'axios'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -35,6 +35,40 @@ const useStyles = makeStyles((theme) => ({
 
 const SignUp = () => {
   const classes = useStyles();
+  const [userId, setUserId] = useState("");
+  const [password, setPassword] = useState("");
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("")
+
+  const handleIdCheck = e => {
+    e.preventDefault();
+    axios.get(`http://localhost:8080/user/idCheck/${userId}`)
+        .then(response => {
+          alert("이미 존재하는 아이디 입니다.");
+          setUserId("");
+        }).catch(error => {
+      alert("사용한 가능한 아이디 입니다.");
+    })
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const userJson = {
+      userId: userId,
+      password: password,
+      userName: userName,
+      email: email,
+      phoneNumber: phoneNumber
+    }
+    axios.post(`http://localhost:8080/user/signUp`, userJson)
+        .then(response => {
+
+            }
+        ).catch(
+        error => { throw (error) }
+    );
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -42,7 +76,7 @@ const SignUp = () => {
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h2" variant="h5">
           Sign up
         </Typography>
         <form className={classes.form} >
@@ -56,6 +90,8 @@ const SignUp = () => {
                   label="userId"
                   name="userId"
                   autoComplete="userId"
+                  value={userId}
+                  onChange={e => setUserId(e.target.value)}
               />
             </Grid>
             <Grid item xs={4}
@@ -64,7 +100,7 @@ const SignUp = () => {
                   justify="flex-end"
                   alignItems="flex-end"
             >
-              <Button variant="outlined" color="secondary">
+              <Button variant="outlined" color="secondary" onClick={handleIdCheck}>
                 아이디<br/>
                 중복 확인
               </Button>
@@ -79,6 +115,8 @@ const SignUp = () => {
                 id="userName"
                 label="userName"
                 autoFocus
+                value={userName}
+                onChange={e => setUserName(e.target.value)}
               />
             </Grid>
 
@@ -90,7 +128,9 @@ const SignUp = () => {
                 id="phoneNumber"
                 label="phoneNumber"
                 name="phoneNumber"
-                autoComplete="phoneNumber"              
+                autoComplete="phoneNumber"
+                value={phoneNumber}
+                onChange={e => setPhoneNumber(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -103,6 +143,8 @@ const SignUp = () => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -114,6 +156,8 @@ const SignUp = () => {
             label="Email Address"
             name="email"
             autoComplete="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
           />
             </Grid>
             <Grid item xs={12}>

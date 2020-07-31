@@ -1,34 +1,34 @@
-import React from 'react'
-import { Container } from "react-bootstrap";
-import {RenderAfterNavermapsLoaded, NaverMap, Marker} from 'react-naver-maps';
+import React, { Component } from 'react';
+import { Map, GoogleApiWrapper,Marker } from 'google-maps-react';
+import '../../helpers/styles/Map.css'
+const mapStyles = {
+    width: '73%',
+    height: '70%'
+};
+
+export class MapContainer extends Component {
 
 
-const Map =()=>{
-    return (
-<Container>
 
-    <RenderAfterNavermapsLoaded
-    ncpClientId={'h4c9enw8gw'}
-    error={<p>Maps Load Error</p>}
-    loading={<p>Maps Loading...</p>}
->
-    <NaverMap
-        mapDivId={'maps-getting-started-uncontrolled'}
-        style={{
-            width: '1100px',
-            height: '500px',
-        }}
-        defaultCenter={{ lat:37.562457, lng:126.941089 }} // 지도 초기 위치
-        defaultZoom={13} // 지도 초기 확대 배율
-    >
-        <Marker
-        position ={{lat:37.562457, lng:126.941089}}
-        onClick={() => {alert('여기는 신촌세브란스병원입니다.');}}
-        />            
-
-    </NaverMap>
-</RenderAfterNavermapsLoaded>
-</Container>
-    )
+    render() {
+        return (
+            <div className="womap_container">
+                <div className="womap">
+            <Map
+                google={this.props.google}
+                zoom={14}
+                style={mapStyles}
+                initialCenter={{
+                    lat: 37.562457,
+                    lng: 126.941089
+                }}
+            />
+                </div>
+            </div>
+        );
+    }
 }
-export default Map
+
+export default GoogleApiWrapper({
+    apiKey: 'AIzaSyD_d0nY1RTtSkpyu2iY4j85GVIv58DL4NI'
+})(MapContainer);

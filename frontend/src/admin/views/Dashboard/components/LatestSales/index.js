@@ -1,2 +1,2 @@
 export { default } from './LatestSales.jsx';
-export { default as SalesOverView} from './SalesOverView';
+export { default as OverViewSales, DoughnutChart} from './OverViewSales';

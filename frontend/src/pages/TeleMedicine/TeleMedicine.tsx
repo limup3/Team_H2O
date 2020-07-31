@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 const TeleMedicine = () => (
 
 <Container>
-<h1>화상진료</h1>
+<div>화상진료</div>
 </Container>
 
 

@@ -1,7 +1,9 @@
 import palette from '../../../../theme/palette';
 
-export const data = {
-  labels: ['1 Aug', '2 Aug', '3 Aug', '4 Aug', '5 Aug', '6 Aug'],
+export const data = (pram) => {{
+  switch(pram){
+  // data donut value
+  case 0: return {labels: ['1 Aug', '2 Aug', '3 Aug', '4 Aug', '5 Aug', '6 Aug'],
   datasets: [
     {
       label: 'This year',
@@ -14,6 +16,23 @@ export const data = {
       data: [11, 20, 12, 29, 30, 25, 13]
     }
   ]
+}
+  // Data Default Value
+  default: return {labels: ['1 Aug', '2 Aug', '3 Aug', '4 Aug', '5 Aug', '6 Aug'],
+    datasets: [
+      {
+        label: 'This year',
+        backgroundColor: palette.primary.main,
+        data: [18, 5, 19, 27, 29, 19, 20]
+      },
+      {
+        label: 'Last year',
+        backgroundColor: palette.neutral,
+        data: [11, 20, 12, 29, 30, 25, 13]
+      }
+    ]
+  }
+}}
 };
 
 export const options = {
@@ -70,3 +89,13 @@ export const options = {
     ]
   }
 };
+
+export const chartView_7 = () => {
+  alert('7일!')
+}
+export const chartView_15 = () => {
+  alert('15일!')
+}
+export const chartView_30 = () => {
+  alert('30일!')
+}

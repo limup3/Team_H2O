@@ -23,7 +23,10 @@ import {
   SignIn as SignInView,
   NotFound as NotFoundView
 } from './admin/views';
-import { SalesOverView } from './admin/views/Dashboard/components/LatestSales';
+import OverViewSales from './admin/views/Dashboard/components/LatestSales/OverViewSales';
+import { OverViewProducts } from './admin/views/Dashboard/components/LatestProducts';
+import { RecentVisitingHospital } from './admin/views/Dashboard/components/LatestOrders';
+
 
 const browserHistory = createBrowserHistory();
 
@@ -107,12 +110,25 @@ const AdminPage = () => {
         path="/admin/not-found"
       />
       <RouteWithLayout
-        component={SalesOverView}
+        component={OverViewSales}
         exact
         layout={MainLayout}
-        path="/admin/SalesOverView"
+        path="/admin/OverViewSales"
       />
-      
+      <RouteWithLayout
+        component={OverViewProducts}
+        exact
+        layout={MainLayout}
+        path="/admin/OverViewProducts"
+      />
+      <RouteWithLayout
+        component={RecentVisitingHospital}
+        exact
+        layout={MainLayout}
+        path="/admin/RecentVisitingHospital"
+      />
+
+
     </Switch>
     </Router>
       </ThemeProvider>

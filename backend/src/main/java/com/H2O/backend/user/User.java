@@ -11,7 +11,8 @@ import org.springframework.stereotype.Component;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity @Getter
+@Entity
+@Getter
 @Setter
 @ToString
 @Component
@@ -31,4 +32,6 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Reservation> reservation;
+
+
 }

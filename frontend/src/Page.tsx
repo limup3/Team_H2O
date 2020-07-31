@@ -5,7 +5,7 @@ import {MainTopPage, MainBottomPage} from './pages/splash-page'
 import {Map} from './pages/SearchHospital'
 import {Ambulance} from './pages/Ambulance'
 import {TeleMedicine} from './pages/TeleMedicine'
-import {Community} from './pages/Community'
+import {Community, CustomerServiceCenter, QueAn, Review, Edit} from './pages/Community'
 import {Login, SignUp, MyPage, User_Modify, User_FindID, User_FindPW, Reset_PW} from './pages/Account'
 
 
@@ -24,6 +24,31 @@ const Page = () => (
         <Ambulance/>
         <Footer/>
         </Route>
+
+        <Route path="/CustomerServiceCenter">
+        <NavBar/>
+        <CustomerServiceCenter/>
+        <Footer/>
+        </Route>
+
+        <Route path="/QueAn">
+        <NavBar/>
+        <QueAn/>
+        <Footer/>
+        </Route>
+
+        <Route path="/Review">
+        <NavBar/>
+        <Review/>
+        <Footer/>
+        </Route>
+
+        <Route path="/Edit">
+        <NavBar/>
+        <Edit/>
+        <Footer/>
+        </Route>
+
 
         <Route path="/TeleMedicine">
         <NavBar/>
@@ -79,7 +104,7 @@ const Page = () => (
          <Footer/>
          </Route>
 
-            <Route path="/SignUp">
+        <Route path="/SignUp">
         <NavBar/>
         <SignUp/>
         <Footer/>

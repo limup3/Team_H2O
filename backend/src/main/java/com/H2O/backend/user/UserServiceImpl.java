@@ -2,6 +2,7 @@ package com.H2O.backend.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
@@ -18,7 +19,7 @@ interface UserService {
 
     Optional<User> createUser(User user);
 }
-
+@Service
 public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;

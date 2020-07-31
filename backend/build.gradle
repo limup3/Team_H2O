@@ -6,7 +6,7 @@ plugins {
     id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
 }
 
-group = 'texas.sbq'
+group = 'com.chatbot'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
@@ -16,6 +16,7 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    annotationProcessor("org.projectlombok:lombok:1.18.8")
     compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: '2.2.5.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.2.5.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web-services', version: '2.2.5.RELEASE'

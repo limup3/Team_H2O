@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 const Map = () => (
 
 <Container>
-<h1>병원찾기</h1>
+<div>병원찾기</div>
 </Container>
 
 
