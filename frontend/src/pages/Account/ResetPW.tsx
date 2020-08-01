@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const User_FindID = () => {
+const ResetPW = () => {
   const classes = useStyles();
 
   return (
@@ -41,38 +41,38 @@ const User_FindID = () => {
         <Avatar className={classes.avatar}>
         </Avatar>
         <Typography component="h2" variant="h5">
-          Find ID
+          Reset Password
         </Typography>
         <form className={classes.form} >
-          <Grid container spacing={2}>
+          <Grid container spacing={2}> 
             <Grid item xs={12}>
               <TextField
-                autoComplete="userName"
-                name="userName"
-                variant="outlined"
-                required
-                fullWidth
-                id="userName"
-                label="userName"
-                autoFocus
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="new_password"
+                  label="New Password"
+                  name="new_password"
+                  autoComplete="new_password"
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="phoneNumber"
-                label="PhoneNumber"
-                type="phoneNumber"
-                id="phoneNumber"
-                autoComplete="current-password"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="confirm_password"
+                  label="Confirm Password"
+                  name="confirm_password"
+                  autoComplete="confirm_password"
               />
             </Grid>
+
 
             <Grid item xs={12}>
             </Grid>
           </Grid>
+          <Link to="/Login">
           <Button
             type="submit"
             fullWidth
@@ -80,23 +80,12 @@ const User_FindID = () => {
             color="primary"
             className={classes.submit}
           >
-            Find
+            Change
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link to="/User_FindPW" >
-                {"Forgot Password?"}
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link to="/Login" >
-                {"Already have an account? Sign in"}
-              </Link>
-            </Grid>
-          </Grid>
+          </Link>
         </form>
       </div>
     </Container>
   );
 }
-export default User_FindID
+export default ResetPW

@@ -1,12 +1,12 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import {Switch, Route } from "react-router-dom";
 import {NavBar, Footer} from './layout'
 import {MainTopPage, MainBottomPage} from './pages/splash-page'
 import {Map} from './pages/SearchHospital'
 import {Ambulance} from './pages/Ambulance'
 import {TeleMedicine} from './pages/TeleMedicine'
 import {Community, CustomerServiceCenter, QueAn, Review, Edit} from './pages/Community'
-import {Login, SignUp, MyPage, User_Modify, User_FindID, User_FindPW, Reset_PW} from './pages/Account'
+import {Login, SignUp, MyPage, UserModify, UserFindID, UserFindPW, ResetPW, Navtest} from './pages/Account'
 
 
 const Page = () => (
@@ -22,6 +22,12 @@ const Page = () => (
         <Route path="/Ambulance">
         <NavBar/>
         <Ambulance/>
+        <Footer/>
+        </Route>
+
+        <Route path="/navtest">
+        <Navtest/>
+        <MainBottomPage/>
         <Footer/>
         </Route>
 
@@ -80,27 +86,27 @@ const Page = () => (
         <Footer/>
         </Route>
 
-        <Route path="/User_Modify">
+        <Route path="/UserModify">
         <NavBar/>
-        <User_Modify/>
+        <UserModify/>
         <Footer/>
         </Route>
 
-        <Route path="/User_FIndID">
+        <Route path="/UserFIndID">
         <NavBar/>
-        <User_FindID/>
+        <UserFindID/>
         <Footer/>
         </Route>
 
-        <Route path="/User_FIndPW">
+        <Route path="/UserFIndPW">
          <NavBar/>
-         <User_FindPW/>
+         <UserFindPW/>
          <Footer/>
          </Route>
 
-        <Route path="/Reset_PW">
+        <Route path="/ResetPW">
          <NavBar/>
-         <Reset_PW/>
+         <ResetPW/>
          <Footer/>
          </Route>
 

@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import {Link} from "react-router-dom";
 
 
 
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const User_Modify = () => {
+const UserFindID = () => {
   const classes = useStyles();
 
   return (
@@ -40,7 +41,7 @@ const User_Modify = () => {
         <Avatar className={classes.avatar}>
         </Avatar>
         <Typography component="h2" variant="h5">
-          MyPage
+          Find ID
         </Typography>
         <form className={classes.form} >
           <Grid container spacing={2}>
@@ -61,24 +62,14 @@ const User_Modify = () => {
                 variant="outlined"
                 required
                 fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
+                name="phoneNumber"
+                label="PhoneNumber"
+                type="phoneNumber"
+                id="phoneNumber"
                 autoComplete="current-password"
               />
             </Grid>
-            <Grid item xs={12}>
-            <TextField
-            variant="outlined"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-          />
-            </Grid>
+
             <Grid item xs={12}>
             </Grid>
           </Grid>
@@ -89,10 +80,18 @@ const User_Modify = () => {
             color="primary"
             className={classes.submit}
           >
-            Change
+            Find
           </Button>
-          <Grid container justify="flex-end">
+          <Grid container>
+            <Grid item xs>
+              <Link to="/UserFindPW" >
+                {"Forgot Password?"}
+              </Link>
+            </Grid>
             <Grid item>
+              <Link to="/Login" >
+                {"Already have an account? Sign in"}
+              </Link>
             </Grid>
           </Grid>
         </form>
@@ -100,4 +99,4 @@ const User_Modify = () => {
     </Container>
   );
 }
-export default User_Modify
+export default UserFindID

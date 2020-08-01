@@ -7,7 +7,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {Link} from "react-router-dom";
 
 
 
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Reset_PW = () => {
+const UserModify = () => {
   const classes = useStyles();
 
   return (
@@ -41,38 +40,48 @@ const Reset_PW = () => {
         <Avatar className={classes.avatar}>
         </Avatar>
         <Typography component="h2" variant="h5">
-          Reset Password
+          MyPage
         </Typography>
         <form className={classes.form} >
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="new_password"
-                  label="New Password"
-                  name="new_password"
-                  autoComplete="new_password"
+                autoComplete="userName"
+                name="userName"
+                variant="outlined"
+                required
+                fullWidth
+                id="userName"
+                label="userName"
+                autoFocus
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="confirm_password"
-                  label="Confirm Password"
-                  name="confirm_password"
-                  autoComplete="confirm_password"
+                variant="outlined"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
               />
             </Grid>
-
-
+            <Grid item xs={12}>
+            <TextField
+            variant="outlined"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+          />
+            </Grid>
             <Grid item xs={12}>
             </Grid>
           </Grid>
-          <Link to="/Login">
           <Button
             type="submit"
             fullWidth
@@ -82,10 +91,13 @@ const Reset_PW = () => {
           >
             Change
           </Button>
-          </Link>
+          <Grid container justify="flex-end">
+            <Grid item>
+            </Grid>
+          </Grid>
         </form>
       </div>
     </Container>
   );
 }
-export default Reset_PW
+export default UserModify

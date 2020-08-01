@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const User_FindPW = () => {
+const UserFindPW = () => {
   const classes = useStyles();
 
   return (
@@ -84,7 +84,7 @@ const User_FindPW = () => {
             <Grid item xs={12}>
             </Grid>
           </Grid>
-          <Link to="/Reset_PW">
+          <Link to="/ResetPW">
           <Button
             type="submit"
             fullWidth
@@ -97,7 +97,7 @@ const User_FindPW = () => {
           </Link>
           <Grid container>
             <Grid item xs>
-              <Link to="/User_FindID" >
+              <Link to="/UserFindID" >
                 {"Find ID ?"}
               </Link>
             </Grid>
@@ -112,4 +112,4 @@ const User_FindPW = () => {
     </Container>
   );
 }
-export default User_FindPW
+export default UserFindPW

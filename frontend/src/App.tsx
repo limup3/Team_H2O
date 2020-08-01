@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "tailwindcss/dist/base.css";
+import "./helpers/styles/globalStyles.css";
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { combineReducers, createStore, applyMiddleware } from 'redux';

@@ -131,7 +131,7 @@ const Login = () => {
                     </Button>
                     <Grid container>
                         <Grid item xs>
-                            <Link to="/User_FindID" >
+                            <Link to="/UserFindID" >
                                 {"Forgot id?"}
                             </Link>
                         </Grid>

@@ -8,6 +8,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SettingsIcon from '@material-ui/icons/Settings';
 import DvrIcon from '@material-ui/icons/Dvr';
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 
 import { Profile, SidebarNav } from './components';
 
@@ -51,15 +52,20 @@ const Sidebar = props => {
       icon: <PeopleIcon />
     },
     {
+      title: '병원(Hospital)',
+      href: '/admin/hospital',
+      icon: <LocalHospitalIcon />
+    },
+    {
       title: '게시판(Board)',
       href: '/admin/board',
       icon: <DvrIcon/>
     },
-    {
-      title: '계정정보(Account)',
-      href: '/admin/account',
-      icon: <AccountBoxIcon />
-    },
+    // {
+    //   title: '계정정보(Account)',
+    //   href: '/admin/account',
+    //   icon: <AccountBoxIcon />
+    // },
     {
       title: '세팅(Settings)',
       href: '/admin/settings',
@@ -71,8 +77,8 @@ const Sidebar = props => {
     <Drawer
       anchor="left"
       classes={{ paper: classes.drawer }}
-      onClose={onClose}
       open={open}
+      onClose={onClose}
       variant={variant}
     >
       <div
@@ -84,6 +90,8 @@ const Sidebar = props => {
         <SidebarNav
           className={classes.nav}
           pages={pages}
+          open
+          onClose
         />
       </div>
     </Drawer>
