@@ -13,7 +13,6 @@ const Page = () => (
 
     <Switch>
         <Route path="/" exact>
-        <NavBar/>
         <MainTopPage/>
         <MainBottomPage/>
         <Footer/>
@@ -25,11 +24,7 @@ const Page = () => (
         <Footer/>
         </Route>
 
-        <Route path="/navtest">
-        <Navtest/>
-        <MainBottomPage/>
-        <Footer/>
-        </Route>
+        
 
         <Route path="/CustomerServiceCenter">
         <NavBar/>
@@ -113,6 +108,12 @@ const Page = () => (
         <Route path="/SignUp">
         <NavBar/>
         <SignUp/>
+        <Footer/>
+        </Route>
+
+        <Route path="/navtest">
+        <Navtest/>
+        <MainBottomPage/>
         <Footer/>
         </Route>
         

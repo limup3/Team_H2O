@@ -54,14 +54,15 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
 
   const defaultLinks = [
     <NavLinks key={1}>
-      <NavLink href="/#">병원찾기</NavLink>
-      <NavLink href="/#">응급차 호출</NavLink>
-      <NavLink href="/#">화상 진료</NavLink>
-      <NavLink href="/#">커뮤니티</NavLink>
-      <NavLink href="/#" tw="lg:ml-12!">
+      <NavLink href="/SearchHospital">병원찾기</NavLink>
+      <NavLink href="/Ambulance">응급차 호출</NavLink>
+      <NavLink href="/TeleMedicine">화상 진료</NavLink>
+      <NavLink href="/Community">커뮤니티</NavLink>
+      <NavLink href="/Admin" target="_blank">관리자(임시)</NavLink>
+      <NavLink href="/Login" tw="lg:ml-12!">
         Login
       </NavLink>
-      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`}href="/#">Sign Up</PrimaryLink>
+      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`}href="/SignUp">Sign Up</PrimaryLink>
     </NavLinks>
   ];
 
