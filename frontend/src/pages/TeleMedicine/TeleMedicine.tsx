@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
 import { Container } from "react-bootstrap";
+import RTCVideo from "./RTCVideo"
 
-const TeleMedicine = () => (
+const TeleMedicine = () => {
+    const [localStream, setLocalStream] = useState<MediaStream>();
+  
+  useEffect(()=>{
+    navigator.mediaDevices.getUserMedia({video: true})
+    .then(stream=>{
+      setLocalStream(stream);
+    })
+  },[]);
 
-<Container>
-<div>화상진료</div>
-</Container>
-
-
-    );
+  return (
+    <div>
+      <RTCVideo
+        mediaStream = {localStream}
+      />
+    </div>
+  );
+}
 
 
 export default TeleMedicine
