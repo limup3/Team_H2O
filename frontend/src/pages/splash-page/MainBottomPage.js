@@ -66,7 +66,7 @@ export default ({
     },
     {
       imageSrc: profile2,
-      position: "leader",
+      position: "Team leader",
       name: "KyungMin Lim",
       links: [
         {
@@ -86,7 +86,7 @@ export default ({
     {
       imageSrc: profile3,
       position: "Manager",
-      name: "WooJoon Park",
+      name: "WooJun Park",
       links: [
         {
           url: "https://twitter.com",

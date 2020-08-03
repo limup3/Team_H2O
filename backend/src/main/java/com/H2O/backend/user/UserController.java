@@ -16,21 +16,29 @@ public class UserController {
     @Autowired UserService userService;
 
     @PostMapping("/signUp")
-    public void signup(@RequestBody String id, String name, String email, String phone, String password) {
-        System.out.println("들어옴");
-        System.out.println("id : "+id);
-        System.out.println("name : "+name);
-        System.out.println("password : "+password);
-        user.setUserId(id);
-        user.setName(name);
-        user.setEmail(email);
-        user.setPhone(phone);
-        user.setPassword(password);
-        userRepository.save(user);
+    public ResponseEntity<User> signup(@RequestBody User user) {
+        Optional<User> signUp = userService.signUp(user);
+
+        if ((signUp.isPresent())) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+
 
     }
 
-    @PostMapping(value = "/login")
+    @GetMapping("/idCheck/{userId}")
+    public ResponseEntity<User> idCheck(@PathVariable String userId) {
+        Optional<User> idCheckResult = userService.findUserByUserId(userId);
+        if(idCheckResult.isPresent()) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody User user) {
         System.out.println(">>>>"+user.toString());
         Optional<User> findUser = userService.findUserByUserId(user.getUserId());
@@ -43,6 +51,16 @@ public class UserController {
             }
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/findId")
+    public ResponseEntity<User> findId(@RequestParam String name, @RequestParam String phone) {
+        Optional<User> findId = userService.findId(name,phone);
+        if(findId.isPresent()) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.badRequest().build();
         }
     }
 

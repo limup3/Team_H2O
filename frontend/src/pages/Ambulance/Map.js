@@ -1,46 +1,73 @@
-import React from 'react'
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
- 
-const containerStyle = {
-  width: '100%px',
-  height: '600px'
-};
- 
-const center = {
-  lat: 37.562457,
-  lng: 126.941089
+import React, { Component } from 'react';
+import { GoogleApiWrapper, InfoWindow, Marker, Map } from 'google-maps-react';
+import '../../helpers/styles/Map.css'
+
+
+const mapStyles = {
+    width: '73%',
+    height: '70%'
 };
 
-const MyComponent =()=> {
-  const [map, setMap] = React.useState(null)//null값을 줌으로써 타입정의를 안한상태
- 
-  const onLoad = React.useCallback(function callback(map) {
-    const bounds = new window.google.maps.LatLngBounds();
-    map.fitBounds(bounds);
-    setMap(map)
-  }, [])
- 
-  const onUnmount = React.useCallback(function callback(map) {
-    setMap(null)
-  }, [])
 
-  return (
-    <LoadScript
-      googleMapsApiKey="AIzaSyDyYteoY6q3NQwsEHFrXfan_q_9VlIVsxk"
-    >
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={10}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
-      >
-        <Marker
-      position={{   lat: 37.562457,lng: 126.941089 }}
-    />
-      </GoogleMap>
-    </LoadScript>
-  )
+export class MapContainer extends Component {
+    state = {
+        showingInfoWindow: true,  //Hides or the shows the infoWindow
+        activeMarker: {},          //Shows the active marker upon click
+        selectedPlace: {},      //Shows the infoWindow to the selected place upon a marker
+        animation : 2
+    };
+
+    onMarkerClick = (props, marker, e) =>
+        this.setState({
+            selectedPlace: props,
+            activeMarker: marker,
+            showingInfoWindow: true
+        });
+
+    onClose = props => {
+        if (this.state.showingInfoWindow) {
+            this.setState({
+                showingInfoWindow: false,
+                activeMarker: null
+            });
+        }
+    };
+
+    render() {
+        return (
+            <div className="womap_container">
+                <div className="womap">
+            <Map
+                google={this.props.google}
+                zoom={14}
+                style={mapStyles}
+                initialCenter={{
+                    lat: 37.562457,
+                    lng: 126.941089
+                }}
+            >
+                <Marker
+                    onClick={this.onMarkerClick}
+                    name={'여기는 신촌 연세대학교입니다.'}
+                />
+                <InfoWindow
+                    marker={this.state.activeMarker}
+                    visible={this.state.showingInfoWindow}
+                    onClose={this.onClose}
+                >
+                    <div>
+                        <h4>{this.state.selectedPlace.name}</h4>
+                    </div>
+                </InfoWindow>
+            </Map>
+                </div>
+            </div>
+
+
+        );
+    }
 }
- 
-export default React.memo(MyComponent)
+
+export default GoogleApiWrapper({
+    apiKey: 'AIzaSyDyYteoY6q3NQwsEHFrXfan_q_9VlIVsxk'
+})(MapContainer);

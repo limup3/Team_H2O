@@ -15,9 +15,11 @@ interface UserService {
 
     void delete(User selectUser);
 
-    Optional<User> findUser(Long id);
+    Optional<User> findId(String name, String phone);
 
-    Optional<User> createUser(User user);
+    Optional<User> findPw(String userId, String name, String phone);
+
+    Optional<User> signUp(User user);
 }
 @Service
 public class UserServiceImpl implements UserService {
@@ -41,12 +43,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findUser(Long id) {
-        return Optional.empty();
+    public Optional<User> findId(String name, String phone) {
+        Optional<User> findId = userRepository.findUserId(name,phone);
+        return findId;
     }
 
     @Override
-    public Optional<User> createUser(User user) {
-        return Optional.empty();
+    public Optional<User> findPw(String userId, String name, String phone) {
+        Optional<User> findPw = userRepository.findUserPw(userId,name,phone);
+        return findPw;
+    }
+
+
+    @Override
+    public Optional<User> signUp(User user) {
+        User createUser = new User();
+        createUser.setUserId(user.getUserId());
+        createUser.setPassword(user.getPassword());
+        createUser.setName(user.getName());
+        createUser.setPhone(user.getPhone());
+        createUser.setEmail(user.getEmail());
+        createUser.setAdminCheck(0);
+
+        System.out.println(createUser);
+        User userData = userRepository.save(createUser);
+        return Optional.of(userData);
+
     }
 }

@@ -10,6 +10,11 @@ import java.util.Optional;
 @Repository
 interface CustomedUserRepository {
     Optional<User> findByUserId(String userId);
+
+    Optional<User> findUserId(String name, String phone);
+
+    Optional<User> findUserPw(String userId, String name, String phone);
+
 }
 
 public class UserRepositoryImpl extends QuerydslRepositorySupport implements CustomedUserRepository {
@@ -27,5 +32,22 @@ public class UserRepositoryImpl extends QuerydslRepositorySupport implements Cus
         User findOne = queryFactory.selectFrom(qUser).where(qUser.userId.eq(userId)).fetchOne();
 
         return Optional.ofNullable(findOne);
+    }
+
+    @Override
+    public Optional<User> findUserId(String name, String phone) {
+        QUser qUser = QUser.user;
+        User findId = queryFactory.selectFrom(qUser).where(qUser.name.eq(name),qUser.phone.eq(phone)).fetchOne();
+
+        return Optional.ofNullable(findId);
+    }
+
+    @Override
+    public Optional<User> findUserPw(String userId, String name, String phone) {
+        QUser qUser = QUser.user;
+        User findPw = queryFactory.selectFrom(qUser).where(qUser.userId.eq(userId),qUser.name.eq(name),
+                qUser.phone.eq(phone)).fetchOne();
+
+        return Optional.ofNullable(findPw);
     }
 }

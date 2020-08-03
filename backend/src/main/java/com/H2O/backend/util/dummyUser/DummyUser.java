@@ -16,6 +16,7 @@ public class DummyUser {
         return randomId;
     }
     public static String generateRandomNo2() {
+
         return (int)(Math.random() * 99)+1 +"";
     }
 
@@ -84,17 +85,24 @@ public class DummyUser {
         return randomEmailEnd;
     }
 
-    // 주소
-    public static List<String> gyeonggiLocal =
-            Arrays.asList("강남구" , "강동구" , "강북구" , "강서구" , "관악구" , "광진구" , "구로구" ,
-                    "금천구" , "노원구" , "도봉구" , "동대문구" , "동작구" , "마포구" , "서대문구" ,
-                    "서초구" , "성동구" , "성북구" , "송파구" , "양천구" , "영등포구" , "용산구" , "은평구" ,
-                    "종로구" , "중구" , "중랑구");
-
-    public static String generateRandomAddress() {
-        Collections.shuffle(gyeonggiLocal);
-        String randomAddress = "서울시" + gyeonggiLocal.get(0);
-        return randomAddress;
+    public static String generateRandomPhone() {
+        List<String> 번호 = Arrays.asList("010","011","012","013");
+        Collections.shuffle(번호);
+        return 번호.get(0);
     }
+    public static String generateRandomPhoneNo() {
+        return (int)(Math.random() * 8999)+1000 +"";
+    }
+    public static void main(String[] args) {
+        // 전화번호
+        for (int i = 0; i < 500; i++)
+        {
+            if(i % 10 == 0) {
+                System.err.println();
+            }
+
+        }
+    }
+
 
 }

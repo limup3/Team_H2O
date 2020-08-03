@@ -6,7 +6,7 @@ import SignUp from './SignUp'
 import UserFindID from "./UserFindID";
 import UserFindPW from "./UserFindPW";
 import ResetPW from "./ResetPW";
-import Navtest from "./Navtest";
+
 export {
-    Login, loginReducer, UserModify, MyPage, SignUp, UserFindID, UserFindPW, ResetPW, Navtest
+    Login, loginReducer, UserModify, MyPage, SignUp, UserFindID, UserFindPW, ResetPW, 
 }

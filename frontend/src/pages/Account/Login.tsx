@@ -53,13 +53,21 @@ export const loginReducer = (state = {}, action) => {
 }
 //리듀서
 
-export const postLoginRequest = data => async dispatch => {
-    axios.post(`http://localhost:8080/user/login`, data)
-    .then(response => {
-        dispatch(loginRequestAction(response.data))
-        sessionStorage.setItem("userId", response.data.userId)
-    }).catch(error => { throw(error) })
-}
+// export const postLoginRequest = data => async dispatch => {
+//     axios.post(`http://localhost:8080/user/login`, data)
+//     .then(response => {
+//         alert("로그인 성공")
+//         dispatch(loginRequestAction(response.data))
+//         sessionStorage.setItem("userId", response.data.userId)
+        
+
+//     }).catch(error => { 
+//         alert("로그인 실패")
+
+//         throw(error) 
+//     }
+//     )
+// }
 // dispatch redux
 
 const Login = () => {
@@ -74,8 +82,23 @@ const Login = () => {
 
     const handleLoginButton = e => {
         e.preventDefault()
-        dispatch(postLoginRequest({userId: userId, password:password}))
-        alert(`${userId}님 안녕하세요.`)
+        const userJson = {
+            userId: userId,
+            password: password
+        }
+        axios.post(`http://localhost:8080/user/login`, userJson)
+            .then(response => {
+                alert("로그인 성공 !")
+                history.push("/")
+                }
+            ).catch(
+                error => {
+                    alert("로그인 실패 !")
+                    throw (error)
+                }
+            )
+        // dispatch(postLoginRequest({userId: userId, password:password}))
+        
     }
 
     return (

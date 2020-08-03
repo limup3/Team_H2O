@@ -26,6 +26,7 @@ public class User {
     @Column(name = "name", nullable = false) private String name;
     @Column(name = "password", nullable = false) private String password;
     @Column(name = "phone", nullable = false) private String phone;
+    @Column(name = "admin_check", nullable = false, columnDefinition = "boolean default 0") private Integer adminCheck;
     @Column(name = "email", nullable = false) private String email;
     @Column(name = "history") private String history;
 

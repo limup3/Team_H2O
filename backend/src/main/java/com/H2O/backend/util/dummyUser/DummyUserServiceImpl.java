@@ -1,6 +1,7 @@
 package com.H2O.backend.util.dummyUser;
 
 import com.H2O.backend.user.User;
+import com.H2O.backend.user.UserRepository;
 import com.H2O.backend.user.UserRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,8 @@ interface DummyUserService {
 
 @Service
 public class DummyUserServiceImpl implements DummyUserService{
+    @Autowired
+    UserRepository userRepository;
 
 
     @Override
@@ -28,9 +31,10 @@ public class DummyUserServiceImpl implements DummyUserService{
             user.setName(DummyUser.generateRandomName());
             user.setEmail(DummyUser.generateRandomEmailId()+"@"+DummyUser.generateRandomEmail()+
                     DummyUser.generateRandomEmailEnd());
+            user.setPhone(DummyUser.generateRandomPhone()+DummyUser.generateRandomPhoneNo()+DummyUser.generateRandomPhoneNo());
+            user.setAdminCheck(0);
             userList.add(user);
         }
-//        return userRepository.saveAll(userList);
-        return null;
+        return userRepository.saveAll(userList);
     }
 }

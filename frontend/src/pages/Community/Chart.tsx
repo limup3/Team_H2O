@@ -3,8 +3,22 @@ import {Table, Navbar,Form,FormControl,Button,DropdownButton,Dropdown} from "rea
 import {Link} from "react-router-dom";
 import './styles.css'
 import './community.css'
+import TablePagination from '@material-ui/core/TablePagination';
 
 const Chart=()=> {
+    const [page, setPage] = React.useState(2);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+    const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (
+        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
 
     return(
 
@@ -43,7 +57,8 @@ const Chart=()=> {
 
                 <tr>
                     <td>0</td>
-                    <td>pw****</td>
+                    <td>
+                        donald**</td>
                     <td>자랑</td>
                     <td><Link to="/Review">내가 오늘 한 일 자랑한다.</Link></td>
                     <td>2020.07.31</td>
@@ -51,11 +66,11 @@ const Chart=()=> {
                 </tr>
                 <tr>
                     <td>1</td>
-                    <td>pw****</td>
+                    <td>Elon**</td>
                     <td>나눔</td>
-                    <td><Link to="/Review">즐거운 나눔활동</Link></td>
-                    <td>2020.07.31</td>
-                    <td>3</td>
+                    <td><Link to="/Review2">즐거운 나눔활동</Link></td>
+                    <td>2020.08.03</td>
+                    <td>160</td>
 
                 </tr>
                 <tr>
@@ -115,6 +130,18 @@ const Chart=()=> {
                 </tbody>
                 <Button className="ml-auto" variant="secondary"
                 ><Link to='/Edit'>글쓰기</Link></Button>
+
+
+                <TablePagination
+                    component="div"
+                    count={100}
+                    page={page}
+                    onChangePage={handleChangePage}
+                    rowsPerPage={rowsPerPage}
+                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                />
+
+
 
             </thead>
 

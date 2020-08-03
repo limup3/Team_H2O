@@ -53,7 +53,7 @@ const MainTopPage = () => {
         <TwoColumn>
           <LeftColumn>
             <Heading>
-              <span tw="text-primary-500">H2O</span>
+              <span tw="text-primary-500">Easy to Search!</span>
             </Heading>
             <Paragraph>
             [ 간편하게 병원 비교검색하고 원하는 병원 찾기 ]

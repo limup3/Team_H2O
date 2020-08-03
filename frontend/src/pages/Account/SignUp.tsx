@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -41,6 +41,8 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("")
 
+  const history = useHistory();
+
   const handleIdCheck = e => {
     e.preventDefault();
     axios.get(`http://localhost:8080/user/idCheck/${userId}`)
@@ -57,16 +59,21 @@ const SignUp = () => {
     const userJson = {
       userId: userId,
       password: password,
-      userName: userName,
+      name: userName,
       email: email,
-      phoneNumber: phoneNumber
+      phone: phoneNumber
     }
     axios.post(`http://localhost:8080/user/signUp`, userJson)
         .then(response => {
-
+          alert("회원가입 성공 !")
+          history.push("/Login")
             }
         ).catch(
-        error => { throw (error) }
+          
+        error => { 
+          alert("회원가입 실패")
+          throw (error) 
+        }
     );
   }
 
@@ -86,6 +93,7 @@ const SignUp = () => {
                   variant="outlined"
                   required
                   fullWidth
+                  // error={ userId === "" ? true : false}
                   id="userId"
                   label="userId"
                   name="userId"
@@ -174,6 +182,7 @@ const SignUp = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={handleSubmit}
           >
             Sign Up
           </Button>
