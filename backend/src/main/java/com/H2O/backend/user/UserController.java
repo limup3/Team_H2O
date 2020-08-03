@@ -61,9 +61,20 @@ public class UserController {
         Optional<User> findId = userService.findId(name,phone);
 
         if(findId.isPresent()) {
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(findId.get());
         } else {
             return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping(value = "/findPw")
+    public ResponseEntity<User> findPw(@RequestParam String userId,
+                                                          @RequestParam String name, @RequestParam String phone) {
+        Optional<User> findPw = userService.findPw(userId, name, phone);
+        if(findPw.isPresent()) {
+            return ResponseEntity.ok(findPw.get());
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 

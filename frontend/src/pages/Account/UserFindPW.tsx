@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -7,7 +7,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {Link} from "react-router-dom";
+import {useHistory, Link} from "react-router-dom";
+import axios from 'axios';
 
 
 
@@ -33,6 +34,28 @@ const useStyles = makeStyles((theme) => ({
 
 const UserFindPW = () => {
   const classes = useStyles();
+  const [userId, setUserId] = useState("");
+  const [userName, setUserName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+
+  const history = useHistory();
+
+  const handleSubmit = e => {
+    e.preventDefault();
+  axios.get(`http://localhost:8080/user/findPw?userId=${userId}&name=${userName}&phone=${phoneNumber}`)
+    .then(response => {
+      alert('성공')
+      console.log(response) 
+      history.push("/ResetPw")
+    }
+    ).catch(
+      error => {
+        alert(`실패`)
+        throw (error)
+      }
+    )
+  }
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -54,6 +77,8 @@ const UserFindPW = () => {
                   label="UserId"
                   name="userId"
                   autoComplete="userId"
+                  value={userId}
+                  onChange={e => setUserId(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -65,6 +90,8 @@ const UserFindPW = () => {
                 fullWidth
                 id="userName"
                 label="userName"
+                value={userName}
+                onChange={e => setUserName(e.target.value)}
                 autoFocus
               />
             </Grid>
@@ -77,6 +104,8 @@ const UserFindPW = () => {
                 label="PhoneNumber"
                 type="phoneNumber"
                 id="phoneNumber"
+                value={phoneNumber}
+                onChange={e => setPhoneNumber(e.target.value)}
                 autoComplete="current-password"
               />
             </Grid>
@@ -84,17 +113,18 @@ const UserFindPW = () => {
             <Grid item xs={12}>
             </Grid>
           </Grid>
-          <Link to="/ResetPW">
+        
           <Button
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={handleSubmit}
           >
             Find
           </Button>
-          </Link>
+       
           <Grid container>
             <Grid item xs>
               <Link to="/UserFindID" >

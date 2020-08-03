@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {Link} from "react-router-dom";
+import {useHistory,Link} from "react-router-dom";
 
 
 
@@ -31,9 +31,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ResetPW = () => {
+const ResetPW = (name) => {
+  console.log(name)
   const classes = useStyles();
-
+  const [newPassword,setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const history = useHistory()
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -50,10 +53,12 @@ const ResetPW = () => {
                   variant="outlined"
                   required
                   fullWidth
-                  id="new_password"
+                  id="newPassword"
                   label="New Password"
-                  name="new_password"
-                  autoComplete="new_password"
+                  name="newPassword"
+                  autoComplete="newPassword"
+                  value={newPassword}
+                  onChange={e => setNewPassword(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -61,10 +66,12 @@ const ResetPW = () => {
                   variant="outlined"
                   required
                   fullWidth
-                  id="confirm_password"
+                  id="confirmPassword"
                   label="Confirm Password"
-                  name="confirm_password"
-                  autoComplete="confirm_password"
+                  name="confirmPassword"
+                  autoComplete="confirmPassword"
+                  value={confirmPassword}
+                  onChange={e => setConfirmPassword(e.target.value)}
               />
             </Grid>
 
