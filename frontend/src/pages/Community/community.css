@@ -1,6 +1,6 @@
 .Submit{
     width: 120px;
-   margin-left: 680px;
+    margin-left: 680px;
 }
 .Cancel{
     width: 120px;
@@ -13,7 +13,7 @@
     width:400px;
 }
 .ml-auto{
-
+    width: 150px;
 }
 .table-comu{
     width: 100%;
@@ -24,4 +24,29 @@
 
 .Rev{
     height: 300px;
+}
+.fix-sub{
+    width: 80px;
+
+}
+.fix-can{
+    width: 80px;
+
+}
+.fix-btn{
+    margin-left: 85%;
+}
+.table-list{
+    width: 80px;
+}
+.comment{
+    height: 100px;
+}
+.custom-table{
+    width: 64%;
+    margin-left: 18%;
+}
+.que-table{
+    width: 64%;
+    margin-left: 18%;
 }

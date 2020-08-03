@@ -1,0 +1,7 @@
+.streaming_container{
+  
+  width : 40%;
+  float: left;  
+  border:1px solid red;
+  margin : 0.5rem;
+}

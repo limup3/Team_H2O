@@ -19,6 +19,7 @@ import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 import { data, options } from './chart';
 import { Link } from 'react-router-dom';
+import { DoughnutChart, BarChart, MixedChart } from './Charts/ChartBody';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -37,8 +38,8 @@ const LatestSales = props => {
   const classes = useStyles();
   //
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [days, setDays] = useState(7)
-
+  const [chartType, setChartType] = useState("도넛형")
+  
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -58,7 +59,7 @@ const LatestSales = props => {
           <div>
           <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} size="small" variant="text" >
           
-          최근 {days}일 전
+          {chartType}
         
           <ArrowDropDownIcon />
           </Button>
@@ -69,22 +70,17 @@ const LatestSales = props => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={()=> {setDays(7); setAnchorEl(null); chartView_7()}}>최근 일주일</MenuItem>
-          <MenuItem onClick={()=> {setDays(15); setAnchorEl(null); chartView_15()}}>최근 15일</MenuItem>
-          <MenuItem onClick={()=> {setDays(30); setAnchorEl(null); chartView_30()}}>최근 한달</MenuItem>
+          <MenuItem onClick={()=> {setAnchorEl(null); setChartType("도넛형")}}>도넛형</MenuItem>
+          <MenuItem onClick={()=> {setAnchorEl(null); setChartType("바형")}}>바형</MenuItem>
+          <MenuItem onClick={()=> {setAnchorEl(null); setChartType("종합형")}}>종합형</MenuItem>
         </Menu>
         </div>}
         
-        title="판매량 통계(Latest Sales)"
+        title="이용자수 통계(Latest Sales)"
       />
       <Divider />
       <CardContent>
-        <div className={classes.chartContainer}>
-          <Bar
-            data={data}
-            options={options}
-          />
-        </div>
+        {chartType === "도넛형" ?  <DoughnutChart/>: chartType === "바형"? <BarChart/>: <MixedChart/>}
       </CardContent>
       <Divider />
       <CardActions className={classes.actions}>

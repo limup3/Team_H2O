@@ -73,7 +73,7 @@ const LatestOrders = props => {
             New entry
           </Button>
         }
-        title="최근 이용 병원(Latest Orders)"
+        title="가맹 병원(Latest Orders)"
       />
       <Divider />
       <CardContent className={classes.content}>

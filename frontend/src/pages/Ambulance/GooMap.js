@@ -1,183 +1,292 @@
 import React from 'react';
+import {MDBBtn, MDBRow, MDBCardBody, MDBCol, MDBIcon, MDBInput, MDBModalFooter} from "mdbreact";
 import {
-    withScriptjs,
-    withGoogleMap,
     GoogleMap,
+    useLoadScript,
     Marker,
-    InfoWindow
-} from "react-google-maps";
-import Geocode from 'react-geocode'
-import { Descriptions} from 'antd';
-import AutoComplete from 'react-google-autocomplete';
+    InfoWindow,
+} from "@react-google-maps/api";
 
-Geocode.setApiKey("AIzaSyD_d0nY1RTtSkpyu2iY4j85GVIv58DL4NI");
-class GooMap extends React.Component {
-    state={
-        address: '',
-        city: '',
-        area: '',
-        state: '',
-        zoom: 15,
-        height: 400,
-        mapPosition:{
-            lat: 0,
-            lng:0,
-        },
-        markerPosition: {
-            lat:0,
-            lng:0,
+import usePlacesAutocomplete, {
+    getGeocode,
+    getLatLng,
+} from "use-places-autocomplete";
+
+import {
+    Combobox,
+    ComboboxInput,
+    ComboboxPopover,
+    ComboboxList,
+    ComboboxOption,
+} from "@reach/combobox";
+
+import "@reach/combobox/styles.css";
+
+const libraries = ["places"];
+
+
+const center = {
+    lat: 37.5717975,
+    lng: 126.9325254,
+};
+const locations = [
+    {
+        name: "cutomerLocation",
+        location: {
+            lat: 37.57822294432912,
+            lng: 126.92318541124448,
         }
     }
-    // Life Cycle
-    componentDidMount() {
-        if(navigator.geolocation ){
-            navigator.geolocation.getCurrentPosition(position => {
-                this.setState({
-                    mapPosition:{
-                        lat:position.coords.latitude,
-                        lng: position.coords.longitude,
-                    },
-                    markerPosition:{
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    }
-                })
-            })
-        }
-    }
-    // 주소 자세하게 받아오기 위해
-    getCity = (addressArray) => {
-        let city = '';
-        for (let i = 0; i < addressArray.length; i++) {
-            if (addressArray[i].types[0] && 'administrative_area_level_2' === addressArray[i].types[0]) {
-                city = addressArray[i].long_name;
-                return city;
-            }
-        }
-    };
-    getArea = (addressArray) => {
-        let area = '';
-        for (let index = 0; index < addressArray.length; index++) {
-            if (addressArray[index].types[0]) {
-                for (let j = 0; j < addressArray.length; j++) {
-                    if ('sublocality_level_1' === addressArray[index].types[j] || 'locality' === addressArray[index].types[j]) {
-                        area = addressArray[index].long_name;
-                        return area;
-                    }
-                }
-            }
-        }
-    };
-    getState = (addressArray) => {
-        let state = '';
-        for (let i = 0; i < addressArray.length; i++) {
-            for (let i = 0; i < addressArray.length; i++) {
-                if (addressArray[i].types[0] && 'administrative_area_level_1' === addressArray[i].types[0]) {
-                    state = addressArray[i].long_name;
-                    return state;
-                }
-            }
-        }
-    };
-    onMarkerDragEnd =(event)=>{
-        //
-        let newLat = event.latLng.lat() //위도
-        let newLng = event.latLng.lng() // 경도
-        Geocode.fromLatLng(newLat,newLng) // Geocode가 위도,경도로부터 주소를 가져온다.
-            .then(response=>{
-                console.log('response',response) // response에 확인하면 주소들이 자세히 찍힌다.
-                const address= response.results[0].formatted_address,
-                    addressArray = response.results[0].address_components,
-                    city= this.getCity(addressArray),
-                    area= this.getArea(addressArray),
-                    state= this.getState(addressArray);
-                this.setState({   // 받아온 값(city,area,State)들을 위에 state에 넣어주기 위해
-                    address: (address) ? address: "",
-                    city:(city)? city: "",
-                    area: (area) ? area: "",
-                    state: (state) ? state: "",
-                    markerPosition:{
-                        lat: newLat,
-                        lng: newLng
-                    },
-                    mapPosition:{
-                        lat: newLat,
-                        lng: newLng
-                    }
-                })
-            })
-        console.log('newLat',newLat)
-    }
-    onPlaceSelected= (place)=>{
-        const address = place.formatted_address,
-            addressArray= place.address_components,
-            city= this.getCity(addressArray),
-            area= this.getArea(addressArray),
-            state= this.getState(addressArray),
-            newLat= place.geometry.location.lat(),
-            newLng= place.geometry.location.lng();
-        this.setState({   // 받아온 값(city,area,State)들을 위에 state에 넣어주기 위해
-            address: (address) ? address: "",
-            city:(city)? city:"",
-            area: (area) ? area: "",
-            state: (state) ? state: "",
-            markerPosition:{
-                lat: newLat,
-                lng: newLng
+
+];
+
+const GooMap=()=> {
+
+    const { isLoaded, loadError } = useLoadScript({
+        googleMapsApiKey: "AIzaSyDyYteoY6q3NQwsEHFrXfan_q_9VlIVsxk",
+        libraries,
+    });
+    const [markers, setMarkers] = React.useState([]);
+    const [selected, setSelected] = React.useState(null);
+
+    const onMapClick = React.useCallback((e) => {
+        setMarkers((current) => [
+            ...current,
+            {
+                lat: e.latLng.lat(),
+                lng: e.latLng.lng(),
+                time: new Date(),
             },
-            mapPosition:{
-                lat: newLat,
-                lng: newLng
-            }
-        })
-    }
-    render() {
-        const MapWithAMarker = withScriptjs(withGoogleMap(props =>
-            <GoogleMap
-                defaultZoom={16}
-                defaultCenter={{ lat: this.state.mapPosition.lat, lng: this.state.mapPosition.lng }}
-            >
-                <Marker
-                    draggable={true} //드래그 기능
-                    onDragEnd={this.onMarkerDragEnd} // 끝나는지점 위치확인하는것
-                    position={{ lat: this.state.markerPosition.lat, lng: this.state.markerPosition.lng }}
+        ]);
+    }, []);
+
+    const mapRef = React.useRef();
+    const onMapLoad = React.useCallback((map) => {
+        mapRef.current = map;
+    }, []);
+
+    const panTo = React.useCallback(({ lat, lng }) => {
+        mapRef.current.panTo({ lat, lng });
+        mapRef.current.setZoom(14);
+    }, []);
+
+    if (loadError) return "Error";
+    if (!isLoaded) return "Loading...";
+    return (
+        <>
+            <div>
+                <form
+                    className="needs-validation"
+                    noValidate
+                    style={{padding:'4rem', margin:'0 auto', maxWidth:800}}
                 >
-                    <InfoWindow
-                        onCloseClick={()=>{
-                        }}>
-                        <div>
-                            {this.state.address}
-                        </div>
-                    </InfoWindow>
-                </Marker>
-                {/* 검색기능 */}
-                <AutoComplete
-                    style={{width:"100%", height:'40px', paddingLeft:16, marginTop:2, marginBottom:'2rem'}}
-                    types={['(regions)']} // type of places in google place API
-                    onPlaceSelected = {this.onPlaceSelected} // drag했을때도 가져오기위해
-                    /*onPlaceSelected = {(place)=>{
-                            console.log(place) // address_components, formatted_address 같은 정보 찍힘
-                        }}*/
-                />
-                ​
-            </GoogleMap>
-        ));
-        return (
-            <div style={{padding:'1rem', margin:'0 auto', maxWidth:1000}}>
-                <Descriptions  bordered>
-                    <Descriptions.Item label="City">{this.state.city}</Descriptions.Item>
-                    <Descriptions.Item label="Area">{this.state.area}</Descriptions.Item>
-                    <Descriptions.Item label="State">{this.state.state}</Descriptions.Item>
-                    <Descriptions.Item label="Address">{this.state.address}</Descriptions.Item>
-                </Descriptions>
-                <MapWithAMarker
-                    googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrQuKKwt0DtPF8vxKPx6dRq3us6me2LO8&language=ko&v=3.exp&libraries=geometry,drawing,places"
-                    loadingElement={<div style={{ height: `100%` }} />}
-                    containerElement={<div style={{ height: `400px` }} />}
-                    mapElement={<div style={{ height: `100%` }} />}
-                />
+                    <MDBRow >
+
+                        <MDBCol md="8" className="mb-3">
+                            <h2> 홍두깨님 회원정보</h2>
+
+                            <label
+                                htmlFor="defaultFormRegisterNameEx"
+                            >
+                                이름
+                            </label>
+                            <input
+                                name="fname"
+                                type="text"
+                                id="defaultFormRegisterNameEx"
+                                className="form-control"
+                                required
+                                value="홍두깨"
+                            />
+                            <label
+                                htmlFor="defaultFormRegisterNameEx"
+                            >
+                                아이디
+                            </label>
+                            <input
+                                name="fname"
+                                type="text"
+                                id="defaultFormRegisterNameEx"
+                                className="form-control"
+                                required
+                                value="Izzy2020"
+                            />
+                            <label
+                                htmlFor="defaultFormRegisterNameEx"
+                            >
+                                이메일
+                            </label>
+                            <input
+                                name="fname"
+                                type="text"
+                                id="defaultFormRegisterNameEx"
+                                className="form-control"
+                                placeholder="홍두깨"
+                                required
+                                value="izzy2020@gmail.com"
+                            />
+                            <label
+                                htmlFor="defaultFormRegisterNameEx"
+                            >
+                                거주지
+                            </label>
+
+                            <input
+                                name="fname"
+                                type="text"
+                                id="defaultFormRegisterNameEx"
+                                className="form-control"
+                                required
+                                value="서울 특별시 서대문구 연희동"
+                            />
+                            <br/><br/>
+
+                            <Locate panTo={panTo} />
+                            <Search panTo={panTo} />
+
+                            <GoogleMap
+                                id="map"
+                                zoom={14}
+                                center={center}
+                                onClick={onMapClick}
+                                onLoad={onMapLoad}
+                            >
+                                <Marker position={center}
+                                        icon={{
+                                            url: `/movingCar.png`,
+                                            origin: new window.google.maps.Point(0, 0),
+                                            anchor: new window.google.maps.Point(15, 15),
+                                            scaledSize: new window.google.maps.Size(30, 30),
+                                        }}/>
+                                {
+                                    locations.map(item => {
+                                        return (
+                                            <Marker key={item.name} position={item.location}
+                                                    icon={{
+                                                        url: `/movingCar.png`,
+                                                        origin: new window.google.maps.Point(0, 0),
+                                                        anchor: new window.google.maps.Point(15, 15),
+                                                        scaledSize: new window.google.maps.Size(30, 30),
+                                                    }}/>
+                                        )
+                                    })
+                                }
+                                {markers.map((marker) => (
+                                    <Marker
+                                        key={`${marker.lat}-${marker.lng}`}
+                                        position={{ lat: marker.lat, lng: marker.lng }}
+                                        onClick={() => {
+                                            setSelected(marker);
+                                        }}
+                                        icon={{
+                                            url: `/movingCar.png`,
+                                            origin: new window.google.maps.Point(0, 0),
+                                            anchor: new window.google.maps.Point(15, 15),
+                                            scaledSize: new window.google.maps.Size(30, 30),
+                                        }}
+                                    />
+                                ))}
+
+                                {selected ? (
+                                    <InfoWindow
+                                        position={{ lat: selected.lat, lng: selected.lng }}
+
+                                        onCloseClick={() => {
+                                            setSelected(null);
+                                        }}
+                                    >
+                                        <div>
+                                            <h2>
+                                                <span role="img" aria-label="bear">
+                                                  🐻
+                                                </span>{" "}
+                                                Alert
+                                            </h2>
+                                            <p>Spotted  {console.log(selected.lat,selected.lng)}</p>
+                                        </div>
+                                    </InfoWindow>
+                                ) : null}
+                            </GoogleMap>
+                        </MDBCol>
+                    </MDBRow>
+                </form>
             </div>
-        );
-    }
+        </>
+    )
 }
-export default GooMap
+function Locate({ panTo }) {
+    return (
+        <button
+            className="locate"
+            onClick={() => {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        panTo({
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        });
+                    },
+                    () => null
+                );
+            }}
+        >
+            <img src="/compass.svg" alt="compass" />
+        </button>
+    );
+}
+function Search({ panTo }) {
+    const {
+        ready,
+        value,
+        suggestions: { status, data },
+        setValue,
+        clearSuggestions,
+    } = usePlacesAutocomplete({
+        requestOptions: {
+            location: { lat: () => 43.6532, lng: () => -79.3832 },
+            radius: 100 * 1000,
+        },
+    });
+
+    // https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompletionRequest
+
+    const handleInput = (e) => {
+        setValue(e.target.value);
+    };
+
+    const handleSelect = async (address) => {
+        setValue(address, false);
+        clearSuggestions();
+
+        try {
+            const results = await getGeocode({ address });
+            const { lat, lng } = await getLatLng(results[0]);
+            console.log(lat,lng)
+            panTo({ lat, lng });
+        } catch (error) {
+            console.log("😱 Error: ", error);
+        }
+    };
+
+    return (
+        <div className="search">
+            <Combobox onSelect={handleSelect}>
+                <ComboboxInput
+                    value={value}
+                    onChange={handleInput}
+                    disabled={!ready}
+                    placeholder="Search your location"
+                />
+                <ComboboxPopover>
+                    <ComboboxList>
+                        {status === "OK" &&
+                        data.map(({ id, description }) => (
+                            <ComboboxOption key={id} value={description} />
+                        ))}
+                    </ComboboxList>
+                </ComboboxPopover>
+            </Combobox>
+        </div>
+    );
+}
+export default GooMap;

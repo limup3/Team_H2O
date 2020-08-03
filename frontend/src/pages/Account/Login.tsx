@@ -89,6 +89,7 @@ const Login = () => {
         axios.post(`http://localhost:8080/user/login`, userJson)
             .then(response => {
                 alert("로그인 성공 !")
+                console.log(response)
                 history.push("/")
                 }
             ).catch(

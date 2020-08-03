@@ -5,7 +5,6 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import {ChartBody} from '../Charts';
 
-
 const ChartHead = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [chartStyle, setChartStyle] = useState("도넛형")
@@ -27,7 +26,9 @@ const ChartHead = () => {
     const TotalEvent = () => {
       setAnchorEl(null);
       }
-
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
     
     return (
         <Card>
@@ -39,7 +40,8 @@ const ChartHead = () => {
             aria-haspopup="true" 
             onClick={handleClick} 
             size="small" 
-            variant="text">
+            variant="text"
+            >
           {chartStyle}<ArrowDropDownIcon />
           </Button>
           <Menu
@@ -47,6 +49,7 @@ const ChartHead = () => {
            anchorEl={anchorEl}
            keepMounted
            open={Boolean(anchorEl)}
+           onClose={handleClose}
            >
           <MenuItem onClick={()=>{DoughnutEvent()}}>도너츠형</MenuItem>
           <MenuItem onClick={()=>{BarEvent()}}>바형</MenuItem>

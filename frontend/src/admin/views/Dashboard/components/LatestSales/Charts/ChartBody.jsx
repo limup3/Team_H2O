@@ -1,6 +1,26 @@
 import React, {useState} from 'react';
 import { Doughnut, Bar } from 'react-chartjs-2';
 
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/styles';
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardActions,
+  Divider,
+  Button,
+  Menu,
+  MenuItem 
+} from '@material-ui/core';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+
+import { data, options } from '../chart';
+import { Link } from 'react-router-dom';
+
+
 // Dounut Chart Data
 const dougnutData = {
 	labels: [ 
@@ -61,18 +81,26 @@ export const BarChart = createReactClass => ({
     return (
       <div>
         <h2>Bar Chart</h2>
-        <Bar
+        <Bar 
           data={barData}
-          width={100}
-          height={50}
-          options={{
-            maintainAspectRatio: false
-          }}
         />
       </div>
     );
   }
 });
+
+// var createReactClass = require('create-react-class');
+// export const DoughnutChart = createReactClass({
+//   displayName: 'DoughnutChart',
+// 	render() {
+// 		return (
+// 		  <div>
+// 			<h2>Dounut Chart</h2>
+// 			<Doughnut data={dougnutData} />
+// 		  </div>
+// 		);
+// 	  }
+// 	});
 
 // Mixed Chart Data
 const mixedData = {
@@ -102,7 +130,7 @@ const mixedData = {
   }]
   };
   
-  const options = {
+  const chartOptions = {
   responsive: true,
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
   tooltips: {
@@ -171,7 +199,7 @@ export const MixedChart = createReactClass => ({
         <h2>Mixed data Example</h2>
         <Bar
           data={mixedData}
-          options={options}
+          options={chartOptions}
           plugins={plugins}
         />
       </div>
@@ -179,12 +207,89 @@ export const MixedChart = createReactClass => ({
   }
 });
 
-const ChartBody = () => {
-    return <div 
-	style={{backgroundColor:"white"}}>
-    <DoughnutChart/>
-    <BarChart/>
-    <MixedChart/>
-</div>
-}
-export default ChartBody
+const useStyles = makeStyles(() => ({
+  root: {},
+  chartContainer: {
+    height: 400,
+    position: 'relative'
+  },
+  actions: {
+    justifyContent: 'flex-end'
+  }
+}));
+
+const ChartBody = props => {
+  const { className, ...rest } = props;
+
+  const classes = useStyles();
+  //
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [days, setDays] = useState(7)
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  
+  //
+  return (
+    <Card
+      {...rest}
+      className={clsx(classes.root, className)}
+    >
+      <CardHeader
+        action={
+          <div>
+          <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} size="small" variant="text" >
+          
+          최근 {days}일 전
+        
+          <ArrowDropDownIcon />
+          </Button>
+          <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={()=> {setDays(7); setAnchorEl(null); }}>최근 일주일</MenuItem>
+          <MenuItem onClick={()=> {setDays(15); setAnchorEl(null); }}>최근 15일</MenuItem>
+          <MenuItem onClick={()=> {setDays(30); setAnchorEl(null); }}>최근 한달</MenuItem>
+        </Menu>
+        </div>}
+        
+        title="판매량 통계(ChartBody)"
+      />
+      <Divider />
+      <CardContent>
+        <div className={classes.chartContainer}>
+          <Bar
+            data={data}
+            options={options}
+          />
+        </div>
+      </CardContent>
+      <Divider />
+      <CardActions className={classes.actions}>
+        <Link
+          color="primary"
+          size="small"
+          variant="text"
+          to="/admin/OverViewSales"
+        >
+          자세히 보기(Overview) <ArrowRightIcon />
+        </Link>
+      </CardActions>
+    </Card>
+  );
+};
+
+ChartBody.propTypes = {
+  className: PropTypes.string
+};
+
+export default ChartBody;

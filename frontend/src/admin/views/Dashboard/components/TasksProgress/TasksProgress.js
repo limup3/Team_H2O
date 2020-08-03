@@ -10,7 +10,9 @@ import {
   Avatar,
   LinearProgress
 } from '@material-ui/core';
-import InsertChartIcon from '@material-ui/icons/InsertChartOutlined';
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -33,8 +35,17 @@ const useStyles = makeStyles(theme => ({
     height: 32,
     width: 32
   },
-  progress: {
-    marginTop: theme.spacing(3)
+  difference: {
+    marginTop: theme.spacing(2),
+    display: 'flex',
+    alignItems: 'center'
+  },
+  differenceIcon: {
+    color: theme.palette.success.dark
+  },
+  differenceValue: {
+    color: theme.palette.success.dark,
+    marginRight: theme.spacing(1)
   }
 }));
 
@@ -60,21 +71,31 @@ const TasksProgress = props => {
               gutterBottom
               variant="body2"
             >
-              과업(TASKS PROGRESS)
+              병원 등록 수
             </Typography>
-            <Typography variant="h3">75.5%</Typography>
+            <Typography variant="h3">71</Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>
-              <InsertChartIcon className={classes.icon} />
+              <LocalHospitalIcon className={classes.icon} />
             </Avatar>
           </Grid>
         </Grid>
-        <LinearProgress
-          className={classes.progress}
-          value={75.5}
-          variant="determinate"
-        />
+        <div className={classes.difference}>
+          <ArrowUpwardIcon className={classes.differenceIcon} />
+          <Typography
+            className={classes.differenceValue}
+            variant="body2"
+          >
+            16%
+          </Typography>
+          <Typography
+            className={classes.caption}
+            variant="caption"
+          >
+            Since last month
+          </Typography>
+        </div>
       </CardContent>
     </Card>
   );

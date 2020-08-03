@@ -41,6 +41,7 @@ const Review = () => {
         <Container>
             <div>
                 <textPath><Link to="/https://twitter.com/realdonaldtrump">Donald J. Trump @realDonaldTrump 님 게시글</Link></textPath>
+
                 <Table striped bordered hover size="sm">
                     <thead>
                     <tr>
@@ -61,7 +62,6 @@ const Review = () => {
                         </td>
                         <td>
                             <textPath>
-
                                 Great to spend time with Mike Singletary while going to Texas. He’s one of the greatest football players ever — A strong man and a really good person. Great being with you Mike! pic.twitter.com/lWsYn4lhOm
                             </textPath>
                         </td>
@@ -69,8 +69,20 @@ const Review = () => {
                     </tr>
 
                     </tbody>
-                </Table>
 
+                </Table>
+                <textPath>
+                    <Button className="fix-btn" variant="secondary">
+                        <Link to='/Fix'>수정하기</Link></Button>
+                </textPath>
+                <Form.Group className="comment">
+                    <button className='comment-btn' >댓글 :</button>
+
+                    <Form.Control type="text" placeholder="Normal text" />
+                    <Button className="fix-btn" variant="secondary" >
+                        <Link to='/Review'>댓글달기</Link>
+                    </Button>
+                </Form.Group>
             </div>
         </Container>
     );

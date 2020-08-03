@@ -2,7 +2,7 @@ import React from "react";
 import {Switch, Route } from "react-router-dom";
 import {NavBar, Footer} from './layout'
 import {MainTopPage, MainBottomPage} from './pages/splash-page'
-import {Map} from './pages/SearchHospital'
+import {SearchHospital} from './pages/SearchHospital'
 import {Ambulance} from './pages/Ambulance'
 import {TeleMedicine} from './pages/TeleMedicine'
 import {Community, CustomerServiceCenter, QueAn, Review, Edit,Review2,Fix} from './pages/Community'
@@ -62,7 +62,7 @@ const Page = () => (
 
         <Route path="/SearchHospital">
         <NavBar/>
-        <Map/>
+        <SearchHospital/>
         <Footer/>
         </Route>
 

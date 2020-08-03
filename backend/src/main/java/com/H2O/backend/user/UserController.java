@@ -54,9 +54,12 @@ public class UserController {
         }
     }
 
-    @PostMapping("/findId")
+    @GetMapping("/findId")
     public ResponseEntity<User> findId(@RequestParam String name, @RequestParam String phone) {
+        System.out.println(name);
+        System.out.println(phone);
         Optional<User> findId = userService.findId(name,phone);
+
         if(findId.isPresent()) {
             return ResponseEntity.ok().build();
         } else {

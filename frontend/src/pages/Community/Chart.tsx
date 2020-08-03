@@ -24,6 +24,7 @@ const Chart=()=> {
 
     <Table striped bordered hover>
 
+
         <Navbar className="bg-light justify-content-between">
             <thead className="table-comu">
                 <tr>
@@ -95,7 +96,7 @@ const Chart=()=> {
                     <td>4</td>
                     <td>pw****</td>
                     <td>후기</td>
-                    <td>너무좋아요! 여긴 꼭 가야해!</td>
+                    <td>너무좋아요! 어머! 여긴 꼭 가야해!</td>
                     <td>2020.07.25</td>
                     <td>7</td>
 
@@ -130,7 +131,6 @@ const Chart=()=> {
                 </tbody>
                 <Button className="ml-auto" variant="secondary"
                 ><Link to='/Edit'>글쓰기</Link></Button>
-
 
                 <TablePagination
                     component="div"

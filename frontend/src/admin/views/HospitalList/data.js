@@ -5,14 +5,14 @@ export default [
     id: uuid(),
     name: '연세 세브란스 병원',
     address: '서울 서대문구 연세로 50-1',
-    homepage: 'https://sev.iseverance.com/index.asp',
+    homepage: 'https://sev.iseverance.com/index',
     phone: '304-428-3097',
     avatarUrl: '/admin_images/avatars/Hospital_Logo_1.png',
     createdAt: 1555016400000
   },
   {
     id: uuid(),
-    name: 'Cao Yu',
+    name: '고려의료원',
     address: '',
     homepage: 'cao.yu@devias.io',
     avatarUrl: '/admin_images/avatars/Hospital_Logo_2.png',
@@ -21,7 +21,7 @@ export default [
   },
   {
     id: uuid(),
-    name: 'Alexa Richardson',
+    name: '서울대병원',
     address: '',
     homepage: 'alexa.richardson@devias.io',
     phone: '770-635-2682',

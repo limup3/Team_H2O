@@ -40,11 +40,11 @@ const HospitalProfile = props => {
   const classes = useStyles();
 
   const user = {
-    name: 'Shen Zhi',
-    city: 'Los Angeles',
-    country: 'USA',
-    timezone: 'GTM-7',
-    avatar: '/admin_images/avatars/avatar_11.png'
+    name: '연세 세브란스 병원',
+    address: '서울 서대문구 연세로 50-1',
+    homepage: 'https://sev.iseverance.com/index',
+    phone: '304-428-3097',
+    avatarUrl: '/admin_images/avatars/Hospital_Logo_1.png',
   };
 
   return (
@@ -59,33 +59,28 @@ const HospitalProfile = props => {
               gutterBottom
               variant="h2"
             >
-              사용자 이름(John Doe)
+             {user.name}
             </Typography>
             <Typography
               className={classes.locationText}
               color="textSecondary"
               variant="body1"
             >
-              {user.city}, {user.country}
+              병원 주소 : <br/> 
+              {user.address}
             </Typography>
             <Typography
               className={classes.dateText}
               color="textSecondary"
               variant="body1"
             >
-              {moment().format('hh:mm A')} ({user.timezone})
+              홈페이지 주소 : <br/>
+              {user.homepage}
             </Typography>
           </div>
           <Avatar
             className={classes.avatar}
-            src={user.avatar}
-          />
-        </div>
-        <div className={classes.progress}>
-          <Typography variant="body1">프로필 완성도(Profile Completeness: 70%)</Typography>
-          <LinearProgress
-            value={70}
-            variant="determinate"
+            src={user.avatarUrl}
           />
         </div>
       </CardContent>
@@ -96,9 +91,9 @@ const HospitalProfile = props => {
           color="primary"
           variant="text"
         >
-          사진 등록(Upload picture)
+          사진 등록
         </Button>
-        <Button variant="text">사진 삭제(Remove picture)</Button>
+        <Button variant="text">사진 삭제</Button>
       </CardActions>
     </Card>
   );

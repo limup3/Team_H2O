@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { makeStyles } from '@material-ui/styles';
+import { Button, Modal } from 'react-bootstrap';
+// import {Button, Col, Container, Form, Image, Modal, Row} from "react-bootstrap";
 import {
   Card,
   CardActions,
@@ -17,11 +19,12 @@ import {
   TableRow,
   Typography,
   TablePagination,
-  Button,
-  Modal
+  Button as MUI_Button
 } from '@material-ui/core';
 
 import { getInitials } from '../../../../helpers';
+import Hospital from '../../../Hospital/Hospital';
+
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -42,6 +45,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-end'
   }
 }));
+
 
 const HospitalsTable = props => {
   const { className, hospitals, ...rest } = props;
@@ -94,6 +98,14 @@ const HospitalsTable = props => {
     setRowsPerPage(event.target.value);
   };
 
+// ModalLine-------------------------------------------- START
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+// ModalLine-------------------------------------------- END
   return (
     <Card
       {...rest}
@@ -116,11 +128,11 @@ const HospitalsTable = props => {
                       onChange={handleSelectAll}
                     />
                   </TableCell>
-                  <TableCell>이름(Name)</TableCell>
-                  <TableCell>이메일(Email)</TableCell>
-                  <TableCell>지역(Location)</TableCell>
-                  <TableCell>휴대폰(Phone)</TableCell>
-                  <TableCell>가입일(Registration date)</TableCell>
+                  <TableCell>이름</TableCell>
+                  <TableCell>홈페이지</TableCell>
+                  <TableCell>병원 주소</TableCell>
+                  <TableCell>연락처</TableCell>
+                  <TableCell>등록일</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -148,12 +160,36 @@ const HospitalsTable = props => {
                           {getInitials(hospital.name)}
                         </Avatar>
                         <Typography variant="body1">
-                          <Button>
-                            {hospital.name}
+                        {/* -------------------- Modal Line ------------------ */}
+                        
+                        <MUI_Button variant="primary" onClick={handleShow}>
+                          {hospital.name}
+                        </MUI_Button>
+                        <Modal 
+                          {...props} 
+                          show={show} 
+                          onHide={handleClose}
+                          size="lg"
+                          aria-labelledby="contained-modal-title-vcenter"
+                          centered
+                          scrollable={Boolean(true)}
+                          >
+                        <Modal.Header closeButton>
+                          <Modal.Title>등록 병원 정보</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body><Hospital/></Modal.Body>
+                        <Modal.Footer>
+                          <Button variant="primary" onClick={handleClose}>
+                            저장
                           </Button>
-                          <Modal>
-                          </Modal>
+                          <Button variant="secondary" onClick={handleClose}>
+                            취소
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
+                        {/* -------------------- Modal Line ------------------ */}
                         </Typography>
+
                       </div>
                     </TableCell>
                     <TableCell>{hospital.homepage}</TableCell>

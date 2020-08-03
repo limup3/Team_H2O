@@ -6,10 +6,9 @@ import './styles.css'
 import './community.css'
 import {Link} from "react-router-dom";
 
-const Review2 = () => {
+const CSReview = () => {
     const [value, setValue] = useState('')
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
@@ -40,7 +39,6 @@ const Review2 = () => {
     return (
         <Container>
             <div>
-                <textPath><Link to="/https://twitter.com/elonmusk"> Elon Musk 님 게시글</Link></textPath>
                 <Table striped bordered hover size="sm">
                     <thead>
                     <tr>
@@ -54,13 +52,12 @@ const Review2 = () => {
                         <td>
                             <textPath
                                 className="use-pic">
-                                <img src="https://img.vogue.co.kr/vogue/2018/03/style_5ab9feda23133-844x930.jpg"/>
-                                Elon Reeve Musk
+                                Donald J. Trump @realDonaldTrump
                             </textPath>
                         </td>
                         <td>
                             <textPath>
-                                I think that's the single best piece of advice: constantly think about how you could be doing things better and questioning yourself.
+                                원하는 서비스를 제공받을수가 없습니다,  오류를 해결해주세요.
                             </textPath>
                         </td>
                         <td>2020.07.31</td>
@@ -68,11 +65,18 @@ const Review2 = () => {
                     </tbody>
                 </Table>
                 <Button className="fix-btn" variant="secondary" >
-                    <Link to='/Fix'>수정하기</Link></Button>
+                    <Link to='/CSFix'>수정하기</Link></Button>
+                <Form.Group className="comment">
+                    <button className='comment-btn' >댓글 :</button>
+                    <Form.Control type="text" placeholder="Normal text" />
+                    <Button className="fix-btn" variant="secondary" >
+                        <Link to='/CSReview'>댓글달기</Link>
+                    </Button>
+                </Form.Group>
             </div>
         </Container>
     );
 };
 
-export default Review2;
+export default CSReview;
 

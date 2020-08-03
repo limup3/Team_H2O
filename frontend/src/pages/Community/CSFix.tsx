@@ -1,24 +1,15 @@
 import React, {useState} from "react";
 import {Container,Form, Button,Modal,Table,} from "react-bootstrap";
-import {Link, useHistory} from "react-router-dom";
-import './styles.css'
-import './community.css'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css';
+import './styles.css'
+import './community.css'
+import {Link} from "react-router-dom";
 
-
-
-const Fix = () => {
+const CSFix = () => {
     const [value, setValue] = useState('')
     const [show, setShow] = useState(false);
-    const history = useHistory();
-
-    const handleClose = (e:any) => {
-        e.preventDefault();
-        history.push("/Review")
-        setShow(false);
-    }
-
+    const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const modules = {
@@ -48,7 +39,6 @@ const Fix = () => {
     return (
         <Container>
             <div>
-                <textPath><Link to="/https://twitter.com/realdonaldtrump">Donald J. Trump @realDonaldTrump 님 게시글</Link></textPath>
                 <Table striped bordered hover size="sm">
                     <thead>
                     <tr>
@@ -62,13 +52,8 @@ const Fix = () => {
                         <td>
                             <textPath
                                 className="use-pic">
-                                <img src="https://search.pstatic.net/common?type=a&size=120x150&quality=95&direct=true&src=http%3A%2F%2Fsstatic.naver.net%2Fpeople%2F7%2F201804241120041041.jpg"/>
                                 Donald J. Trump @realDonaldTrump
-                                <Form.Group>
-                                    <Form.File className="fixfile" />
-                                </Form.Group>
                             </textPath>
-
                         </td>
                         <td>
                             <textPath>
@@ -79,12 +64,13 @@ const Fix = () => {
                                     modules={modules}
                                     formats={formats}
                                 ><textPath>
-                                Great to spend time with Mike Singletary while going to Texas. He’s one of the greatest football players ever — A strong man and a really good person. Great being with you Mike! pic.twitter.com/lWsYn4lhOm
+                                원하는 서비스를 제공받을수가 없습니다,  오류를 해결해주세요.
                                 </textPath>
                                 </ReactQuill>
                                 </textPath>
 
-                        </td>
+
+                    </td>
                         <td>2020.07.31</td>
                     </tr>
                     </tbody>
@@ -92,15 +78,15 @@ const Fix = () => {
                 <div className="fix-btn">
                     <tr>
                         <td>
-                    <Button className="fix-sub" variant="primary" onClick={handleShow}
-                    >Submit
-                    </Button>
+                            <Button className="fix-sub" variant="primary" onClick={handleShow}
+                            >Submit
+                            </Button>
                         </td>
-                    <td>
-                    <Button className="fix-can" variant="danger">
-                        <Link to="/Review">Cancel</Link>
-                    </Button>
-                    </td>
+                        <td>
+                            <Button className="fix-can" variant="danger">
+                                <Link to="/CSReview">Cancel</Link>
+                            </Button>
+                        </td>
                     </tr>
                     <Modal show={show} onHide={handleClose}>
                         <Modal.Header closeButton>
@@ -123,5 +109,5 @@ const Fix = () => {
     );
 };
 
-export default Fix;
+export default CSFix;
 

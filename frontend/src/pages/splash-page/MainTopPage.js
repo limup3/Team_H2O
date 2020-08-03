@@ -5,7 +5,7 @@ import tw from "twin.macro";
 import { css } from "styled-components/macro";
 import AnimationRevealPage from "../../helpers/AnimationRevealPage"
 import Header from "../../layout/header/Header";
-
+import {Link} from "react-router-dom";
 import { ReactComponent as SvgDecoratorBlob1 } from "../../helpers/images/svg-decorator-blob-1.svg";
 import DesignIllustration from "../../helpers/images/design-illustration-2.svg";
 import CustomersLogoStripImage from "../../helpers/images/customers-logo-strip.png";
@@ -60,7 +60,9 @@ const MainTopPage = () => {
             </Paragraph>
             <Actions>
               <input type="text" placeholder="Search Hospital" />
+              <Link to="/SearchHospital">
               <button>Click!</button>
+              </Link>
             </Actions>
             <CustomersLogoStrip>
               <p>Our TRUSTED Customers</p>

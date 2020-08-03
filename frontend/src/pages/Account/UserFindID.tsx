@@ -1,13 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import { useHistory, Link } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {Link} from "react-router-dom";
+import axios from 'axios';
+import { Modal } from 'react-bootstrap';
 
 
 
@@ -31,8 +33,39 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
 const UserFindID = () => {
   const classes = useStyles();
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [userId, setUserId] = useState("");
+  const [show, setShow] = useState(false);
+  const history = useHistory()
+
+  const handleClose = () => setShow(false);
+  const handleCheck = e => {
+    e.preventDefault();
+    handleClose();
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    axios.get(`http://localhost:8080/user/findId?name=${name}&phone=${phone}`)
+    .then(response => {
+      alert('성공')
+      setUserId(response.data.userId);
+      setShow(!show);
+      console.log(response)
+    }
+    ).catch(
+      error => {
+        alert(`실패`)
+        throw (error)
+      }
+    )
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -47,13 +80,15 @@ const UserFindID = () => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                autoComplete="userName"
-                name="userName"
+                autoComplete="name"
+                name="name"
                 variant="outlined"
                 required
                 fullWidth
-                id="userName"
-                label="userName"
+                id="name"
+                label="name"
+                value={name}
+                onChange={e => setName(e.target.value)}
                 autoFocus
               />
             </Grid>
@@ -62,10 +97,12 @@ const UserFindID = () => {
                 variant="outlined"
                 required
                 fullWidth
-                name="phoneNumber"
-                label="PhoneNumber"
-                type="phoneNumber"
-                id="phoneNumber"
+                name="phone"
+                label="phone"
+                type="phone"
+                id="phone"
+                value={phone}
+                onChange={e => setPhone(e.target.value)}
                 autoComplete="current-password"
               />
             </Grid>
@@ -79,6 +116,7 @@ const UserFindID = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={handleSubmit}
           >
             Find
           </Button>
@@ -96,7 +134,30 @@ const UserFindID = () => {
           </Grid>
         </form>
       </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>아이디 찾기 결과</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div>
+            <div>
+              <p>아이디</p>
+              <p>{userId}</p>
+              
+            </div>
+            <button
+              className="btn btn-primary btn-block mb-2 mt-2"
+              onClick={handleCheck}
+            >
+              확인
+            </button>
+          </div>
+          
+        </Modal.Body>
+      </Modal>
     </Container>
+    
+
   );
 }
 export default UserFindID

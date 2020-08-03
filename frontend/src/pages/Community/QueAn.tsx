@@ -10,13 +10,19 @@ const QueAn = () => {
 
     return (
 
-        <Table striped bordered hover>
-            <h1>질의응답</h1>
-            <Navbar className="bg-light justify-content-between" >
+        <Table striped bordered hover className="que-table">
+            <h1>Q&A</h1>
+            <Navbar className="que-nav" >
                 <thead>
                 <tr>
-                    <th>
-                        <textPath>고객아이디</textPath>
+                    <th>번호</th>
+                    <th>사용자 이름</th>
+                    <th style={{width:'150px'}}>
+                        <DropdownButton   id="dropdown-basic-button" title="질문항목">
+                            <Dropdown.Item href="#/action-1">사용질문</Dropdown.Item>
+                            <Dropdown.Item href="#/action-2">결제질문</Dropdown.Item>
+                            <Dropdown.Item href="#/action-3">오류질문</Dropdown.Item>
+                        </DropdownButton>
                     </th>
                     <th className="gesi">
                         <Form inline>
@@ -24,71 +30,58 @@ const QueAn = () => {
                             <Button type="submit">게시물 검색하기</Button>
                         </Form>
                     </th>
-                    <th className="ii"
-                    >
+                    <th className="ii">
                         <textPath>게시물 등록일: </textPath>
-
                     </th>
                     <th>
                         <textPath>조회수</textPath>
+                    </th>
+                    <th>
+                        <textPath>진행상황</textPath>
                     </th>
 
                 </tr>
                 <tbody>
 
                 <tr>
-                    <td>pw***</td>
-                    <td><Link to="/Review">김모씨</Link></td>
+                    <td>0</td>
+                    <td>
+                        donald**</td>
+                    <td>사용질문</td>
+                    <td><Link to="/QAReview">효과적으로 사용할수있는방법?.</Link></td>
                     <td>2020.07.31</td>
                     <td>34</td>
-                </tr>
-                <tr>
-                    <td>pw***</td>
-                    <td><Link to="/Review">이모씨</Link></td>
-                    <td>2020.07.31</td>
-                    <td>3</td>
+                    <td>진행중</td>
 
                 </tr>
                 <tr>
-                    <td>pw***</td>
-                    <td>박모씨</td>
+                    <td>1</td>
+                    <td>Elon**</td>
+                    <td>결제질문</td>
+                    <td><Link to="/QAReview">빠르게 서비스를 이용할수있나요?</Link></td>
+                    <td>2020.08.03</td>
+                    <td>160</td>
+                    <td>진행중</td>
+
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>pw****</td>
+                    <td>오류질문</td>
+                    <td>오류를 안나게하려면 어떻게할까?</td>
                     <td>2020.07.31</td>
                     <td>7</td>
+                    <td>진행중</td>
 
                 </tr>
                 <tr>
-                    <td>pw***</td>
-                    <td>최모씨</td>
+                    <td>3</td>
+                    <td>pw****</td>
+                    <td>오류질문</td>
+                    <td>결제부분에서 중복이 됬습니다.</td>
                     <td>2020.07.30</td>
                     <td>12</td>
-
-                </tr>
-                <tr>
-                    <td>pw***</td>
-                    <td>구모씨</td>
-                    <td>2020.07.25</td>
-                    <td>7</td>
-
-                </tr>
-                <tr>
-                    <td>**</td>
-                    <td>강모씨</td>
-                    <td>@bird</td>
-                    <td>5</td>
-
-                </tr>
-                <tr>
-                    <td>**</td>
-                    <td>조모씨</td>
-                    <td>@horse</td>
-                    <td>7</td>
-
-                </tr>
-                <tr>
-                    <td>**</td>
-                    <td>윤모씨</td>
-                    <td>@shark</td>
-                    <td>7</td>
+                    <td>진행중</td>
 
                 </tr>
                 </tbody>

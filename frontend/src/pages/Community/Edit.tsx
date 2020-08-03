@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Container,Form, Button,Modal} from "react-bootstrap";
+import {Container, Form, Button, Modal, DropdownButton, Dropdown} from "react-bootstrap";
 import { useHistory,Link } from "react-router-dom";
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css';
@@ -37,7 +37,12 @@ const Edit = () => {
     return (
         <Container>
             <div>
-                <textPath>게시글쓰기</textPath>
+                <Form.Group controlId="exampleForm.ControlInput1" >
+                    <Form.Label>게시글 제목: </Form.Label>
+                    <Form.Control type="email" />
+                </Form.Group>
+                <div>내용:</div>
+
                 <ReactQuill
                     theme="snow"
                     value={value}
@@ -45,6 +50,7 @@ const Edit = () => {
                     modules={modules}
                     formats={formats}
                 />
+
                     <div className="input-group">
                         <Form>
                             <Form.Group>

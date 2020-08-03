@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from "react";
 import { Container } from "react-bootstrap";
 import RTCVideo from "./RTCVideo"
-
+import './TeleMedicine.css'
 const TeleMedicine = () => {
     const [localStream, setLocalStream] = useState<MediaStream>();
   
@@ -13,11 +13,11 @@ const TeleMedicine = () => {
   },[]);
 
   return (
-    <div>
+    <Container>
       <RTCVideo
         mediaStream = {localStream}
       />
-    </div>
+    </Container>
   );
 }
 

@@ -23,12 +23,10 @@ const HospitalDetails = props => {
   const classes = useStyles();
 
   const [values, setValues] = useState({
-    firstName: 'Shen',
-    lastName: 'Zhi',
-    email: 'shen.zhi@devias.io',
-    phone: '',
-    state: 'Alabama',
-    country: 'USA'
+    name: '연세 세브란스 병원',
+    address: '서울 서대문구 연세로 50-1',
+    homepage: 'https://sev.iseverance.com/index',
+    phone: '304-428-3097'
   });
 
   const handleChange = event => {
@@ -63,14 +61,14 @@ const HospitalDetails = props => {
         noValidate
       >
         <CardHeader
-          subheader="The information can be edited"
-          title="Profile"
+          subheader="하단의 정보를 변경시 수정됩니다."
+          title="병원 정보 수정"
         />
         <Divider />
         <CardContent>
           <Grid
             container
-            spacing={3}
+            spacing={5}
           >
             <Grid
               item
@@ -79,13 +77,13 @@ const HospitalDetails = props => {
             >
               <TextField
                 fullWidth
-                helperText="Please specify the first name"
-                label="First name"
+                // helperText="병원명을 입력하세요."
+                label="병원명"
                 margin="dense"
-                name="firstName"
+                name="name"
                 onChange={handleChange}
                 required
-                value={values.firstName}
+                value={values.name}
                 variant="outlined"
               />
             </Grid>
@@ -96,12 +94,12 @@ const HospitalDetails = props => {
             >
               <TextField
                 fullWidth
-                label="Last name"
+                label="병원 주소"
                 margin="dense"
                 name="lastName"
                 onChange={handleChange}
                 required
-                value={values.lastName}
+                value={values.address}
                 variant="outlined"
               />
             </Grid>
@@ -112,12 +110,12 @@ const HospitalDetails = props => {
             >
               <TextField
                 fullWidth
-                label="Email Address"
+                label="병원 주소"
                 margin="dense"
-                name="email"
+                name="homepage"
                 onChange={handleChange}
                 required
-                value={values.email}
+                value={values.homepage}
                 variant="outlined"
               />
             </Grid>
@@ -128,56 +126,12 @@ const HospitalDetails = props => {
             >
               <TextField
                 fullWidth
-                label="Phone Number"
+                label="병원 연락처"
                 margin="dense"
                 name="phone"
                 onChange={handleChange}
-                type="number"
+                required
                 value={values.phone}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Select State"
-                margin="dense"
-                name="state"
-                onChange={handleChange}
-                required
-                select
-                // eslint-disable-next-line react/jsx-sort-props
-                SelectProps={{ native: true }}
-                value={values.state}
-                variant="outlined"
-              >
-                {states.map(option => (
-                  <option
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Country"
-                margin="dense"
-                name="country"
-                onChange={handleChange}
-                required
-                value={values.country}
                 variant="outlined"
               />
             </Grid>
@@ -189,7 +143,7 @@ const HospitalDetails = props => {
             color="primary"
             variant="contained"
           >
-            Save details
+            변경된 정보 저장
           </Button>
         </CardActions>
       </form>
