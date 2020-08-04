@@ -31,8 +31,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ResetPW = (name) => {
-  console.log(name)
+const ResetPW = (props) => {
+  
   const classes = useStyles();
   const [newPassword,setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -60,6 +60,7 @@ const ResetPW = (name) => {
                   value={newPassword}
                   onChange={e => setNewPassword(e.target.value)}
               />
+              
             </Grid>
             <Grid item xs={12}>
               <TextField

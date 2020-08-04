@@ -10,7 +10,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
 import { Modal } from 'react-bootstrap';
-
+import './FindIdAndPassword.css';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -57,7 +57,7 @@ const UserFindID = () => {
       alert('성공')
       console.log(response)
       setUserId(response.data.userId);
-      
+      console.log(response.data.userId)
       setShow(!show);
       
     }

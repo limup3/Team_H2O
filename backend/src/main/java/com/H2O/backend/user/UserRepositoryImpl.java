@@ -11,6 +11,7 @@ import java.util.Optional;
 interface CustomedUserRepository {
     Optional<User> findByUserId(String userId);
 
+
     Optional<User> findUserId(String name, String phone);
 
     Optional<User> findUserPw(String userId, String name, String phone);

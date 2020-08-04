@@ -15,7 +15,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/pages" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/chat-master/chat-master" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -87,6 +87,7 @@
       <workItem from="1596296964284" duration="1080000" />
       <workItem from="1596375288080" duration="643000" />
       <workItem from="1596452950162" duration="2005000" />
+      <workItem from="1596524965212" duration="55000" />
     </task>
     <servers />
   </component>

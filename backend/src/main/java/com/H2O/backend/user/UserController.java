@@ -78,4 +78,19 @@ public class UserController {
         }
     }
 
-}
+    @PatchMapping(value = "/{userNo}")
+    public ResponseEntity<User> updateUser(@PathVariable String userNo, @RequestBody User user) {
+        System.out.println(userNo);
+        Optional<User> findUser = userService.findUser(Long.valueOf(userNo));
+        if(findUser.isPresent()) {
+            User selectUser = findUser.get();
+            Optional.ofNullable(user.getPassword()).ifPresent(password -> selectUser.setPassword(password));
+            Optional.ofNullable(user.getPhone()).ifPresent(phone -> selectUser.setPhone(phone));
+            Optional.ofNullable(user.getEmail()).ifPresent(email -> selectUser.setEmail(email));
+            return ResponseEntity.ok(userService.update(selectUser));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    }

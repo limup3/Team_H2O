@@ -9,8 +9,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {useHistory, Link} from "react-router-dom";
 import axios from 'axios';
-
-
+import { Modal } from 'react-bootstrap';
+import './FindIdAndPassword.css';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -32,21 +32,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
 const UserFindPW = () => {
+
   const classes = useStyles();
+  const [userNo, setUserNo] = useState("");
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [show, setShow] = useState(false);
 
   const history = useHistory();
-
+  const handleClose = () => setShow(false);
   const handleSubmit = e => {
     e.preventDefault();
   axios.get(`http://localhost:8080/user/findPw?userId=${userId}&name=${userName}&phone=${phoneNumber}`)
     .then(response => {
       alert('성공')
       console.log(response) 
-      history.push("/ResetPw")
+      setUserNo(response.data.no);
+      console.log(response.data.no)
+      setShow(true);
     }
     ).catch(
       error => {
@@ -55,6 +64,20 @@ const UserFindPW = () => {
       }
     )
   }
+
+  const handleSaveNewPassword = e => {
+    e.preventDefault();
+    if( newPassword === confirmNewPassword ) {
+      axios.patch(`http://localhost:8080/user/${userNo}`, {password: newPassword})
+        .then( () => {
+          alert("비밀번호가 재설정되었습니다. 다시 로그인하세요.");
+          history.push("/login");
+        }).catch(error => { throw (error) });
+    } else {
+      alert("비밀번호가 일치하지 않습니다.");
+      setNewPassword("");
+    };
+  };
 
 
   return (
@@ -139,7 +162,41 @@ const UserFindPW = () => {
           </Grid>
         </form>
       </div>
+      <Modal show={show} onHide={handleClose}>
+<Modal.Header closeButton>
+  <Modal.Title>비밀번호 재설정하기</Modal.Title>
+</Modal.Header>
+<Modal.Body>
+  <div>
+    <div>
+      <p className="change-password-modal-p">새 비밀번호</p>
+      <input
+        type="password"
+        value={newPassword}
+        onChange={e => setNewPassword(e.target.value)}
+      />
+    </div>
+    <div>
+      <p className="change-password-modal-p">새 비밀번호 확인</p>
+      <input
+        type="password"
+        value={confirmNewPassword}
+        onChange={e => setConfirmNewPassword(e.target.value)}
+      />
+    </div>
+    <button
+      className="btn btn-primary btn-block mb-2 mt-2"
+      onClick={handleSaveNewPassword}
+    >
+      비밀번호 재설정
+    </button>
+  </div>
+</Modal.Body>
+</Modal>
     </Container>
+
+
+
   );
 }
 export default UserFindPW

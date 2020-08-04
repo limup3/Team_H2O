@@ -15,6 +15,8 @@ interface UserService {
 
     void delete(User selectUser);
 
+    Optional<User> findUser(Long userNo);
+
     Optional<User> findId(String name, String phone);
 
     Optional<User> findPw(String userId, String name, String phone);
@@ -34,12 +36,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User update(User selectUser) {
-        return null;
+        return userRepository.save(selectUser);
     }
 
     @Override
     public void delete(User selectUser) {
 
+    }
+
+    @Override
+    public Optional<User> findUser(Long userNo) {
+        return userRepository.findById(userNo);
     }
 
     @Override
