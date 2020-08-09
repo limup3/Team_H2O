@@ -1,6 +1,7 @@
 
-import TeleMedicine from './TeleMedicine'
+import RtcRoom from "./RtcRoom";
+import TeleMedicine from "./TeleMedicine"
 
 export {
-    TeleMedicine
+    RtcRoom,TeleMedicine
 }

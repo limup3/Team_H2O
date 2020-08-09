@@ -1,8 +1,12 @@
 
-import Login from './Login'
+import Login, {loginReducer} from './Login'
 import MyPage from './MyPage'
-import User_Modify from './User_Modify'
+import UserModify from './UserModify'
 import SignUp from './SignUp'
+import UserFindID from "./UserFindID";
+import UserFindPW from "./UserFindPW";
+import ResetPW from "./ResetPW";
+
 export {
-    Login, User_Modify, MyPage, SignUp
+    Login, loginReducer, UserModify, MyPage, SignUp, UserFindID, UserFindPW, ResetPW, 
 }

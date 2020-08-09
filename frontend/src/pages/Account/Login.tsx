@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState }  from 'react';
+import { useHistory, Link } from 'react-router-dom';
+import axios from 'axios';
+// import { useDispatch } from 'react-redux';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 
 import Typography from '@material-ui/core/Typography';
@@ -37,8 +39,69 @@ const useStyles = makeStyles((theme) => ({
     //SIGN IN 버튼 정렬
 }));
 
+const POST_LOGIN_REQUEST = 'POST_LOGIN_REQUEST'
+//액션
+
+export const loginRequestAction = data => ({type: POST_LOGIN_REQUEST, payload:data})
+//액션 생성기
+
+export const loginReducer = (state = {}, action) => {
+    switch (action.type) {
+        case 'POST_LOGIN_REQUEST' : return action.payload
+        default: return state;
+    }
+}
+//리듀서
+
+// export const postLoginRequest = data => async dispatch => {
+//     axios.post(`http://localhost:8080/user/login`, data)
+//     .then(response => {
+//         alert("로그인 성공")
+//         dispatch(loginRequestAction(response.data))
+//         sessionStorage.setItem("userId", response.data.userId)
+        
+
+//     }).catch(error => { 
+//         alert("로그인 실패")
+
+//         throw(error) 
+//     }
+//     )
+// }
+// dispatch redux
+
 const Login = () => {
     const classes = useStyles();
+
+    const [userId, setUserId] = useState("");
+    const [password, setPassword] = useState("");
+
+    const history = useHistory();
+
+    // const dispatch = useDispatch();
+
+    const handleLoginButton = e => {
+        e.preventDefault()
+        const userJson = {
+            userId: userId,
+            password: password
+        }
+        axios.post(`http://localhost:8080/user/login`, userJson)
+            .then(response => {
+                alert("로그인 성공 !")
+                console.log(response)
+                history.push("/")
+                }
+            ).catch(
+                error => {
+                    alert("로그인 실패 !")
+                    throw (error)
+                }
+            )
+        // dispatch(postLoginRequest({userId: userId, password:password}))
+        
+    }
+
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -46,10 +109,10 @@ const Login = () => {
                 <Avatar className={classes.avatar}>
 
                 </Avatar>
-                <Typography component="h1" variant="h5">
+                <Typography component="h2" variant="h5">
                     Login
                 </Typography>
-                <form className={classes.form} noValidate>
+                <form className={classes.form} >
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -60,6 +123,8 @@ const Login = () => {
                         name="userId"
                         autoComplete="userId"
                         autoFocus
+                        value={userId}
+                        onChange={e => setUserId(e.target.value)}                       
                     />
                     <TextField
                         variant="outlined"
@@ -71,6 +136,8 @@ const Login = () => {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
                     />
                     <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
@@ -82,17 +149,18 @@ const Login = () => {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
+                        onClick={handleLoginButton}
                     >
                         Login
                     </Button>
                     <Grid container>
                         <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Forgot password?
+                            <Link to="/UserFindID" >
+                                {"Forgot id?"}
                             </Link>
                         </Grid>
                         <Grid item>
-                            <Link href="/admin/SignUp" variant="body2">
+                            <Link to="/SignUp" >
                                 {"Don't have an account? Sign Up"}
                             </Link>
                         </Grid>

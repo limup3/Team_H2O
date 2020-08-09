@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { Bar } from 'react-chartjs-2';
 import { makeStyles } from '@material-ui/styles';
+import {chartView_7,chartView_15,chartView_30} from './chart'
 import {
   Card,
   CardHeader,
@@ -17,6 +18,8 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 import { data, options } from './chart';
+import { Link } from 'react-router-dom';
+import { DoughnutChart, BarChart, MixedChart } from './Charts/ChartBody';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -35,6 +38,8 @@ const LatestSales = props => {
   const classes = useStyles();
   //
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [chartType, setChartType] = useState("도넛형")
+  
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -42,6 +47,7 @@ const LatestSales = props => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  
   //
   return (
     <Card
@@ -52,7 +58,10 @@ const LatestSales = props => {
         action={
           <div>
           <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} size="small" variant="text" >
-          최근 일주일(Last 7 days) <ArrowDropDownIcon />
+          
+          {chartType}
+        
+          <ArrowDropDownIcon />
           </Button>
           <Menu
           id="simple-menu"
@@ -61,33 +70,28 @@ const LatestSales = props => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose}>최근 일주일</MenuItem>
-          <MenuItem onClick={handleClose}>최근 15일</MenuItem>
-          <MenuItem onClick={handleClose}>최근 한달</MenuItem>
+          <MenuItem onClick={()=> {setAnchorEl(null); setChartType("도넛형")}}>도넛형</MenuItem>
+          <MenuItem onClick={()=> {setAnchorEl(null); setChartType("바형")}}>바형</MenuItem>
+          <MenuItem onClick={()=> {setAnchorEl(null); setChartType("종합형")}}>종합형</MenuItem>
         </Menu>
         </div>}
         
-        title="판매량 통계(Latest Sales)"
+        title="이용자수 통계(Latest Sales)"
       />
       <Divider />
       <CardContent>
-        <div className={classes.chartContainer}>
-          <Bar
-            data={data}
-            options={options}
-          />
-        </div>
+        {chartType === "도넛형" ?  <DoughnutChart/>: chartType === "바형"? <BarChart/>: <MixedChart/>}
       </CardContent>
       <Divider />
       <CardActions className={classes.actions}>
-        <Button
+        <Link
           color="primary"
           size="small"
           variant="text"
-          href="/SalesOverView"
+          to="/admin/OverViewSales"
         >
           자세히 보기(Overview) <ArrowRightIcon />
-        </Button>
+        </Link>
       </CardActions>
     </Card>
   );

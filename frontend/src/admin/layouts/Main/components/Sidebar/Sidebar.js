@@ -5,14 +5,12 @@ import { makeStyles } from '@material-ui/styles';
 import { Divider, Drawer } from '@material-ui/core';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
-//import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
-//import TextFieldsIcon from '@material-ui/icons/TextFields';
-//import ImageIcon from '@material-ui/icons/Image';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SettingsIcon from '@material-ui/icons/Settings';
-//import LockOpenIcon from '@material-ui/icons/LockOpen';
+import DvrIcon from '@material-ui/icons/Dvr';
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 
-import { Profile, SidebarNav, UpgradePlan } from './components';
+import { Profile, SidebarNav } from './components';
 
 const useStyles = makeStyles(theme => ({
   drawer: {
@@ -53,31 +51,21 @@ const Sidebar = props => {
       href: '/admin/users',
       icon: <PeopleIcon />
     },
-    // {
-    //   title: 'Products',
-    //   href: '/products',
-    //   icon: <ShoppingBasketIcon />
-    // },
-    // {
-    //   title: 'Authentication',
-    //   href: '/sign-in',
-    //   icon: <LockOpenIcon />
-    // },
-    // {
-    //   title: 'Typography',
-    //   href: '/typography',
-    //   icon: <TextFieldsIcon />
-    // },
-    // {
-    //   title: 'Icons',
-    //   href: '/icons',
-    //   icon: <ImageIcon />
-    // },
     {
-      title: '계정정보(Account)',
-      href: '/admin/account',
-      icon: <AccountBoxIcon />
+      title: '병원(Hospital)',
+      href: '/admin/hospital',
+      icon: <LocalHospitalIcon />
     },
+    {
+      title: '게시판(Board)',
+      href: '/admin/board',
+      icon: <DvrIcon/>
+    },
+    // {
+    //   title: '계정정보(Account)',
+    //   href: '/admin/account',
+    //   icon: <AccountBoxIcon />
+    // },
     {
       title: '세팅(Settings)',
       href: '/admin/settings',
@@ -89,8 +77,8 @@ const Sidebar = props => {
     <Drawer
       anchor="left"
       classes={{ paper: classes.drawer }}
-      onClose={onClose}
       open={open}
+      onClose={onClose}
       variant={variant}
     >
       <div
@@ -102,8 +90,9 @@ const Sidebar = props => {
         <SidebarNav
           className={classes.nav}
           pages={pages}
+          open
+          onClose
         />
-        <UpgradePlan />
       </div>
     </Drawer>
   );

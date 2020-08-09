@@ -1,34 +1,73 @@
-import React from 'react'
-import { Container } from "react-bootstrap";
-import {RenderAfterNavermapsLoaded, NaverMap, Marker} from 'react-naver-maps';
+import React, { Component,useState,useEffect,useRef } from 'react';
+import { Map, GoogleApiWrapper,Marker,InfoWindow } from 'google-maps-react';
+import {Button,Modal} from 'react-bootstrap';
 
 
-const Map =()=>{
-    return (
-<Container>
+const mapStyles = {
+    position: 'absolute',
+    height: '70%',
+    width: '64%',
+    };
+export class MapContainer extends Component {
+    state = {
+        showingInfoWindow: false,  //Hides or the shows the infoWindow
+        activeMarker: {},          //Shows the active marker upon click
+        selectedPlace: {},          //Shows the infoWindow to the selected place upon a marker
+        point:[{  lat:37.562457, lng:126.941089 },
+            { lat:37.579602, lng:126.998998 },
+            { lat:37.550999, lng:126.8589698 }]
+    };
+      onMarkerClick = (props, marker, e) =>
+      {this.setState({
+        selectedPlace: props,
+        activeMarker: marker,
+        showingInfoWindow: true
+      });
+      this.state.modalShow=true}
 
-    <RenderAfterNavermapsLoaded
-    ncpClientId={'h4c9enw8gw'}
-    error={<p>Maps Load Error</p>}
-    loading={<p>Maps Loading...</p>}
->
-    <NaverMap
-        mapDivId={'maps-getting-started-uncontrolled'}
-        style={{
-            width: '1100px',
-            height: '500px',
-        }}
-        defaultCenter={{ lat:37.562457, lng:126.941089 }} // 지도 초기 위치
-        defaultZoom={13} // 지도 초기 확대 배율
-    >
-        <Marker
-        position ={{lat:37.562457, lng:126.941089}}
-        onClick={() => {alert('여기는 신촌세브란스병원입니다.');}}
-        />            
+    onClose = props => {
+      if (this.state.showingInfoWindow) {
+        this.setState({
+          showingInfoWindow: false,
+          activeMarker: null
+        });
+      }
+    };
 
-    </NaverMap>
-</RenderAfterNavermapsLoaded>
-</Container>
-    )
+
+    render() {
+        return (
+            <div>
+                <Map
+                    google={this.props.google}
+                    zoom={14}
+                    style={mapStyles}
+                    initialCenter={{
+                        lat: 37.562457,lng: 126.941089
+                    }}>
+                    {this.state.point.map((con,i)=>{//맵(맵으로 보내준다) : 자신이 설정한 주소를 배열분해해서 각 위도와 경도를 계속 돌려서 뜨게끔한다.
+                        return(
+                            <Marker
+                                position={con}
+                                animation={4}
+                                onClick={this.onMarkerClick}
+                                name={'귀하께서 선택한 지역입니다.'}
+                            />);
+                    })}
+                  <InfoWindow
+                  marker={this.state.activeMarker}
+                  visible={this.state.showingInfoWindow}
+                  onClose={this.onClose}
+                    >
+                      <div>
+                        <h4>{this.state.selectedPlace.name}</h4>
+                      </div>
+                    </InfoWindow>
+                </Map>
+            </div>
+        );
+    }
 }
-export default Map
+export default GoogleApiWrapper({
+    apiKey: 'AIzaSyDyYteoY6q3NQwsEHFrXfan_q_9VlIVsxk'
+})(MapContainer);

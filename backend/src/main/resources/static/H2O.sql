@@ -1,3 +1,11 @@
+DROP TABLE IF EXISTS Ambulance;
+DROP TABLE IF EXISTS Reservation;
+DROP TABLE IF EXISTS Board;
+DROP TABLE IF EXISTS User;
+DROP TABLE IF EXISTS Hospital;
+DROP TABLE IF EXISTS Doctor;
+DROP TABLE IF EXISTS Comments;
+
 CREATE TABLE Ambulance
 (
     `Ambulance_No`    INT            NOT NULL    AUTO_INCREMENT,
@@ -30,13 +38,14 @@ CREATE TABLE Board
 )default character set utf8 collate UTF8_GENERAL_CI;
 CREATE TABLE User
 (
-    `User_No`   INT             NOT NULL    AUTO_INCREMENT,
-    `User_Id`   VARCHAR(50)     NOT NULL,
-    `Name`      VARCHAR(20)     NULL,
-    `Password`  VARCHAR(20)     NULL,
-    `Phone`     VARCHAR(30)     NULL,
-    `Email`     VARCHAR(50)     NULL,
-    `History`   VARCHAR(150)    NULL,
+    `User_No`           INT             NOT NULL    AUTO_INCREMENT,
+    `User_Id`           VARCHAR(50)     NOT NULL,
+    `Name`              VARCHAR(20)     NULL,
+    `Password`          VARCHAR(20)     NULL,
+    `Phone`             VARCHAR(30)     NULL,
+    `Admin_Check`       BOOLEAN         NULL,
+    `Email`             VARCHAR(50)     NULL,
+    `History`           VARCHAR(150)    NULL,
     PRIMARY KEY (User_No)
 )default character set utf8 collate UTF8_GENERAL_CI;
 CREATE TABLE Hospital

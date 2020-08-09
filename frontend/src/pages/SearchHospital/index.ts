@@ -1,6 +1,6 @@
 
-import Map from './Map'
+import SearchHospital from './SearchHospital'
 
 export {
-    Map
+    SearchHospital
 }

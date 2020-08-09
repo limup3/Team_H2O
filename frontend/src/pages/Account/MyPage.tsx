@@ -33,7 +33,7 @@ const Mypage = () => {
   container
   justify="flex-end" 
 >
-<Button variant="contained" color="secondary" href="/User_Modify" >회원 정보 수정</Button>
+<Button variant="contained" color="secondary" href="/UserModify" >회원 정보 수정</Button>
 </Grid>
 <Grid
   container

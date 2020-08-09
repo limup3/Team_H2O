@@ -1,19 +1,17 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import {Switch, Route } from "react-router-dom";
 import {NavBar, Footer} from './layout'
 import {MainTopPage, MainBottomPage} from './pages/splash-page'
-import {Map} from './pages/SearchHospital'
+import {SearchHospital} from './pages/SearchHospital'
 import {Ambulance} from './pages/Ambulance'
-import {TeleMedicine} from './pages/TeleMedicine'
-import {Community} from './pages/Community'
-import {Login, SignUp, MyPage,User_Modify} from './pages/Account'
-
+import {TeleMedicine, RtcRoom} from './pages/TeleMedicine'
+import {Community, CustomerServiceCenter, QueAn, Review, Edit,Review2,Fix} from './pages/Community'
+import {Login, SignUp, MyPage, UserModify, UserFindID, UserFindPW, ResetPW, } from './pages/Account'
 
 const Page = () => (
 
     <Switch>
         <Route path="/" exact>
-        <NavBar/>
         <MainTopPage/>
         <MainBottomPage/>
         <Footer/>
@@ -25,11 +23,41 @@ const Page = () => (
         <Footer/>
         </Route>
 
-        <Route path="/TeleMedicine">
+        <Route path="/CustomerServiceCenter">
         <NavBar/>
-        <TeleMedicine/>
+        <CustomerServiceCenter/>
         <Footer/>
         </Route>
+
+        <Route path="/QueAn">
+        <NavBar/>
+        <QueAn/>
+        <Footer/>
+        </Route>
+
+        <Route path="/Review">
+        <NavBar/>
+        <Review/>
+        <Footer/>
+        </Route>
+
+        <Route path="/Edit">
+        <NavBar/>
+        <Edit/>
+        <Footer/>
+        </Route>
+
+        {/*<Route path="/TeleMedicine">*/}
+        {/*<RtcRoom/>*/}
+        {/*</Route>*/}
+
+        {/*<Route path="/TeleMedicine/:roomId">*/}
+        {/*<TeleMedicine/>*/}
+        {/*</Route>    */}
+        <React.Fragment>
+        <Route path="/TeleMedicine" exact component={RtcRoom}/>
+        <Route path="/TeleMedicine/:roomId" exact component={TeleMedicine}/>
+         </React.Fragment>
 
         <Route path="/Community">
         <NavBar/>
@@ -39,7 +67,7 @@ const Page = () => (
 
         <Route path="/SearchHospital">
         <NavBar/>
-        <Map/>
+        <SearchHospital/>
         <Footer/>
         </Route>
 
@@ -54,19 +82,51 @@ const Page = () => (
         <MyPage/>
         <Footer/>
         </Route>
-        <Route path="/User_Modify">
+
+        <Route path="/UserModify">
         <NavBar/>
-        <User_Modify/>
+        <UserModify/>
         <Footer/>
         </Route>
+
+        <Route path="/UserFIndID">
+        <NavBar/>
+        <UserFindID/>
+        <Footer/>
+        </Route>
+
+        <Route path="/UserFIndPW">
+         <NavBar/>
+         <UserFindPW/>
+         <Footer/>
+         </Route>
+
+        <Route path="/ResetPW">
+         <NavBar/>
+         <ResetPW/>
+         <Footer/>
+         </Route>
 
         <Route path="/SignUp">
         <NavBar/>
         <SignUp/>
         <Footer/>
         </Route>
+
+        <Route path="/Review2">
+            <NavBar/>
+            <Review2/>
+            <Footer/>
+        </Route>
+
+        <Route path="/Fix">
+            <NavBar/>
+            <Fix/>
+            <Footer/>
+        </Route>
         
     </Switch>
+
 );
 
 export default Page;
