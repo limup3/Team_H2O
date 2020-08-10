@@ -1,5 +1,8 @@
 import palette from '../../../../theme/palette';
 
+
+
+
 export const data = (pram) => {{
   switch(pram){
   // data donut value

@@ -1,19 +1,20 @@
 import React from 'react';
 import {Button, Dropdown, DropdownButton, Form, FormControl, Navbar, Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import './styles.css'
 import './community.css'
-import TablePagination from "@material-ui/core/TablePagination";
+import {SideBar} from "./index";
 
 
 const CustomerServiceCenter = () => {
 
 
     return (
-
-        <Table striped bordered hover className="custom-table">
-
-            <Navbar className="nav-size">
+        <>
+            <div className="CS-div">
+            <SideBar/>
+                <div id="page-wrapper-1">
+            <Table striped bordered hover className="table-CS" >
+                <Navbar className="bg-light justify-content-between-1">
                 <thead className="table-comu">
                     <tr>
                     <th>번호</th>
@@ -84,16 +85,15 @@ const CustomerServiceCenter = () => {
                     <td>진행중</td>
 
                 </tr>
-
-
                 </tbody>
                 <Button className="ml-auto" variant="secondary"
                 ><Link to='/Edit'>글쓰기</Link></Button>
-
-
                 </thead>
             </Navbar>
         </Table>
+        </div>
+            </div>
+        </>
     )
 }
 

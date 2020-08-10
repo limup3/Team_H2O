@@ -21,27 +21,38 @@ import { data, options } from '../chart';
 import { Link } from 'react-router-dom';
 
 
+// export const chartData = props => {
+//   const { chartData } = props
+//   alert(chartData)
+// }
+
+
 // Dounut Chart Data
 const dougnutData = {
 	labels: [ 
-		'Red', 'Blue', 'green'
+    '청소년', '청년', '중년', '장년', '노년'
 	],
 	datasets: [{
 		label: '데이터',
-		data: [20, 30, 50],
+		data: [15, 35, 25, 15, 10],
 		backgroundColor: [
         'red',
-        'blue',
-        'green'
+        'orange',
+        'gray',
+        'green',
+        'blue'
         ],
 		hoverBackgroundColor: [
         'red',
-        'blue',
-        'green'
+        'orange',
+        'gray',
+        'green',
+        'blue'
         ],
         borderWidth : 1
 	}]
 };
+
 
 var createReactClass = require('create-react-class');
 export const DoughnutChart = createReactClass({
@@ -49,7 +60,7 @@ export const DoughnutChart = createReactClass({
 	render() {
 		return (
 		  <div>
-			<h2>Dounut Chart</h2>
+        <h2>연령층별 이용자 비율</h2>
 			<Doughnut data={dougnutData} />
 		  </div>
 		);
@@ -61,16 +72,16 @@ export const DoughnutChart = createReactClass({
 
 // Bar Chart Data
 const barData = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월','10월','11월','12월'],
   datasets: [
     {
-      label: 'Bar chart Data',
+      label: '월별 이용자 수',
       backgroundColor: 'rgba(255,99,132,0.2)',
       borderColor: 'rgba(255,99,132,1)',
       borderWidth: 1,
       hoverBackgroundColor: 'rgba(255,99,132,0.4)',
       hoverBorderColor: 'rgba(255,99,132,1)',
-      data: [65, 59, 80, 81, 56, 55, 40]
+      data: [65, 59, 80, 81, 56, 55, 40, 34, 21, 55, 78, 95]
     }
   ]
 };
@@ -80,7 +91,7 @@ export const BarChart = createReactClass => ({
 	render() {
     return (
       <div>
-        <h2>Bar Chart</h2>
+        <h2>월별 이용자 수</h2>
         <Bar 
           data={barData}
         />
@@ -223,15 +234,15 @@ const ChartBody = props => {
 
   const classes = useStyles();
   //
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [dropdownState, setDropdownState] = useState(null);
   const [days, setDays] = useState(7)
 
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    setDropdownState(event.currentTarget);
   };
 
   const handleClose = () => {
-    setAnchorEl(null);
+    setDropdownState(null);
   };
   
   //
@@ -251,14 +262,14 @@ const ChartBody = props => {
           </Button>
           <Menu
           id="simple-menu"
-          anchorEl={anchorEl}
+          dropdownState={dropdownState}
           keepMounted
-          open={Boolean(anchorEl)}
+          open={Boolean(dropdownState)}
           onClose={handleClose}
         >
-          <MenuItem onClick={()=> {setDays(7); setAnchorEl(null); }}>최근 일주일</MenuItem>
-          <MenuItem onClick={()=> {setDays(15); setAnchorEl(null); }}>최근 15일</MenuItem>
-          <MenuItem onClick={()=> {setDays(30); setAnchorEl(null); }}>최근 한달</MenuItem>
+          <MenuItem onClick={()=> {setDays(7); setDropdownState(null); }}>최근 일주일</MenuItem>
+          <MenuItem onClick={()=> {setDays(15); setDropdownState(null); }}>최근 15일</MenuItem>
+          <MenuItem onClick={()=> {setDays(30); setDropdownState(null); }}>최근 한달</MenuItem>
         </Menu>
         </div>}
         
@@ -274,16 +285,6 @@ const ChartBody = props => {
         </div>
       </CardContent>
       <Divider />
-      <CardActions className={classes.actions}>
-        <Link
-          color="primary"
-          size="small"
-          variant="text"
-          to="/admin/OverViewSales"
-        >
-          자세히 보기(Overview) <ArrowRightIcon />
-        </Link>
-      </CardActions>
     </Card>
   );
 };

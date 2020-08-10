@@ -22,9 +22,10 @@ import {
   Board as BoardView,
   HospitalList as HospitalView
 } from './admin/views';
-import OverViewSales from './admin/views/Dashboard/components/LatestSales/OverViewSales';
 import { RecentVisitingHospital } from './admin/views/Dashboard/components/LatestOrders';
 import { HospitalsAdd } from './admin/views/HospitalList/components';
+import { Doctor } from './admin/views/Doctor';
+import DoctorsAdd from './admin/views/Doctor/components/DoctorList/DoctorAdd';
 
 
 const browserHistory = createBrowserHistory();
@@ -91,12 +92,6 @@ const AdminPage = () => {
         path="/admin/not-found"
       />
       <RouteWithLayout
-        component={OverViewSales}
-        exact
-        layout={MainLayout}
-        path="/admin/OverViewSales"
-      />
-      <RouteWithLayout
         component={RecentVisitingHospital}
         exact
         layout={MainLayout}
@@ -119,6 +114,18 @@ const AdminPage = () => {
         exact
         layout={MainLayout}
         path="/admin/HospitalsAdd"
+      />
+      <RouteWithLayout
+        component={Doctor}
+        exact
+        layout={MainLayout}
+        path="/admin/doctor"
+      />
+      <RouteWithLayout
+        component={DoctorsAdd}
+        exact
+        layout={MainLayout}
+        path="/admin/DoctorsAdd"
       />
     </Switch>
     </Router>

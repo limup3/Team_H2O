@@ -1,4 +1,3 @@
-import ComuChart from "./Chart";
 import Community from './Community'
 import Review from './Review'
 import Review2 from './Review2'
@@ -10,6 +9,9 @@ import CSReview from "./CSReview"
 import QAReview from "./QAReview"
 import CSFix from "./CSFix"
 import QAFix from "./QAFix"
+import CommunityTem from "./CommunityTem"
+import SideBar from "./Sidebar";
+
 export {
-    Community,ComuChart,Review,Edit,CustomerServiceCenter,QueAn,CSFix,Fix,Review2,CSReview,QAReview,QAFix
+    Community,Review,Edit,CustomerServiceCenter,QueAn,CSFix,Fix,Review2,CSReview,QAReview,QAFix,CommunityTem,SideBar
 }

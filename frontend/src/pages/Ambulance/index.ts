@@ -1,5 +1,5 @@
 import Ambulance from './Ambulance'
-import Map from "./Map.js"
+import GooMap from './GooMap'
 export {
-    Ambulance,Map
+    Ambulance,GooMap
 }

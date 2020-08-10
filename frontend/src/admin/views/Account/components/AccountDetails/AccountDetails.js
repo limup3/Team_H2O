@@ -23,12 +23,10 @@ const AccountDetails = props => {
   const classes = useStyles();
 
   const [values, setValues] = useState({
-    firstName: 'Shen',
-    lastName: 'Zhi',
-    email: 'shen.zhi@devias.io',
-    phone: '',
-    state: 'Alabama',
-    country: 'USA'
+    name: '박정관',
+    address: '대한민국 서울시',
+    email: 'parksrazor@tistory.com',
+    phone: '010-1111-1111'
   });
 
   const handleChange = event => {
@@ -63,14 +61,14 @@ const AccountDetails = props => {
         noValidate
       >
         <CardHeader
-          subheader="The information can be edited"
-          title="Profile"
+          subheader="하단의 정보를 변경시 수정됩니다."
+          title="사용자 정보 수정"
         />
         <Divider />
         <CardContent>
           <Grid
             container
-            spacing={3}
+            spacing={5}
           >
             <Grid
               item
@@ -79,13 +77,12 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                helperText="Please specify the first name"
-                label="First name"
+                label="사용자 이름"
                 margin="dense"
-                name="firstName"
+                name="name"
                 onChange={handleChange}
                 required
-                value={values.firstName}
+                value={values.name}
                 variant="outlined"
               />
             </Grid>
@@ -96,12 +93,12 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                label="Last name"
+                label="주소"
                 margin="dense"
                 name="lastName"
                 onChange={handleChange}
                 required
-                value={values.lastName}
+                value={values.address}
                 variant="outlined"
               />
             </Grid>
@@ -112,9 +109,9 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                label="Email Address"
+                label="이메일"
                 margin="dense"
-                name="email"
+                name="homepage"
                 onChange={handleChange}
                 required
                 value={values.email}
@@ -128,56 +125,12 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                label="Phone Number"
+                label="연락처"
                 margin="dense"
                 name="phone"
                 onChange={handleChange}
-                type="number"
+                required
                 value={values.phone}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Select State"
-                margin="dense"
-                name="state"
-                onChange={handleChange}
-                required
-                select
-                // eslint-disable-next-line react/jsx-sort-props
-                SelectProps={{ native: true }}
-                value={values.state}
-                variant="outlined"
-              >
-                {states.map(option => (
-                  <option
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Country"
-                margin="dense"
-                name="country"
-                onChange={handleChange}
-                required
-                value={values.country}
                 variant="outlined"
               />
             </Grid>
@@ -189,7 +142,7 @@ const AccountDetails = props => {
             color="primary"
             variant="contained"
           >
-            Save details
+            변경된 정보 저장
           </Button>
         </CardActions>
       </form>

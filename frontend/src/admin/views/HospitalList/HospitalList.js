@@ -23,6 +23,7 @@ const HospitalList = () => {
       <HospitalsToolbar />
       <div className={classes.content}>
         <HospitalsTable hospitals={hospitals} />
+        {/* <HospitalsTable hospitals={hospitals} /> */}
       </div>
     </div>
   );

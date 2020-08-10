@@ -1,17 +1,20 @@
 import React from 'react';
-import {Button, Dropdown, DropdownButton, Form, FormControl, Navbar, Table} from "react-bootstrap";
+import {Button, Container, Dropdown, DropdownButton, Form, FormControl, Navbar, Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import './styles.css'
 import './community.css'
+import {SideBar} from "./index";
 
 
 const QueAn = () => {
 
 
     return (
-
+        <>
+            <div className="QA-1">
+        <SideBar/>
+            <div id="page-wrapper-2">
         <Table striped bordered hover className="que-table">
-            <h1>Q&A</h1>
             <Navbar className="que-nav" >
                 <thead>
                 <tr>
@@ -93,6 +96,9 @@ const QueAn = () => {
             </Navbar>
 
         </Table>
+        </div>
+            </div>
+            </>
     )
 }
 

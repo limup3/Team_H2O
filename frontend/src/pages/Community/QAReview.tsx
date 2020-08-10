@@ -39,7 +39,6 @@ const QAReview = () => {
     return (
         <Container>
             <div>
-
                 <Table striped bordered hover size="sm">
                     <thead>
                     <tr>

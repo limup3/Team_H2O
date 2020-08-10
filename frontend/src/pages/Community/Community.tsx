@@ -1,23 +1,9 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import Chart from "./Chart";
+import CommunityTem from "./CommunityTem"
 const Community = () => (
     <Container>
-        <Chart/>
+        <CommunityTem/>
     </Container>
     );
 export default Community
-
-// import React, {Component} from 'react';
-//
-// class Community extends Component {
-//     render() {
-//         return (
-//             <Container>
-//                 <Chart/>
-//             </Container>
-//         );
-//     }
-// }
-//
-// export default Community;

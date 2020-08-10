@@ -7,8 +7,8 @@ import {
   CardContent,
   Grid,
   Typography,
-  Avatar,
-  LinearProgress
+  Avatar
+  // LinearProgress
 } from '@material-ui/core';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';

@@ -5,6 +5,7 @@ import 'react-quill/dist/quill.snow.css';
 import './styles.css'
 import './community.css'
 import {Link} from "react-router-dom";
+import {SideBar} from "./index";
 
 const CSFix = () => {
     const [value, setValue] = useState('')
@@ -38,6 +39,7 @@ const CSFix = () => {
     ]
     return (
         <Container>
+
             <div>
                 <Table striped bordered hover size="sm">
                     <thead>

@@ -42,32 +42,33 @@ const Sidebar = props => {
 
   const pages = [
     {
-      title: '통계(DashBoard)',
+      title: '데이터 통계',
       href: '/admin/dashboard',
       icon: <DashboardIcon />
     },
     {
-      title: '사용자(Users)',
+      title: '사용자 관리',
       href: '/admin/users',
       icon: <PeopleIcon />
     },
     {
-      title: '병원(Hospital)',
+      title: '병원 관리',
       href: '/admin/hospital',
       icon: <LocalHospitalIcon />
     },
     {
-      title: '게시판(Board)',
+      title: '의사 관리',
+      href: '/admin/doctor',
+      icon: <AccountBoxIcon />
+    },
+    {
+      title: '게시판',
       href: '/admin/board',
       icon: <DvrIcon/>
     },
-    // {
-    //   title: '계정정보(Account)',
-    //   href: '/admin/account',
-    //   icon: <AccountBoxIcon />
-    // },
+    
     {
-      title: '세팅(Settings)',
+      title: '세팅',
       href: '/admin/settings',
       icon: <SettingsIcon />
     }

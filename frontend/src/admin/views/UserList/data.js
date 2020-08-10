@@ -3,16 +3,11 @@ import uuid from 'uuid/v1';
 export default [
   {
     id: uuid(),
-    name: 'Ekaterina Tankova',
-    address: {
-      country: 'USA',
-      state: 'West Virginia',
-      city: 'Parkersburg',
-      street: '2849 Fulton Street'
-    },
-    email: 'ekaterina.tankova@devias.io',
-    phone: '304-428-3097',
-    avatarUrl: '/admin_images/avatars/avatar_3.png',
+    name: '박정관',
+    address: '대한민국 서울시',
+    email: 'parksrazor@tistory.com',
+    phone: '010-1111-1111',
+    avatarUrl: '/admin_images/avatars/parksrazor.png',
     createdAt: 1555016400000
   },
   {
@@ -25,7 +20,7 @@ export default [
       street: '1865  Pleasant Hill Road'
     },
     email: 'cao.yu@devias.io',
-    avatarUrl: '/admin_images/avatars/avatar_4.png',
+    avatarUrl: '/admin_images/avatars/user_default.png',
     phone: '712-351-5711',
     createdAt: 1555016400000
   },
@@ -40,7 +35,7 @@ export default [
     },
     email: 'alexa.richardson@devias.io',
     phone: '770-635-2682',
-    avatarUrl: '/admin_images/avatars/avatar_2.png',
+    avatarUrl: '/admin_images/avatars/user_default.png',
     createdAt: 1555016400000
   },
   {
@@ -53,7 +48,7 @@ export default [
       street: '4158  Hedge Street'
     },
     email: 'anje.keizer@devias.io',
-    avatarUrl: '/admin_images/avatars/avatar_5.png',
+    avatarUrl: '/admin_images/avatars/user_default.png',
     phone: '908-691-3242',
     createdAt: 1554930000000
   },
@@ -68,7 +63,7 @@ export default [
     },
     email: 'clarke.gillebert@devias.io',
     phone: '972-333-4106',
-    avatarUrl: '/admin_images/avatars/avatar_6.png',
+    avatarUrl: '/admin_images/avatars/user_default.png',
     createdAt: 1554757200000
   },
   {
@@ -82,7 +77,7 @@ export default [
     },
     email: 'adam.denisov@devias.io',
     phone: '858-602-3409',
-    avatarUrl: '/admin_images/avatars/avatar_1.png',
+    avatarUrl: '/admin_images/avatars/user_default.png',
     createdAt: 1554670800000
   },
   {
@@ -95,7 +90,7 @@ export default [
       street: '2188  Armbrester Drive'
     },
     email: 'ava.gregoraci@devias.io',
-    avatarUrl: '/admin_images/avatars/avatar_7.png',
+    avatarUrl: '/admin_images/avatars/user_default.png',
     phone: '415-907-2647',
     createdAt: 1554325200000
   },
@@ -110,7 +105,7 @@ export default [
     },
     email: 'emilee.simchenko@devias.io',
     phone: '702-661-1654',
-    avatarUrl: '/admin_images/avatars/avatar_8.png',
+    avatarUrl: '/admin_images/avatars/user_default.png',
     createdAt: 1523048400000
   },
   {
@@ -123,7 +118,7 @@ export default [
       street: '3934  Wildrose Lane'
     },
     email: 'kwak.seong.min@devias.io',
-    avatarUrl: '/admin_images/avatars/avatar_9.png',
+    avatarUrl: '/admin_images/avatars/user_default.png',
     phone: '313-812-8947'
   },
   {
@@ -137,7 +132,7 @@ export default [
     },
     email: 'merrile.burgett@devias.io',
     phone: '801-301-7894',
-    avatarUrl: '/admin_images/avatars/avatar_10.png',
+    avatarUrl: '/admin_images/avatars/user_default.png',
     createdAt: 1522702800000
   }
 ];

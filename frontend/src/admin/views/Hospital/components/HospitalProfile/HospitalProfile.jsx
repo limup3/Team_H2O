@@ -39,7 +39,7 @@ const HospitalProfile = props => {
 
   const classes = useStyles();
 
-  const user = {
+  const hospital = {
     name: '연세 세브란스 병원',
     address: '서울 서대문구 연세로 50-1',
     homepage: 'https://sev.iseverance.com/index',
@@ -59,7 +59,7 @@ const HospitalProfile = props => {
               gutterBottom
               variant="h2"
             >
-             {user.name}
+             {hospital.name}
             </Typography>
             <Typography
               className={classes.locationText}
@@ -67,7 +67,7 @@ const HospitalProfile = props => {
               variant="body1"
             >
               병원 주소 : <br/> 
-              {user.address}
+              {hospital.address}
             </Typography>
             <Typography
               className={classes.dateText}
@@ -75,12 +75,12 @@ const HospitalProfile = props => {
               variant="body1"
             >
               홈페이지 주소 : <br/>
-              {user.homepage}
+              {hospital.homepage}
             </Typography>
           </div>
           <Avatar
             className={classes.avatar}
-            src={user.avatarUrl}
+            src={hospital.avatarUrl}
           />
         </div>
       </CardContent>

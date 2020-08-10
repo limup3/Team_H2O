@@ -37,7 +37,9 @@ const CSReview = () => {
         'image'
     ]
     return (
-        <Container>
+    <>
+        <div id="wrapper">
+            <div className="page-wrapper">
             <div>
                 <Table striped bordered hover size="sm">
                     <thead>
@@ -74,7 +76,9 @@ const CSReview = () => {
                     </Button>
                 </Form.Group>
             </div>
-        </Container>
+        </div>
+        </div>
+    </>
     );
 };
 

@@ -52,7 +52,7 @@ const TotalProfit = props => {
               gutterBottom
               variant="body2"
             >
-              총 수익(TOTAL PROFIT)
+              총 수익
             </Typography>
             <Typography
               color="inherit"
