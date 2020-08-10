@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32746d49-5c9d-479e-b07a-ce460cad7c3c" name="Default Changelist" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +19,10 @@
   </component>
   <component name="ProjectId" id="1etOpEVotiAyKSuG0EYEy3ErEWm" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/pages" />
@@ -42,18 +45,6 @@
       <recent name="C:\Users\lim_1\Team_H2O\frontend\src\pages" />
       <recent name="C:\Users\lim_1\Team_H2O\frontend\src\admin\views" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager">
     <configuration default="true" type="js.build_tools.npm">
@@ -97,6 +88,7 @@
       <workItem from="1596524965212" duration="55000" />
       <workItem from="1597041731879" duration="3029000" />
       <workItem from="1597045311244" duration="269000" />
+      <workItem from="1597058019487" duration="23000" />
     </task>
     <servers />
   </component>
@@ -108,13 +100,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>

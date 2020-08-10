@@ -25,7 +25,7 @@ const center ={
 }
 const storeList = [
     {
-        name: '준화님 집',
+        name: '우준님 집',
         location: {lat:37.550928, lng:126.867306},
         address: '서울 강서구 공황대로 63길 14',
     },
