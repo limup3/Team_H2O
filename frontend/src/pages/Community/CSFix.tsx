@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Container,Form, Button,Modal,Table,} from "react-bootstrap";
+import {Container, Button,Modal,Table,} from "react-bootstrap";
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css';
 import './styles.css'

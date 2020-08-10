@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Container, Dropdown, DropdownButton, Form, FormControl, Navbar, Table} from "react-bootstrap";
+import {Button, Dropdown, DropdownButton, Form, FormControl, Navbar, Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import './styles.css'
 import './community.css'
