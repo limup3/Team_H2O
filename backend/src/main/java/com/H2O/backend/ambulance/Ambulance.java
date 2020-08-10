@@ -15,16 +15,16 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
-@Table(name = "Ambulance")
+@Table(name = "ambulance")
 public class Ambulance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ambulance_no") private Long no;
-    @Column(name = "ambulance_name", nullable = false) private String AmbulanceName;
-    @Column(name = "Addr", nullable = false) private String Addr;
-    @Column(name = "Tel", nullable = false) private String Tel;
-    @Column(name = "HomePage", nullable = false) private String HomePage;
-    @Column(name = "Count", nullable = false) private int Count;
+    @Column(name = "ambulance_no") private Long ambulanceNo;
+    @Column(name = "ambulance_name", nullable = false) private String ambulanceName;
+    @Column(name = "addr", nullable = false) private String addr;
+    @Column(name = "tel", nullable = false) private String tel;
+    @Column(name = "homePage", nullable = false) private String homePage;
+    @Column(name = "count", nullable = false) private int count;
 
     @JsonIgnore
     @OneToMany(mappedBy = "ambulance")

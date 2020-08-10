@@ -19,11 +19,11 @@ import java.util.List;
 @Table(name="doctor")
 public class Doctor {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="doctor_no") private Long no;
-    @Column(name = "doctor_name") private String doctor_name;
-    @Column(name = "hospital_name") private String hospital_name;
+    @Column(name="doctor_no") private Long doctorNo;
+    @Column(name = "doctor_name") private String doctorName;
+    @Column(name = "hospital_name") private String hospitalName;
     @Column(name = "position", nullable = false) private String position;
-    @Column(name = "detail_data", nullable = false) private String detail_data;
+    @Column(name = "detail_data", nullable = false) private String detailData;
     @Column(name = "specialized", nullable = false) private String specialized;
     @Column(name = "medicalSubject", nullable = false) private String medicalSubject;
     @Column(name = "age", nullable = false) private int age;

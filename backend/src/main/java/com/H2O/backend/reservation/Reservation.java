@@ -19,8 +19,8 @@ import javax.persistence.*;
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "reservation_no") private Long no;
-    @Column(name = "reservation_id") private Long id;
+    @Column(name = "reservation_no") private Long reservationNo;
+    @Column(name = "reservation_id") private Long reservationId;
     @Column(name = "gubun",nullable = false ) private String gubun;
     @Column(name = "date",nullable = false ) private String date;
     @Column(name = "time",nullable = false ) private String time;

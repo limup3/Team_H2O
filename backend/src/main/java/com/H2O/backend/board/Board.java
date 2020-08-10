@@ -16,19 +16,20 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
-@Table(name = "Board")
+@Table(name = "board")
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "board_no") private Long no;
-    @Column(name = "hospital_star", nullable = false) private String HospitalStar;
-    @Column(name = "Title", nullable = false) private String Title;
-    @Column(name = "Content", nullable = false) private String Content;
-    @Column(name = "creation_date", nullable = false) private String CreationDate;
-    @Column(name = "Category", nullable = false) private String Category;
+    @Column(name = "board_no") private Long boardNo;
+    @Column(name = "hospital_star", nullable = false) private String hospitalStar;
+    @Column(name = "title", nullable = false) private String title;
+    @Column(name = "content", nullable = false) private String content;
+    @Column(name = "creation_date", nullable = false) private String creationDate;
+    @Column(name = "category", nullable = false) private String category;
 
     @ManyToOne
     @JoinColumn(name = "user_id") private User user;
+
     @ManyToOne
     @JoinColumn(name = "hospital_no")private Hospital hospital;
 

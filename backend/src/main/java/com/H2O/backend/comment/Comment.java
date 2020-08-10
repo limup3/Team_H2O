@@ -13,16 +13,15 @@ import javax.persistence.*;
 @Setter
 @ToString
 @NoArgsConstructor
-@Table(name = "Comment")
+@Table(name = "comment")
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "comment_id") private Long id;
-    @Column(name = "comment_no", nullable = false) private String commentsNo;
-    @Column(name = "Content", nullable = false) private String Content;
-    @Column(name = "creation_date", nullable = false) private String creation_date;
-    @Column(name = "comment_reply", nullable = false) private String comments_reply;
-    @Column(name = "sequence_no", nullable = false) private String sequence_no;
+    @Column(name = "comment_no") private Long commentNo;
+    @Column(name = "content", nullable = false) private String content;
+    @Column(name = "creation_date", nullable = false) private String creationDate;
+    @Column(name = "comment_reply", nullable = false) private String commentsReply;
+    @Column(name = "sequence_no", nullable = false) private String sequenceNo;
 
     @ManyToOne
     @JoinColumn(name = "board_no") private Board board;

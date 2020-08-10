@@ -53,8 +53,8 @@ const UserFindPW = () => {
     .then(response => {
       alert('성공')
       console.log(response) 
-      setUserNo(response.data.no);
-      console.log(response.data.no)
+      setUserNo(response.data.userNo);
+      console.log(response.data.userNo)
       setShow(true);
     }
     ).catch(

@@ -21,7 +21,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_no") private Long no;
+    @Column(name = "user_no") private Long userNo;
     @Column(name = "user_id", nullable = false) private String userId;
     @Column(name = "name", nullable = false) private String name;
     @Column(name = "password", nullable = false) private String password;
