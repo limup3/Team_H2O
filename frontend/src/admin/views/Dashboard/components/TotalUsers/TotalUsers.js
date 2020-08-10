@@ -62,7 +62,7 @@ const TotalUsers = props => {
               gutterBottom
               variant="body2"
             >
-              총 사용자 수
+              테스트 테스트
             </Typography>
             <Typography variant="h3">1,600</Typography>
           </Grid>
