@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
-import { sizing } from '@material-ui/system';
 import { DoctorProfile, DoctorDetails} from '../DoctorAccount';
 
 const useStyles = makeStyles(theme => ({

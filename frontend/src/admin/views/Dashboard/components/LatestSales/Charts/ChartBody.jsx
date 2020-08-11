@@ -8,17 +8,14 @@ import {
   Card,
   CardHeader,
   CardContent,
-  CardActions,
   Divider,
   Button,
   Menu,
-  MenuItem 
+  MenuItem
 } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 import { data, options } from '../chart';
-import { Link } from 'react-router-dom';
 
 
 // export const chartData = props => {
@@ -28,6 +25,10 @@ import { Link } from 'react-router-dom';
 
 
 // Dounut Chart Data
+const ChartSize = {
+  height : '50px'
+}
+
 const dougnutData = {
 	labels: [ 
     '청소년', '청년', '중년', '장년', '노년'
@@ -61,7 +62,9 @@ export const DoughnutChart = createReactClass({
 		return (
 		  <div>
         <h2>연령층별 이용자 비율</h2>
-			<Doughnut data={dougnutData} />
+      <Doughnut 
+      className={ChartSize}
+      data={dougnutData} />
 		  </div>
 		);
 	  }

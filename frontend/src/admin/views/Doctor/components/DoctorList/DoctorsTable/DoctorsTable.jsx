@@ -19,7 +19,7 @@ import {
   TableRow,
   Typography,
   TablePagination,
-  Button as M_Button
+  Button as MuiButton
 } from '@material-ui/core';
 
 import { getInitials } from '../../../../../helpers';
@@ -170,12 +170,12 @@ const DoctorsTable = props => {
                         <Typography variant="body1">
                         {/* -------------------- Modal Line ------------------ */}
                         
-                        <M_Button 
+                        <MuiButton 
                           variant="primary" 
                           onClick={handleShow} 
                           className={classes.headscheama}>
                             {doctor.doctorName}
-                        </M_Button>
+                        </MuiButton>
                         <Modal 
                           {...props} 
                           show={show} 

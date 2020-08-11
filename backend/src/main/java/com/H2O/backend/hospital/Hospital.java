@@ -29,6 +29,25 @@ public class Hospital {
     @Column(name = "latitude", nullable = false) private String latitude;
     @Column(name = "longitude", nullable = false) private String longitude;
 
+    @Builder
+    public Hospital(String hospitalName,
+                  String logo,
+                  String addr,
+                  String hospitalType,
+                  String medicalPerson,
+                  String tel,
+                  String latitude,
+                  String longitude){
+        this.hospitalName = hospitalName;
+        this.logo= logo;
+        this.addr = addr;
+        this.hospitalType = hospitalType;
+        this.medicalPerson = medicalPerson;
+        this.tel = tel;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     @OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL)
     private List<Doctor> doctor;
 

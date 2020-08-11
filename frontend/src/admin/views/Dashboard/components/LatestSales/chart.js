@@ -3,7 +3,7 @@ import palette from '../../../../theme/palette';
 
 
 
-export const data = (pram) => {{
+export const data = (pram) => {
   switch(pram){
   // data donut value
   case 0: return {labels: ['1 Aug', '2 Aug', '3 Aug', '4 Aug', '5 Aug', '6 Aug'],
@@ -35,7 +35,7 @@ export const data = (pram) => {{
       }
     ]
   }
-}}
+}
 };
 
 export const options = {

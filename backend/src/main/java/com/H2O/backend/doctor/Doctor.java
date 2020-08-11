@@ -28,6 +28,24 @@ public class Doctor {
     @Column(name = "medicalSubject", nullable = false) private String medicalSubject;
     @Column(name = "age", nullable = false) private int age;
 
+    @Builder
+    public Doctor(String doctorName,
+                  String hospitalName,
+                  String position,
+                  String detailData,
+                  String specialized,
+                  String medicalSubject,
+                  int age){
+        this.doctorName = doctorName;
+        this.hospitalName= hospitalName;
+        this.position = position;
+        this.detailData = detailData;
+        this.specialized = specialized;
+        this.medicalSubject = medicalSubject;
+        this.age = age;
+    }
+
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="hospital_no")
     private Hospital hospital;

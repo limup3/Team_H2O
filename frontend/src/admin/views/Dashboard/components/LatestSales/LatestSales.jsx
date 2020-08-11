@@ -17,10 +17,7 @@ import {
   FormControlLabel
 } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
-import { data, options } from './chart';
-import { Link } from 'react-router-dom';
 import { DoughnutChart, BarChart, MixedChart } from './Charts/ChartBody';
 
 // import axios from 'axios';
@@ -29,7 +26,7 @@ import { useDispatch } from 'react-redux';
 const useStyles = makeStyles((theme) => ({
   root: {},
   chartContainer: {
-    height: 400,
+    height: 300,
     position: 'relative'
   },
   actions: {
@@ -185,10 +182,13 @@ const LatestSales = props => {
       <Divider />
       <CardContent>
         {chartType === "도넛형" ? 
-          <DoughnutChart chartData = {chartData}/>
+          <DoughnutChart 
+            chartData = {chartData}/>
           : chartType === "바형"
-          ? <BarChart chartData={chartData}/>: 
-          <MixedChart chartData={chartData}/>}
+          ? <BarChart 
+            chartData={chartData}/>: 
+          <MixedChart 
+            chartData={chartData}/>}
       </CardContent>
     </Card>
   );
