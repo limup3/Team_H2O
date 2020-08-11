@@ -2,7 +2,7 @@ import React, {useState, useCallback, useRef} from 'react'
 import { GoogleMap, useLoadScript, Marker, InfoWindow} from "@react-google-maps/api";
 import './map.css'
 import "@reach/combobox/styles.css";
-import LocationOnIcon from '@material-ui/icons/LocationOn';
+import {Card,CardHeader,CardContent,CardActions,Divider} from '@material-ui/core'
 
 const MAP_KEY ="AIzaSyB7sfZLERFCcGjAjkfOrmMRjf_y_Oo3KhQ"
 
@@ -10,7 +10,7 @@ const libraries = ["places"]
 
 const mapContainerStyle = {
   width: 'auto',
-  height: '400px'
+  height: '500px'
 };
 
 const options = {
@@ -41,42 +41,47 @@ const HospitalsMapBody = props => {
    if(!isLoaded) return "Loading..."
 
     return (
-      <GoogleMap
-        id="map"
-        mapContainerStyle={mapContainerStyle}
-        center={center}
-        zoom={12}
-        onLoad={onMapLoad}
-      >
-        <>
-        { HospitalsMapData.map((hospital, i) => (
-          <Marker 
-          key={i}
-          position={hospital.location}
-          onClick={()=>setSelected(hospital)}
-          icon={
-            {url:"https://cdn2.iconfinder.com/data/icons/funtime-objects-part-2/60/005_062_point_pointer_location_geo_checkin_mobile_map-512.png",
-              scaledSize : new window.google.maps.Size(40,40)}
+      <Card>
+        <CardHeader
+          title="가맹 병원 지도"/>
+        <Divider />
+        <GoogleMap
+          id="map"
+          mapContainerStyle={mapContainerStyle}
+          center={center}
+          zoom={12}
+          onLoad={onMapLoad}
+        >
+          <>
+          { HospitalsMapData.map((hospital, i) => (
+            <Marker 
+            key={i}
+            position={hospital.location}
+            onClick={()=>setSelected(hospital)}
+            icon={
+              {url:"https://cdn2.iconfinder.com/data/icons/funtime-objects-part-2/60/005_062_point_pointer_location_geo_checkin_mobile_map-512.png",
+                scaledSize : new window.google.maps.Size(40,40)}
+            }
+          />
+          )) 
           }
-        />
-        )) 
-        }
-        {selected.location ? (
-          <InfoWindow
-            position={selected.location}
-            clickable={true}
-            onCloseClick={()=>setSelected({})}
-            >
-              <div className="infowindow">
-              <p>{selected.name}</p>
-              <p>{selected.street_address}</p>
-              </div>
-            </InfoWindow>
-          )
-          :null
-        }
-        </>
-      </GoogleMap>
+          {selected.location ? (
+            <InfoWindow
+              position={selected.location}
+              clickable={true}
+              onCloseClick={()=>setSelected({})}
+              >
+                <div className="infowindow">
+                <p>{selected.name}</p>
+                <p>{selected.street_address}</p>
+                </div>
+              </InfoWindow>
+            )
+            :null
+          }
+          </>
+        </GoogleMap>
+      </Card>
     )
 }
 

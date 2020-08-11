@@ -8,7 +8,6 @@ import {
   TasksProgress,
   TotalProfit,
   LatestSales,
-  LatestOrders,
   HospitalsMap
 } from './components';
 
@@ -65,27 +64,18 @@ const Dashboard = () => {
         </Grid>
         <Grid
           item
-          lg={8}
+          lg={6}
           md={12}
-          xl={9}
+          xl={6}
           xs={12}
         >
           <LatestSales />
         </Grid>
         <Grid
           item
-          lg={8}
+          lg={6}
           md={12}
-          xl={9}
-          xs={12}
-        >
-          <LatestOrders />
-        </Grid>
-        <Grid
-          item
-          lg={8}
-          md={12}
-          xl={9}
+          xl={6}
           xs={12}
         >
           <HospitalsMap />
