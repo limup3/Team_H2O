@@ -1,7 +1,6 @@
 import React, { useState }  from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
-// import { useDispatch } from 'react-redux';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';

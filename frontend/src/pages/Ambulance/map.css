@@ -18,6 +18,14 @@
 .map_box{
     width : 68%;
 }
+.map-textbtn{
+    width: 480px;
+}
+.map-subbtn{
+    width: 100px;
+    height: 100px;
+    background-color: crimson;
+}
 .search_box{
     width :28%;
 }

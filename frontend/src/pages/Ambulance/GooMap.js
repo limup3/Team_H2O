@@ -3,13 +3,11 @@ import { GoogleMap,useLoadScript,Marker,InfoWindow,} from "@react-google-maps/ap
 import usePlacesAutocomplete, {getGeocode,getLatLng,getZipCode} from "use-places-autocomplete";
 import Geocode from 'react-geocode'
 import {Combobox,ComboboxInput, ComboboxPopover,ComboboxList, ComboboxOption,} from "@reach/combobox";
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
+import { MDBCard, MDBCardBody,MDBCardText, MDBCol } from 'mdbreact';
 import './map.css'
 import "@reach/combobox/styles.css";
-import {Button, Col, Container, Form} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import {Button, Col, Form} from "react-bootstrap";
 import Data from "../../data-sights";
-import "../../"
 
 
 const mapContainerStyle ={
@@ -25,7 +23,7 @@ const center ={
 }
 const storeList = [
     {
-        name: '준화님 집',
+        name: '우준님 집',
         location: {lat:37.550928, lng:126.867306},
         address: '서울 강서구 공황대로 63길 14',
     },
@@ -52,10 +50,9 @@ const GooMap = () =>{
     const [ selected, setSelected ] = useState({});
     const [ currentPosition, setCurrentPosition ] = useState({});
     const [ infoShow, setInfoShow ]= useState(false)
+    const [ searchedAddr,setSearchedAddr] = useState("");
+    const [ selectedAddr, setSelectedAddr] = useState("");
 
-    const [ selectedAddr, setSelectedAddr] = useState("")
-    const [ startAddr, setStartAddr] = useState("")
-    const [ endAddr, setEndAddr ] = useState("")
 
     const [ selectedPc, setSelectedPc ] = useState("")
     const [ markers, setMarkers ] = useState([]);
@@ -81,8 +78,6 @@ const GooMap = () =>{
                 setSelectedPc("정보없음")
             }
             setSelectedAddr(address)
-            setStartAddr(address)
-            setEndAddr(address)
 
             console.log(address)
         },
@@ -143,6 +138,7 @@ const GooMap = () =>{
                 panTo({ lat, lng });
                 setSelectedPc(postal_code)
                 setSearchLocation({ lat, lng });
+                setSearchedAddr(address);
             }catch (error) {
                 console.log("Error: ", error);
             }
@@ -298,11 +294,11 @@ const GooMap = () =>{
                             key={i}
                             position={{lat:store.x_value, lng:store.y_value}}
                             onClick={()=>setSelected(store)}
-                                icon={{
+                            icon={{
                                 url: "https://image.flaticon.com/icons/svg/3198/3198517.svg",
                                 scaledSize: new window.google.maps.Size(40, 40)
                             }}
-                            />
+                        />
                     ))
                 }
                 {//인포윈도우 내용정보
@@ -324,20 +320,20 @@ const GooMap = () =>{
                                                     <span>*우편번호 :</span><br/>
                                                         <h2>{selectedPc}</h2><br/>
 
-                                                    <Button
-                                                        className="map-start"
-                                                        variant="secondary"
-                                                        value={setStartAddr}
-                                                    >출발지 선택
-                                                    </Button>
+                                                    {/*<Button*/}
+                                                    {/*    className="map-start"*/}
+                                                    {/*    variant="secondary"*/}
+                                                    {/*    value={setStartAddr}*/}
+                                                    {/*>출발지 선택*/}
+                                                    {/*</Button>*/}
 
-                                                    <Button
-                                                        className="map-end"
-                                                        variant="secondary"
-                                                        value={endAddr}
-                                                    >
-                                                    도착지 선택
-                                                    </Button>
+                                                    {/*<Button*/}
+                                                    {/*    className="map-end"*/}
+                                                    {/*    variant="secondary"*/}
+                                                    {/*    value={endAddr}*/}
+                                                    {/*>*/}
+                                                    {/*도착지 선택*/}
+                                                    {/*</Button>*/}
                                                     </div>
                                             </MDBCardText>
                                             </MDBCardBody>
@@ -359,12 +355,12 @@ const GooMap = () =>{
 
                                     <Form>
                                         <Form.Group controlId="formGroupEmail">
-                                            <Form.Label>출발지 주소 : </Form.Label>
-                                            <Form.Control type="location" placeholder="starting point" value={setStartAddr}/>
+                                            <Form.Label>출발지 주소(클릭) : </Form.Label>
+                                            <Form.Control type="location" placeholder="starting point" className="map-textbtn" value={selectedAddr}/>
                                         </Form.Group>
                                         <Form.Group controlId="formGroupPassword">
-                                            <Form.Label>도착지 주소:</Form.Label>
-                                            <Form.Control type="location" placeholder="ending point" value={setEndAddr}/>
+                                            <Form.Label>도착지 주소(검색):</Form.Label>
+                                            <Form.Control type="location" placeholder="ending point"className="map-textbtn" value={searchedAddr}/>
                                         </Form.Group>
                                         <Form.Group controlId="formGroupPassword">
                                             <Form.Label>예약 날짜:</Form.Label>
@@ -374,7 +370,7 @@ const GooMap = () =>{
                                 </Col>
                                 <div>
                                     <Col xs="auto" className="my-1">
-                                        <Button type="submit">Submit</Button>
+                                        <Button type="submit" className="map-subbtn">전송하기</Button>
                                     </Col>
                                 </div>
                             </Form.Row>
