@@ -7,7 +7,7 @@ import { MDBCard, MDBCardBody,MDBCardText, MDBCol } from 'mdbreact';
 import './map.css'
 import "@reach/combobox/styles.css";
 import {Button, Col, Form} from "react-bootstrap";
-import Data from "../../data-sights";
+import mapdata from "./mapdata";
 
 
 const mapContainerStyle ={
@@ -21,19 +21,6 @@ const center ={
     lat:37.550928,
     lng:126.867306
 }
-const storeList = [
-    {
-        name: '우준님 집',
-        location: {lat:37.550928, lng:126.867306},
-        address: '서울 강서구 공황대로 63길 14',
-    },
-    {
-        name:'비트캠프 신촌점',
-        location: {lat:37.5525892,lng: 126.9367663},
-        address: '서울 마포구 백범로 23 구프라자 3층'
-    },
-]
-
 
 const MAP_KEY ='AIzaSyDyYteoY6q3NQwsEHFrXfan_q_9VlIVsxk'
 const libraries = ["places"];
@@ -57,11 +44,7 @@ const GooMap = () =>{
     const [ selectedPc, setSelectedPc ] = useState("")
     const [ markers, setMarkers ] = useState([]);
     const [ searchLocation, setSearchLocation ] = useState({})
-    const [ point, setPoint] = useState([
-        { lat:37.562457, lng:126.941089 },
-        { lat:37.579602, lng:126.998998 },
-        { lat:37.550999, lng:126.8589698 }
-    ])
+
 
     Geocode.setApiKey(MAP_KEY);
     Geocode.setLanguage('ko')
@@ -191,7 +174,6 @@ const GooMap = () =>{
         );
     }
     
-    
     return(
         <>
         <div className="map_container map_box">
@@ -206,21 +188,7 @@ const GooMap = () =>{
             >
                 <Locate panTo={panTo}/>
                 <Search panTo={panTo}/>
-                {//다중마커
-                    storeList.map((point,i)=>(
-                        <Marker
-                            key={i}
-                            position={point.location}
-                            onClick={()=>setPoint(point)}
-                            icon={
-                                {
-                                url: "https://image.flaticon.com/icons/svg/3198/3198467.svg",
-                                scaledSize: new window.google.maps.Size(40, 40)}
-                            }
-                        >
-                        </Marker>
-                    ))
-                }
+
                 {//지도마커 정보
                     selected.location ? (
                         <InfoWindow
@@ -289,7 +257,7 @@ const GooMap = () =>{
                         : null
                 }
                 {
-                    Data.map((store,i)=>(
+                    mapdata.map((store,i)=>(
                         <Marker
                             key={i}
                             position={{lat:store.x_value, lng:store.y_value}}
@@ -301,6 +269,33 @@ const GooMap = () =>{
                         />
                     ))
                 }
+                {selected.x_value ? (
+                        <InfoWindow
+                            position={{lat:selected.x_value,lng:selected.y_value}}
+                            clickable={true}
+                            onCloseClick={()=>setSelected({})}
+                        >
+                            <div className="infowindow">
+                                <MDBCol>
+                                    <MDBCard>
+                                        <MDBCardBody>
+                                            <MDBCardText>
+                                            <div className="infowindow">
+                                                <p>선택지 이름 : {selected.name}</p>
+                                                <p>주소 : {selected.street_address}</p>
+                                                <p>내용 : {selected.info}</p>
+                                            </div>
+                                            </MDBCardText>
+                                        </MDBCardBody>
+                                    </MDBCard>
+                                </MDBCol>
+                            </div>
+                        </InfoWindow>
+                    )
+                    :null
+                }
+
+
                 {//인포윈도우 내용정보
                     infoShow ? (
                             <InfoWindow

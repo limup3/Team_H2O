@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Data = [
+export const mapdata = [
     {
         "sights_id":1,
         "name":"의료법인동신의료재단 동신병원",
@@ -9,6 +9,8 @@ export const Data = [
         "x_value":37.550999,
         "y_value":126.8589698,
         "info":"서울시 서대문구 홍은동 동신병원입니다."
+        // "image":"서울시 서대문구 홍은동 동신병원입니다."
+
     },
     {
         "sights_id":2,
@@ -137,4 +139,4 @@ export const Data = [
     },
 
 ]
-export default Data
+export default mapdata
