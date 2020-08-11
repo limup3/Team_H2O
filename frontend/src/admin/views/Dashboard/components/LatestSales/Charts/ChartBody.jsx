@@ -18,12 +18,6 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { data, options } from '../chart';
 
 
-// export const chartData = props => {
-//   const { chartData } = props
-//   alert(chartData)
-// }
-
-
 // Dounut Chart Data
 const ChartSize = {
   height : '50px'
@@ -55,20 +49,18 @@ const dougnutData = {
 };
 
 
-var createReactClass = require('create-react-class');
-export const DoughnutChart = createReactClass({
-  displayName: 'DoughnutChart',
-	render() {
-		return (
-		  <div>
-        <h2>연령층별 이용자 비율</h2>
-      <Doughnut 
-      className={ChartSize}
-      data={dougnutData} />
-		  </div>
-		);
-	  }
-	});
+export const DoughnutChart = props => {
+    const {chartValue} = props
+  return (
+  <div>
+    <h2>{chartValue}</h2>
+  <Doughnut 
+  className={ChartSize}
+  data={dougnutData} />
+  </div>
+  );
+}
+		
 
 
 
@@ -78,7 +70,7 @@ const barData = {
   labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월','10월','11월','12월'],
   datasets: [
     {
-      label: '월별 이용자 수',
+      label: '월별 이용자',
       backgroundColor: 'rgba(255,99,132,0.2)',
       borderColor: 'rgba(255,99,132,1)',
       borderWidth: 1,
@@ -89,19 +81,17 @@ const barData = {
   ]
 };
 
-export const BarChart = createReactClass => ({
-  displayName: 'BarChart',
-	render() {
+export const BarChart = props => {
+  const {chartValue} = props
     return (
       <div>
-        <h2>월별 이용자 수</h2>
+        <h2>{chartValue}월별 이용자 수</h2>
         <Bar 
           data={barData}
         />
       </div>
     );
   }
-});
 
 // var createReactClass = require('create-react-class');
 // export const DoughnutChart = createReactClass({
@@ -204,13 +194,11 @@ const plugins = [{
   }];
 
 
-export const MixedChart = createReactClass => ({
-  displayName: 'MixedChart',
-
-  render() {
+export const MixedChart = props => {
+  const {chartValue} = props
     return (
       <div>
-        <h2>Mixed data Example</h2>
+        <h2>{chartValue}Mixed data Example</h2>
         <Bar
           data={mixedData}
           options={chartOptions}
@@ -219,7 +207,6 @@ export const MixedChart = createReactClass => ({
       </div>
     );
   }
-});
 
 const useStyles = makeStyles(() => ({
   root: {},

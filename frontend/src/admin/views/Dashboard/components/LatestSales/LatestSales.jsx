@@ -17,6 +17,7 @@ import {
   FormControlLabel
 } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import {userData} from './Charts/userData'
 
 import { DoughnutChart, BarChart, MixedChart } from './Charts/ChartBody';
 
@@ -68,13 +69,11 @@ const LatestSales = props => {
   const [checked, setChecked] = useState({
     checkBox_Age: false,
     checkBox_Sex: false,
-    checkBox_C: false,
+    checkBox_Location: false,
     checkBox_D: false,
     checkBox_E: false,
     checkBox_ChartData: ""
   })
-  
-  const [chartData, setChartData] = useState("")
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -84,19 +83,18 @@ const LatestSales = props => {
     setAnchorEl(null);
   };
   
+  const [chartValue, setChartValue] = useState("연령별 이용자 통계")
   const handleChange = event => {
     setChecked({checked, [event.target.name]: event.target.checked })
-    
-    // switch({chartData}){
-    //   case 
-    // }
-
-    // 체크에 따른 true false
-    // if(event.target.checked===!true){
-    //   alert("True")
-    // }else{
-    //   alert("False")
-    // }
+    if(event.target.checked===true){
+      switch(event.target.name){
+        case "checkBox_Age": return setChartValue("연령별 이용자 통계")
+        case "checkBox_Sex": return setChartValue("성별 이용자 통계")
+        case "checkBox_Location": return setChartValue("지역별 이용자 통계")
+        case "checkBox_D": return setChartValue("D별 이용자 통계")
+        case "checkBox_E": return setChartValue("E별 이용자 통계")
+      }
+    }
   }
   useEffect(()=>{
     setChecked({...checked, checkBox_Age:true})
@@ -138,7 +136,6 @@ const LatestSales = props => {
         <FormControlLabel
           control={
             <Checkbox 
-              defaultChecked={true}
               checked={checked.checkBox_Age} 
               onChange={handleChange} 
               name="checkBox_Age"
@@ -156,9 +153,9 @@ const LatestSales = props => {
         <FormControlLabel
           control={
             <Checkbox 
-              checked={checked.checkBox_C} 
+              checked={checked.checkBox_Location} 
               onChange={handleChange} 
-              name="checkBox_C" />}
+              name="checkBox_Location" />}
             label="지역"
         />
         <FormControlLabel
@@ -183,12 +180,12 @@ const LatestSales = props => {
       <CardContent>
         {chartType === "도넛형" ? 
           <DoughnutChart 
-            chartData = {chartData}/>
+            chartValue = {chartValue}/>
           : chartType === "바형"
           ? <BarChart 
-            chartData={chartData}/>: 
+            chartValue={chartValue}/>: 
           <MixedChart 
-            chartData={chartData}/>}
+            chartValue={chartValue}/>}
       </CardContent>
     </Card>
   );

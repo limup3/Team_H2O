@@ -1,6 +1,4 @@
-import uuid from 'uuid/v1';
-
-export default [
+export const userData = [
   {
     id: 1,
     name: '비트캠프1',
@@ -112,4 +110,6 @@ export default [
     createdAt: 1555016400000
   }
   
-];
+]
+
+export default userData
