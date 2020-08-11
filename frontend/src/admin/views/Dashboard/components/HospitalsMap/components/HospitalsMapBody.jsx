@@ -1,49 +1,83 @@
-import React from 'react'
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import { sizing, Box } from '@material-ui/core';
+import React, {useState, useCallback, useRef} from 'react'
+import { GoogleMap, useLoadScript, Marker, InfoWindow} from "@react-google-maps/api";
+import './map.css'
+import "@reach/combobox/styles.css";
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 
-const containerStyle = {
+const MAP_KEY ="AIzaSyB7sfZLERFCcGjAjkfOrmMRjf_y_Oo3KhQ"
+
+const libraries = ["places"]
+
+const mapContainerStyle = {
   width: 'auto',
   height: '400px'
 };
+
+const options = {
+  zoomControl: true
+}
+
 const center = {
-  lat: 37.552345,
-  lng: 126.937982
+  lat: 37.551052,
+  lng: 126.990964
 };
 
-const HospitalsMapBody = () => {
-    
-    const [map, setMap] = React.useState(null)
- 
-    const onLoad = React.useCallback(function callback(map) {
-    const bounds = new window.google.maps.LatLngBounds();
-        map.fitBounds(bounds);
-        setMap(map)
-        }, [])
+const HospitalsMapBody = props => {
+  const {HospitalsMapData} = props
+    const { isLoaded, loadError } = useLoadScript({
+      googleMapsApitKey: MAP_KEY,
+      libraries,
+      region: 'kr'
+    })
 
-    const onUnmount = React.useCallback(function callback(map) {
-        setMap(null)
-        }, [])
+    const [selected, setSelected ] = useState({})
 
-    return <Box width="auto">
-        <LoadScript
-      googleMapsApiKey="AIzaSyBCVs3dKsLOC5xfB8pshVaPEpM7zBPjIZQ"
-    >
+    const mapRef = useRef()
+    const onMapLoad = useCallback((map)=>{
+      mapRef.current = map
+    }, [])
+
+   if(loadError) return "Error"
+   if(!isLoaded) return "Loading..."
+
+    return (
       <GoogleMap
-        mapContainerStyle={containerStyle}
+        id="map"
+        mapContainerStyle={mapContainerStyle}
         center={center}
-        zoom={8}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
+        zoom={12}
+        onLoad={onMapLoad}
       >
         <>
+        { HospitalsMapData.map((hospital, i) => (
           <Marker 
-            position={{lat: 37.552345, lng: 126.937982}}
-          />
+          key={i}
+          position={hospital.location}
+          onClick={()=>setSelected(hospital)}
+          icon={
+            {url:"https://cdn2.iconfinder.com/data/icons/funtime-objects-part-2/60/005_062_point_pointer_location_geo_checkin_mobile_map-512.png",
+              scaledSize : new window.google.maps.Size(40,40)}
+          }
+        />
+        )) 
+        }
+        {selected.location ? (
+          <InfoWindow
+            position={selected.location}
+            clickable={true}
+            onCloseClick={()=>setSelected({})}
+            >
+              <div className="infowindow">
+              <p>{selected.name}</p>
+              <p>{selected.street_address}</p>
+              </div>
+            </InfoWindow>
+          )
+          :null
+        }
         </>
       </GoogleMap>
-    </LoadScript>
-    </Box >
+    )
 }
 
 export default HospitalsMapBody
