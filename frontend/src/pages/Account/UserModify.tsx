@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -51,9 +51,11 @@ const UserModify = () => {
       email: email,
       phone: phoneNumber
     }
+    console.log(userId)
     axios.patch(`http://localhost:8080/user/modify/${userId}`, userJson)
           .then(response => {
             alert("데이터 변경 성공")
+            sessionStorage.clear()
             history.push("/")
           }
           ).catch(
@@ -158,8 +160,13 @@ const UserModify = () => {
           >
             Change
           </Button>
-          <Grid container justify="flex-end">
+          <Grid container>
+            <Grid item xs>
+            </Grid>
             <Grid item>
+              <Link to="/UserDelete" >
+                {"Do you want to withdraw from membership?"}
+              </Link>
             </Grid>
           </Grid>
         </form>
