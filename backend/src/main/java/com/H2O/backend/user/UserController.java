@@ -1,6 +1,5 @@
 package com.H2O.backend.user;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +10,15 @@ import java.util.Optional;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired User user;
-    @Autowired UserRepository userRepository;
-    @Autowired UserService userService;
+    private final User user;
+    private final UserRepository userRepository;
+    private final UserService userService;
+
+    public UserController(User user, UserRepository userRepository, UserService userService) {
+        this.user = user;
+        this.userRepository = userRepository;
+        this.userService = userService;
+    }
 
     @PostMapping("/signUp")
     public ResponseEntity<User> signup(@RequestBody User user) {
@@ -67,7 +72,7 @@ public class UserController {
         }
     }
 
-    @GetMapping(value = "/findPw")
+    @GetMapping("/findPw")
     public ResponseEntity<User> findPw(@RequestParam String userId,
                                                           @RequestParam String name, @RequestParam String phone) {
         Optional<User> findPw = userService.findPw(userId, name, phone);
@@ -78,19 +83,52 @@ public class UserController {
         }
     }
 
-    @PatchMapping(value = "/{userNo}")
-    public ResponseEntity<User> updateUser(@PathVariable String userNo, @RequestBody User user) {
-        System.out.println(userNo);
-        Optional<User> findUser = userService.findUser(Long.valueOf(userNo));
-        if(findUser.isPresent()) {
-            User selectUser = findUser.get();
-            Optional.ofNullable(user.getPassword()).ifPresent(password -> selectUser.setPassword(password));
-            Optional.ofNullable(user.getPhone()).ifPresent(phone -> selectUser.setPhone(phone));
-            Optional.ofNullable(user.getEmail()).ifPresent(email -> selectUser.setEmail(email));
-            return ResponseEntity.ok(userService.update(selectUser));
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
+//    @PatchMapping("/{userNo}")
+//    public ResponseEntity<User> updateUser(@PathVariable String userNo, @RequestBody User user) {
+//        System.out.println(userNo);
+//        Optional<User> findUser = userService.findUser(Long.valueOf(userNo));
+//        if(findUser.isPresent()) {
+//            User selectUser = findUser.get();
+//            Optional.ofNullable(user.getPassword()).ifPresent(password -> selectUser.setPassword(password));
+//            Optional.ofNullable(user.getPhone()).ifPresent(phone -> selectUser.setPhone(phone));
+//            Optional.ofNullable(user.getEmail()).ifPresent(email -> selectUser.setEmail(email));
+//            return ResponseEntity.ok(userService.update(selectUser));
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
+
+//    @PatchMapping("/modify/{userId}")
+//    public ResponseEntity<User> modify(@PathVariable String userId, @RequestBody User user) {
+//
+//        Optional<User> modifyUser = userService.findUserByUserId(userId);
+//        System.out.println(userId);
+//        System.out.println(user);
+////        modifyUser.ifPresent(selectUser -> {
+////                    selectUser.setName(user.getName());
+////                    selectUser.setPhone(user.getPhone());
+////                    selectUser.setEmail(user.getEmail());
+////                    selectUser.setPassword(user.getPassword());
+////                    User newUser = userRepository.save(selectUser);
+////                    System.out.println("user: " + newUser);
+////        });
+////    }
+//        if(modifyUser.isPresent()){
+//            modifyUser.ifPresent(selectUser ->{
+//                selectUser.setName(user.getName());
+//                selectUser.setPhone(user.getPhone());
+//                selectUser.setEmail(user.getEmail());
+//                selectUser.setPassword(user.getPassword());
+//                User newUser = userRepository.save(selectUser);
+//                System.out.println("user: "+newUser);
+//            });
+//            return ResponseEntity.ok(modifyUser.get());
+//        } else {
+//            System.out.println("업데이트 실패");
+//
+//            return ResponseEntity.notFound().build();
+//        }
+//
+//    }
 
     }

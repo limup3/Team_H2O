@@ -94,7 +94,6 @@ const SignUp = () => {
                   variant="outlined"
                   required
                   fullWidth
-                  // error={ userId === "" ? true : false}
                   id="userId"
                   label="userId"
                   name="userId"

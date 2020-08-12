@@ -342,6 +342,7 @@ const GooMap = () =>{
                                 </div>
                             </InfoWindow>
                     ): null
+                    
                 }
             </GoogleMap>
 
