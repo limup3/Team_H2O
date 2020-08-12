@@ -26,7 +26,6 @@ public class Ambulance {
     @Column(name = "homePage", nullable = false) private String homePage;
     @Column(name = "count", nullable = false) private int count;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "ambulance")
     private List<Reservation> reservations;
 }

@@ -13,31 +13,21 @@ const QAReview = () => {
 
     const modules = {
         toolbar: [
-            //[{header: [1, 2, false]}],
             ['bold', 'italic', 'underline', 'strike', 'link', 'image']
-            //[{list: 'ordered'}, {list: 'bullet'}, {indent: '-1'}, {indent: '+1'}],
-            //['clean']
         ]
     }
 
     const formats = [
-        //'header',
         'bold',
         'italic',
         'underline',
         'strike',
-        /*
-        'blockquote',
-        'list',
-        'bullet',
-        'indent',
-        */
         'link',
         'image'
     ]
     return (
         <Container>
-            <div>
+            <div className="Rev-tab">
                 <Table striped bordered hover size="sm">
                     <thead>
                     <tr>
@@ -68,8 +58,8 @@ const QAReview = () => {
                         <Link to='/QAFix'>수정하기</Link></Button>
                 </textPath>
                 <Form.Group className="comment">
-                    <button className='comment-btn' >댓글 :</button>
-                    <Form.Control type="text" placeholder="Normal text" />
+                    <textPath >댓글 :</textPath>
+                    <Form.Control type="text" placeholder="Normal text" className="comment-box"/>
                     <Button className="fix-btn" variant="secondary" >
                         <Link to='/QAReview'>댓글달기</Link>
                     </Button>
