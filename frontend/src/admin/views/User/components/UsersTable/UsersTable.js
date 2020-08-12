@@ -23,7 +23,7 @@ import {
 } from '@material-ui/core';
 
 import { getInitials } from '../../../../helpers';
-import Account from '../../../Account';
+import UserInfo from '../../UserInfo';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -174,7 +174,7 @@ const UsersTable = props => {
                         <Modal.Header closeButton>
                           <Modal.Title>등록 병원 정보</Modal.Title>
                         </Modal.Header>
-                        <Modal.Body><Account/></Modal.Body>
+                        <Modal.Body><UserInfo/></Modal.Body>
                         <Modal.Footer>
                           <Button variant="primary" onClick={handleClose}>
                             저장

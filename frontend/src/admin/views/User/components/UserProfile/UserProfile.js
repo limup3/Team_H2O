@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AccountProfile = props => {
+const UserProfile = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
@@ -97,8 +97,8 @@ const AccountProfile = props => {
   );
 };
 
-AccountProfile.propTypes = {
+UserProfile.propTypes = {
   className: PropTypes.string
 };
 
-export default AccountProfile;
+export default UserProfile;

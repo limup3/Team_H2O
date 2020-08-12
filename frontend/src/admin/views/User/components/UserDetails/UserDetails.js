@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
   root: {}
 }));
 
-const AccountDetails = props => {
+const UserDetails = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
@@ -150,8 +150,8 @@ const AccountDetails = props => {
   );
 };
 
-AccountDetails.propTypes = {
+UserDetails.propTypes = {
   className: PropTypes.string
 };
 
-export default AccountDetails;
+export default UserDetails;

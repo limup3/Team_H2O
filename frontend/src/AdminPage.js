@@ -13,10 +13,10 @@ import './admin/assets/css/index.css';
 import validators from './admin/common/validators';
 import {
   Dashboard as DashboardView,
-  UserList as UserListView,
+  UsersList as UserListView,
   Typography as TypographyView,
   Icons as IconsView,
-  Account as AccountView,
+  UsersList as UserView,
   Settings as SettingsView,
   NotFound as NotFoundView,
   Board as BoardView,
@@ -73,7 +73,7 @@ const AdminPage = () => {
         path="/admin/icons"
       />
       <RouteWithLayout
-        component={AccountView}
+        component={UserView}
         exact
         layout={MainLayout}
         path="/admin/account"

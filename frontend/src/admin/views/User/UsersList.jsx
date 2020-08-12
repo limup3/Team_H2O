@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const UserList = () => {
+const UsersList = () => {
   const classes = useStyles();
 
   const [users] = useState(mockData);
@@ -28,4 +28,4 @@ const UserList = () => {
   );
 };
 
-export default UserList;
+export default UsersList;
