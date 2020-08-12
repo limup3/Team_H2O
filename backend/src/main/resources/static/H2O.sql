@@ -24,6 +24,9 @@ CREATE TABLE Reservation
     `Date`            VARCHAR(50)     NULL,
     `Time`            VARCHAR(10)     NULL,
     `Prescription`    VARCHAR(100)    NULL,
+    `User_No`         INT             NOT NULL,
+    `Doctor_No`       INT             NOT NULL,
+    `Ambulance_No`    INT             NOT NULL,
     PRIMARY KEY (Reservation_No)
 )default character set utf8 collate UTF8_GENERAL_CI;
 CREATE TABLE Board
@@ -34,6 +37,8 @@ CREATE TABLE Board
     `Content`        VARCHAR(150)    NULL,
     `Creation_Date`  VARCHAR(20)     NULL,
     `Category`       VARCHAR(20)     NULL,
+    `User_No`        INT             NOT NULL,
+    `Hospital_No`    INT             NOT NULL,
     PRIMARY KEY (Board_No)
 )default character set utf8 collate UTF8_GENERAL_CI;
 CREATE TABLE User
@@ -71,6 +76,7 @@ CREATE TABLE Doctor
     `Specialized`     VARCHAR(255)    NULL,
     `MedicalSubject`  VARCHAR(20)     NULL,
     `Age`             INT             NULL,
+    `Hospital_No`     INT             NOT NULL,
     PRIMARY KEY (Doctor_No)
 )default character set utf8 collate UTF8_GENERAL_CI;
 CREATE TABLE Comments

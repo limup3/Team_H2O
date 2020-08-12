@@ -7,8 +7,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {Link} from "react-router-dom";
-
+import {Link, useHistory} from "react-router-dom";
+import axios from 'axios';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -31,12 +31,46 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ResetPW = (props) => {
+const UserDelete = () => {
   
   const classes = useStyles();
-  const [newPassword,setNewPassword] = useState("");
+  const [userId, setUserId] = useState(JSON.parse(sessionStorage.userData).userId);
+  const [password,setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  // const history = useHistory()
+
+
+  const history = useHistory()
+  
+  const handleWithDraw = e => {
+    e.preventDefault();
+    console.log(userId)
+    const userJson = {
+      userId: userId,
+      password: password,
+    }
+    if(password === JSON.parse(sessionStorage.userData).password ){
+      if( password === confirmPassword ) {
+        axios.post(`http://localhost:8080/user/delete`,userJson)
+        .then(() => {
+          sessionStorage.clear();
+          alert("회원탈퇴 완료");
+          history.push("/");
+        }).catch(
+          error => { throw (error) }
+        )
+      } else {
+        alert("비밀번호와 비밀번호 확인이 일치하지않습니다.");
+        setPassword("");
+        setConfirmPassword("");
+      }
+    } else {
+      alert("비밀번호가 일치하지 않습니다.");
+        setPassword("");
+        setConfirmPassword("");
+    }
+    } 
+    
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -44,7 +78,7 @@ const ResetPW = (props) => {
         <Avatar className={classes.avatar}>
         </Avatar>
         <Typography component="h2" variant="h5">
-          Reset Password
+          MemberShip WithDraw
         </Typography>
         <form className={classes.form} >
           <Grid container spacing={2}> 
@@ -53,12 +87,12 @@ const ResetPW = (props) => {
                   variant="outlined"
                   required
                   fullWidth
-                  id="newPassword"
-                  label="New Password"
-                  name="newPassword"
-                  autoComplete="newPassword"
-                  value={newPassword}
-                  onChange={e => setNewPassword(e.target.value)}
+                  id="Password"
+                  label="Password"
+                  name="Password"
+                  autoComplete="Password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
               />
               
             </Grid>
@@ -87,8 +121,9 @@ const ResetPW = (props) => {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={handleWithDraw}
           >
-            Change
+            WithDraw
           </Button>
           </Link>
         </form>
@@ -96,4 +131,4 @@ const ResetPW = (props) => {
     </Container>
   );
 }
-export default ResetPW
+export default UserDelete

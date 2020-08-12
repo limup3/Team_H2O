@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -7,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import axios from 'axios';
 
 
 
@@ -32,6 +34,38 @@ const useStyles = makeStyles((theme) => ({
 
 const UserModify = () => {
   const classes = useStyles();
+  const [userId, setUserId] = useState(JSON.parse(sessionStorage.userData).userId);
+  const [password, setPassword] = useState(JSON.parse(sessionStorage.userData).password);
+  const [userName, setUserName] = useState(JSON.parse(sessionStorage.userData).name);
+  const [email, setEmail] = useState(JSON.parse(sessionStorage.userData).email);
+  const [phoneNumber, setPhoneNumber] = useState(JSON.parse(sessionStorage.userData).phone)
+
+  const history = useHistory();
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    const userJson = {
+      userId: userId,
+      password: password,
+      name: userName,
+      email: email,
+      phone: phoneNumber
+    }
+    console.log(userId)
+    axios.patch(`http://localhost:8080/user/modify/${userId}`, userJson)
+          .then(response => {
+            alert("데이터 변경 성공")
+            sessionStorage.clear()
+            history.push("/")
+          }
+          ).catch(
+            error => {
+              alert("데이터 변경 실패")
+              throw (error)
+            }
+          )
+  }
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -46,14 +80,30 @@ const UserModify = () => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
+                autoComplete="userId"
+                name="userId"
+                variant="filled"
+                disabled
+                fullWidth
+                id="userId"
+                label="userId"
+                autoFocus
+                value={userId}
+                onChange={e => setUserId(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
                 autoComplete="userName"
                 name="userName"
                 variant="outlined"
                 required
                 fullWidth
                 id="userName"
-                label="userName"
+                label="UserName"
                 autoFocus
+                value={userName}
+                onChange={e => setUserName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -66,6 +116,22 @@ const UserModify = () => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                autoComplete="phoneNumber"
+                name="phoneNumber"
+                variant="outlined"
+                required
+                fullWidth
+                id="phoneNumber"
+                label="PhoneNumber"
+                autoFocus
+                value={phoneNumber}
+                onChange={e => setPhoneNumber(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -77,6 +143,8 @@ const UserModify = () => {
             label="Email Address"
             name="email"
             autoComplete="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
           />
             </Grid>
             <Grid item xs={12}>
@@ -88,11 +156,17 @@ const UserModify = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={handleSubmit}
           >
             Change
           </Button>
-          <Grid container justify="flex-end">
+          <Grid container>
+            <Grid item xs>
+            </Grid>
             <Grid item>
+              <Link to="/UserDelete" >
+                {"Do you want to withdraw from membership?"}
+              </Link>
             </Grid>
           </Grid>
         </form>

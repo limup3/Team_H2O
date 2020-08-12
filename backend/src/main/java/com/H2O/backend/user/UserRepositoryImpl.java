@@ -1,16 +1,15 @@
 package com.H2O.backend.user;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.util.Optional;
 
 @Repository
 interface CustomedUserRepository {
     Optional<User> findByUserId(String userId);
-
 
     Optional<User> findUserId(String name, String phone);
 
@@ -19,11 +18,14 @@ interface CustomedUserRepository {
 }
 
 public class UserRepositoryImpl extends QuerydslRepositorySupport implements CustomedUserRepository {
-    @Autowired
-    JPAQueryFactory queryFactory;
 
-    UserRepositoryImpl() {
+    private final JPAQueryFactory queryFactory;
+    private final DataSource dataSource;
+
+    UserRepositoryImpl(JPAQueryFactory queryFactory, DataSource dataSource) {
         super(User.class);
+        this.queryFactory = queryFactory;
+        this.dataSource = dataSource;
     }
 
 

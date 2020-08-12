@@ -5,8 +5,8 @@ import UserModify from './UserModify'
 import SignUp from './SignUp'
 import UserFindID from "./UserFindID";
 import UserFindPW from "./UserFindPW";
-import ResetPW from "./ResetPW";
+import UserDelete from "./UserDelete";
 
 export {
-    Login, loginReducer, UserModify, MyPage, SignUp, UserFindID, UserFindPW, ResetPW, 
+    Login, loginReducer, UserModify, MyPage, SignUp, UserFindID, UserFindPW, UserDelete, 
 }

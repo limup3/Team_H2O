@@ -2,10 +2,7 @@ package com.H2O.backend.user;
 
 import com.H2O.backend.reservation.Reservation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -33,6 +30,17 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Reservation> reservation;
+
+    @Builder
+    public User(String userId, String name, String password, String phone, int adminCheck, String email, String history){
+        this.userId = userId;
+        this.name = name;
+        this.password = password;
+        this.phone = phone;
+        this.adminCheck = adminCheck;
+        this.email = email;
+        this.history = history;
+    }
 
 
 }

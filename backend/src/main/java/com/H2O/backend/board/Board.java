@@ -27,11 +27,13 @@ public class Board {
     @Column(name = "creation_date", nullable = false) private String creationDate;
     @Column(name = "category", nullable = false) private String category;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id") private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "hospital_no")private Hospital hospital;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hospital_no")
+    private Hospital hospital;
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<Comment> comment;

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Container,Form, Button,Modal,Table,} from "react-bootstrap";
+import {Container, Button,Modal,Table,} from "react-bootstrap";
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css';
 import './styles.css'
@@ -14,31 +14,22 @@ const CSFix = () => {
 
     const modules = {
         toolbar: [
-            //[{header: [1, 2, false]}],
             ['bold', 'italic', 'underline', 'strike', 'link', 'image']
-            //[{list: 'ordered'}, {list: 'bullet'}, {indent: '-1'}, {indent: '+1'}],
-            //['clean']
+
         ]
     }
 
     const formats = [
-        //'header',
         'bold',
         'italic',
         'underline',
         'strike',
-        /*
-        'blockquote',
-        'list',
-        'bullet',
-        'indent',
-        */
         'link',
         'image'
     ]
     return (
         <Container>
-            <div>
+            <div className="Rev-tab">
                 <Table striped bordered hover size="sm">
                     <thead>
                     <tr>

@@ -2,10 +2,7 @@ package com.H2O.backend.doctor;
 
 import com.H2O.backend.hospital.Hospital;
 import com.H2O.backend.reservation.Reservation;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;

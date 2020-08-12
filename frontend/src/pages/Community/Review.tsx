@@ -1,6 +1,5 @@
 import React, {useState} from "react";
-import {Container,Form, Button,Modal,Table,} from "react-bootstrap";
-import ReactQuill from 'react-quill'
+import {Container,Form, Button,Table,} from "react-bootstrap";
 import 'react-quill/dist/quill.snow.css';
 import './styles.css'
 import './community.css'
@@ -15,31 +14,22 @@ const Review = () => {
 
     const modules = {
         toolbar: [
-            //[{header: [1, 2, false]}],
             ['bold', 'italic', 'underline', 'strike', 'link', 'image']
-            //[{list: 'ordered'}, {list: 'bullet'}, {indent: '-1'}, {indent: '+1'}],
-            //['clean']
         ]
     }
 
     const formats = [
-        //'header',
         'bold',
         'italic',
         'underline',
         'strike',
-        /*
-        'blockquote',
-        'list',
-        'bullet',
-        'indent',
-        */
         'link',
         'image'
     ]
     return (
         <Container>
-            <div>
+
+            <div className="Rev-tab">
                 <textPath><Link to="/https://twitter.com/realdonaldtrump">Donald J. Trump @realDonaldTrump 님 게시글</Link></textPath>
 
                 <Table striped bordered hover size="sm">
