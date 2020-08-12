@@ -26,7 +26,9 @@ const Topbar = props => {
   const classes = useStyles();
 
   const [notifications] = useState([]);
-
+  const windowClose = () => {
+    window.close()
+  }
   return (
     <AppBar
       {...rest}
@@ -53,7 +55,7 @@ const Topbar = props => {
           <Button
             className={classes.signOutButton}
             color="inherit"
-            onClick={() => window.close()}
+            onClick={windowClose}
           >
             <InputIcon />
           </Button>

@@ -19,7 +19,7 @@ import {
   TableRow,
   Typography,
   TablePagination,
-  Button as M_Button
+  Button as MuiButton
 } from '@material-ui/core';
 
 import { getInitials } from '../../../../helpers';
@@ -159,9 +159,9 @@ const UsersTable = props => {
                           {getInitials(user.name)}
                         </Avatar>
                         <Typography variant="body1">
-                        <M_Button variant="primary" onClick={handleShow}>
+                        <MuiButton variant="primary" onClick={handleShow}>
                           {user.name}
-                        </M_Button>
+                        </MuiButton>
                         <Modal 
                           {...props} 
                           show={show} 

@@ -2,7 +2,7 @@ import React, {useState, useCallback, useRef} from 'react'
 import { GoogleMap, useLoadScript, Marker, InfoWindow} from "@react-google-maps/api";
 import './map.css'
 import "@reach/combobox/styles.css";
-import {Card,CardHeader,CardContent,CardActions,Divider} from '@material-ui/core'
+import {Card,CardHeader,Divider} from '@material-ui/core'
 
 const MAP_KEY ="AIzaSyB7sfZLERFCcGjAjkfOrmMRjf_y_Oo3KhQ"
 

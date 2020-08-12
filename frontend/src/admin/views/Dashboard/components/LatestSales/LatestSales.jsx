@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { Bar } from 'react-chartjs-2';
 import { makeStyles } from '@material-ui/styles';
 import {
   Card,
@@ -17,12 +16,10 @@ import {
   FormControlLabel
 } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import {userData} from './Charts/userData'
 
 import { DoughnutChart, BarChart, MixedChart } from './Charts/ChartBody';
 
 // import axios from 'axios';
-import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -70,7 +67,7 @@ const LatestSales = props => {
     checkBox_Age: false,
     checkBox_Sex: false,
     checkBox_Location: false,
-    checkBox_D: false,
+    checkBox_days: false,
     checkBox_E: false,
     checkBox_ChartData: ""
   })
@@ -91,7 +88,7 @@ const LatestSales = props => {
         case "checkBox_Age": return setChartValue("연령별 이용자 통계")
         case "checkBox_Sex": return setChartValue("성별 이용자 통계")
         case "checkBox_Location": return setChartValue("지역별 이용자 통계")
-        case "checkBox_D": return setChartValue("D별 이용자 통계")
+        case "checkBox_days": return setChartValue("기간별 이용자 통계")
         case "checkBox_E": return setChartValue("E별 이용자 통계")
       }
     }
@@ -161,10 +158,10 @@ const LatestSales = props => {
         <FormControlLabel
           control={
             <Checkbox 
-              checked={checked.checkBox_D} 
+              checked={checked.checkBox_days} 
               onChange={handleChange} 
-              name="checkBox_D" />}
-            label="4"
+              name="checkBox_days" />}
+            label="기간"
         />
         <FormControlLabel
           control={

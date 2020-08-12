@@ -85,7 +85,7 @@ export const BarChart = props => {
   const {chartValue} = props
     return (
       <div>
-        <h2>{chartValue}월별 이용자 수</h2>
+        <h2>{chartValue}</h2>
         <Bar 
           data={barData}
         />
@@ -93,18 +93,6 @@ export const BarChart = props => {
     );
   }
 
-// var createReactClass = require('create-react-class');
-// export const DoughnutChart = createReactClass({
-//   displayName: 'DoughnutChart',
-// 	render() {
-// 		return (
-// 		  <div>
-// 			<h2>Dounut Chart</h2>
-// 			<Doughnut data={dougnutData} />
-// 		  </div>
-// 		);
-// 	  }
-// 	});
 
 // Mixed Chart Data
 const mixedData = {
@@ -198,7 +186,7 @@ export const MixedChart = props => {
   const {chartValue} = props
     return (
       <div>
-        <h2>{chartValue}Mixed data Example</h2>
+        <h2>{chartValue}</h2>
         <Bar
           data={mixedData}
           options={chartOptions}

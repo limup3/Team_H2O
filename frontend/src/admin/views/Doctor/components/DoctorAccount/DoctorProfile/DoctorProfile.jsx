@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import moment from 'moment';
 import { makeStyles } from '@material-ui/styles';
 import {
   Card,
@@ -10,8 +9,7 @@ import {
   Avatar,
   Typography,
   Divider,
-  Button,
-  LinearProgress
+  Button
 } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({

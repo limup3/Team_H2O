@@ -8,44 +8,52 @@ import {
   Button,
   IconButton,
   TextField,
-  Link,
-  FormHelperText,
-  Checkbox,
   Typography
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import PostcodeButton from './PostcodeButton';
 
 const schema = {
-  firstName: {
-    presence: { allowEmpty: false, message: 'is required' },
-    length: {
+    hospitalName: {
+        presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
+        length: {
+          maximum: 32
+        }
+      },
+    name: {
+        presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
+        length: {
       maximum: 32
     }
-  },
-  lastName: {
-    presence: { allowEmpty: false, message: 'is required' },
-    length: {
-      maximum: 32
+    },
+    birthday: {
+        presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
+        length: {
+        maximum: 32
+        }
+    },
+    position: {
+        length: {
+        maximum: 64
+        }
+    },
+    detailData: {
+        length: {
+        maximum: 128
+        }
+    },
+    specialized: {
+        length: {
+        maximum: 32
+        }
+    },
+    medicalSubject: {
+        presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
+        length: {
+        maximum: 128
+        }
     }
-  },
-  email: {
-    presence: { allowEmpty: false, message: 'is required' },
-    email: true,
-    length: {
-      maximum: 64
-    }
-  },
-  password: {
-    presence: { allowEmpty: false, message: 'is required' },
-    length: {
-      maximum: 128
-    }
-  },
-  policy: {
-    presence: { allowEmpty: false, message: 'is required' },
-    checked: true
-  }
-};
+    };
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -132,9 +140,6 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center'
   },
-  policyCheckbox: {
-    marginLeft: '-14px'
-  },
   DoctorsAddButton: {
     margin: theme.spacing(2, 0)
   }
@@ -151,7 +156,6 @@ const DoctorsAdd = props => {
     touched: {},
     errors: {}
   });
-
   useEffect(() => {
     const errors = validate(formState.values, schema);
 
@@ -169,10 +173,7 @@ const DoctorsAdd = props => {
       ...formState,
       values: {
         ...formState.values,
-        [event.target.name]:
-          event.target.type === 'checkbox'
-            ? event.target.checked
-            : event.target.value
+        [event.target.name]: event.target.value
       },
       touched: {
         ...formState.touched,
@@ -223,97 +224,96 @@ const DoctorsAdd = props => {
                   의사 등록
                 </Typography>
                 <Typography
-                  color="textSecondary"
+                  color="primary"
                   gutterBottom
-                >
-                  의사 정보를 입력해주세요.
+                ><br/>
+                  *은 필수 입력사항입니다.
                 </Typography>
                 <TextField
                   className={classes.textField}
-                  error={hasError('firstName')}
+                  error={hasError('hospitalName')}
                   fullWidth
                   helperText={
-                    hasError('firstName') ? formState.errors.firstName[0] : null
+                    hasError('hospitalName') ? formState.errors.hospitalName[0] : null
                   }
-                  label="First name"
-                  name="firstName"
+                  label="* 소속병원"
+                  name="hospitalName"
                   onChange={handleChange}
                   type="text"
-                  value={formState.values.firstName || ''}
+                  value={formState.values.hospitalName || ''}
+                  variant="outlined"
+                />
+                <PostcodeButton/>
+                <TextField
+                  className={classes.textField}
+                  error={hasError('name')}
+                  fullWidth
+                  helperText={
+                    hasError('name') ? formState.errors.name[0] : null
+                  }
+                  label="* 이름"
+                  name="name"
+                  onChange={handleChange}
+                  type="text"
+                  value={formState.values.name || ''}
                   variant="outlined"
                 />
                 <TextField
                   className={classes.textField}
-                  error={hasError('lastName')}
+                  error={hasError('birthday')}
                   fullWidth
                   helperText={
-                    hasError('lastName') ? formState.errors.lastName[0] : null
+                    hasError('birthday') ? formState.errors.birthday[0] : null
                   }
-                  label="Last name"
-                  name="lastName"
+                  label="* 생년월일"
+                  name="birthday"
                   onChange={handleChange}
                   type="text"
-                  value={formState.values.lastName || ''}
+                  value={formState.values.birthday || ''}
                   variant="outlined"
                 />
                 <TextField
                   className={classes.textField}
-                  error={hasError('email')}
+                  error={hasError('medicalSubject')}
                   fullWidth
                   helperText={
-                    hasError('email') ? formState.errors.email[0] : null
+                    hasError('medicalSubject') ? formState.errors.medicalSubject[0] : null
                   }
-                  label="Email address"
-                  name="email"
+                  label="* 진료과"
+                  name="medicalSubject"
                   onChange={handleChange}
                   type="text"
-                  value={formState.values.email || ''}
+                  value={formState.values.medicalSubject || ''}
                   variant="outlined"
                 />
                 <TextField
                   className={classes.textField}
-                  error={hasError('password')}
                   fullWidth
-                  helperText={
-                    hasError('password') ? formState.errors.password[0] : null
-                  }
-                  label="Password"
-                  name="password"
+                  label="직책"
+                  name="position"
                   onChange={handleChange}
-                  type="password"
-                  value={formState.values.password || ''}
+                  type="text"
                   variant="outlined"
                 />
-                <div className={classes.policy}>
-                  <Checkbox
-                    checked={formState.values.policy || false}
-                    className={classes.policyCheckbox}
-                    color="primary"
-                    name="policy"
-                    onChange={handleChange}
-                  />
-                  <Typography
-                    className={classes.policyText}
-                    color="textSecondary"
-                    variant="body1"
-                  >
-                    I have read the{' '}
-                    <Link
-                      color="primary"
-                      component={RouterLink}
-                      to="#"
-                      underline="always"
-                      variant="h6"
-                    >
-                      Terms and Conditions
-                    </Link>
-                  </Typography>
-                </div>
-                {hasError('policy') && (
-                  <FormHelperText error>
-                    {formState.errors.policy[0]}
-                  </FormHelperText>
-                )}
+                <TextField
+                  className={classes.textField}
+                  fullWidth
+                  label="전문분야"
+                  name="specialized"
+                  onChange={handleChange}
+                  type="text"
+                  variant="outlined"
+                />
+                <TextField
+                  className={classes.textField}
+                  fullWidth
+                  label="상세정보"
+                  name="detailData"
+                  onChange={handleChange}
+                  type="text"
+                  variant="outlined"
+                />
+                
                 <Button
                   className={classes.DoctorsAddButton}
                   color="primary"
@@ -323,21 +323,8 @@ const DoctorsAdd = props => {
                   type="submit"
                   variant="contained"
                 >
-                  Sign up now
+                  등록 완료
                 </Button>
-                <Typography
-                  color="textSecondary"
-                  variant="body1"
-                >
-                  Have an account?{' '}
-                  <Link
-                    component={RouterLink}
-                    to="/admin/sign-in"
-                    variant="h6"
-                  >
-                    Sign in
-                  </Link>
-                </Typography>
               </form>
             </div>
           </div>

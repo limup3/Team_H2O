@@ -7,7 +7,6 @@ import {HospitalsMapData} from './components/HospitalsMapData'
 const HospitalsMap = () => {
     const [HospitalsMap] = useState(HospitalsMapData)
     return <>
-        <HospitalsMapHead/>
         <HospitalsMapBody HospitalsMapData={HospitalsMapData}/>
     </>
 }
