@@ -1,1 +1,1 @@
-export { default } from './HospitalProfile.jsx';
+export { default } from './HospitalProfile';

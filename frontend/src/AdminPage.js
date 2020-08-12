@@ -13,19 +13,18 @@ import './admin/assets/css/index.css';
 import validators from './admin/common/validators';
 import {
   Dashboard as DashboardView,
-  UserList as UserListView,
+  UsersList as UserListView,
   Typography as TypographyView,
   Icons as IconsView,
-  Account as AccountView,
+  UsersList as UserView,
   Settings as SettingsView,
   NotFound as NotFoundView,
   Board as BoardView,
-  HospitalList as HospitalView
+  HospitalsList as HospitalView
 } from './admin/views';
-import { RecentVisitingHospital } from './admin/views/Dashboard/components/LatestOrders';
-import { HospitalsAdd } from './admin/views/HospitalList/components';
 import { Doctor } from './admin/views/Doctor';
 import DoctorsAdd from './admin/views/Doctor/components/DoctorList/DoctorAdd';
+import { HospitalsAdd } from './admin/views/Hospital/components';
 
 
 const browserHistory = createBrowserHistory();
@@ -74,7 +73,7 @@ const AdminPage = () => {
         path="/admin/icons"
       />
       <RouteWithLayout
-        component={AccountView}
+        component={UserView}
         exact
         layout={MainLayout}
         path="/admin/account"
@@ -90,12 +89,6 @@ const AdminPage = () => {
         exact
         layout={MinimalLayout}
         path="/admin/not-found"
-      />
-      <RouteWithLayout
-        component={RecentVisitingHospital}
-        exact
-        layout={MainLayout}
-        path="/admin/RecentVisitingHospital"
       />
       <RouteWithLayout
         component={BoardView}
