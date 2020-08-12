@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link as RouterLink, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import validate from 'validate.js';
 import { makeStyles } from '@material-ui/styles';
@@ -11,7 +11,6 @@ import {
   Typography
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import PostcodeButton from './PostcodeButton';
 
 const schema = {
     hospitalName: {
@@ -145,7 +144,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const DoctorsAdd = props => {
+const DoctorAdd = props => {
   const { history } = props;
 
   const classes = useStyles();
@@ -243,7 +242,6 @@ const DoctorsAdd = props => {
                   value={formState.values.hospitalName || ''}
                   variant="outlined"
                 />
-                <PostcodeButton/>
                 <TextField
                   className={classes.textField}
                   error={hasError('name')}
@@ -334,8 +332,8 @@ const DoctorsAdd = props => {
   );
 };
 
-DoctorsAdd.propTypes = {
+DoctorAdd.propTypes = {
   history: PropTypes.object
 };
 
-export default withRouter(DoctorsAdd);
+export default DoctorAdd;

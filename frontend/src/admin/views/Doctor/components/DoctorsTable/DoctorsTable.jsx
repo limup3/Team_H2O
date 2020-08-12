@@ -5,7 +5,6 @@ import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { makeStyles } from '@material-ui/styles';
 import { Button, Modal } from 'react-bootstrap';
-// import {Button, Col, Container, Form, Image, Modal, Row} from "react-bootstrap";
 import {
   Card,
   CardActions,
@@ -22,8 +21,8 @@ import {
   Button as MuiButton
 } from '@material-ui/core';
 
-import { getInitials } from '../../../../../helpers';
-import DoctorAccount from '../../DoctorAccount/DoctorAccount';
+import DoctorAccount from '../../DoctorAccount'
+import { getInitials } from '../../../../helpers';
 
 
 
