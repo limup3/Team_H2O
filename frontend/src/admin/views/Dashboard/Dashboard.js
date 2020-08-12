@@ -7,7 +7,7 @@ import {
   TotalUsers,
   TasksProgress,
   TotalProfit,
-  LatestSales,
+  Chart,
   HospitalsMap
 } from './components';
 
@@ -69,7 +69,7 @@ const Dashboard = () => {
           xl={6}
           xs={12}
         >
-          <LatestSales />
+          <Chart />
         </Grid>
         <Grid
           item

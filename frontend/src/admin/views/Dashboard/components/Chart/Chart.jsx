@@ -17,7 +17,7 @@ import {
 } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
-import { DoughnutChart, BarChart, MixedChart } from './Charts/ChartBody';
+import { ChartBar, ChartDounut, ChartMix } from './components';
 
 // import axios from 'axios';
 
@@ -55,7 +55,7 @@ export const chartReducer = (state = {}, action) => {
 
 //
 
-const LatestSales = props => {
+const Chart = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
@@ -85,11 +85,11 @@ const LatestSales = props => {
     setChecked({checked, [event.target.name]: event.target.checked })
     if(event.target.checked===true){
       switch(event.target.name){
-        case "checkBox_Age": return setChartValue("연령별 이용자 통계")
-        case "checkBox_Sex": return setChartValue("성별 이용자 통계")
-        case "checkBox_Location": return setChartValue("지역별 이용자 통계")
-        case "checkBox_days": return setChartValue("기간별 이용자 통계")
-        case "checkBox_E": return setChartValue("E별 이용자 통계")
+        case "checkBox_Age": return setChartValue("Age")
+        case "checkBox_Sex": return setChartValue("Sex")
+        case "checkBox_Location": return setChartValue("Location")
+        case "checkBox_days": return setChartValue("Days")
+        case "checkBox_E": return setChartValue("E")
       }
     }
   }
@@ -176,20 +176,20 @@ const LatestSales = props => {
       <Divider />
       <CardContent>
         {chartType === "도넛형" ? 
-          <DoughnutChart 
+          <ChartDounut 
             chartValue = {chartValue}/>
           : chartType === "바형"
-          ? <BarChart 
+          ? <ChartBar 
             chartValue={chartValue}/>: 
-          <MixedChart 
+          <ChartMix 
             chartValue={chartValue}/>}
       </CardContent>
     </Card>
   );
 };
 
-LatestSales.propTypes = {
+Chart.propTypes = {
   className: PropTypes.string
 };
 
-export default LatestSales;
+export default Chart;
