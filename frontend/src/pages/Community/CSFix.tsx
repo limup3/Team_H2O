@@ -29,7 +29,7 @@ const CSFix = () => {
     ]
     return (
         <Container>
-            <div>
+            <div className="Rev-tab">
                 <Table striped bordered hover size="sm">
                     <thead>
                     <tr>

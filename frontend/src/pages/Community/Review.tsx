@@ -28,7 +28,8 @@ const Review = () => {
     ]
     return (
         <Container>
-            <div>
+
+            <div className="Rev-tab">
                 <textPath><Link to="/https://twitter.com/realdonaldtrump">Donald J. Trump @realDonaldTrump 님 게시글</Link></textPath>
 
                 <Table striped bordered hover size="sm">

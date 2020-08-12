@@ -27,7 +27,7 @@ const QAReview = () => {
     ]
     return (
         <Container>
-            <div>
+            <div className="Rev-tab">
                 <Table striped bordered hover size="sm">
                     <thead>
                     <tr>
@@ -58,8 +58,8 @@ const QAReview = () => {
                         <Link to='/QAFix'>수정하기</Link></Button>
                 </textPath>
                 <Form.Group className="comment">
-                    <button className='comment-btn' >댓글 :</button>
-                    <Form.Control type="text" placeholder="Normal text" />
+                    <textPath >댓글 :</textPath>
+                    <Form.Control type="text" placeholder="Normal text" className="comment-box"/>
                     <Button className="fix-btn" variant="secondary" >
                         <Link to='/QAReview'>댓글달기</Link>
                     </Button>

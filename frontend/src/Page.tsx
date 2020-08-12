@@ -5,9 +5,23 @@ import {MainTopPage, MainBottomPage} from './pages/splash-page'
 import {SearchHospital} from './pages/SearchHospital'
 import {Ambulance} from './pages/Ambulance'
 import {TeleMedicine, RtcRoom} from './pages/TeleMedicine'
-import {Community, CustomerServiceCenter, QueAn, Review,CSReview, Edit,Review2,QAFix,CSFix,Fix,CommunityTem,QAReview} from './pages/Community'
+import {
+    Community,
+    CustomerServiceCenter,
+    QueAn,
+    Review,
+    CSReview,
+    Edit,
+    Review2,
+    QAFix,
+    CSFix,
+    Fix,
+    CommunityTem,
+    QAReview,
+    TablePage
+} from './pages/Community'
 import {Login, SignUp, MyPage, UserModify, UserFindID, UserFindPW, ResetPW, } from './pages/Account'
-
+import './pages/Community/community.css'
 const Page = () => (
 
     <Switch>
@@ -20,12 +34,6 @@ const Page = () => (
             <Route path="/Ambulance">
                     <NavBar/>
                     <Ambulance/>
-                    <Footer/>
-            </Route>
-
-            <Route path="/CommunityTem">
-                    <NavBar/>
-                    <CommunityTem/>
                     <Footer/>
             </Route>
 

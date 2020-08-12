@@ -11,7 +11,7 @@ import CSFix from "./CSFix"
 import QAFix from "./QAFix"
 import CommunityTem from "./CommunityTem"
 import SideBar from "./Sidebar";
-
+import TablePage from "./TablePage";
 export {
-    Community,Review,Edit,CustomerServiceCenter,QueAn,CSFix,Fix,Review2,CSReview,QAReview,QAFix,CommunityTem,SideBar
+    TablePage, Community,Review,Edit,CustomerServiceCenter,QueAn,CSFix,Fix,Review2,CSReview,QAReview,QAFix,CommunityTem,SideBar
 }

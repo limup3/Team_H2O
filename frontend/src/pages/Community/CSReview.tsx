@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Form, Button,Table,} from "react-bootstrap";
+import {Container,Form, Button,Table,} from "react-bootstrap";
 import 'react-quill/dist/quill.snow.css';
 import './styles.css'
 import './community.css'
@@ -16,7 +16,6 @@ const CSReview = () => {
             ['bold', 'italic', 'underline', 'strike', 'link', 'image']
         ]
     }
-
     const formats = [
         'bold',
         'italic',
@@ -26,10 +25,8 @@ const CSReview = () => {
         'image'
     ]
     return (
-    <>
-        <div id="wrapper">
-            <div className="page-wrapper">
-            <div>
+    <Container>
+            <div className="Rev-tab">
                 <Table striped bordered hover size="sm">
                     <thead>
                     <tr>
@@ -65,9 +62,7 @@ const CSReview = () => {
                     </Button>
                 </Form.Group>
             </div>
-        </div>
-        </div>
-    </>
+    </Container>
     );
 };
 
