@@ -28,11 +28,11 @@ public class Board {
     @Column(name = "category", nullable = false) private String category;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(mappedBy = "user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(mappedBy = "hospital_no")
+    @JoinColumn(name = "hospital_no")
     private Hospital hospital;
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
