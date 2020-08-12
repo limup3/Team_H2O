@@ -80,7 +80,7 @@ const Chart = props => {
     setAnchorEl(null);
   };
   
-  const [chartValue, setChartValue] = useState("연령별 이용자 통계")
+  const [chartValue, setChartValue] = useState("")
   const handleChange = event => {
     setChecked({checked, [event.target.name]: event.target.checked })
     if(event.target.checked===true){
@@ -89,7 +89,6 @@ const Chart = props => {
         case "checkBox_Sex": return setChartValue("Sex")
         case "checkBox_Location": return setChartValue("Location")
         case "checkBox_days": return setChartValue("Days")
-        case "checkBox_E": return setChartValue("E")
       }
     }
   }
@@ -162,14 +161,6 @@ const Chart = props => {
               onChange={handleChange} 
               name="checkBox_days" />}
             label="기간"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox 
-              checked={checked.checkBox_E} 
-              onChange={handleChange} 
-              name="checkBox_E" />}
-            label="5"
         />
         </FormGroup>
       </CardActions>
