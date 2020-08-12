@@ -21,10 +21,8 @@ import {
   TablePagination,
   Button as M_Buttun
 } from '@material-ui/core';
-
 import { getInitials } from '../../../../helpers';
-import Hospital from '../../../Hospital/Hospital';
-// import mockData from '../data'
+import HospitalInfo from '../../HospitalInfo';
 
 
 const useStyles = makeStyles(theme => ({
@@ -179,7 +177,7 @@ const HospitalsTable = props => {
                         <Modal.Header closeButton>
                           <Modal.Title>등록 병원 정보</Modal.Title>
                         </Modal.Header>
-                        <Modal.Body><Hospital/></Modal.Body>
+                        <Modal.Body><HospitalInfo/></Modal.Body>
                         <Modal.Footer>
                           <Button variant="primary" onClick={handleClose}>
                             저장

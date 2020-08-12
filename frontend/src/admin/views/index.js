@@ -6,5 +6,5 @@ export { default as Settings } from './Settings';
 export { default as Typography } from './Typography';
 export { default as UserList } from './UserList';
 export { default as Board } from './Board';
-export { default as HospitalList } from './HospitalList';
+export { HospitalsList, HospitalInfo } from './Hospital'
 

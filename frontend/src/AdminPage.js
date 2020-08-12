@@ -20,11 +20,11 @@ import {
   Settings as SettingsView,
   NotFound as NotFoundView,
   Board as BoardView,
-  HospitalList as HospitalView
+  HospitalsList as HospitalView
 } from './admin/views';
-import { HospitalsAdd } from './admin/views/HospitalList/components';
 import { Doctor } from './admin/views/Doctor';
 import DoctorsAdd from './admin/views/Doctor/components/DoctorList/DoctorAdd';
+import { HospitalsAdd } from './admin/views/Hospital/components';
 
 
 const browserHistory = createBrowserHistory();

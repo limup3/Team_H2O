@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Hospital = () => {
+const HospitalsInfo = () => {
   const classes = useStyles();
 
   return (
@@ -42,4 +42,4 @@ const Hospital = () => {
   );
 };
 
-export default Hospital;
+export default HospitalsInfo;
