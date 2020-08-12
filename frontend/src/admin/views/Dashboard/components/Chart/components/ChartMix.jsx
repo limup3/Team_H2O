@@ -2,7 +2,6 @@ import React from 'react';
 import { Bar } from 'react-chartjs-2';
 
 
-// Mixed Chart Data
 const mixedData = {
     // labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [{
