@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 const DoctorAdd = () => {
   const classes = useStyles();
-  const [doctorLicense, setDoctorLicense] = useState("");
+  const [doctorsLicense, setDoctorsLicense] = useState("");
   const [doctorName, setDoctorName] = useState("");
   const [hospitalName, setHospitalName] = useState("");
   const [position, setPosition] = useState("");
@@ -39,15 +39,16 @@ const DoctorAdd = () => {
   const [specialized, setSpecialized] = useState("")
   const [medicalSubject, setMedicalSubject] = useState("")
   const [birthday, setBirthday] = useState("")
+  const [hospitalNo, setHospitalNo] = useState("")
 
   const history = useHistory();
 
   const handleIdCheck = e => {
     e.preventDefault();
-    axios.get(`http://localhost:8080/doctor/idCheck/${doctorLicense}`)
+    axios.get(`http://localhost:8080/doctor/idCheck/${doctorsLicense}`)
         .then(response => {
           alert("이미 존재하는 아이디 입니다.");
-          setDoctorLicense("");
+          setDoctorsLicense("");
         }).catch(error => {
       alert("사용한 가능한 아이디 입니다.");
     })
@@ -56,14 +57,15 @@ const DoctorAdd = () => {
   const handleSubmit = e => {
     e.preventDefault();
     const doctorJson = {
-      doctorLicense: doctorLicense,
+      doctorsLicense: doctorsLicense,
       doctorName: doctorName,
       hospitalName: hospitalName,
       position: position,
       detailData: detailData,
       specialized: specialized,
       medicalSubject: medicalSubject,
-      birthday: birthday
+      birthday: birthday,
+      hospitalNo : "1"
     }
     axios.post(`http://localhost:8080/doctor/doctorAdd`, doctorJson)
         .then(response => {
@@ -93,12 +95,12 @@ const DoctorAdd = () => {
                   variant="outlined"
                   required
                   fullWidth
-                  id="doctorLicense"
-                  label="doctorLicense"
-                  name="doctorLicense"
-                  autoComplete="doctorLicense"
-                  value={doctorLicense}
-                  onChange={e => setDoctorLicense(e.target.value)}
+                  id="doctorsLicense"
+                  label="doctorsLicense"
+                  name="doctorsLicense"
+                  autoComplete="doctorsLicense"
+                  value={doctorsLicense}
+                  onChange={e => setDoctorsLicense(e.target.value)}
               />
             </Grid>
             <Grid item xs={4}

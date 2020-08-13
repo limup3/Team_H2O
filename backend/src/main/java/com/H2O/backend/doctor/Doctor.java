@@ -27,7 +27,7 @@ public class Doctor {
     @Column(name = "position", nullable = false) private String position;
     @Column(name = "detail_data", nullable = false) private String detailData;
     @Column(name = "specialized", nullable = false) private String specialized;
-    @Column(name = "medicalSubject", nullable = false) private String medicalSubject;
+    @Column(name = "medical_subject", nullable = false) private String medicalSubject;
     @Column(name = "birthday", nullable = false) private String birthday;
 
     @Builder

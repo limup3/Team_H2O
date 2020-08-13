@@ -1,7 +1,6 @@
 package com.H2O.backend.doctor;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +16,11 @@ interface DoctorService{
 
 @Service
 public class DoctorServiceImpl implements DoctorService{
-    @Autowired
-    DoctorRepository doctorRepository;
+    private final DoctorRepository doctorRepository;
+
+    public DoctorServiceImpl(DoctorRepository doctorRepository) {
+        this.doctorRepository = doctorRepository;
+    }
 
     @Override
     public Optional<Doctor> findDoctorByDoctorLicense(String doctor) {
@@ -41,14 +43,19 @@ public class DoctorServiceImpl implements DoctorService{
         Doctor createDoctor = new Doctor();
         createDoctor.setDoctorsLicense(doctor.getDoctorsLicense());
         createDoctor.setDoctorName(doctor.getDoctorName());
+        createDoctor.setHospitalName(doctor.getHospitalName());
         createDoctor.setPosition(doctor.getPosition());
         createDoctor.setDetailData(doctor.getDetailData());
         createDoctor.setSpecialized(doctor.getSpecialized());
         createDoctor.setMedicalSubject(doctor.getMedicalSubject());
         createDoctor.setBirthday(doctor.getBirthday());
 
+        System.out.println("------------------");
         System.out.println(createDoctor);
+
         Doctor doctorData = doctorRepository.save(createDoctor);
+
+        System.out.println("22222222222222222222222222222");
         return Optional.of(doctorData);
     }
 }
