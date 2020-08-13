@@ -2,7 +2,6 @@ package com.H2O.backend.util.dummyUser;
 
 import com.H2O.backend.user.User;
 import com.H2O.backend.user.UserRepository;
-import com.H2O.backend.user.UserRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;

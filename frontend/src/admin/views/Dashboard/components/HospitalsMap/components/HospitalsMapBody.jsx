@@ -13,9 +13,6 @@ const mapContainerStyle = {
   height: '500px'
 };
 
-const options = {
-  zoomControl: true
-}
 
 const center = {
   lat: 37.551052,

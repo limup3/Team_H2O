@@ -1,339 +1,226 @@
-import React, { useState, useEffect } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import validate from 'validate.js';
-import { makeStyles } from '@material-ui/styles';
-import {
-  Grid,
-  Button,
-  IconButton,
-  TextField,
-  Typography
-} from '@material-ui/core';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import React, {useState} from 'react';
+import Button from '@material-ui/core/Button';
+import { useHistory, Link } from 'react-router-dom';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import axios from 'axios'
 
-const schema = {
-    hospitalName: {
-        presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
-        length: {
-          maximum: 32
-        }
-      },
-    name: {
-        presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
-        length: {
-      maximum: 32
-    }
-    },
-    birthday: {
-        presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
-        length: {
-        maximum: 32
-        }
-    },
-    position: {
-        length: {
-        maximum: 64
-        }
-    },
-    detailData: {
-        length: {
-        maximum: 128
-        }
-    },
-    specialized: {
-        length: {
-        maximum: 32
-        }
-    },
-    medicalSubject: {
-        presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
-        length: {
-        maximum: 128
-        }
-    }
-    };
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    backgroundColor: theme.palette.background.default,
-    height: '100%'
-  },
-  grid: {
-    height: '100%'
-  },
-  quoteContainer: {
-    [theme.breakpoints.down('md')]: {
-      display: 'none'
-    }
-  },
-  quote: {
-    backgroundColor: theme.palette.neutral,
-    height: '100%',
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
     display: 'flex',
-    justifyContent: 'center',
+    flexDirection: 'column',
     alignItems: 'center',
-    backgroundImage: 'url(/images/auth.jpg)',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center'
-  },
-  quoteInner: {
-    textAlign: 'center',
-    flexBasis: '600px'
-  },
-  quoteText: {
-    color: theme.palette.white,
-    fontWeight: 300
-  },
-  name: {
-    marginTop: theme.spacing(3),
-    color: theme.palette.white
-  },
-  bio: {
-    color: theme.palette.white
-  },
-  contentContainer: {},
-  content: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  contentHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingTop: theme.spacing(5),
-    paddingBototm: theme.spacing(2),
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2)
-  },
-  logoImage: {
-    marginLeft: theme.spacing(4)
-  },
-  contentBody: {
-    flexGrow: 1,
-    display: 'flex',
-    alignItems: 'center',
-    [theme.breakpoints.down('md')]: {
-      justifyContent: 'center'
-    }
   },
   form: {
-    paddingLeft: 100,
-    paddingRight: 100,
-    paddingBottom: 125,
-    flexBasis: 700,
-    [theme.breakpoints.down('sm')]: {
-      paddingLeft: theme.spacing(2),
-      paddingRight: theme.spacing(2)
-    }
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
   },
-  title: {
-    marginTop: theme.spacing(3)
+  submit: {
+    margin: theme.spacing(3, 0, 2),
   },
-  textField: {
-    marginTop: theme.spacing(2)
-  },
-  policy: {
-    marginTop: theme.spacing(1),
-    display: 'flex',
-    alignItems: 'center'
-  },
-  DoctorsAddButton: {
-    margin: theme.spacing(2, 0)
-  }
 }));
 
-const DoctorAdd = props => {
-  const { history } = props;
 
+const DoctorAdd = () => {
   const classes = useStyles();
+  const [doctorLicense, setDoctorLicense] = useState("");
+  const [doctorName, setDoctorName] = useState("");
+  const [hospitalName, setHospitalName] = useState("");
+  const [position, setPosition] = useState("");
+  const [detailData, setDetailData] = useState("")
+  const [specialized, setSpecialized] = useState("")
+  const [medicalSubject, setMedicalSubject] = useState("")
+  const [birthday, setBirthday] = useState("")
 
-  const [formState, setFormState] = useState({
-    isValid: false,
-    values: {},
-    touched: {},
-    errors: {}
-  });
-  useEffect(() => {
-    const errors = validate(formState.values, schema);
+  const history = useHistory();
 
-    setFormState(formState => ({
-      ...formState,
-      isValid: errors ? false : true,
-      errors: errors || {}
-    }));
-  }, [formState.values]);
+  const handleIdCheck = e => {
+    e.preventDefault();
+    axios.get(`http://localhost:8080/doctor/idCheck/${doctorLicense}`)
+        .then(response => {
+          alert("이미 존재하는 아이디 입니다.");
+          setDoctorLicense("");
+        }).catch(error => {
+      alert("사용한 가능한 아이디 입니다.");
+    })
+  }
 
-  const handleChange = event => {
-    event.persist();
-
-    setFormState(formState => ({
-      ...formState,
-      values: {
-        ...formState.values,
-        [event.target.name]: event.target.value
-      },
-      touched: {
-        ...formState.touched,
-        [event.target.name]: true
-      }
-    }));
-  };
-
-  const handleBack = () => {
-    history.goBack();
-  };
-
-  const handleDoctorsAdd = event => {
-    event.preventDefault();
-    history.push('/admin');
-  };
-
-  const hasError = field =>
-    formState.touched[field] && formState.errors[field] ? true : false;
+  const handleSubmit = e => {
+    e.preventDefault();
+    const doctorJson = {
+      doctorLicense: doctorLicense,
+      doctorName: doctorName,
+      hospitalName: hospitalName,
+      position: position,
+      detailData: detailData,
+      specialized: specialized,
+      medicalSubject: medicalSubject,
+      birthday: birthday
+    }
+    axios.post(`http://localhost:8080/doctor/doctorAdd`, doctorJson)
+        .then(response => {
+          alert("회원가입 성공 !")
+          history.push("/admin/doctor")
+            }
+        ).catch(
+          
+        error => { 
+          alert("회원가입 실패")
+          throw (error) 
+        }
+    );
+  }
 
   return (
-    <div className={classes.root}>
-      <Grid
-        className={classes.grid}
-        container
-      >
-        <Grid
-          className={classes.content}
-          item
-          lg={7}
-          xs={12}
-        >
-          <div className={classes.content}>
-            <div className={classes.contentHeader}>
-              <IconButton onClick={handleBack}>
-                <ArrowBackIcon />
-              </IconButton>
-            </div>
-            <div className={classes.contentBody}>
-              <form
-                className={classes.form}
-                onSubmit={handleDoctorsAdd}
-              >
-                <Typography
-                  className={classes.title}
-                  variant="h2"
-                >
-                  의사 등록
-                </Typography>
-                <Typography
-                  color="primary"
-                  gutterBottom
-                ><br/>
-                  *은 필수 입력사항입니다.
-                </Typography>
-                <TextField
-                  className={classes.textField}
-                  error={hasError('hospitalName')}
-                  fullWidth
-                  helperText={
-                    hasError('hospitalName') ? formState.errors.hospitalName[0] : null
-                  }
-                  label="* 소속병원"
-                  name="hospitalName"
-                  onChange={handleChange}
-                  type="text"
-                  value={formState.values.hospitalName || ''}
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Typography component="h2" variant="h5">
+          사용자 등록
+        </Typography>
+        <form className={classes.form} >
+          <Grid container spacing={2}>
+            <Grid item xs={8}>
+              <TextField
                   variant="outlined"
-                />
-                <TextField
-                  className={classes.textField}
-                  error={hasError('name')}
+                  required
                   fullWidth
-                  helperText={
-                    hasError('name') ? formState.errors.name[0] : null
-                  }
-                  label="* 이름"
-                  name="name"
-                  onChange={handleChange}
-                  type="text"
-                  value={formState.values.name || ''}
-                  variant="outlined"
-                />
-                <TextField
-                  className={classes.textField}
-                  error={hasError('birthday')}
-                  fullWidth
-                  helperText={
-                    hasError('birthday') ? formState.errors.birthday[0] : null
-                  }
-                  label="* 생년월일"
-                  name="birthday"
-                  onChange={handleChange}
-                  type="text"
-                  value={formState.values.birthday || ''}
-                  variant="outlined"
-                />
-                <TextField
-                  className={classes.textField}
-                  error={hasError('medicalSubject')}
-                  fullWidth
-                  helperText={
-                    hasError('medicalSubject') ? formState.errors.medicalSubject[0] : null
-                  }
-                  label="* 진료과"
-                  name="medicalSubject"
-                  onChange={handleChange}
-                  type="text"
-                  value={formState.values.medicalSubject || ''}
-                  variant="outlined"
-                />
-                <TextField
-                  className={classes.textField}
-                  fullWidth
-                  label="직책"
-                  name="position"
-                  onChange={handleChange}
-                  type="text"
-                  variant="outlined"
-                />
-                <TextField
-                  className={classes.textField}
-                  fullWidth
-                  label="전문분야"
-                  name="specialized"
-                  onChange={handleChange}
-                  type="text"
-                  variant="outlined"
-                />
-                <TextField
-                  className={classes.textField}
-                  fullWidth
-                  label="상세정보"
-                  name="detailData"
-                  onChange={handleChange}
-                  type="text"
-                  variant="outlined"
-                />
-                
-                <Button
-                  className={classes.DoctorsAddButton}
-                  color="primary"
-                  disabled={!formState.isValid}
-                  fullWidth
-                  size="large"
-                  type="submit"
-                  variant="contained"
-                >
-                  등록 완료
-                </Button>
-              </form>
-            </div>
-          </div>
-        </Grid>
-      </Grid>
-    </div>
+                  id="doctorLicense"
+                  label="doctorLicense"
+                  name="doctorLicense"
+                  autoComplete="doctorLicense"
+                  value={doctorLicense}
+                  onChange={e => setDoctorLicense(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={4}
+                  container
+                  direction="column"
+                  justify="flex-end"
+                  alignItems="flex-end"
+            >
+              <Button variant="outlined" color="secondary" onClick={handleIdCheck}>
+                라이센스<br/>
+                중복 확인
+              </Button>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                autoComplete="doctorName"
+                name="doctorName"
+                variant="outlined"
+                required
+                fullWidth
+                id="doctorName"
+                label="doctorName"
+                autoFocus
+                value={doctorName}
+                onChange={e => setDoctorName(e.target.value)}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="hospitalName"
+                label="hospitalName"
+                name="hospitalName"
+                autoComplete="hospitalName"
+                value={hospitalName}
+                onChange={e => setHospitalName(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="position"
+                label="position"
+                name="position"
+                autoComplete="position"
+                value={position}
+                onChange={e => setPosition(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+            <TextField
+            variant="outlined"
+            required
+            fullWidth
+            id="detailData"
+            label="detailData"
+            name="detailData"
+            autoComplete="detailData"
+            value={detailData}
+            onChange={e => setDetailData(e.target.value)}
+          />
+            </Grid>
+            <Grid item xs={12}>
+            <TextField
+            variant="outlined"
+            required
+            fullWidth
+            id="specialized"
+            label="specialized"
+            name="specialized"
+            autoComplete="specialized"
+            value={specialized}
+            onChange={e => setSpecialized(e.target.value)}
+          />
+            </Grid>
+            <Grid item xs={12}>
+            <TextField
+            variant="outlined"
+            required
+            fullWidth
+            id="medicalSubject"
+            label="medicalSubject"
+            name="medicalSubject"
+            autoComplete="medicalSubject"
+            value={medicalSubject}
+            onChange={e => setMedicalSubject(e.target.value)}
+          />
+            </Grid>
+            <Grid item xs={12}>
+            <TextField
+            variant="outlined"
+            required
+            fullWidth
+            id="birthday"
+            label="birthday"
+            name="birthday"
+            autoComplete="birthday"
+            value={birthday}
+            onChange={e => setBirthday(e.target.value)}
+          />
+            </Grid>
+          </Grid>
+
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={handleSubmit}
+          >
+            등록하기
+          </Button>
+         
+        </form>
+      </div>
+    </Container>
   );
-};
-
-DoctorAdd.propTypes = {
-  history: PropTypes.object
-};
-
-export default DoctorAdd;
+}
+export default DoctorAdd

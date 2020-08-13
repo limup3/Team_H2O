@@ -1,364 +1,182 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import validate from 'validate.js';
-import { makeStyles } from '@material-ui/styles';
-import {
-  Grid,
-  Button,
-  IconButton,
-  TextField,
-  Typography
-} from '@material-ui/core';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import React, {useState} from 'react';
+import Button from '@material-ui/core/Button';
+import { useHistory, Link } from 'react-router-dom';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import axios from 'axios'
 
-const schema = {
-  userId: {
-    presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
-    length: {
-      maximum: 32
-    }
-  },
-  password: {
-    presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
-    length: {
-    maximum: 32
-    }
-  },
-  passwordConfirm: {
-    presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
-    length: {
-    maximum: 32
-    }
-  },
-  name: {
-      presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
-      length: {
-    maximum: 32
-  }
-  },
-  birthday: {
-      presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
-      length: {
-      maximum: 32
-      }
-  },
-  phone: {
-    presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
-    length: {
-    maximum: 32
-    }
-  },
-  addr: {
-      length: {
-      maximum: 64
-      }
-  },
-  email: {
-      length: {
-      maximum: 128
-      }
-  }
-};
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    backgroundColor: theme.palette.background.default,
-    height: '100%'
-  },
-  grid: {
-    height: '100%'
-  },
-  quoteContainer: {
-    [theme.breakpoints.down('md')]: {
-      display: 'none'
-    }
-  },
-  quote: {
-    backgroundColor: theme.palette.neutral,
-    height: '100%',
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
     display: 'flex',
-    justifyContent: 'center',
+    flexDirection: 'column',
     alignItems: 'center',
-    backgroundImage: 'url(/images/auth.jpg)',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center'
-  },
-  quoteInner: {
-    textAlign: 'center',
-    flexBasis: '600px'
-  },
-  quoteText: {
-    color: theme.palette.white,
-    fontWeight: 300
-  },
-  name: {
-    marginTop: theme.spacing(3),
-    color: theme.palette.white
-  },
-  bio: {
-    color: theme.palette.white
-  },
-  contentContainer: {},
-  content: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  contentHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingTop: theme.spacing(5),
-    paddingBototm: theme.spacing(2),
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2)
-  },
-  logoImage: {
-    marginLeft: theme.spacing(4)
-  },
-  contentBody: {
-    flexGrow: 1,
-    display: 'flex',
-    alignItems: 'center',
-    [theme.breakpoints.down('md')]: {
-      justifyContent: 'center'
-    }
   },
   form: {
-    paddingLeft: 100,
-    paddingRight: 100,
-    paddingBottom: 125,
-    flexBasis: 700,
-    [theme.breakpoints.down('sm')]: {
-      paddingLeft: theme.spacing(2),
-      paddingRight: theme.spacing(2)
-    }
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
   },
-  title: {
-    marginTop: theme.spacing(3)
+  submit: {
+    margin: theme.spacing(3, 0, 2),
   },
-  textField: {
-    marginTop: theme.spacing(2)
-  },
-  policy: {
-    marginTop: theme.spacing(1),
-    display: 'flex',
-    alignItems: 'center'
-  },
-  DoctorsAddButton: {
-    margin: theme.spacing(2, 0)
-  }
 }));
 
-const UserAdd = props => {
-  const { history } = props;
 
+const UserAdd = () => {
   const classes = useStyles();
+  const [userId, setUserId] = useState("");
+  const [password, setPassword] = useState("");
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("")
 
-  const [formState, setFormState] = useState({
-    isValid: false,
-    values: {},
-    touched: {},
-    errors: {}
-  });
-  useEffect(() => {
-    const errors = validate(formState.values, schema);
+  const history = useHistory();
 
-    setFormState(formState => ({
-      ...formState,
-      isValid: errors ? false : true,
-      errors: errors || {}
-    }));
-  }, [formState.values]);
+  const handleIdCheck = e => {
+    e.preventDefault();
+    axios.get(`http://localhost:8080/user/idCheck/${userId}`)
+        .then(response => {
+          alert("이미 존재하는 아이디 입니다.");
+          setUserId("");
+        }).catch(error => {
+      alert("사용한 가능한 아이디 입니다.");
+    })
+  }
 
-  const handleChange = event => {
-    event.persist();
-
-    setFormState(formState => ({
-      ...formState,
-      values: {
-        ...formState.values,
-        [event.target.name]: event.target.value
-      },
-      touched: {
-        ...formState.touched,
-        [event.target.name]: true
-      }
-    }));
-  };
-
-  const handleBack = () => {
-    history.goBack();
-  };
-
-  const handleDoctorsAdd = event => {
-    event.preventDefault();
-    history.push('/admin');
-  };
-
-  const hasError = field =>
-    formState.touched[field] && formState.errors[field] ? true : false;
+  const handleSubmit = e => {
+    e.preventDefault();
+    const userJson = {
+      userId: userId,
+      password: password,
+      name: userName,
+      email: email,
+      phone: phoneNumber
+    }
+    axios.post(`http://localhost:8080/user/signUp`, userJson)
+        .then(response => {
+          alert("회원가입 성공 !")
+          history.push("/admin/account")
+            }
+        ).catch(
+          
+        error => { 
+          alert("회원가입 실패")
+          throw (error) 
+        }
+    );
+  }
 
   return (
-    <div className={classes.root}>
-      <Grid
-        className={classes.grid}
-        container
-      >
-        <Grid
-          className={classes.content}
-          item
-          lg={7}
-          xs={12}
-        >
-          <div className={classes.content}>
-            <div className={classes.contentHeader}>
-              <IconButton onClick={handleBack}>
-                <ArrowBackIcon />
-              </IconButton>
-            </div>
-            <div className={classes.contentBody}>
-              <form
-                className={classes.form}
-                onSubmit={handleDoctorsAdd}
-              >
-                <Typography
-                  className={classes.title}
-                  variant="h2"
-                >
-                  사용자 등록
-                </Typography>
-                <Typography
-                  color="primary"
-                  gutterBottom
-                ><br/>
-                  *은 필수 입력사항입니다.
-                </Typography>
-                <TextField
-                  className={classes.textField}
-                  error={hasError('userId')}
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Typography component="h2" variant="h5">
+          사용자 등록
+        </Typography>
+        <form className={classes.form} >
+          <Grid container spacing={2}>
+            <Grid item xs={8}>
+              <TextField
+                  variant="outlined"
+                  required
                   fullWidth
-                  helperText={
-                    hasError('userId') ? formState.errors.userId[0] : null
-                  }
-                  label="* 아이디"
+                  id="userId"
+                  label="userId"
                   name="userId"
-                  onChange={handleChange}
-                  type="text"
-                  value={formState.values.userId || ''}
-                  variant="outlined"
-                />
-                <TextField
-                  className={classes.textField}
-                  error={hasError('password')}
-                  fullWidth
-                  helperText={
-                    hasError('password') ? formState.errors.password[0] : null
-                  }
-                  type="password"
-                  label="* 패스워드"
-                  name="password"
-                  onChange={handleChange}
-                  value={formState.values.password || ''}
-                  variant="outlined"
-                />
-                <TextField
-                  className={classes.textField}
-                  error={hasError('passwordConfirm')}
-                  fullWidth
-                  helperText={
-                    hasError('passwordConfirm') ? formState.errors.passwordConfirm[0] : null
-                  }
-                  label="* 패스워드 확인"
-                  type="password" 
-                  name="passwordConfirm"
-                  onChange={handleChange}
-                  value={formState.values.passwordConfirm || ''}
-                  variant="outlined"
-                />
-                <TextField
-                  className={classes.textField}
-                  error={hasError('name')}
-                  fullWidth
-                  helperText={
-                    hasError('name') ? formState.errors.name[0] : null
-                  }
-                  label="* 이름"
-                  name="name"
-                  onChange={handleChange}
-                  type="text"
-                  value={formState.values.name || ''}
-                  variant="outlined"
-                />
-                <TextField
-                  className={classes.textField}
-                  error={hasError('birthday')}
-                  fullWidth
-                  helperText={
-                    hasError('birthday') ? formState.errors.birthday[0] : null
-                  }
-                  label="* 생년월일"
-                  name="birthday"
-                  onChange={handleChange}
-                  type="text"
-                  value={formState.values.birthday || ''}
-                  variant="outlined"
-                />
-                <TextField
-                  className={classes.textField}
-                  error={hasError('phone')}
-                  fullWidth
-                  helperText={
-                    hasError('phone') ? formState.errors.phone[0] : null
-                  }
-                  label="* 연락처"
-                  name="phone"
-                  onChange={handleChange}
-                  type="text"
-                  value={formState.values.phone || ''}
-                  variant="outlined"
-                />
-                <TextField
-                  className={classes.textField}
-                  fullWidth
-                  label="주소"
-                  name="addr"
-                  onChange={handleChange}
-                  type="text"
-                  variant="outlined"
-                />
-                <TextField
-                  className={classes.textField}
-                  fullWidth
-                  label="이메일"
-                  name="email"
-                  onChange={handleChange}
-                  type="text"
-                  variant="outlined"
-                />
-                
-                <Button
-                  className={classes.DoctorsAddButton}
-                  color="primary"
-                  disabled={!formState.isValid}
-                  fullWidth
-                  size="large"
-                  type="submit"
-                  variant="contained"
-                >
-                  등록 완료
-                </Button>
-              </form>
-            </div>
-          </div>
-        </Grid>
-      </Grid>
-    </div>
+                  autoComplete="userId"
+                  value={userId}
+                  onChange={e => setUserId(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={4}
+                  container
+                  direction="column"
+                  justify="flex-end"
+                  alignItems="flex-end"
+            >
+              <Button variant="outlined" color="secondary" onClick={handleIdCheck}>
+                아이디<br/>
+                중복 확인
+              </Button>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                autoComplete="userName"
+                name="userName"
+                variant="outlined"
+                required
+                fullWidth
+                id="userName"
+                label="userName"
+                autoFocus
+                value={userName}
+                onChange={e => setUserName(e.target.value)}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="phoneNumber"
+                label="phoneNumber"
+                name="phoneNumber"
+                autoComplete="phoneNumber"
+                value={phoneNumber}
+                onChange={e => setPhoneNumber(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+            <TextField
+            variant="outlined"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
+            </Grid>
+          </Grid>
+
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={handleSubmit}
+          >
+            등록하기
+          </Button>
+         
+        </form>
+      </div>
+    </Container>
   );
-};
-
-UserAdd.propTypes = {
-  history: PropTypes.object
-};
-
-export default UserAdd;
+}
+export default UserAdd
