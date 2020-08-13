@@ -25,6 +25,7 @@ import {
 } from './admin/views';
 import { HospitalsAdd } from './admin/views/Hospital/components';
 import { DoctorAdd } from './admin/views/Doctor/components'
+import { UserAdd } from './admin/views/User/components'
 
 
 const browserHistory = createBrowserHistory();
@@ -119,6 +120,12 @@ const AdminPage = () => {
         exact
         layout={MainLayout}
         path="/admin/DoctorsAdd"
+      />
+      <RouteWithLayout
+        component={UserAdd}
+        exact
+        layout={MainLayout}
+        path="/admin/UserAdd"
       />
     </Switch>
     </Router>

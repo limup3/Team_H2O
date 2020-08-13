@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
-// Dounut Chart Data
 const ChartSize = {
     height : '50px'
   }

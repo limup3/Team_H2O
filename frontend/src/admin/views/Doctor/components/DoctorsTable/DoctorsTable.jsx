@@ -147,7 +147,7 @@ const DoctorsTable = props => {
                     className={classes.tableRow, classes.headscheama}
                     hover
                     key={doctor.id}
-                    selected={selectedDoctors.indexOf(doctor.id) !== -1}
+                    selected={selectedDoctors.indexOf(doctor.id) !==-1}
                   >
                     <TableCell padding="checkbox">
                       <Checkbox
