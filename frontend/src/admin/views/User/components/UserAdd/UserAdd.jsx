@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link as RouterLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import validate from 'validate.js';
 import { makeStyles } from '@material-ui/styles';
@@ -11,49 +10,55 @@ import {
   Typography
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import PostcodeButton from './PostcodeButton';
 
 const schema = {
-    hospitalName: {
-        presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
-        length: {
-          maximum: 32
-        }
-      },
-    name: {
-        presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
-        length: {
+  userId: {
+    presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
+    length: {
       maximum: 32
     }
-    },
-    birthday: {
-        presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
-        length: {
-        maximum: 32
-        }
-    },
-    position: {
-        length: {
-        maximum: 64
-        }
-    },
-    detailData: {
-        length: {
-        maximum: 128
-        }
-    },
-    specialized: {
-        length: {
-        maximum: 32
-        }
-    },
-    medicalSubject: {
-        presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
-        length: {
-        maximum: 128
-        }
+  },
+  password: {
+    presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
+    length: {
+    maximum: 32
     }
-    };
+  },
+  passwordConfirm: {
+    presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
+    length: {
+    maximum: 32
+    }
+  },
+  name: {
+      presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
+      length: {
+    maximum: 32
+  }
+  },
+  birthday: {
+      presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
+      length: {
+      maximum: 32
+      }
+  },
+  phone: {
+    presence: { allowEmpty: false, message: '은(는) 필수항목입니다.' },
+    length: {
+    maximum: 32
+    }
+  },
+  addr: {
+      length: {
+      maximum: 64
+      }
+  },
+  email: {
+      length: {
+      maximum: 128
+      }
+  }
+};
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -145,7 +150,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const DoctorsAdd = props => {
+const UserAdd = props => {
   const { history } = props;
 
   const classes = useStyles();
@@ -221,7 +226,7 @@ const DoctorsAdd = props => {
                   className={classes.title}
                   variant="h2"
                 >
-                  의사 등록
+                  사용자 등록
                 </Typography>
                 <Typography
                   color="primary"
@@ -231,19 +236,46 @@ const DoctorsAdd = props => {
                 </Typography>
                 <TextField
                   className={classes.textField}
-                  error={hasError('hospitalName')}
+                  error={hasError('userId')}
                   fullWidth
                   helperText={
-                    hasError('hospitalName') ? formState.errors.hospitalName[0] : null
+                    hasError('userId') ? formState.errors.userId[0] : null
                   }
-                  label="* 소속병원"
-                  name="hospitalName"
+                  label="* 아이디"
+                  name="userId"
                   onChange={handleChange}
                   type="text"
-                  value={formState.values.hospitalName || ''}
+                  value={formState.values.userId || ''}
                   variant="outlined"
                 />
-                <PostcodeButton/>
+                <TextField
+                  className={classes.textField}
+                  error={hasError('password')}
+                  fullWidth
+                  helperText={
+                    hasError('password') ? formState.errors.password[0] : null
+                  }
+                  type="password"
+                  label="* 패스워드"
+                  name="password"
+                  onChange={handleChange}
+                  value={formState.values.password || ''}
+                  variant="outlined"
+                />
+                <TextField
+                  className={classes.textField}
+                  error={hasError('passwordConfirm')}
+                  fullWidth
+                  helperText={
+                    hasError('passwordConfirm') ? formState.errors.passwordConfirm[0] : null
+                  }
+                  label="* 패스워드 확인"
+                  type="password" 
+                  name="passwordConfirm"
+                  onChange={handleChange}
+                  value={formState.values.passwordConfirm || ''}
+                  variant="outlined"
+                />
                 <TextField
                   className={classes.textField}
                   error={hasError('name')}
@@ -274,32 +306,23 @@ const DoctorsAdd = props => {
                 />
                 <TextField
                   className={classes.textField}
-                  error={hasError('medicalSubject')}
+                  error={hasError('phone')}
                   fullWidth
                   helperText={
-                    hasError('medicalSubject') ? formState.errors.medicalSubject[0] : null
+                    hasError('phone') ? formState.errors.phone[0] : null
                   }
-                  label="* 진료과"
-                  name="medicalSubject"
+                  label="* 연락처"
+                  name="phone"
                   onChange={handleChange}
                   type="text"
-                  value={formState.values.medicalSubject || ''}
+                  value={formState.values.phone || ''}
                   variant="outlined"
                 />
                 <TextField
                   className={classes.textField}
                   fullWidth
-                  label="직책"
-                  name="position"
-                  onChange={handleChange}
-                  type="text"
-                  variant="outlined"
-                />
-                <TextField
-                  className={classes.textField}
-                  fullWidth
-                  label="전문분야"
-                  name="specialized"
+                  label="주소"
+                  name="addr"
                   onChange={handleChange}
                   type="text"
                   variant="outlined"
@@ -307,8 +330,8 @@ const DoctorsAdd = props => {
                 <TextField
                   className={classes.textField}
                   fullWidth
-                  label="상세정보"
-                  name="detailData"
+                  label="이메일"
+                  name="email"
                   onChange={handleChange}
                   type="text"
                   variant="outlined"
@@ -334,8 +357,8 @@ const DoctorsAdd = props => {
   );
 };
 
-DoctorsAdd.propTypes = {
+UserAdd.propTypes = {
   history: PropTypes.object
 };
 
-export default withRouter(DoctorsAdd);
+export default UserAdd;

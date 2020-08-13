@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
-
+import { DoctorsTable, DoctorsToolbar}  from './components';
 import mockData from './data';
-import DoctorsTable from './DoctorsTable';
-import { DoctorsToolbar } from './DoctordToolbar';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const DoctorList = () => {
+const DoctorsList = () => {
   const classes = useStyles();
 
   const [doctors] = useState(mockData);
@@ -29,4 +27,4 @@ const DoctorList = () => {
   );
 };
 
-export default DoctorList;
+export default DoctorsList;

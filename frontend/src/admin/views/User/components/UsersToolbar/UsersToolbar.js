@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom'
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
@@ -54,12 +55,14 @@ const UsersToolbar = props => {
         className={classes.exportButton}
           >Export
         </Button>
-        <Button
-          color="primary"
-          variant="contained"
-        >
-          사용자 등록
-        </Button>
+          <Link to="/admin/UserAdd">
+          <Button
+            color="primary"
+            variant="contained"
+          >
+            사용자 등록
+          </Button>
+        </Link>
       </div>
       <div className={classes.row}>
         <SearchInput

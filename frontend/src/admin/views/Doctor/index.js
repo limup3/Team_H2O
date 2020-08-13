@@ -1,1 +1,2 @@
-export {default as Doctor} from './Doctor'
+export { default as DoctorAccount } from './DoctorAccount'
+export { default as DoctorsList } from './DoctorsList'

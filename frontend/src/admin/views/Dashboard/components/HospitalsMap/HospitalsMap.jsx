@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
-import {HospitalsMapHead, HospitalsMapBody} from './components'
+import {HospitalsMapBody} from './components'
 import {HospitalsMapData} from './components/HospitalsMapData'
 
 
 
 const HospitalsMap = () => {
-    const [HospitalsMap] = useState(HospitalsMapData)
+    useState(HospitalsMapData)
     return <>
         <HospitalsMapBody HospitalsMapData={HospitalsMapData}/>
     </>

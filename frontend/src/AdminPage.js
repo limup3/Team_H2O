@@ -20,11 +20,12 @@ import {
   Settings as SettingsView,
   NotFound as NotFoundView,
   Board as BoardView,
-  HospitalsList as HospitalView
+  HospitalsList as HospitalView,
+  DoctorsList as DoctorView
 } from './admin/views';
-import { Doctor } from './admin/views/Doctor';
-import DoctorsAdd from './admin/views/Doctor/components/DoctorList/DoctorAdd';
 import { HospitalsAdd } from './admin/views/Hospital/components';
+import { DoctorAdd } from './admin/views/Doctor/components'
+import { UserAdd } from './admin/views/User/components'
 
 
 const browserHistory = createBrowserHistory();
@@ -109,16 +110,22 @@ const AdminPage = () => {
         path="/admin/HospitalsAdd"
       />
       <RouteWithLayout
-        component={Doctor}
+        component={DoctorView}
         exact
         layout={MainLayout}
         path="/admin/doctor"
       />
       <RouteWithLayout
-        component={DoctorsAdd}
+        component={DoctorAdd}
         exact
         layout={MainLayout}
         path="/admin/DoctorsAdd"
+      />
+      <RouteWithLayout
+        component={UserAdd}
+        exact
+        layout={MainLayout}
+        path="/admin/UserAdd"
       />
     </Switch>
     </Router>
