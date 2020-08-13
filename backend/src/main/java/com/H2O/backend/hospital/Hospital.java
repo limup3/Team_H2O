@@ -16,33 +16,42 @@ import java.util.List;
 @Table(name="hospital")
 public class Hospital {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="hospital_no") private Long hospitalNo;
-    @Column(name="hospital_name") private String hospitalName;
-    @Column(name = "logo", nullable = false) private String logo;
-    @Column(name = "addr", nullable = false) private String addr;
-    @Column(name = "hospital_type", nullable = false) private String hospitalType;
-    @Column(name = "medical_person", nullable = false) private String medicalPerson;
+    @Column(name = "hospital_no") private Long hospitalNo;
+    @Column(name = "business_status") private String businessStatus;
     @Column(name = "tel", nullable = false) private String tel;
+    @Column(name = "addr", nullable = false) private String addr;
+    @Column(name = "hospital_name", nullable = false) private String hospitalName;
     @Column(name = "latitude", nullable = false) private String latitude;
     @Column(name = "longitude", nullable = false) private String longitude;
+    @Column(name = "medical_people", nullable = false) private int medicalPeople;
+    @Column(name = "medical_room", nullable = false) private int medicalRoom;
+    @Column(name = "medical_bed", nullable = false) private int medicalBed;
+    @Column(name = "hospital_area", nullable = false) private String hospitalArea;
+    @Column(name = "type_detail", nullable = false) private String typeDetail;
 
     @Builder
-    public Hospital(String hospitalName,
-                  String logo,
-                  String addr,
-                  String hospitalType,
-                  String medicalPerson,
+    public Hospital(String businessStatus,
                   String tel,
+                  String addr,
+                  String hospitalName,
                   String latitude,
-                  String longitude){
-        this.hospitalName = hospitalName;
-        this.logo= logo;
-        this.addr = addr;
-        this.hospitalType = hospitalType;
-        this.medicalPerson = medicalPerson;
+                  String longitude,
+                  int medicalPeople,
+                  int medicalRoom,
+                  int medicalBed,
+                  String hospitalArea,
+                  String typeDetail){
+        this.businessStatus = businessStatus;
         this.tel = tel;
+        this.addr = addr;
+        this.hospitalName = hospitalName;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.medicalPeople = medicalPeople;
+        this.medicalRoom = medicalRoom;
+        this.medicalBed = medicalBed;
+        this.hospitalArea = hospitalArea;
+        this.typeDetail = typeDetail;
     }
 
     @OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL)

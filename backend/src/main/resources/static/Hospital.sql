@@ -1,12 +1,16 @@
 CREATE TABLE Hospital
 (
-    `Hospital_Name`  VARCHAR(20)     NOT NULL,
-    `Logo`           VARCHAR(255)    NULL,
-    `Addr`           VARCHAR(255)    NULL,
-    `HospitalType`   VARCHAR(10)     NULL,
-    `MedicalPerson`  VARCHAR(5)      NULL,
-    `Tel`            VARCHAR(15)     NULL,
-    `Latitude`       VARCHAR(45)     NULL,
-    `Longitude`      VARCHAR(45)     NULL,
-    PRIMARY KEY (Hospital_Name)
-);
+    `Hospital_No`      INT             NOT NULL    AUTO_INCREMENT,
+    `Business_Status`  VARCHAR(10)     NULL,
+    `Tel`              VARCHAR(20)     NULL,
+    `Addr`             VARCHAR(255)    NULL,
+    `Hospital_Name`    VARCHAR(50)     NULL,
+    `Latitude`         VARCHAR(20)     NULL,
+    `Longitude`        VARCHAR(20)     NULL,
+    `Medical_People`   INT             NULL,
+    `Hospital_Room`    INT             NULL,
+    `Hospital_Bed`     INT             NULL,
+    `Hospital_Area`    VARCHAR(20)     NULL,
+    `TypeDetail`       VARCHAR(200)    NULL,
+    PRIMARY KEY (Hospital_No)
+)default character set utf8 collate UTF8_GENERAL_CI;
