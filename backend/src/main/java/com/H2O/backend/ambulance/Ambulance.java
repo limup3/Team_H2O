@@ -2,10 +2,7 @@ package com.H2O.backend.ambulance;
 
 import com.H2O.backend.reservation.Reservation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -28,4 +25,13 @@ public class Ambulance {
 
     @OneToMany(mappedBy = "ambulance")
     private List<Reservation> reservations;
+
+    @Builder
+    public Ambulance(String ambulanceName, String addr, String tel, String homePage, int count){
+        this.ambulanceName = ambulanceName;
+        this.addr = addr;
+        this.tel = tel;
+        this.homePage = homePage;
+        this.count = count;
+    }
 }

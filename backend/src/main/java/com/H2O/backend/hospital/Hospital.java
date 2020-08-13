@@ -12,7 +12,6 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 @Table(name="hospital")
 public class Hospital {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,22 +22,27 @@ public class Hospital {
     @Column(name = "hospital_name", nullable = false) private String hospitalName;
     @Column(name = "latitude", nullable = false) private String latitude;
     @Column(name = "longitude", nullable = false) private String longitude;
+    @Column(name = "hospital_type", nullable = false) private String hospitalType;
     @Column(name = "medical_people", nullable = false) private int medicalPeople;
-    @Column(name = "medical_room", nullable = false) private int medicalRoom;
-    @Column(name = "medical_bed", nullable = false) private int medicalBed;
+    @Column(name = "hospital_room", nullable = false) private int hospitalRoom;
+    @Column(name = "hospital_bed", nullable = false) private int hospitalBed;
     @Column(name = "hospital_area", nullable = false) private String hospitalArea;
     @Column(name = "type_detail", nullable = false) private String typeDetail;
 
+    public Hospital(){}
+
     @Builder
-    public Hospital(String businessStatus,
+    public Hospital(
+                  String businessStatus,
                   String tel,
                   String addr,
                   String hospitalName,
                   String latitude,
                   String longitude,
+                  String hospitalType,
                   int medicalPeople,
-                  int medicalRoom,
-                  int medicalBed,
+                  int hospitalRoom,
+                  int hospitalBed,
                   String hospitalArea,
                   String typeDetail){
         this.businessStatus = businessStatus;
@@ -47,9 +51,10 @@ public class Hospital {
         this.hospitalName = hospitalName;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.hospitalType = hospitalType;
         this.medicalPeople = medicalPeople;
-        this.medicalRoom = medicalRoom;
-        this.medicalBed = medicalBed;
+        this.hospitalRoom = hospitalRoom;
+        this.hospitalBed = hospitalBed;
         this.hospitalArea = hospitalArea;
         this.typeDetail = typeDetail;
     }
