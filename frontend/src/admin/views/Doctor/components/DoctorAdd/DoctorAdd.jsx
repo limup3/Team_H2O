@@ -43,9 +43,11 @@ const DoctorAdd = () => {
 
   const history = useHistory();
   const handleIdCheck = e => {
+    setLicenseChecker("")
     if(doctorsLicense){
     e.preventDefault();
-    axios.get(`http://localhost:8080/doctor/licenseCheck/${doctorsLicense}`)
+    axios
+      .get(`http://localhost:8080/doctor/licenseCheck/${doctorsLicense}`)
       .then(response => {
         alert("이미 존재하는 면허번호 입니다.");
         setLicenseChecker("unavailable");
@@ -58,14 +60,10 @@ const DoctorAdd = () => {
       alert("의사 면허번호를 입력하세요.")
     }
   }
-  const initialLicenseChecker = () => {
-    return setLicenseChecker("none")
-  }
-
 
   const handleSubmit = e => {
     e.preventDefault();
-    initialLicenseChecker()
+    setLicenseChecker("")
     const doctorJson = {
       doctorsLicense: doctorsLicense,
       doctorName: doctorName,
@@ -94,7 +92,7 @@ const DoctorAdd = () => {
       }else if(licenseChecker==="unavailable"){
         alert("라이센스가 이미 존재합니다.")
       }else{
-        alert("라이센스 체크를 해주세요.")
+        alert("라이센스 중복 체크를 해주세요.")
       }
   }
 

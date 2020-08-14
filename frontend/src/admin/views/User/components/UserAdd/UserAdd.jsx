@@ -36,22 +36,32 @@ const UserAdd = () => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("")
+  const [idChecker, setIdChecker] = useState("")
 
   const history = useHistory();
 
   const handleIdCheck = e => {
+    setIdChecker("")
+    if(userId){
     e.preventDefault();
-    axios.get(`http://localhost:8080/user/idCheck/${userId}`)
-        .then(response => {
-          alert("이미 존재하는 아이디 입니다.");
-          setUserId("");
-        }).catch(error => {
-      alert("사용한 가능한 아이디 입니다.");
-    })
+    axios
+      .get(`http://localhost:8080/user/idCheck/${userId}`)
+      .then(response => {
+        alert("이미 존재하는 아이디 입니다.");
+        setIdChecker("unavailable")
+      })
+      .catch(error => {
+        alert("사용한 가능한 아이디 입니다.");
+        setIdChecker("available")
+      })
+    }else{
+      alert("아이디를 입력하세요.")
+    }
   }
 
   const handleSubmit = e => {
     e.preventDefault();
+    setIdChecker("")
     const userJson = {
       userId: userId,
       password: password,
@@ -59,7 +69,8 @@ const UserAdd = () => {
       email: email,
       phone: phoneNumber
     }
-    axios.post(`http://localhost:8080/user/signUp`, userJson)
+    if(idChecker==="available"){
+      axios.post(`http://localhost:8080/user/signUp`, userJson)
         .then(response => {
           alert("회원가입 성공 !")
           history.push("/admin/account")
@@ -71,6 +82,12 @@ const UserAdd = () => {
           throw (error) 
         }
     );
+    }else if(idChecker==="unavailable"){
+      alert("아이디가 이미 존재합니다.")
+    }else{
+      alert("아이디 중복체크 해주세요.")
+    }
+    
   }
 
   return (
