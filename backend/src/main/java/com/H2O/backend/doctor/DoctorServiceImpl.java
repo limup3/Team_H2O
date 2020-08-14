@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Component
 interface DoctorService{
-    Optional<Doctor> findDoctorByDoctorLicense(String Doctor);
+    Optional<Doctor> findDoctorByDoctorsLicense(String doctorsLicense);
     Doctor update(Doctor selectDoctor);
     void delete(Doctor selectDoctor);
     Optional<Doctor> doctorAdd(Doctor doctor);
@@ -23,8 +23,8 @@ public class DoctorServiceImpl implements DoctorService{
     }
 
     @Override
-    public Optional<Doctor> findDoctorByDoctorLicense(String doctor) {
-        Optional<Doctor> licenseCheck = doctorRepository.findByDoctorLicense(doctor);
+    public Optional<Doctor> findDoctorByDoctorsLicense(String doctorsLicense) {
+        Optional<Doctor> licenseCheck = doctorRepository.findByDoctorsLicense(doctorsLicense);
         return licenseCheck;
     }
 

@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 interface IDoctorRepository{
-    Optional<Doctor> findByDoctorLicense(String doctorLicense);
+    Optional<Doctor> findByDoctorsLicense(String doctorsLicense);
 }
 
 public class DoctorRepositoryImpl extends QuerydslRepositorySupport implements IDoctorRepository{
@@ -25,9 +25,9 @@ public class DoctorRepositoryImpl extends QuerydslRepositorySupport implements I
     }
 
     @Override
-    public Optional<Doctor> findByDoctorLicense(String doctorLicense) {
+    public Optional<Doctor> findByDoctorsLicense(String doctorsLicense) {
         QDoctor qDoctor = QDoctor.doctor;
-        Doctor findOne = queryFactory.selectFrom(qDoctor).where(qDoctor.doctorsLicense.eq(doctorLicense)).fetchOne();
+        Doctor findOne = queryFactory.selectFrom(qDoctor).where(qDoctor.doctorsLicense.eq(doctorsLicense)).fetchOne();
         return Optional.ofNullable(findOne);
     }
 }

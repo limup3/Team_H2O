@@ -32,9 +32,9 @@ public class DoctorController {
     }
 
     // 의사 정보 변경
-    @PatchMapping("/modify/{doctorLicense}")
-    public ResponseEntity<Doctor> modify(@PathVariable String DoctorLicense, @RequestBody Doctor doctor){
-        Optional<Doctor> modifyDoctor = doctorService.findDoctorByDoctorLicense(doctor.getDoctorsLicense());
+    @PatchMapping("/modify/{doctorsLicense}")
+    public ResponseEntity<Doctor> modify(@PathVariable String doctorsLicense, @RequestBody Doctor doctor){
+        Optional<Doctor> modifyDoctor = doctorService.findDoctorByDoctorsLicense(doctor.getDoctorsLicense());
 
         if(modifyDoctor.isPresent()){
             modifyDoctor.ifPresent(selectDoctor ->{
@@ -49,6 +49,17 @@ public class DoctorController {
             return ResponseEntity.ok(modifyDoctor.get());
         } else {
             System.out.println("의사 정보 업데이트 실패");
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    //의사 라이센스 중복 검사
+    @GetMapping("/licenseCheck/{doctorsLicense}")
+    public ResponseEntity<Doctor> licenseCheck(@PathVariable String doctorsLicense){
+        Optional<Doctor> licenseCheckResult = doctorService.findDoctorByDoctorsLicense(doctorsLicense);
+        if(licenseCheckResult.isPresent()){
+            return ResponseEntity.ok().build();
+        }else{
             return ResponseEntity.notFound().build();
         }
     }

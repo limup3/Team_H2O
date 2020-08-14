@@ -3,8 +3,6 @@ import Button from '@material-ui/core/Button';
 import { useHistory, Link } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -29,6 +27,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+
+
 const DoctorAdd = () => {
   const classes = useStyles();
   const [doctorsLicense, setDoctorsLicense] = useState("");
@@ -39,23 +39,33 @@ const DoctorAdd = () => {
   const [specialized, setSpecialized] = useState("")
   const [medicalSubject, setMedicalSubject] = useState("")
   const [birthday, setBirthday] = useState("")
-  const [hospitalNo, setHospitalNo] = useState("")
+  const [licenseChecker, setLicenseChecker] = useState("")
 
   const history = useHistory();
-
   const handleIdCheck = e => {
+    if(doctorsLicense){
     e.preventDefault();
-    axios.get(`http://localhost:8080/doctor/idCheck/${doctorsLicense}`)
-        .then(response => {
-          alert("이미 존재하는 아이디 입니다.");
-          setDoctorsLicense("");
-        }).catch(error => {
-      alert("사용한 가능한 아이디 입니다.");
-    })
+    axios.get(`http://localhost:8080/doctor/licenseCheck/${doctorsLicense}`)
+      .then(response => {
+        alert("이미 존재하는 면허번호 입니다.");
+        setLicenseChecker("unavailable");
+      })
+      .catch(error => {
+          alert("사용한 가능한 면허번호 입니다.");
+          setLicenseChecker("available");
+      })
+    }else{
+      alert("의사 면허번호를 입력하세요.")
+    }
   }
+  const initialLicenseChecker = () => {
+    return setLicenseChecker("none")
+  }
+
 
   const handleSubmit = e => {
     e.preventDefault();
+    initialLicenseChecker()
     const doctorJson = {
       doctorsLicense: doctorsLicense,
       doctorName: doctorName,
@@ -67,7 +77,9 @@ const DoctorAdd = () => {
       birthday: birthday,
       hospitalNo : "1"
     }
-    axios.post(`http://localhost:8080/doctor/doctorAdd`, doctorJson)
+
+    if(licenseChecker==="available"){
+      axios.post(`http://localhost:8080/doctor/doctorAdd`, doctorJson)
         .then(response => {
           alert("회원가입 성공 !")
           history.push("/admin/doctor")
@@ -79,6 +91,11 @@ const DoctorAdd = () => {
           throw (error) 
         }
     );
+      }else if(licenseChecker==="unavailable"){
+        alert("라이센스가 이미 존재합니다.")
+      }else{
+        alert("라이센스 체크를 해주세요.")
+      }
   }
 
   return (
@@ -86,7 +103,7 @@ const DoctorAdd = () => {
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h2" variant="h5">
-          사용자 등록
+          의사 등록
         </Typography>
         <form className={classes.form} >
           <Grid container spacing={2}>
@@ -96,7 +113,7 @@ const DoctorAdd = () => {
                   required
                   fullWidth
                   id="doctorsLicense"
-                  label="doctorsLicense"
+                  label="의사 면허번호"
                   name="doctorsLicense"
                   autoComplete="doctorsLicense"
                   value={doctorsLicense}
@@ -122,7 +139,7 @@ const DoctorAdd = () => {
                 required
                 fullWidth
                 id="doctorName"
-                label="doctorName"
+                label="이름"
                 autoFocus
                 value={doctorName}
                 onChange={e => setDoctorName(e.target.value)}
@@ -135,7 +152,7 @@ const DoctorAdd = () => {
                 required
                 fullWidth
                 id="hospitalName"
-                label="hospitalName"
+                label="소속 병원 이름"
                 name="hospitalName"
                 autoComplete="hospitalName"
                 value={hospitalName}
@@ -148,7 +165,7 @@ const DoctorAdd = () => {
                 required
                 fullWidth
                 id="position"
-                label="position"
+                label="직책"
                 name="position"
                 autoComplete="position"
                 value={position}
@@ -161,7 +178,7 @@ const DoctorAdd = () => {
             required
             fullWidth
             id="detailData"
-            label="detailData"
+            label="상세 정보"
             name="detailData"
             autoComplete="detailData"
             value={detailData}
@@ -174,7 +191,7 @@ const DoctorAdd = () => {
             required
             fullWidth
             id="specialized"
-            label="specialized"
+            label="전문 분야"
             name="specialized"
             autoComplete="specialized"
             value={specialized}
@@ -187,7 +204,7 @@ const DoctorAdd = () => {
             required
             fullWidth
             id="medicalSubject"
-            label="medicalSubject"
+            label="진료 과목"
             name="medicalSubject"
             autoComplete="medicalSubject"
             value={medicalSubject}
@@ -200,7 +217,7 @@ const DoctorAdd = () => {
             required
             fullWidth
             id="birthday"
-            label="birthday"
+            label="생년월일"
             name="birthday"
             autoComplete="birthday"
             value={birthday}

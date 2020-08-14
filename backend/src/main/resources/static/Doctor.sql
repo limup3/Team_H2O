@@ -9,6 +9,6 @@ CREATE TABLE Doctor
     `Specialized`     VARCHAR(255)    NULL,
     `Medical_Subject`  VARCHAR(20)     NULL,
     `Birthday`        VARCHAR(20)     NULL,
-    `Hospital_No`     INT             NOT NULL,
+    `Hospital_No`     INT                    NULL,
     PRIMARY KEY (Doctor_No)
 )default character set utf8 collate UTF8_GENERAL_CI;
