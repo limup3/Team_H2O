@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import { Link , useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -41,13 +41,12 @@ const UserFindID = () => {
   const [phone, setPhone] = useState("");
   const [userId, setUserId] = useState("");
   const [show, setShow] = useState(false);
-  const history = useHistory()
+  // const history = useHistory()
 
   const handleClose = () => setShow(false);
   const handleCheck = e => {
     e.preventDefault();
     handleClose();
-    history.push("/")
   }
 
   const handleSubmit = e => {
@@ -60,7 +59,6 @@ const UserFindID = () => {
       setUserId(response.data.userId);
       console.log(response.data.userId)
       setShow(!show);
-     
       
     }
     ).catch(

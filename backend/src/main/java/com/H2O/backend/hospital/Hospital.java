@@ -33,18 +33,18 @@ public class Hospital {
 
     @Builder
     public Hospital(
-                  String businessStatus,
-                  String tel,
-                  String addr,
-                  String hospitalName,
-                  String latitude,
-                  String longitude,
-                  String hospitalType,
-                  int medicalPeople,
-                  int hospitalRoom,
-                  int hospitalBed,
-                  String hospitalArea,
-                  String typeDetail){
+            String businessStatus,
+            String tel,
+            String addr,
+            String hospitalName,
+            String latitude,
+            String longitude,
+            String hospitalType,
+            int medicalPeople,
+            int hospitalRoom,
+            int hospitalBed,
+            String hospitalArea,
+            String typeDetail){
         this.businessStatus = businessStatus;
         this.tel = tel;
         this.addr = addr;

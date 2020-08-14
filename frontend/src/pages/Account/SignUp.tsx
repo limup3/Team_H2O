@@ -98,7 +98,6 @@ const SignUp = () => {
                   label="userId"
                   name="userId"
                   autoComplete="userId"
-                  autoFocus
                   value={userId}
                   onChange={e => setUserId(e.target.value)}
               />
@@ -123,6 +122,7 @@ const SignUp = () => {
                 fullWidth
                 id="userName"
                 label="userName"
+                autoFocus
                 value={userName}
                 onChange={e => setUserName(e.target.value)}
               />

@@ -56,8 +56,6 @@ const handleLogout = () => {
 }
 
 export default ({ roundedHeaderButton = false, logoLink, links, className, collapseBreakpointClass = "lg" }) => {
-  
-  console.log(sessionStorage)
   console.log(sessionStorage.userData)
 
   const defaultLinks = [
@@ -67,13 +65,11 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
       <NavLink href="/TeleMedicine" target="_blank">화상 진료</NavLink>
       <NavLink href="/Community">커뮤니티</NavLink>
       <NavLink href="/Admin" target="_blank">관리자(임시)</NavLink>
-      {/* 세션이 없을때 ( 로그인 하지 않았을 경우) */}
       {!sessionStorage.userData &&
         <NavLink href="/Login" tw="lg:ml-12!">
         Login
       </NavLink>
       }
-      {/* 세션이 있을때 ( 로그인 한 경우) */}
       {sessionStorage.userData &&
         <NavLink href="/" tw="lg:ml-12!" onClick={handleLogout}>
         Logout
@@ -83,7 +79,7 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
       <PrimaryLink css={roundedHeaderButton && tw`rounded-full`}href="/SignUp">Sign Up</PrimaryLink>
       }
       {sessionStorage.userData &&
-      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`}href="/UserModify">MyPage</PrimaryLink>
+      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`}href="/MyPage">MyPage</PrimaryLink>
       }       
      
     </NavLinks>

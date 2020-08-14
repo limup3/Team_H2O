@@ -1,11 +1,11 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import {HospitalMap} from "./index"
+import {GooMap} from "../Ambulance/index"
 const SearchHospital = () => (
 
 <Container>
 <br/> <br/>
-        <HospitalMap/>
+        <GooMap/>
 </Container>
 
 
