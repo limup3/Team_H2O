@@ -1,10 +1,11 @@
 package com.H2O.backend.hospital;
 
 import com.H2O.backend.util.jpaService.JpaService;
-import org.springframework.stereotype.Service;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.stereotype.Service;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -87,8 +88,8 @@ public class HospitalServiceImpl implements HospitalService {
                         csvRecord.get(1),
                         csvRecord.get(2),
                         csvRecord.get(3),
-                        csvRecord.get(4),
-                        csvRecord.get(5),
+                        Double.parseDouble(csvRecord.get(4)),
+                        Double.parseDouble(csvRecord.get(5)),
                         csvRecord.get(6),
                         Integer.parseInt(csvRecord.get(7)),
                         Integer.parseInt(csvRecord.get(8)),

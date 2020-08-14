@@ -40,9 +40,9 @@ public class QHospital extends EntityPathBase<Hospital> {
 
     public final StringPath hospitalType = createString("hospitalType");
 
-    public final StringPath latitude = createString("latitude");
+    public final NumberPath<Double> latitude = createNumber("latitude", Double.class);
 
-    public final StringPath longitude = createString("longitude");
+    public final NumberPath<Double> longitude = createNumber("longitude", Double.class);
 
     public final NumberPath<Integer> medicalPeople = createNumber("medicalPeople", Integer.class);
 

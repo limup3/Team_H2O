@@ -2,7 +2,10 @@ package com.H2O.backend.hospital;
 
 import com.H2O.backend.board.Board;
 import com.H2O.backend.doctor.Doctor;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,8 +23,8 @@ public class Hospital {
     @Column(name = "tel", nullable = false) private String tel;
     @Column(name = "addr", nullable = false) private String addr;
     @Column(name = "hospital_name", nullable = false) private String hospitalName;
-    @Column(name = "latitude", nullable = false) private String latitude;
-    @Column(name = "longitude", nullable = false) private String longitude;
+    @Column(name = "latitude", nullable = false) private double latitude;
+    @Column(name = "longitude", nullable = false) private double longitude;
     @Column(name = "hospital_type", nullable = false) private String hospitalType;
     @Column(name = "medical_people", nullable = false) private int medicalPeople;
     @Column(name = "hospital_room", nullable = false) private int hospitalRoom;
@@ -33,18 +36,18 @@ public class Hospital {
 
     @Builder
     public Hospital(
-            String businessStatus,
-            String tel,
-            String addr,
-            String hospitalName,
-            String latitude,
-            String longitude,
-            String hospitalType,
-            int medicalPeople,
-            int hospitalRoom,
-            int hospitalBed,
-            String hospitalArea,
-            String typeDetail){
+                  String businessStatus,
+                  String tel,
+                  String addr,
+                  String hospitalName,
+                  double latitude,
+                  double longitude,
+                  String hospitalType,
+                  int medicalPeople,
+                  int hospitalRoom,
+                  int hospitalBed,
+                  String hospitalArea,
+                  String typeDetail){
         this.businessStatus = businessStatus;
         this.tel = tel;
         this.addr = addr;
