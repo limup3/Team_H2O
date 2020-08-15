@@ -50,9 +50,9 @@ public class Hospital {
         this.longitude = longitude;
     }
 
-    @OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL)
-    private List<Doctor> doctor;
-
-    @OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL)
-    private List<Board> board;
+//    @OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL)
+//    private List<Doctor> doctor;
+//
+//    @OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL)
+//    private List<Board> board;
 }

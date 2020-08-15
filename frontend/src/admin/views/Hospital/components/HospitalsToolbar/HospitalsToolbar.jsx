@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -36,7 +36,7 @@ const HospitalsToolbar = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
-
+  
   return (
     <div
       {...rest}
@@ -52,7 +52,7 @@ const HospitalsToolbar = props => {
         </Button>
         <Button 
         className={classes.exportButton}
-          >Export
+          >리스트 파일 확인
         </Button>
         <Link to="/admin/HospitalsAdd">
         <Button

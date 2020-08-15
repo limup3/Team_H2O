@@ -10,8 +10,10 @@ import {loginReducer} from './pages/Account'
 import Page from './Page';
 import AdminPage from './AdminPage';
 //rootReducer
+
 const rootReducer = combineReducers({
-  loginReducer
+  loginReducer,
+  
 })
 
 const store = createStore(rootReducer,applyMiddleware(thunk))

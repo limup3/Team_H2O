@@ -48,6 +48,9 @@ public class HospitalController {
     @GetMapping("/hospitalList")
     public ResponseEntity<List<Hospital>> hospitalList() {
         List<Hospital> hospitalList = hospitalService.hospitalList();
+        System.out.println(hospitalList);
         return ResponseEntity.ok(hospitalList);
     }
+
+
 }
