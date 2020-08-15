@@ -39,25 +39,26 @@ const UserAdd = () => {
   const history = useHistory();
 
   const handleIdCheck = e => {
-    setIdChecker("")
-    if(userId){
-    e.preventDefault();
-    axios
-      .get(`http://localhost:8080/user/idCheck/${userId}`)
-      .then(response => {
-        alert("이미 존재하는 아이디 입니다.");
-        setIdChecker("unavailable")
-      })
-      .catch(error => {
-        alert("사용한 가능한 아이디 입니다.");
-        setIdChecker("available")
-      })
-    }else{
-      alert("아이디를 입력하세요.")
-    }
+      setIdChecker("")
+      if(userId){
+      e.preventDefault();
+      axios
+        .get(`http://localhost:8080/user/idCheck/${userId}`)
+        .then(response => {
+          alert("이미 존재하는 아이디 입니다.");
+          setIdChecker("unavailable")
+        })
+        .catch(error => {
+          alert("사용한 가능한 아이디 입니다.");
+          setIdChecker("available")
+        })
+      }else{
+        alert("아이디 중복을 확인하세요.")
+      }
   }
 
   const handleSubmit = e => {
+    if(password && userId){
     e.preventDefault();
     setIdChecker("")
     const userJson = {
@@ -79,13 +80,15 @@ const UserAdd = () => {
           alert("회원가입 실패")
           throw (error) 
         }
-    );
-    }else if(idChecker==="unavailable"){
-      alert("아이디가 이미 존재합니다.")
+      );
+      }else if(idChecker==="unavailable"){
+        alert("아이디가 이미 존재합니다.")
+      }else{
+        alert("아이디 중복체크 해주세요.")
+      }
     }else{
-      alert("아이디 중복체크 해주세요.")
+      alert("입력되지 않은 정보가 있습니다.")
     }
-    
   }
 
   return (
@@ -123,6 +126,20 @@ const UserAdd = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="password"
+                label="비밀번호"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
                 autoComplete="userName"
                 name="userName"
                 variant="outlined"
@@ -135,7 +152,6 @@ const UserAdd = () => {
                 onChange={e => setUserName(e.target.value)}
               />
             </Grid>
-
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -149,20 +165,7 @@ const UserAdd = () => {
                 onChange={e => setPhoneNumber(e.target.value)}
               />
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="비밀번호"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-              />
-            </Grid>
+            
             <Grid item xs={12}>
             <TextField
             variant="outlined"

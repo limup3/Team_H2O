@@ -46,7 +46,7 @@ CREATE TABLE User
     `User_No`           INT             NOT NULL    AUTO_INCREMENT,
     `User_Id`           VARCHAR(50)     NOT NULL,
     `Name`              VARCHAR(20)     NULL,
-    `Password`          VARCHAR(20)     NULL,
+    `Password`          VARCHAR(20)     NOT NULL,
     `Phone`             VARCHAR(30)     NULL,
     `Admin_Check`       BOOLEAN         NULL,
     `Email`             VARCHAR(50)     NULL,

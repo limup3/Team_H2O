@@ -62,6 +62,7 @@ const DoctorAdd = () => {
   }
 
   const handleSubmit = e => {
+    if(doctorName){
     e.preventDefault();
     setLicenseChecker("")
     const doctorJson = {
@@ -94,6 +95,9 @@ const DoctorAdd = () => {
       }else{
         alert("라이센스 중복 체크를 해주세요.")
       }
+    }else{
+      alert("입력되지 않은 정보가 있습니다.")
+    }
   }
 
   return (
