@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/styles';
 
 import { HospitalsToolbar, HospitalsTable } from './components';
 import mockData from './data';
+import HospitalPagination from './components/HospitalPagination/HospitalPagination';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,7 +24,7 @@ const HospitalList = () => {
       <HospitalsToolbar />
       <div className={classes.content}>
         <HospitalsTable hospitals={hospitals} />
-
+        {/* <HospitalPagination/> */}
       </div>
     </div>
   );

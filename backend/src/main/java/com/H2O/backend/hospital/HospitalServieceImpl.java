@@ -3,6 +3,7 @@ package com.H2O.backend.hospital;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -11,6 +12,7 @@ interface HospitalService{
     Hospital update(Hospital selectHospital);
     void delete(Hospital selectHospital);
     Optional<Hospital> hospitalAdd(Hospital hospital);
+    List<Hospital> hospitalList();
 }
 
 @Service
@@ -52,5 +54,10 @@ public class HospitalServieceImpl implements HospitalService{
 
         Hospital hospitalData = hospitalRepository.save(createHospital);
         return Optional.of(hospitalData);
+    }
+
+    @Override
+    public List<Hospital> hospitalList() {
+        return hospitalRepository.findAll();
     }
 }

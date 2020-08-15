@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.html.Option;
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -41,5 +42,12 @@ public class HospitalController {
         }else{
             return ResponseEntity.notFound().build();
         }
+    }
+
+    // 병원 테이블 리스트
+    @GetMapping("/hospitalList")
+    public ResponseEntity<List<Hospital>> hospitalList() {
+        List<Hospital> hospitalList = hospitalService.hospitalList();
+        return ResponseEntity.ok(hospitalList);
     }
 }
