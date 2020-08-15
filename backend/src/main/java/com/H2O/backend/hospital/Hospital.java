@@ -3,6 +3,7 @@ package com.H2O.backend.hospital;
 import com.H2O.backend.board.Board;
 import com.H2O.backend.doctor.Doctor;
 import lombok.*;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,12 +13,14 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@Component
 @NoArgsConstructor
-@Table(name="hospital")
+@Table(name="hospital", uniqueConstraints={@UniqueConstraint(columnNames = {"business_license_number"})})
 public class Hospital {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="hospital_no") private Long hospitalNo;
     @Column(name="hospital_name") private String hospitalName;
+    @Column(name="business_license_number") private String businessLicenseNumber;
     @Column(name = "logo", nullable = false) private String logo;
     @Column(name = "addr", nullable = false) private String addr;
     @Column(name = "hospital_type", nullable = false) private String hospitalType;
@@ -28,6 +31,7 @@ public class Hospital {
 
     @Builder
     public Hospital(String hospitalName,
+                  String businessLicenseNumber,
                   String logo,
                   String addr,
                   String hospitalType,
@@ -36,6 +40,7 @@ public class Hospital {
                   String latitude,
                   String longitude){
         this.hospitalName = hospitalName;
+        this.businessLicenseNumber = businessLicenseNumber;
         this.logo= logo;
         this.addr = addr;
         this.hospitalType = hospitalType;
@@ -48,6 +53,6 @@ public class Hospital {
     @OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL)
     private List<Doctor> doctor;
 
-    @OneToMany(mappedBy = "hospital")
+    @OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL)
     private List<Board> board;
 }

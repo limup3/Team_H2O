@@ -1,354 +1,259 @@
-import React, { useState, useEffect } from 'react';
-import { Link as RouterLink, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import validate from 'validate.js';
-import { makeStyles } from '@material-ui/styles';
-import {
-  Grid,
-  Button,
-  IconButton,
-  TextField,
-  Link,
-  FormHelperText,
-  Checkbox,
-  Typography
-} from '@material-ui/core';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import React, {useState} from 'react';
+import Button from '@material-ui/core/Button';
+import { useHistory, Link } from 'react-router-dom';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import axios from 'axios'
 
-const schema = {
-  firstName: {
-    presence: { allowEmpty: false, message: 'is required' },
-    length: {
-      maximum: 32
-    }
-  },
-  lastName: {
-    presence: { allowEmpty: false, message: 'is required' },
-    length: {
-      maximum: 32
-    }
-  },
-  email: {
-    presence: { allowEmpty: false, message: 'is required' },
-    email: true,
-    length: {
-      maximum: 64
-    }
-  },
-  password: {
-    presence: { allowEmpty: false, message: 'is required' },
-    length: {
-      maximum: 128
-    }
-  },
-  policy: {
-    presence: { allowEmpty: false, message: 'is required' },
-    checked: true
-  }
-};
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    backgroundColor: theme.palette.background.default,
-    height: '100%'
-  },
-  grid: {
-    height: '100%'
-  },
-  quoteContainer: {
-    [theme.breakpoints.down('md')]: {
-      display: 'none'
-    }
-  },
-  quote: {
-    backgroundColor: theme.palette.neutral,
-    height: '100%',
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
     display: 'flex',
-    justifyContent: 'center',
+    flexDirection: 'column',
     alignItems: 'center',
-    backgroundImage: 'url(/images/auth.jpg)',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center'
-  },
-  quoteInner: {
-    textAlign: 'center',
-    flexBasis: '600px'
-  },
-  quoteText: {
-    color: theme.palette.white,
-    fontWeight: 300
-  },
-  name: {
-    marginTop: theme.spacing(3),
-    color: theme.palette.white
-  },
-  bio: {
-    color: theme.palette.white
-  },
-  contentContainer: {},
-  content: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  contentHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingTop: theme.spacing(5),
-    paddingBototm: theme.spacing(2),
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2)
-  },
-  logoImage: {
-    marginLeft: theme.spacing(4)
-  },
-  contentBody: {
-    flexGrow: 1,
-    display: 'flex',
-    alignItems: 'center',
-    [theme.breakpoints.down('md')]: {
-      justifyContent: 'center'
-    }
   },
   form: {
-    paddingLeft: 100,
-    paddingRight: 100,
-    paddingBottom: 125,
-    flexBasis: 700,
-    [theme.breakpoints.down('sm')]: {
-      paddingLeft: theme.spacing(2),
-      paddingRight: theme.spacing(2)
-    }
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
   },
-  title: {
-    marginTop: theme.spacing(3)
+  submit: {
+    margin: theme.spacing(3, 0, 2),
   },
-  textField: {
-    marginTop: theme.spacing(2)
-  },
-  policy: {
-    marginTop: theme.spacing(1),
-    display: 'flex',
-    alignItems: 'center'
-  },
-  policyCheckbox: {
-    marginLeft: '-14px'
-  },
-  HospitalsAddButton: {
-    margin: theme.spacing(2, 0)
-  }
 }));
 
-const HospitalsAdd = props => {
-  const { history } = props;
 
+const UserAdd = () => {
   const classes = useStyles();
+  const [hospitalName, setHospitalName] = useState("");
+  const [businessLicenseNumber, setBusinessLicenseNumber] = useState("");
+  const [logo, setLogo] = useState("");
+  const [addr, setAddr] = useState("");
+  const [hospitalType, setHospitalType] = useState("")
+  const [medicalPerson, setMedicalPerson] = useState("")
+  const [tel, setTel] = useState("")
+  const [latitude, setLatitude] = useState("")
+  const [longitude, setLongitude] = useState("")
+  const [hospitalIdChecker, setHospitalIdChecker] = useState("")
 
-  const [formState, setFormState] = useState({
-    isValid: false,
-    values: {},
-    touched: {},
-    errors: {}
-  });
+  const history = useHistory();
 
-  useEffect(() => {
-    const errors = validate(formState.values, schema);
+  const handleIdCheck = e => {
+    setHospitalIdChecker("")
+    if(businessLicenseNumber){
+    e.preventDefault();
+    axios
+      .get(`http://localhost:8080/hospitals/BusinessLicenseCheck/${businessLicenseNumber}`)
+      .then(response => {
+        alert("이미 등록된 병원입니다.");
+        setHospitalIdChecker("unavailable")
+      })
+      .catch(error => {
+        alert("등록 가능합니다.");
+        setHospitalIdChecker("available")
+      })
+    }else{
+      alert("등록 여부를 확인하세요.")
+    }
+  }
 
-    setFormState(formState => ({
-      ...formState,
-      isValid: errors ? false : true,
-      errors: errors || {}
-    }));
-  }, [formState.values]);
-
-  const handleChange = event => {
-    event.persist();
-
-    setFormState(formState => ({
-      ...formState,
-      values: {
-        ...formState.values,
-        [event.target.name]:
-          event.target.type === 'checkbox'
-            ? event.target.checked
-            : event.target.value
-      },
-      touched: {
-        ...formState.touched,
-        [event.target.name]: true
-      }
-    }));
-  };
-
-  const handleBack = () => {
-    history.goBack();
-  };
-
-  const handleHospitalsAdd = event => {
-    event.preventDefault();
-    history.push('/admin');
-  };
-
-  const hasError = field =>
-    formState.touched[field] && formState.errors[field] ? true : false;
+  const handleSubmit = e => {
+    if(hospitalName){
+    e.preventDefault();
+    setHospitalIdChecker("")
+    const userJson = {
+      hospitalName: hospitalName,
+      businessLicenseNumber: businessLicenseNumber,
+      logo: logo,
+      addr: addr,
+      hospitalType: hospitalType,
+      medicalPerson: medicalPerson,
+      tel: tel,
+      latitude: latitude,
+      longitude: longitude
+    }
+    if(hospitalIdChecker==="available"){
+      axios.post(`http://localhost:8080/hospitals/hospitalAdd`, userJson)
+        .then(response => {
+          alert("병원 등록 성공 !")
+          history.push("/admin/hospital")
+            }
+        ).catch(
+          
+        error => { 
+          alert("병원 등록 실패")
+          throw (error) 
+        }
+    );
+    }else if(hospitalIdChecker==="unavailable"){
+      alert("이미 등록된 병원입니다.")
+    }else{
+      alert("등록여부를 확인해주세요.")
+    }
+  }else{
+    alert("입력되지 않은 정보가 있습니다.")
+  }
+  }
 
   return (
-    <div className={classes.root}>
-      <Grid
-        className={classes.grid}
-        container
-      >
-        <Grid
-          className={classes.content}
-          item
-          lg={7}
-          xs={12}
-        >
-          <div className={classes.content}>
-            <div className={classes.contentHeader}>
-              <IconButton onClick={handleBack}>
-                <ArrowBackIcon />
-              </IconButton>
-            </div>
-            <div className={classes.contentBody}>
-              <form
-                className={classes.form}
-                onSubmit={handleHospitalsAdd}
-              >
-                <Typography
-                  className={classes.title}
-                  variant="h2"
-                >
-                  Create new account
-                </Typography>
-                <Typography
-                  color="textSecondary"
-                  gutterBottom
-                >
-                  Use your email to create new account
-                </Typography>
-                <TextField
-                  className={classes.textField}
-                  error={hasError('firstName')}
-                  fullWidth
-                  helperText={
-                    hasError('firstName') ? formState.errors.firstName[0] : null
-                  }
-                  label="First name"
-                  name="firstName"
-                  onChange={handleChange}
-                  type="text"
-                  value={formState.values.firstName || ''}
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Typography component="h2" variant="h5">
+          병원 등록
+        </Typography>
+        <form className={classes.form} >
+          <Grid container spacing={2}>
+          <Grid item xs={8}>
+              <TextField
                   variant="outlined"
-                />
-                <TextField
-                  className={classes.textField}
-                  error={hasError('lastName')}
+                  required
                   fullWidth
-                  helperText={
-                    hasError('lastName') ? formState.errors.lastName[0] : null
-                  }
-                  label="Last name"
-                  name="lastName"
-                  onChange={handleChange}
-                  type="text"
-                  value={formState.values.lastName || ''}
+                  id="businessLicenseNumber"
+                  label="병원 사업자 등록번호"
+                  name="businessLicenseNumber"
+                  autoComplete="businessLicenseNumber"
+                  value={businessLicenseNumber || ''}
+                  onChange={e => setBusinessLicenseNumber(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={4}
+                  container
+                  direction="column"
+                  justify="flex-end"
+                  alignItems="flex-end"
+            >
+              <Button variant="outlined" color="secondary" onClick={handleIdCheck}>
+                사업자 번호 중복 확인
+              </Button>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
                   variant="outlined"
-                />
-                <TextField
-                  className={classes.textField}
-                  error={hasError('email')}
+                  required
                   fullWidth
-                  helperText={
-                    hasError('email') ? formState.errors.email[0] : null
-                  }
-                  label="Email address"
-                  name="email"
-                  onChange={handleChange}
-                  type="text"
-                  value={formState.values.email || ''}
+                  id="hospitalName"
+                  label="병원 이름"
+                  name="hospitalName"
+                  autoComplete="hospitalName"
+                  value={hospitalName || ''}
+                  onChange={e => setHospitalName(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
                   variant="outlined"
-                />
+                  required
+                  fullWidth
+                  id="logo"
+                  label="로고"
+                  name="logo"
+                  autoComplete="logo"
+                  value={logo}
+                  onChange={e => setLogo(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                autoComplete="addr"
+                name="addr"
+                variant="outlined"
+                required
+                fullWidth
+                id="addr"
+                label="병원 주소"
+                autoFocus
+                value={addr}
+                onChange={e => setAddr(e.target.value)}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="hospitalType"
+                label="병원 형태"
+                name="hospitalType"
+                autoComplete="hospitalType"
+                value={hospitalType}
+                onChange={e => setHospitalType(e.target.value)}
+              />
+              </Grid>
+              <Grid item xs={12}>
+              <TextField
+              variant="outlined"
+              required
+              fullWidth
+              id="medicalPerson"
+              label="병원 근무자 수"
+              name="medicalPerson"
+              autoComplete="medicalPerson"
+              value={medicalPerson}
+              onChange={e => setMedicalPerson(e.target.value)}
+            />
+              </Grid>
+              <Grid item xs={12}>
                 <TextField
-                  className={classes.textField}
-                  error={hasError('password')}
-                  fullWidth
-                  helperText={
-                    hasError('password') ? formState.errors.password[0] : null
-                  }
-                  label="Password"
-                  name="password"
-                  onChange={handleChange}
-                  type="password"
-                  value={formState.values.password || ''}
-                  variant="outlined"
+                variant="outlined"
+                required
+                fullWidth
+                id="tel"
+                label="연락처"
+                name="tel"
+                autoComplete="tel"
+                value={tel}
+                onChange={e => setTel(e.target.value)}
+              />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="latitude"
+                label="위도"
+                name="latitude"
+                autoComplete="latitude"
+                value={latitude}
+                onChange={e => setLatitude(e.target.value)}
                 />
-                <div className={classes.policy}>
-                  <Checkbox
-                    checked={formState.values.policy || false}
-                    className={classes.policyCheckbox}
-                    color="primary"
-                    name="policy"
-                    onChange={handleChange}
-                  />
-                  <Typography
-                    className={classes.policyText}
-                    color="textSecondary"
-                    variant="body1"
-                  >
-                    I have read the{' '}
-                    <Link
-                      color="primary"
-                      component={RouterLink}
-                      to="#"
-                      underline="always"
-                      variant="h6"
-                    >
-                      Terms and Conditions
-                    </Link>
-                  </Typography>
-                </div>
-                {hasError('policy') && (
-                  <FormHelperText error>
-                    {formState.errors.policy[0]}
-                  </FormHelperText>
-                )}
-                <Button
-                  className={classes.HospitalsAddButton}
-                  color="primary"
-                  disabled={!formState.isValid}
-                  fullWidth
-                  size="large"
-                  type="submit"
-                  variant="contained"
-                >
-                  Sign up now
-                </Button>
-                <Typography
-                  color="textSecondary"
-                  variant="body1"
-                >
-                  Have an account?{' '}
-                  <Link
-                    component={RouterLink}
-                    to="/admin/sign-in"
-                    variant="h6"
-                  >
-                    Sign in
-                  </Link>
-                </Typography>
-              </form>
-            </div>
-          </div>
-        </Grid>
-      </Grid>
-    </div>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="longitude"
+                label="경도"
+                name="longitude"
+                autoComplete="longitude"
+                value={longitude}
+                onChange={e => setLongitude(e.target.value)}
+                />
+              </Grid>
+
+            </Grid>
+
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={handleSubmit}
+          >
+            등록하기
+          </Button>
+         
+        </form>
+      </div>
+    </Container>
   );
-};
-
-HospitalsAdd.propTypes = {
-  history: PropTypes.object
-};
-
-export default withRouter(HospitalsAdd);
+}
+export default UserAdd

@@ -3,8 +3,6 @@ import Button from '@material-ui/core/Button';
 import { useHistory, Link } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -105,7 +103,7 @@ const UserAdd = () => {
                   required
                   fullWidth
                   id="userId"
-                  label="userId"
+                  label="아이디"
                   name="userId"
                   autoComplete="userId"
                   value={userId}
@@ -131,7 +129,7 @@ const UserAdd = () => {
                 required
                 fullWidth
                 id="userName"
-                label="userName"
+                label="이름"
                 autoFocus
                 value={userName}
                 onChange={e => setUserName(e.target.value)}
@@ -144,7 +142,7 @@ const UserAdd = () => {
                 required
                 fullWidth
                 id="phoneNumber"
-                label="phoneNumber"
+                label="연락처"
                 name="phoneNumber"
                 autoComplete="phoneNumber"
                 value={phoneNumber}
@@ -157,7 +155,7 @@ const UserAdd = () => {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="비밀번호"
                 type="password"
                 id="password"
                 autoComplete="current-password"
@@ -171,7 +169,7 @@ const UserAdd = () => {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="이메일 주소"
             name="email"
             autoComplete="email"
             value={email}

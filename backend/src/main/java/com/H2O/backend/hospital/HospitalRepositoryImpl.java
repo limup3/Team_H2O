@@ -1,24 +1,31 @@
 package com.H2O.backend.hospital;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import javax.sql.DataSource;
+import java.util.Optional;
 
 @Repository
-interface HospitalRepository extends JpaRepository<Hospital, Long>, HospitalService {}
-
-interface HospitalService {
-    public List<Object> findAllOrderByJoinDate();
+interface IHospitalRepository{
+    Optional<Hospital> findByBusinessLicenseNumber(String businessLicenseNumber);
 }
 
-public class HospitalRepositoryImpl{
-    @Autowired
-    HospitalService hospitalService;
+public class HospitalRepositoryImpl extends QuerydslRepositorySupport implements IHospitalRepository {
+    private final JPAQueryFactory queryFactory;
+    private final DataSource dataSource;
 
-    public List<Object> findAllOrderByJoinDate() {
-        return null;
+    HospitalRepositoryImpl(JPAQueryFactory queryFactory, DataSource dataSource) {
+        super(Hospital.class);
+        this.queryFactory = queryFactory;
+        this.dataSource = dataSource;
+    }
+
+    @Override
+    public Optional<Hospital> findByBusinessLicenseNumber(String businessLicenseNumber) {
+        QHospital qHospital = QHospital.hospital;
+        Hospital findOne = queryFactory.selectFrom(qHospital).where(qHospital.businessLicenseNumber.eq(businessLicenseNumber)).fetchOne();
+        return Optional.ofNullable(findOne);
     }
 }
