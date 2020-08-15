@@ -3,13 +3,11 @@ import { GoogleMap,useLoadScript,Marker,InfoWindow,} from "@react-google-maps/ap
 import usePlacesAutocomplete, {getGeocode,getLatLng,getZipCode} from "use-places-autocomplete";
 import Geocode from 'react-geocode'
 import {Combobox,ComboboxInput, ComboboxPopover,ComboboxList, ComboboxOption,} from "@reach/combobox";
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCol,MDBCardImage  } from 'mdbreact';
+import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCol,MDBCardImage,MDBIcon,MDBRow, MDBView, MDBLink  } from 'mdbreact';
 import './map.css'
 import "@reach/combobox/styles.css";
 import {Button, Col, Form, Row, Image} from "react-bootstrap";
-import mapdata from "./mapdata";
 import axios from "axios";
-
 
 const MAP_KEY ='AIzaSyDyYteoY6q3NQwsEHFrXfan_q_9VlIVsxk'
 //맵 키 
@@ -28,8 +26,8 @@ const options = {
 }
 
 const center = {
-    lat:37.550928,
-    lng:126.867306
+    lat: 37.554880,
+    lng: 126.936887
 }
 
 
@@ -53,15 +51,28 @@ const HospitalMap = () =>{
         libraries,
         region:'kr'
     });
+
+    const [ reservation, setReservation] = useState({})
+
+    const [infoShow, setInfoShow]= useState(false)
+
+    const handleReload = () => {
+        window.location.reload()
+      }
+
+    const handleOpen = () => setInfoShow(true);
+    const handleCheck = e => {
+      e.preventDefault();
+      handleOpen();
+    }
+
     const [ selected, setSelected] = useState({})
     //마커 찍기
     const [ currentPosition, setCurrentPosition] = useState({})
     //현재위치 찍기
     const mapRef = useRef();
-    //DOM 영역 직접 참조
-    // const onMapLoad = useCallback((map) => {
-    //     mapRef.current = map;
-    // }, [])
+    //DOM 영역 직접 참조 
+
     const onMapLoad = React.useCallback(map => {
         mapRef.current = map;
     }, []);
@@ -107,32 +118,23 @@ const HospitalMap = () =>{
         <GoogleMap
             id="map"
             mapContainerStyle={mapContainerStyle}
-            zoom={11}
+            zoom={17}
             center={center}
             options={options}
             onLoad={onMapLoad}
         >
          
               <Locate panTo= {panTo} />
-              {/* {
-                    mapdata.map((store,i)=>(
-                        <Marker
-                            key={i}
-                            position={store.location}
-                            onClick={()=>setSelected(store)}
-                            icon={{
-                                url: "https://image.flaticon.com/icons/svg/3198/3198517.svg",
-                                scaledSize: new window.google.maps.Size(40, 40)
-                            }}
-                        />
-                    ))
-                } */}
             { // 다중 마커찍기
                 hospitalList.map((store,i)=> (
                     <Marker
                     key={i}
                     position={{lat:store.latitude, lng: store.longitude}}             
-                    onClick={()=>setSelected(store)}
+                    onClick={()=>{
+                        setSelected(store)
+                        // setInfoShow(true)
+                    
+                    }}
                     icon={{
                         url: "https://image.flaticon.com/icons/svg/1786/1786525.svg",
                         scaledSize: new window.google.maps.Size(30, 30)
@@ -145,34 +147,190 @@ const HospitalMap = () =>{
            
            { // 마커 클릭이벤트 infoWindow
                selected.latitude ? (
-                   <InfoWindow
+                   <InfoWindow 
                         position = {{lat:selected.latitude, lng:selected.longitude}}
                         clickable={true}
-                        onCloseClick={() => setSelected({})}
+                        onClick={() => setReservation({})}
+                        onCloseClick={() => setSelected({})} 
+
                     >
-                    
                     <div className="infowindow">
-                                                <MDBCol>
-                                                    <MDBCard>
-                                                        <MDBCardBody>
-                                                            <MDBCardTitle><h3>{selected.hospitalName}</h3></MDBCardTitle><br/>
-                                                            <MDBCardText>
-                                                            <MDBCardImage className="imgThumbnail" src="https://www.tophospital.co.kr/images/sub/present_01.jpg" />
-                                                            <br/>
-                                                                <h4>전화번호: {selected.tel}</h4><br/>
-                                                                <h4>주소: {selected.addr}</h4><br/>
-                                                                <h4>병원상태: {selected.hospitalType}</h4><br/>
-                                                                <h4>의료인수: {selected.medicalPeople}</h4><br/>
-                                                                <h4>입원실수: {selected.hospitalRoom}</h4><br/>
-                                                                <h4>병상수: {selected.hospitalBed}</h4><br/>
-                                                                <h4>총면적: {selected.hospitalArea}</h4><br/>
-                                                            </MDBCardText>
-                                                        </MDBCardBody>
-                                                    </MDBCard>
-                                                </MDBCol>
-                                            </div>
-                                        </InfoWindow>
-                                    ) :null
+                        <MDBCard>
+                            <MDBCardBody>
+                                <MDBCardTitle>{selected.hospitalName}</MDBCardTitle><br/>
+                                <MDBCardText>
+                                <MDBCardImage className="imgThumbnail" src="https://www.tophospital.co.kr/images/sub/present_01.jpg" />
+                                <br/>
+                                <p>{selected.hospitalType}</p><br/>
+                                    <p>전화번호 : {selected.tel}</p><br/>
+                                    <p>주소 : {selected.addr}</p><br/>
+                                    <p>의료인수 : {selected.medicalPeople}</p><br/>
+                                    <p>입원실수 : {selected.hospitalRoom}</p><br/>
+                                    <p>병상수 : {selected.hospitalBed}</p><br/>
+                                    <p>총면적 : {selected.hospitalArea}</p><br/>
+                                    <MDBBtn gradient="purple" onClick={handleCheck}>진료 예약</MDBBtn>
+                                    <MDBBtn gradient="purple">화상 진료</MDBBtn>
+                                </MDBCardText>
+                            </MDBCardBody>
+                        </MDBCard>
+                        </div>
+                    </InfoWindow>
+                    ) :null
+           }
+           {
+               infoShow ? (
+                   <InfoWindow
+                       position = {{lat:selected.latitude, lng:selected.longitude}}
+                       onCloseClick={() => {setInfoShow(false);}}
+                       clickable={true}
+                    >
+                       <div>
+                       <MDBCardTitle>{selected.hospitalName} 의사 리스트</MDBCardTitle><br/>
+                       <MDBRow>
+      <MDBCol md='4'>
+        <MDBCard wide cascade>
+          <MDBView cascade>
+            <MDBCardImage
+              hover
+              overlay='white-slight'
+              className='card-img-top'
+              src='http://hub.khnmc.or.kr/mng/upload/docinfo/1531109799046_D06CAE30BCC0D658__IMG_1237.jpg'
+              alt='Card cap'
+            />
+          </MDBView>
+
+          <MDBCardBody cascade className='text-center'>
+            <MDBCardTitle className='card-title'>
+              <strong>강민서</strong>
+            </MDBCardTitle>
+
+            <p className='font-weight-bold blue-text'>이비인후피부과</p>
+
+            <MDBCardText>
+            여드름, 한방미용시술, 성형수술후관리{' '}
+            </MDBCardText>
+            <MDBLink to="/Community">
+            <MDBBtn gradient="purple">예약</MDBBtn>
+            </MDBLink>
+          </MDBCardBody>
+        </MDBCard>
+      </MDBCol>
+
+      <MDBCol md='4'>
+        <MDBCard wide cascade>
+          <MDBView cascade>
+            <MDBCardImage
+              hover
+              overlay='white-slight'
+              className='card-img-top'
+              src='http://hub.khnmc.or.kr/mng/upload/docinfo/1525414257937_AC15C724AD6C%20AD50C218_h.jpg'
+              alt='Card cap'
+            />
+          </MDBView>
+
+          <MDBCardBody cascade className='text-center'>
+            <MDBCardTitle className='card-title'>
+              <strong>강윤구</strong>
+            </MDBCardTitle>
+
+            <p className='font-weight-bold blue-text'>치과교정과</p>
+
+            <MDBCardText>
+            성인교정, 성장기교정, 투명교정, 악안면 기형 교정, 턱관절교정{' '}
+            </MDBCardText>
+            <MDBBtn gradient="purple">예약</MDBBtn>
+          </MDBCardBody>
+        </MDBCard>
+      </MDBCol>
+
+      <MDBCol md='4'>
+        <MDBCard wide cascade>
+          <MDBView cascade>
+            <MDBCardImage
+              hover
+              overlay='white-slight'
+              className='card-img-top'
+              src='http://hub.khnmc.or.kr/mng/upload/docinfo/1543307784609_AE40ACE0C6B4-AD50C218_h.jpg'
+              alt='Card cap'
+            />
+          </MDBView>
+
+          <MDBCardBody cascade className='text-center'>
+            <MDBCardTitle className='card-title'>
+              <strong>김고운</strong>
+            </MDBCardTitle>
+
+            <p className='font-weight-bold blue-text'>한방재활의학과</p>
+
+            <MDBCardText>
+            (한방비만체형클리닉) 부분비만(매선요법), 소아비만, 산후비만{' '}
+            </MDBCardText>
+            <MDBBtn gradient="purple">예약</MDBBtn>
+          </MDBCardBody>
+        </MDBCard>
+      </MDBCol>
+      </MDBRow>
+        <br/><br/>
+      <MDBRow>
+      <MDBCol md='4'>
+        <MDBCard wide cascade>
+          <MDBView cascade>
+            <MDBCardImage
+              hover
+              overlay='white-slight'
+              className='card-img-top'
+              src='http://hub.khnmc.or.kr/mng/upload/docinfo/1525925418375_AE40AE30D0DD%20AD50C218_h.jpg'
+              alt='Card cap'
+            />
+          </MDBView>
+
+          <MDBCardBody cascade className='text-center'>
+            <MDBCardTitle className='card-title'>
+              <strong>김기택</strong>
+            </MDBCardTitle>
+
+            <p className='font-weight-bold blue-text'>정형외과</p>
+
+            <MDBCardText>
+            척추질환, 강직성척추염, 척추측만증{' '}
+            </MDBCardText>
+            <MDBBtn gradient="purple">예약</MDBBtn>
+          </MDBCardBody>
+        </MDBCard>
+      </MDBCol>
+
+      <MDBCol md='4'>
+        <MDBCard wide cascade>
+          <MDBView cascade>
+            <MDBCardImage
+              hover
+              overlay='white-slight'
+              className='card-img-top'
+              src='http://hub.khnmc.or.kr/mng/upload/docinfo/1544085075343_D06CAE30BCC0D658_B9C8CDE8ACFC%20AC15C885B9CCAD50C218.jpg'
+              alt='Card cap'
+            />
+          </MDBView>
+
+          <MDBCardBody cascade className='text-center'>
+            <MDBCardTitle className='card-title'>
+              <strong>강종만</strong>
+            </MDBCardTitle>
+
+            <p className='font-weight-bold blue-text'>마취통증의학과</p>
+
+            <MDBCardText>
+            수술 전후 척추통증, 급성 및 만성 통증 관리{' '}
+            </MDBCardText>
+            <MDBBtn gradient="purple">예약</MDBBtn>
+          </MDBCardBody>
+        </MDBCard>
+      </MDBCol>
+
+      </MDBRow>
+                       </div>
+                   </InfoWindow>
+
+               ) : null
            }
 
            { // 내 위치
@@ -184,7 +342,7 @@ const HospitalMap = () =>{
                         }}
                         icon={{
                             url : "https://image.flaticon.com/icons/svg/727/727590.svg",
-                            scaledSize: new window.google.maps.Size(40, 40)
+                            scaledSize: new window.google.maps.Size(70, 70)
                         }}
 
                    />
