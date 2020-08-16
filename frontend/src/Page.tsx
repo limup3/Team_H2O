@@ -8,6 +8,8 @@ import {TeleMedicine, RtcRoom} from './pages/TeleMedicine'
 import {Community, CustomerServiceCenter, QueAn, Review,CSReview, Edit,Review2,QAFix,CSFix,Fix,CommunityTem,QAReview, TablePage} from './pages/Community'
 import {Login, SignUp, MyPage, UserModify, UserFindID, UserFindPW, UserDelete, } from './pages/Account'
 import './pages/Community/community.css'
+import { Reservation } from "./pages/Reservation";
+
 
 const Page = () => (
 
@@ -21,6 +23,12 @@ const Page = () => (
             <Route path="/Ambulance">
                     <NavBar/>
                     <Ambulance/>
+                    <Footer/>
+            </Route>
+            
+            <Route path="/Reservation">
+                    <NavBar/>
+                    <Reservation/>
                     <Footer/>
             </Route>
 

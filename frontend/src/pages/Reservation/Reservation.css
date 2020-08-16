@@ -1,0 +1,22 @@
+.Calendar {
+    font-size: 15px;
+    margin: 0 auto;
+  }
+
+.DatePicker {
+    font-size: 15px;
+    margin: 0 auto;
+    left: 130px;
+    top: 20px;
+}
+
+.TimeKeeper {
+    font-size: 25px;
+    margin: 0 auto;
+    left: 250px;
+}
+
+.buttonPosition {
+    text-align: center;
+    left: 200px;
+}

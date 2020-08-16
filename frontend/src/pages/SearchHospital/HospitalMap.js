@@ -3,7 +3,7 @@ import { GoogleMap,useLoadScript,Marker,InfoWindow,} from "@react-google-maps/ap
 import usePlacesAutocomplete, {getGeocode,getLatLng,getZipCode} from "use-places-autocomplete";
 import Geocode from 'react-geocode'
 import {Combobox,ComboboxInput, ComboboxPopover,ComboboxList, ComboboxOption,} from "@reach/combobox";
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCol,MDBCardImage,MDBIcon,MDBRow, MDBView, MDBLink  } from 'mdbreact';
+import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCol,MDBCardImage,MDBRow, MDBView, MDBLink  } from 'mdbreact';
 import './map.css'
 import "@reach/combobox/styles.css";
 import {Button, Col, Form, Row, Image} from "react-bootstrap";
@@ -37,6 +37,7 @@ const HospitalMap = () =>{
     useEffect(()=>{
         axios.get(`http://localhost:8080/hospital/data`)
         .then(response => {
+            console.log(JSON.stringify(response))
             setHospitalList(response.data.list)
         })
         .catch(
@@ -209,7 +210,7 @@ const HospitalMap = () =>{
             <MDBCardText>
             여드름, 한방미용시술, 성형수술후관리{' '}
             </MDBCardText>
-            <MDBLink to="/Community">
+            <MDBLink to="/Reservation">
             <MDBBtn gradient="purple">예약</MDBBtn>
             </MDBLink>
           </MDBCardBody>
@@ -238,7 +239,9 @@ const HospitalMap = () =>{
             <MDBCardText>
             성인교정, 성장기교정, 투명교정, 악안면 기형 교정, 턱관절교정{' '}
             </MDBCardText>
+            <MDBLink to="/Reservation">
             <MDBBtn gradient="purple">예약</MDBBtn>
+            </MDBLink>
           </MDBCardBody>
         </MDBCard>
       </MDBCol>
@@ -265,7 +268,9 @@ const HospitalMap = () =>{
             <MDBCardText>
             (한방비만체형클리닉) 부분비만(매선요법), 소아비만, 산후비만{' '}
             </MDBCardText>
+            <MDBLink to="/Reservation">
             <MDBBtn gradient="purple">예약</MDBBtn>
+            </MDBLink>
           </MDBCardBody>
         </MDBCard>
       </MDBCol>
@@ -294,7 +299,9 @@ const HospitalMap = () =>{
             <MDBCardText>
             척추질환, 강직성척추염, 척추측만증{' '}
             </MDBCardText>
+            <MDBLink to="/Reservation">
             <MDBBtn gradient="purple">예약</MDBBtn>
+            </MDBLink>
           </MDBCardBody>
         </MDBCard>
       </MDBCol>
@@ -321,7 +328,9 @@ const HospitalMap = () =>{
             <MDBCardText>
             수술 전후 척추통증, 급성 및 만성 통증 관리{' '}
             </MDBCardText>
+            <MDBLink to="/Reservation">
             <MDBBtn gradient="purple">예약</MDBBtn>
+            </MDBLink>
           </MDBCardBody>
         </MDBCard>
       </MDBCol>

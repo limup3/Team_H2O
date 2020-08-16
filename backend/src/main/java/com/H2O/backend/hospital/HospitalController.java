@@ -29,6 +29,7 @@ public class HospitalController {
         System.out.println("들어옴");
         Iterable<Hospital> data = repository.findAll();
         box.put("list", data);
+        System.out.println(box.get());
         return box.get();
 
 
