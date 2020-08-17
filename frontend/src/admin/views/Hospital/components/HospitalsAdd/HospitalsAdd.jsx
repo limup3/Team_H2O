@@ -253,20 +253,7 @@ const UserAdd = () => {
                   onChange={e => setLogo(e.target.value)}
               />
               </Grid> */}
-              <Grid item xs={12}
-                    container
-                    fullWidth
-                    variant="outlined"
-                    direction="column"
-                    justify="center"
-                    alignItems="center"
-              >
-                <Grid item xs={8}>
-
-                </Grid>
-              <ImgButton item xs={12}/>
-              </Grid>
-
+              <ImgButton />
             </Grid>
 
           <Button

@@ -3,38 +3,65 @@ import {Grid, Button, Icon, OutlinedInput, Box, Container } from '@material-ui/c
 import { Row, Col } from 'react-bootstrap'
 import Image from 'react-bootstrap/Image'
 
-const outLined = () => {
-    // border:'2px solid #000000',
+const outLined = {
+    width : '200px',
+    height : '200px',
+    border:'1px solid gray',
+}
+
+const outLinedComplete = {
+    width : 'auto',
+    height : 'auto',
+    border:'1px solid gray',
+}
+
+
+const inputStyle = {
+    
 }
 
 const ImgButton = () => {
-    const [file, setFile] = useState()
+    const [file, setFile] = useState(null)
     const [previewURL, setPreviewURL] = useState(null) 
     
     const handleFileOnChange = e => {
         e.preventDefault();
         let reader = new FileReader();
         let file = e.target.files[0];
+        if(e.target.files[0]){
         reader.onloadend = () => {
             setFile()
             setPreviewURL(reader.result)
         }
         reader.readAsDataURL(file);
+        }else{
+            setPreviewURL()
         }
+    }
 
-    let preview
-    if(file!==''){
-        preview = <img className='profile_preview' src={previewURL}></img>
+    let preview=null
+    if(file!==null){
+        preview = <Image 
+                    className='profile_preview' 
+                    src={previewURL}
+                    rounded >
+                 </Image>
     }
 
     return (
-        <div className={outLined}>
-            <Row>
-                <Col xs={8}>
+        <Container>
+            <Row >
+                <Col 
+                    xs={8}
+                    style={previewURL==null? outLined: outLinedComplete}
+                    // style={outLined}
+                    // style={outLinedComplete}
+                    >
+                    {previewURL==null? "이미지": null}
                     {preview}
                 </Col>
                 <Col xs={4}>
-                    <input 
+                    <input style={inputStyle}
                         accept="image/*"
                         type="file"
                         name="img"
@@ -42,7 +69,7 @@ const ImgButton = () => {
                     </input>
                 </Col>
             </Row>
-        </div>
+            </Container>
         )
 }
 
