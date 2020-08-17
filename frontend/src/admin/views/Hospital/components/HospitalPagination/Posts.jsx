@@ -6,9 +6,9 @@ const Posts = ({ posts, loading }) => {
   }
   return (
     <ul className="list">
-      {posts.map((post) => (
-        <li key={post.hospitalNo} className="list_item">
-          {post.hospitalNo}
+      {posts.map((hospital) => (
+        <li key={hospital.hospitalNo} className="list_item">
+          {post.id}
         </li>
       ))}
     </ul>

@@ -52,5 +52,12 @@ public class HospitalController {
         return ResponseEntity.ok(hospitalList);
     }
 
+    // 병원 로고 이미지 삽입
+    @PostMapping("/logoUpload")
+    public ResponseEntity<Hospital> hospitalLogo(){
+        return null;
+    }
+
+
 
 }

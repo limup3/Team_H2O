@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HospitalPagination2 = () => {
+const HospitalPagination = () => {
 
   const classes = useStyles();
 
@@ -45,9 +45,6 @@ const HospitalPagination2 = () => {
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const nextPage = () => currentPage+1;
-  const prevPage = () => currentPage-1;
-
   // -- pagiatnion ---
 
 
@@ -115,4 +112,4 @@ const HospitalPagination2 = () => {
     </>
   )
 }
-export default HospitalPagination2
+export default HospitalPagination

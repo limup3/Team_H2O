@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios'
+import ImgButton, { imgSrc } from '../../../../helpers/ImgButton';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -40,6 +41,10 @@ const UserAdd = () => {
   const [longitude, setLongitude] = useState("")
   const [hospitalIdChecker, setHospitalIdChecker] = useState("")
 
+  //---------------- input -------------
+  const [image, setImage] = useState(null) 
+  //---------------- input -------------
+
   const history = useHistory();
 
   const handleIdCheck = e => {
@@ -60,6 +65,17 @@ const UserAdd = () => {
       alert("등록 여부를 확인하세요.")
     }
   }
+  //---------------- input -------------
+  const handleInputChange = e =>{
+    setImage(e.target.files[0])
+  }
+  const handleInpuLogo = async() => {
+    const formData = new FormData()
+    formData.append('file', image)
+    const res = await axios.post("/hospitals/logoUpload", formData)
+
+  }
+  //---------------- input -------------
 
   const handleSubmit = e => {
     if(hospitalName){
@@ -146,19 +162,6 @@ const UserAdd = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="logo"
-                  label="로고"
-                  name="logo"
-                  autoComplete="logo"
-                  value={logo}
-                  onChange={e => setLogo(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
                 autoComplete="addr"
                 name="addr"
                 variant="outlined"
@@ -236,6 +239,32 @@ const UserAdd = () => {
                 value={longitude}
                 onChange={e => setLongitude(e.target.value)}
                 />
+              </Grid>
+               {/* <Grid item xs={8}>
+              <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="logo"
+                  label="로고"
+                  name="logo"
+                  autoComplete="logo"
+                  value={logo}
+                  onChange={e => setLogo(e.target.value)}
+              />
+              </Grid> */}
+              <Grid item xs={12}
+                    container
+                    fullWidth
+                    variant="outlined"
+                    direction="column"
+                    justify="center"
+                    alignItems="center"
+              >
+                <Grid item xs={8}>
+
+                </Grid>
+              <ImgButton item xs={12}/>
               </Grid>
 
             </Grid>
