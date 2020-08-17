@@ -1,95 +1,93 @@
 import React, { useState } from "react";
-import "react-modern-calendar-datepicker/lib/DatePicker.css";
-import DatePicker,{Calendar, utils} from 'react-modern-calendar-datepicker';
 import './Reservation.css'
-import { MDBBtn, MDBContainer, MDBRow, MDBCol} from 'mdbreact';
-import TimeKeeper from 'react-timekeeper';
+import Payment from "../../layout/Payment";
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import { MDBCard, MDBCardBody, MDBCardTitle,  MDBCol, MDBRow } from 'mdbreact';
+const useStyles = makeStyles((theme) => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
+  },
+}));
 
-const Reservation = () => {
-    const [selectedDay, setSelectedDay] = useState(utils().getToday()); 
-    const [time, setTime] = useState('12:00pm')
 
-    const renderCustomInput = ({ ref }) => (
-      <input 
-        readOnly = "true"
-        ref={ref} 
-        placeholder="Select a Day"
-        value ={`${selectedDay.year}/${selectedDay.month}/${selectedDay.day}`}
-        style={{
-          textAlign: 'center',
-          padding: '0.3rem 0.5rem',
-          fontSize: 'medium',
-          border: '1px solid #184f90',
-          borderRadius: '50px',
-          boxShadow: '0 0.5rem 1rem rgba(156, 136, 255, 0.2)',
-          color: '#184f90',
-          outline: 'none',
-          margin: '1.3rem',
-          
+const Reservation = () =>  {
+  const classes = useStyles();
+  const [selectedDate, setSelectedDate] = useState("2019-08-18T10:30")
+
+  return (
+
+    <div>
+
+<MDBCol>
+  <br/><br/><br/>
+      <MDBCard 
+      style={{ width: "40%",
+               left: "35%",
+            }}>
+        <br/>      
+        <MDBCardTitle cascade className='text-center'>
+              <strong>병원 예약</strong>
+            </MDBCardTitle>
+            <br/>  
+          <div className={"reservation"}>
+          <form className={classes.container} noValidate>
+         <TextField
+        id="datetime-local"
+        label="Reservation"
+        type="datetime-local"
+        value={selectedDate}
+        onChange={e => setSelectedDate(e.target.value)}
+        
+        InputLabelProps={{
+          shrink: true,
         }}
-        className="my-custom-input-class" 
       />
-    )
-  const renderCalendarInput = ({ ref }) => (
-  <input
-      ref={ref} 
-      value ={`${selectedDay.year}/${selectedDay.month}/${selectedDay.day}`}
-      style={{
-      width : '100%',
-      height : '100%',
-      }}
-      className="my-custom-input-class" 
-  />
-  ) 
-
-    return (
-     
-      
-      <MDBContainer>
-        <br/>
-        <MDBRow>
-        <MDBCol md="8"></MDBCol>
-
-      </MDBRow>
-        <br/>
-  <MDBRow>
-    <MDBCol md="4">
-      <Calendar
-            className="Calendar"
-            value={selectedDay}
-            onChange={setSelectedDay}
-            calendarClassName="custom-calendar" 
-            shouldHighlightWeekends
-            colorPrimary="#a742f494" 
-      />
-      <DatePicker
-        value={selectedDay}
-        onChange={setSelectedDay}
-        renderInput={renderCustomInput}
-        shouldHighlightWeekends
-      />
-    </MDBCol>
-    <MDBCol md="4" className="TimeKeeper">
-    <TimeKeeper
+    </form>
+          </div>
+            
+            <br/>  
+        <MDBCardBody>
           
-          time={time}
-          onChange={(newTime) => setTime(newTime.formatted12)}
-      />
-      
-      <br/><br/><br/><br/><br/><br/>
+        <h5>            
+              병원 이름 : 신촌 세브란스 병원{' '}            
+        </h5>
+        <br/>
+        <h5>           
+              의사 : 구윤서{' '}          
+        </h5>
+        <br/>
+        <h5>
+              진료과 : 이비인후과{' '}
+        </h5>
+        <br/>
+        <h5>
+              예약 비용 : 5000원{' '}
+        </h5>
+        <br/>
+        <br/>  
+        <br/>  
 
-      <MDBBtn gradient="aqua" size="lg">Time is {time}</MDBBtn>
-    </MDBCol>
+    <MDBRow>
     <MDBCol md="4">
-        <MDBBtn className="buttonPosition" gradient="purple" size="lg">예약</MDBBtn>
-        </MDBCol>
-  </MDBRow>
+    </MDBCol>
+    <MDBCol md="8">
+    <Payment/>
+    </MDBCol>
+    </MDBRow>
   
-</MDBContainer>
+    <br/>    
+        </MDBCardBody>
+      </MDBCard>
+    </MDBCol>
+    </div>
 
-
-      
-    );
-  };
-
+  );
+}
 export default Reservation

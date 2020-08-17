@@ -1,14 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Icon, Button } from 'antd';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import queryString from 'query-string';
 
-function PaymentResult({ history }) {
+const PaymentResult = () => {
+  const history = useHistory();
   const { location } = history;
   const { search } = location;
   const query = queryString.parse(search);
-  
+  const handleBack = e => {
+    e.preventDefault()
+    history.push('/')
+    window.location.reload()
+  }
   const { merchant_uid, error_msg, imp_uid } = query;
   const isSuccessed = getIsSuccessed();
   function getIsSuccessed() {
@@ -44,7 +49,7 @@ function PaymentResult({ history }) {
             </li>
           )}
         </ul>
-        <Button size="large" onClick={() => history.push('/')}>
+        <Button size="large" onClick={handleBack}>
           <Icon type="arrow-left" />
           돌아가기
         </Button>
@@ -115,4 +120,4 @@ const Container = styled.div`
   }
 `;
 
-export default withRouter(PaymentResult);
+export default PaymentResult;

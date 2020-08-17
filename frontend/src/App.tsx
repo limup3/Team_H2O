@@ -26,9 +26,9 @@ const App = () => (
     <Provider store={store}>
       <Page />
       <AdminPage/>
-    </Provider>
     <Route exact path="/payment" component={Payment} />
     <Route exact path="/payment/result" component={PaymentResult} />
+    </Provider>
     </BrowserRouter>
 );
 

@@ -9,6 +9,8 @@ import {Community, CustomerServiceCenter, QueAn, Review,CSReview, Edit,Review2,Q
 import {Login, SignUp, MyPage, UserModify, UserFindID, UserFindPW, UserDelete, } from './pages/Account'
 import './pages/Community/community.css'
 import { Reservation } from "./pages/Reservation";
+import Payment from "./layout/Payment";
+import PaymentResult from "./layout/PaymentResult";
 
 
 const Page = () => (
@@ -141,7 +143,6 @@ const Page = () => (
                     <Fix/>
                     <Footer/>
             </Route>
-
             
             <React.Fragment>
                     <Route path="/TeleMedicine" exact component={RtcRoom}/>

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
+import './Header.css'
 
 
 import logo from "../../helpers/images/logo.svg";
@@ -59,19 +60,19 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
   console.log(sessionStorage.userData)
 
   const defaultLinks = [
-    <NavLinks key={1}>
-      <NavLink href="/SearchHospital">병원찾기</NavLink>
-      <NavLink href="/Ambulance">응급차 호출</NavLink>
-      <NavLink href="/TeleMedicine" target="_blank">화상 진료</NavLink>
-      <NavLink href="/Community">커뮤니티</NavLink>
-      <NavLink href="/Admin" target="_blank">관리자(임시)</NavLink>
+    <NavLinks key={1} >
+      <NavLink className="navColor" href="/SearchHospital">병원찾기</NavLink>
+      <NavLink className="navColor" href="/Ambulance">응급차 호출</NavLink>
+      <NavLink className="navColor" href="/TeleMedicine" target="_blank">화상 진료</NavLink>
+      <NavLink className="navColor" href="/Community">커뮤니티</NavLink>
+      <NavLink className="navColor" href="/Admin" target="_blank">관리자(임시)</NavLink>
       {!sessionStorage.userData &&
-        <NavLink href="/Login" tw="lg:ml-12!">
+        <NavLink className="navColor" href="/Login" tw="lg:ml-12!">
         Login
       </NavLink>
       }
       {sessionStorage.userData &&
-        <NavLink href="/" tw="lg:ml-12!" onClick={handleLogout}>
+        <NavLink className="navColor" href="/" tw="lg:ml-12!" onClick={handleLogout}>
         Logout
       </NavLink>
       }
@@ -88,7 +89,7 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
   const collapseBreakpointCss = collapseBreakPointCssMap[collapseBreakpointClass];
 
   const defaultLogoLink = (
-    <LogoLink href="/">
+    <LogoLink className="navColor" href="/">
       <img src={logo} alt="logo" />
       H2O
     </LogoLink>
