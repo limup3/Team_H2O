@@ -62,9 +62,16 @@ const HospitalMap = () =>{
       }
 
     const handleOpen = () => setInfoShow(true);
-    const handleCheck = e => {
+
+    const handleClose = () => setInfoShow(false);
+    
+    const handleReservation = e => {
       e.preventDefault();
       handleOpen();
+    }
+    const handleTelReservation = e => {
+      e.preventDefault();
+      handleClose();
     }
 
     const [ selected, setSelected] = useState({})
@@ -165,41 +172,40 @@ const HospitalMap = () =>{
                                 <MDBTable>
                                   <br/>
                                
-      <MDBTableBody>
-        <tr>
-          <th>{selected.hospitalType}</th>
-          <td></td>
-         
-        </tr>
-        <tr>
-          <th>전화번호</th>
-          <td>{selected.tel}</td>
-        </tr>
-        <tr>
-          <th>주소</th>
-          <td>{selected.addr}</td>
-        </tr>
-        <tr>
-          <th>의료인수</th>
-          <td>{selected.medicalPeople}</td>
-        </tr>
-        <tr>
-          <th>입원실수</th>
-          <td>{selected.hospitalRoom}</td>
-        </tr>
-        <tr>
-          <th>병상수</th>
-          <td>{selected.hospitalBed}</td>
-        </tr>
-        <tr>
-          <th>총면적</th>
-          <td>{selected.hospitalArea}</td>
-        </tr>
-      </MDBTableBody>
-    </MDBTable>
-    </div >            
-                                
-                                
+                                <MDBTableBody>
+                                  <tr>
+                                    <th>{selected.hospitalType}</th>
+                                    <td></td>
+                                  
+                                  </tr>
+                                  <tr>
+                                    <th>전화번호</th>
+                                    <td>{selected.tel}</td>
+                                  </tr>
+                                  <tr>
+                                    <th>주소</th>
+                                    <td>{selected.addr}</td>
+                                  </tr>
+                                  <tr>
+                                    <th>의료인수</th>
+                                    <td>{selected.medicalPeople}</td>
+                                  </tr>
+                                  <tr>
+                                    <th>입원실수</th>
+                                    <td>{selected.hospitalRoom}</td>
+                                  </tr>
+                                  <tr>
+                                    <th>병상수</th>
+                                    <td>{selected.hospitalBed}</td>
+                                  </tr>
+                                  <tr>
+                                    <th>총면적</th>
+                                    <td>{selected.hospitalArea}</td>
+                                  </tr>
+                                </MDBTableBody>
+                              </MDBTable>
+                              </div >            
+                                                   
                                 {/* <br/>
                                 <p>{selected.hospitalType}</p><br/>
                                     <p>전화번호 : {selected.tel}</p><br/>
@@ -208,8 +214,8 @@ const HospitalMap = () =>{
                                     <p>입원실수 : {selected.hospitalRoom}</p><br/>
                                     <p>병상수 : {selected.hospitalBed}</p><br/>
                                     <p>총면적 : {selected.hospitalArea}</p><br/> */}
-                                    <MDBBtn gradient="blue" onClick={handleCheck}>진료 예약</MDBBtn>
-                                    <MDBBtn gradient="blue">화상 진료</MDBBtn>
+                                    <MDBBtn gradient="blue" onClick={handleReservation}>진료 예약</MDBBtn>
+                                    <MDBBtn gradient="blue" onClick={handleReservation}>화상 진료</MDBBtn>
                                 </MDBCardText>
                             </MDBCardBody>
                         </MDBCard>
@@ -227,154 +233,154 @@ const HospitalMap = () =>{
                        <div>
                        <MDBCardTitle>{selected.hospitalName} 의사 리스트</MDBCardTitle><br/>
                        <MDBRow>
-      <MDBCol md='4'>
-        <MDBCard wide cascade>
-          <MDBView cascade>
-            <MDBCardImage
-              hover
-              overlay='white-slight'
-              className='card-img-top'
-              src='http://hub.khnmc.or.kr/mng/upload/docinfo/1531109799046_D06CAE30BCC0D658__IMG_1237.jpg'
-              alt='Card cap'
-            />
-          </MDBView>
+                        <MDBCol md='4'>
+                          <MDBCard wide cascade>
+                            <MDBView cascade>
+                              <MDBCardImage
+                                hover
+                                overlay='white-slight'
+                                className='card-img-top'
+                                src='http://hub.khnmc.or.kr/mng/upload/docinfo/1531109799046_D06CAE30BCC0D658__IMG_1237.jpg'
+                                alt='Card cap'
+                              />
+                            </MDBView>
 
-          <MDBCardBody cascade className='text-center'>
-            <MDBCardTitle className='card-title'>
-              <strong>강민서</strong>
-            </MDBCardTitle>
+                            <MDBCardBody cascade className='text-center'>
+                              <MDBCardTitle className='card-title'>
+                                <strong>강민서</strong>
+                              </MDBCardTitle>
 
-            <p className='font-weight-bold blue-text'>이비인후피부과</p>
+                              <p className='font-weight-bold blue-text'>이비인후피부과</p>
 
-            <MDBCardText>
-            여드름, 한방미용시술, 성형수술후관리{' '}
-            </MDBCardText>
-            <MDBLink to="/Reservation">
-            <MDBBtn gradient="purple">예약</MDBBtn>
-            </MDBLink>
-          </MDBCardBody>
-        </MDBCard>
-      </MDBCol>
+                              <MDBCardText>
+                              여드름, 한방미용시술, 성형수술후관리{' '}
+                              </MDBCardText>
+                              <MDBLink to="/Reservation">
+                              <MDBBtn gradient="purple">예약</MDBBtn>
+                              </MDBLink>
+                            </MDBCardBody>
+                          </MDBCard>
+                        </MDBCol>
 
-      <MDBCol md='4'>
-        <MDBCard wide cascade>
-          <MDBView cascade>
-            <MDBCardImage
-              hover
-              overlay='white-slight'
-              className='card-img-top'
-              src='http://hub.khnmc.or.kr/mng/upload/docinfo/1525414257937_AC15C724AD6C%20AD50C218_h.jpg'
-              alt='Card cap'
-            />
-          </MDBView>
+                        <MDBCol md='4'>
+                          <MDBCard wide cascade>
+                            <MDBView cascade>
+                              <MDBCardImage
+                                hover
+                                overlay='white-slight'
+                                className='card-img-top'
+                                src='http://hub.khnmc.or.kr/mng/upload/docinfo/1525414257937_AC15C724AD6C%20AD50C218_h.jpg'
+                                alt='Card cap'
+                              />
+                            </MDBView>
 
-          <MDBCardBody cascade className='text-center'>
-            <MDBCardTitle className='card-title'>
-              <strong>강윤구</strong>
-            </MDBCardTitle>
+                            <MDBCardBody cascade className='text-center'>
+                              <MDBCardTitle className='card-title'>
+                                <strong>강윤구</strong>
+                              </MDBCardTitle>
 
-            <p className='font-weight-bold blue-text'>치과교정과</p>
+                              <p className='font-weight-bold blue-text'>치과교정과</p>
 
-            <MDBCardText>
-            성인교정, 성장기교정, 투명교정, 악안면 기형 교정, 턱관절교정{' '}
-            </MDBCardText>
-            <MDBLink to="/Reservation">
-            <MDBBtn gradient="purple">예약</MDBBtn>
-            </MDBLink>
-          </MDBCardBody>
-        </MDBCard>
-      </MDBCol>
+                              <MDBCardText>
+                              성인교정, 성장기교정, 투명교정, 악안면 기형 교정, 턱관절교정{' '}
+                              </MDBCardText>
+                              <MDBLink to="/Reservation">
+                              <MDBBtn gradient="purple">예약</MDBBtn>
+                              </MDBLink>
+                            </MDBCardBody>
+                          </MDBCard>
+                        </MDBCol>
 
-      <MDBCol md='4'>
-        <MDBCard wide cascade>
-          <MDBView cascade>
-            <MDBCardImage
-              hover
-              overlay='white-slight'
-              className='card-img-top'
-              src='http://hub.khnmc.or.kr/mng/upload/docinfo/1543307784609_AE40ACE0C6B4-AD50C218_h.jpg'
-              alt='Card cap'
-            />
-          </MDBView>
+                        <MDBCol md='4'>
+                          <MDBCard wide cascade>
+                            <MDBView cascade>
+                              <MDBCardImage
+                                hover
+                                overlay='white-slight'
+                                className='card-img-top'
+                                src='http://hub.khnmc.or.kr/mng/upload/docinfo/1543307784609_AE40ACE0C6B4-AD50C218_h.jpg'
+                                alt='Card cap'
+                              />
+                            </MDBView>
 
-          <MDBCardBody cascade className='text-center'>
-            <MDBCardTitle className='card-title'>
-              <strong>김고운</strong>
-            </MDBCardTitle>
+                            <MDBCardBody cascade className='text-center'>
+                              <MDBCardTitle className='card-title'>
+                                <strong>김고운</strong>
+                              </MDBCardTitle>
 
-            <p className='font-weight-bold blue-text'>한방재활의학과</p>
+                              <p className='font-weight-bold blue-text'>한방재활의학과</p>
 
-            <MDBCardText>
-            (한방비만체형클리닉) 부분비만(매선요법), 소아비만, 산후비만{' '}
-            </MDBCardText>
-            <MDBLink to="/Reservation">
-            <MDBBtn gradient="purple">예약</MDBBtn>
-            </MDBLink>
-          </MDBCardBody>
-        </MDBCard>
-      </MDBCol>
-      </MDBRow>
-        <br/><br/>
-      <MDBRow>
-      <MDBCol md='4'>
-        <MDBCard wide cascade>
-          <MDBView cascade>
-            <MDBCardImage
-              hover
-              overlay='white-slight'
-              className='card-img-top'
-              src='http://hub.khnmc.or.kr/mng/upload/docinfo/1525925418375_AE40AE30D0DD%20AD50C218_h.jpg'
-              alt='Card cap'
-            />
-          </MDBView>
+                              <MDBCardText>
+                              (한방비만체형클리닉) 부분비만(매선요법), 소아비만, 산후비만{' '}
+                              </MDBCardText>
+                              <MDBLink to="/Reservation">
+                              <MDBBtn gradient="purple">예약</MDBBtn>
+                              </MDBLink>
+                            </MDBCardBody>
+                          </MDBCard>
+                        </MDBCol>
+                        </MDBRow>
+                          <br/><br/>
+                        <MDBRow>
+                        <MDBCol md='4'>
+                          <MDBCard wide cascade>
+                            <MDBView cascade>
+                              <MDBCardImage
+                                hover
+                                overlay='white-slight'
+                                className='card-img-top'
+                                src='http://hub.khnmc.or.kr/mng/upload/docinfo/1525925418375_AE40AE30D0DD%20AD50C218_h.jpg'
+                                alt='Card cap'
+                              />
+                            </MDBView>
 
-          <MDBCardBody cascade className='text-center'>
-            <MDBCardTitle className='card-title'>
-              <strong>김기택</strong>
-            </MDBCardTitle>
+                            <MDBCardBody cascade className='text-center'>
+                              <MDBCardTitle className='card-title'>
+                                <strong>김기택</strong>
+                              </MDBCardTitle>
 
-            <p className='font-weight-bold blue-text'>정형외과</p>
+                              <p className='font-weight-bold blue-text'>정형외과</p>
 
-            <MDBCardText>
-            척추질환, 강직성척추염, 척추측만증{' '}
-            </MDBCardText>
-            <MDBLink to="/Reservation">
-            <MDBBtn gradient="purple">예약</MDBBtn>
-            </MDBLink>
-          </MDBCardBody>
-        </MDBCard>
-      </MDBCol>
+                              <MDBCardText>
+                              척추질환, 강직성척추염, 척추측만증{' '}
+                              </MDBCardText>
+                              <MDBLink to="/Reservation">
+                              <MDBBtn gradient="purple">예약</MDBBtn>
+                              </MDBLink>
+                            </MDBCardBody>
+                          </MDBCard>
+                        </MDBCol>
 
-      <MDBCol md='4'>
-        <MDBCard wide cascade>
-          <MDBView cascade>
-            <MDBCardImage
-              hover
-              overlay='white-slight'
-              className='card-img-top'
-              src='http://hub.khnmc.or.kr/mng/upload/docinfo/1544085075343_D06CAE30BCC0D658_B9C8CDE8ACFC%20AC15C885B9CCAD50C218.jpg'
-              alt='Card cap'
-            />
-          </MDBView>
+                        <MDBCol md='4'>
+                          <MDBCard wide cascade>
+                            <MDBView cascade>
+                              <MDBCardImage
+                                hover
+                                overlay='white-slight'
+                                className='card-img-top'
+                                src='http://hub.khnmc.or.kr/mng/upload/docinfo/1544085075343_D06CAE30BCC0D658_B9C8CDE8ACFC%20AC15C885B9CCAD50C218.jpg'
+                                alt='Card cap'
+                              />
+                            </MDBView>
 
-          <MDBCardBody cascade className='text-center'>
-            <MDBCardTitle className='card-title'>
-              <strong>강종만</strong>
-            </MDBCardTitle>
+                            <MDBCardBody cascade className='text-center'>
+                              <MDBCardTitle className='card-title'>
+                                <strong>강종만</strong>
+                              </MDBCardTitle>
 
-            <p className='font-weight-bold blue-text'>마취통증의학과</p>
+                              <p className='font-weight-bold blue-text'>마취통증의학과</p>
 
-            <MDBCardText>
-            수술 전후 척추통증, 급성 및 만성 통증 관리{' '}
-            </MDBCardText>
-            <MDBLink to="/Reservation">
-            <MDBBtn gradient="purple">예약</MDBBtn>
-            </MDBLink>
-          </MDBCardBody>
-        </MDBCard>
-      </MDBCol>
+                              <MDBCardText>
+                              수술 전후 척추통증, 급성 및 만성 통증 관리{' '}
+                              </MDBCardText>
+                              <MDBLink to="/Reservation">
+                              <MDBBtn gradient="purple">예약</MDBBtn>
+                              </MDBLink>
+                            </MDBCardBody>
+                          </MDBCard>
+                        </MDBCol>
 
-      </MDBRow>
+                        </MDBRow>
                        </div>
                    </InfoWindow>
 

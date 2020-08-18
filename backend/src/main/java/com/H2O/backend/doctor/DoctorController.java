@@ -16,6 +16,9 @@ public class DoctorController {
     private final DoctorRepository doctorRepository;
     private final DoctorService doctorService;
 
+    //csv파일 데이터베이스에 저장
+    @GetMapping("/csv")
+    public void csvRead(){ doctorService.readCsv(); }
 
     // 의사 추가
     @PostMapping("/doctorAdd")
