@@ -7,7 +7,7 @@ import logo from "../../helpers/images/logo.svg"
 import { ReactComponent as FacebookIcon } from "../../helpers/images/facebook-icon.svg";
 import { ReactComponent as TwitterIcon } from "../../helpers/images/twitter-icon.svg";
 import { ReactComponent as YoutubeIcon } from "../../helpers/images/youtube-icon.svg";
-
+import "./Footer.css"
 
 // const Container = tw(ContainerBase)`bg-gray-900 text-gray-100 -mx-8 -mb-8`
 const Content = tw.div`max-w-screen-xl mx-auto py-20 lg:py-24`;
@@ -41,10 +41,10 @@ const Footer = () => (
          <LogoText>H2O</LogoText>
        </LogoContainer>
        <LinksContainer>
-         <Link href="/SearchHospital">병원찾기</Link>
-         <Link href="/Ambulance">응급차 호출</Link>
-         <Link href="/TeleMedicine">화상진료</Link>
-         <Link href="/Community">커뮤니티</Link>
+         <Link className="navColor" href="/SearchHospital">병원찾기</Link>
+         <Link className="navColor" href="/Ambulance">응급차 호출</Link>
+         <Link className="navColor" href="/TeleMedicine">화상진료</Link>
+         <Link className="navColor" href="/Community">커뮤니티</Link>
        </LinksContainer>
        <SocialLinksContainer>
          <SocialLink href="https://facebook.com">

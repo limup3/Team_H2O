@@ -1,21 +1,41 @@
 package com.H2O.backend.hospital;
 
+import com.H2O.backend.util.etc.Box;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @AllArgsConstructor
-@RequestMapping("/hospitals")
+@RequestMapping("/hospital")
 public class HospitalController {
     private final Hospital hospital;
     private final HospitalRepository hospitalRepository;
     private final HospitalService hospitalService;
+
+    @Autowired
+    Box box;
+
+    //csv파일 데이터베이스에 저장
+    @GetMapping("/csv")
+    public void csvRead(){ hospitalService.readCsv(); }
+
+    //맵에 병원 띄우기
+    @GetMapping("/data")
+    public Map<?,?> hospitalData(){
+        System.out.println("들어옴");
+        Iterable<Hospital> data = hospitalRepository.findAll();
+        box.put("list", data);
+        System.out.println(box.get());
+        return box.get();
+
+    }
 
     // 병원 추가
     @PostMapping("/hospitalAdd")

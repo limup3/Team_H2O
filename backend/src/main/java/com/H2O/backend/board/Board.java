@@ -3,10 +3,7 @@ package com.H2O.backend.board;
 import com.H2O.backend.comment.Comment;
 import com.H2O.backend.hospital.Hospital;
 import com.H2O.backend.user.User;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -28,7 +25,7 @@ public class Board {
     @Column(name = "category", nullable = false) private String category;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_no")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -38,4 +35,12 @@ public class Board {
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<Comment> comment;
 
+    @Builder
+    public Board(String hospitalStar, String title, String content, String creationDate, String category){
+        this.hospitalStar=hospitalStar;
+        this.title=title;
+        this.content=content;
+        this.creationDate=creationDate;
+        this.category=category;
+    }
 }

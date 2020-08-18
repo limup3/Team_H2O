@@ -35,55 +35,32 @@ import {
 const ModalTestBodyProfile = props => {
 
   const {posts, value} = props
+  const key = props.hospitalNo
 
   useEffect(()=>{
     console.log("프로필에서 확인")
     console.log(posts)
     console.log(value)
-    console.log(posts.addr)
   },[])
-  
-  // setPost(posts)
+
+  // const [posts, setposts] = useState({
+  // hospitalNo: '',
+  // hospitalName : '',
+  // businessLicenseNumber: '',
+  // addr: '',
+  // logo: '',
+  // hospitalType: '',
+  // medicalPerson: '',
+  // tel: '',
+  // latitude: '',
+  // longitude: ''})
+
   return (
     <Card
       key={value}
+      // className={clsx(classes.root, className)}
     >
-      <CardContent>
-          <div>
-            <Typography
-              gutterBottom
-              variant="h2"
-            >{posts.addr}
-            </Typography>
-            <Typography
-              color="textSecondary"
-              variant="body1"
-            >
-              병원 주소 : <br/> 
-              {/* {hospital.address} */}
-            </Typography>
-            <Typography
-              color="textSecondary"
-              variant="body1"
-            >
-              홈페이지 주소 : <br/>
-              {/* {hospital.homepage} */}
-            </Typography>
-          </div>
-          <Avatar
-            // src={hospital.avatarUrl}
-          />
-      </CardContent>
-      <Divider />
-      <CardActions>
-        <Button
-          color="primary"
-          variant="text"
-        >
-          사진 등록
-        </Button>
-        <Button variant="text">사진 삭제</Button>
-      </CardActions>
+      {posts.hospitalNo}
     </Card>
   );
 };

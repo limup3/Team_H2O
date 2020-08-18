@@ -1,6 +1,7 @@
 package com.H2O.backend.doctor;
 
 
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,17 +9,13 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
+@AllArgsConstructor
 @RequestMapping("/doctor")
 public class DoctorController {
     private final Doctor doctor;
     private final DoctorRepository doctorRepository;
     private final DoctorService doctorService;
 
-    public DoctorController(Doctor doctor, DoctorRepository doctorRepository, DoctorService doctorService) {
-        this.doctor = doctor;
-        this.doctorRepository = doctorRepository;
-        this.doctorService = doctorService;
-    }
 
     // 의사 추가
     @PostMapping("/doctorAdd")

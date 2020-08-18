@@ -17,9 +17,9 @@ const ModalTestBody = (props) => {
 
     useEffect(()=>{
       console.log("바디에서 확인")
-      // // console.log(posts)
       // console.log(posts)
-      // console.log(value)
+      console.log(posts)
+      console.log(value)
     },[])
     // ------------------------------
 

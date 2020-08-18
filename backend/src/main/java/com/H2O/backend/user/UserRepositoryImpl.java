@@ -8,7 +8,7 @@ import javax.sql.DataSource;
 import java.util.Optional;
 
 @Repository
-interface CustomedUserRepository {
+interface IUserRepository {
     Optional<User> findByUserId(String userId);
 
     Optional<User> findUserId(String name, String phone);
@@ -17,7 +17,7 @@ interface CustomedUserRepository {
 
 }
 
-public class UserRepositoryImpl extends QuerydslRepositorySupport implements CustomedUserRepository {
+public class UserRepositoryImpl extends QuerydslRepositorySupport implements IUserRepository {
 
     private final JPAQueryFactory queryFactory;
     private final DataSource dataSource;

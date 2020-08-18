@@ -16,7 +16,7 @@ import java.util.List;
 @ToString
 @Component
 @NoArgsConstructor
-@Table(name="doctor", uniqueConstraints={@UniqueConstraint(columnNames = {"doctors_license"})})
+@Table(name="doctor")
 public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
