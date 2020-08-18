@@ -1,5 +1,6 @@
 package com.H2O.backend.user;
 
+import lombok.AllArgsConstructor;
 import org.junit.Assert;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +9,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
+@AllArgsConstructor
 @RequestMapping("/user")
 public class UserController {
 
@@ -15,11 +17,6 @@ public class UserController {
     private final UserRepository userRepository;
     private final UserService userService;
 
-    public UserController(User user, UserRepository userRepository, UserService userService) {
-        this.user = user;
-        this.userRepository = userRepository;
-        this.userService = userService;
-    }
 
     //회원가입
     @PostMapping("/signUp")

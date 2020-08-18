@@ -5,4 +5,6 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-interface HospitalRepository extends JpaRepository<Hospital, Long>, IHospitalRepository {}
+public interface HospitalRepository extends JpaRepository<Hospital, Long>, IHospitalRepository {
+
+}

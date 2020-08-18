@@ -3,6 +3,9 @@ import { makeStyles } from '@material-ui/styles';
 
 import { HospitalsToolbar, HospitalsTable } from './components';
 import mockData from './data';
+import HospitalPagination from './components/HospitalPagination/HospitalPagination';
+import { usePagination } from '@material-ui/lab/Pagination';
+import HospitalPagination2 from './components/HospitalPagination/HospitalPagination';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,8 +25,9 @@ const HospitalList = () => {
     <div className={classes.root}>
       <HospitalsToolbar />
       <div className={classes.content}>
-        <HospitalsTable hospitals={hospitals} />
-
+        {/* <HospitalsTable hospitals={hospitals} /> */}
+        <HospitalPagination/>
+        {/* <HospitalPagination2/> */}
       </div>
     </div>
   );

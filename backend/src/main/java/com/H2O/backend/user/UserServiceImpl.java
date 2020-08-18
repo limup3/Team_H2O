@@ -8,7 +8,7 @@ import java.util.Optional;
 @Component
 interface UserService {
 
-    Optional<User> findUserByUserId(String user);
+    Optional<User> findUserByUserId(String userId);
 
     User update(User selectUser);
 
@@ -32,8 +32,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findUserByUserId(String user) {
-        Optional<User> idCheck = userRepository.findByUserId(user);
+    public Optional<User> findUserByUserId(String userId) {
+        Optional<User> idCheck = userRepository.findByUserId(userId);
         return idCheck;
     }
 

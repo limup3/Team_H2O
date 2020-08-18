@@ -1,23 +1,33 @@
 package com.H2O.backend.doctor;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import javax.sql.DataSource;
+import java.util.Optional;
 
 @Repository
-interface MemberRepository extends JpaRepository<Doctor, Long>, DoctorService {}
-
-interface DoctorService {
-//    public List<Object> findAllOrderByJoinDate();
+interface IDoctorRepository{
+    Optional<Doctor> findByDoctorsLicense(String doctorsLicense);
 }
 
-public class DoctorRepositoryImpl{
-    @Autowired
-    DoctorService doctorService;
+public class DoctorRepositoryImpl extends QuerydslRepositorySupport implements IDoctorRepository{
+    private final JPAQueryFactory queryFactory;
+    private final DataSource dataSource;
 
-//    public List<Object> findAllOrderByJoinDate() {
-//        return null;
-//    }
+    DoctorRepositoryImpl(JPAQueryFactory queryFactory, DataSource dataSource) {
+        super(Doctor.class);
+        this.queryFactory = queryFactory;
+        this.dataSource = dataSource;
+
+    }
+
+    @Override
+    public Optional<Doctor> findByDoctorsLicense(String doctorsLicense) {
+        QDoctor qDoctor = QDoctor.doctor;
+        Doctor findOne = queryFactory.selectFrom(qDoctor).where(qDoctor.doctorsLicense.eq(doctorsLicense)).fetchOne();
+        return Optional.ofNullable(findOne);
+    }
 }

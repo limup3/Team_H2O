@@ -16,8 +16,10 @@ import Payment from './layout/Payment';
 import PaymentResult from './layout/PaymentResult';
 
 //rootReducer
+
 const rootReducer = combineReducers({
-  loginReducer
+  loginReducer,
+  
 })
 
 const store = createStore(rootReducer,applyMiddleware(thunk))

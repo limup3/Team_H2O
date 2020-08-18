@@ -13,5 +13,6 @@ CREATE TABLE Hospital
     `Hospital_Bed`     INT             NULL,
     `Hospital_Area`    VARCHAR(20)     NULL,
     `Type_Detail`      VARCHAR(255)    NULL,
+    `business_License_Number`       VARCHAR(20)     NOT NULL,,
     PRIMARY KEY (Hospital_No)
 )default character set utf8 collate UTF8_GENERAL_CI;

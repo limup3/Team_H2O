@@ -13,9 +13,6 @@ const mapContainerStyle = {
   height: '500px'
 };
 
-const options = {
-  zoomControl: true
-}
 
 const center = {
   lat: 37.551052,
@@ -24,7 +21,8 @@ const center = {
 
 const HospitalsMapBody = props => {
   const {HospitalsMapData} = props
-    const { isLoaded,loadError } = useLoadScript({
+
+    const { isLoaded, loadError } = useLoadScript({
       googleMapsApiKey: MAP_KEY,
       libraries,
       region:'kr'

@@ -22,13 +22,15 @@ public class QDoctor extends EntityPathBase<Doctor> {
 
     public static final QDoctor doctor = new QDoctor("doctor");
 
-    public final NumberPath<Integer> age = createNumber("age", Integer.class);
+    public final StringPath birthday = createString("birthday");
 
     public final StringPath detailData = createString("detailData");
 
     public final StringPath doctorName = createString("doctorName");
 
     public final NumberPath<Long> doctorNo = createNumber("doctorNo", Long.class);
+
+    public final StringPath doctorsLicense = createString("doctorsLicense");
 
     public final com.H2O.backend.hospital.QHospital hospital;
 

@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
 @Setter
 @ToString
 @Table(name="hospital")
+@Component
 public class Hospital {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "hospital_no") private Long hospitalNo;
@@ -31,23 +33,25 @@ public class Hospital {
     @Column(name = "hospital_bed", nullable = false) private int hospitalBed;
     @Column(name = "hospital_area", nullable = false) private String hospitalArea;
     @Column(name = "type_detail", nullable = false) private String typeDetail;
+    @Column(name = "business_license_number") private String businessLicenseNumber;
 
     public Hospital(){}
 
     @Builder
     public Hospital(
-                  String businessStatus,
-                  String tel,
-                  String addr,
-                  String hospitalName,
-                  double latitude,
-                  double longitude,
-                  String hospitalType,
-                  int medicalPeople,
-                  int hospitalRoom,
-                  int hospitalBed,
-                  String hospitalArea,
-                  String typeDetail){
+            String businessStatus,
+            String tel,
+            String addr,
+            String hospitalName,
+            double latitude,
+            double longitude,
+            String hospitalType,
+            int medicalPeople,
+            int hospitalRoom,
+            int hospitalBed,
+            String hospitalArea,
+            String typeDetail,
+            String businessLicenseNumber){
         this.businessStatus = businessStatus;
         this.tel = tel;
         this.addr = addr;
@@ -60,6 +64,7 @@ public class Hospital {
         this.hospitalBed = hospitalBed;
         this.hospitalArea = hospitalArea;
         this.typeDetail = typeDetail;
+        this.businessLicenseNumber = businessLicenseNumber;
     }
 
     @OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL)
