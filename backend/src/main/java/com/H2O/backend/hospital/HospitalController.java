@@ -1,5 +1,6 @@
 package com.H2O.backend.hospital;
 
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -7,19 +8,14 @@ import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
+@AllArgsConstructor
 @RequestMapping("/hospitals")
 public class HospitalController {
     private final Hospital hospital;
     private final HospitalRepository hospitalRepository;
     private final HospitalService hospitalService;
-
-    public HospitalController(Hospital hospital, HospitalRepository hospitalRepository, HospitalService hospitalService) {
-        this.hospital = hospital;
-        this.hospitalRepository = hospitalRepository;
-        this.hospitalService = hospitalService;
-    }
 
     // 병원 추가
     @PostMapping("/hospitalAdd")

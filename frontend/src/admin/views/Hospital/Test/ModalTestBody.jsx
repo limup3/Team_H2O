@@ -12,12 +12,17 @@ const useStyles = makeStyles(theme => ({
 
 const ModalTestBody = (props) => {
     const classes = useStyles();
-    const {posts}= props
+    // const {posts}= props.posts
+    const {posts, value} = props
 
-    // useEffect(()=>{
-    //   console.log("바디에서 확인")
-    //   console.log(posts)
-    // },[])
+    useEffect(()=>{
+      console.log("바디에서 확인")
+      // // console.log(posts)
+      // console.log(posts)
+      // console.log(value)
+    },[])
+    // ------------------------------
+
     
     return (
     <div className={classes.root}>
@@ -32,7 +37,7 @@ const ModalTestBody = (props) => {
           xl={4}
           xs={12}
         >
-          <ModalTestBodyProfile posts={posts}/>
+          <ModalTestBodyProfile value={value} posts={posts}/>
         </Grid>
         <Grid
           item

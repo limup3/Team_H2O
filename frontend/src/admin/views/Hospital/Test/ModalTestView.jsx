@@ -94,7 +94,7 @@ const ModalTestView = () => {
                         </Modal.Header>
                         <Modal.Body>
                           {/* ------------------------------------------------------ */}
-                          <ModalTestBody posts={posts}/>
+                          <ModalTestBody value={hospital.hospitalNo} posts={posts}/>
                           {/* ------------------------------------------------------ */}
                           
                           

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
@@ -34,32 +34,56 @@ import {
 
 const ModalTestBodyProfile = props => {
 
-  const {posts} = props
-  const key = props.hospitalNo
-  console.log("프로필에서 확인")
-  console.log(posts)
-  console.log("Key확인")
-  console.log(key)
-  console.log("props.hospitalNo 확인")
-  console.log(posts.hospitalNo)
-  // const [posts, setposts] = useState({
-  // hospitalNo: '',
-  // hospitalName : '',
-  // businessLicenseNumber: '',
-  // addr: '',
-  // logo: '',
-  // hospitalType: '',
-  // medicalPerson: '',
-  // tel: '',
-  // latitude: '',
-  // longitude: ''})
+  const {posts, value} = props
 
+  useEffect(()=>{
+    console.log("프로필에서 확인")
+    console.log(posts)
+    console.log(value)
+    console.log(posts.addr)
+  },[])
+  
+  // setPost(posts)
   return (
     <Card
-      key={key}
-      // className={clsx(classes.root, className)}
+      key={value}
     >
-      
+      <CardContent>
+          <div>
+            <Typography
+              gutterBottom
+              variant="h2"
+            >{posts.addr}
+            </Typography>
+            <Typography
+              color="textSecondary"
+              variant="body1"
+            >
+              병원 주소 : <br/> 
+              {/* {hospital.address} */}
+            </Typography>
+            <Typography
+              color="textSecondary"
+              variant="body1"
+            >
+              홈페이지 주소 : <br/>
+              {/* {hospital.homepage} */}
+            </Typography>
+          </div>
+          <Avatar
+            // src={hospital.avatarUrl}
+          />
+      </CardContent>
+      <Divider />
+      <CardActions>
+        <Button
+          color="primary"
+          variant="text"
+        >
+          사진 등록
+        </Button>
+        <Button variant="text">사진 삭제</Button>
+      </CardActions>
     </Card>
   );
 };
