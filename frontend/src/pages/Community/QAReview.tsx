@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {Container,Form, Button,Table,} from "react-bootstrap";
 import 'react-quill/dist/quill.snow.css';
 import './styles.css'
@@ -6,25 +6,25 @@ import './community.css'
 import {Link} from "react-router-dom";
 
 const QAReview = () => {
-    const [value, setValue] = useState('')
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    // const [value, setValue] = useState('')
+    // const [show, setShow] = useState(false);
+    // const handleClose = () => setShow(false);
+    // const handleShow = () => setShow(true);
 
-    const modules = {
-        toolbar: [
-            ['bold', 'italic', 'underline', 'strike', 'link', 'image']
-        ]
-    }
-
-    const formats = [
-        'bold',
-        'italic',
-        'underline',
-        'strike',
-        'link',
-        'image'
-    ]
+    // const modules = {
+    //     toolbar: [
+    //         ['bold', 'italic', 'underline', 'strike', 'link', 'image']
+    //     ]
+    // }
+    //
+    // const formats = [
+    //     'bold',
+    //     'italic',
+    //     'underline',
+    //     'strike',
+    //     'link',
+    //     'image'
+    // ]
     return (
         <Container>
             <div className="Rev-tab">

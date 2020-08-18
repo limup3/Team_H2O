@@ -3,7 +3,7 @@ import {Route} from "react-router-dom";
 import CommunityTem from "./CommunityTem";
 import CustomerServiceCenter from "./CustomerServiceCenter";
 import QueAn from "./QueAn";
-import Edit from "./Edit";
+import Review from "./Review";
 
 
 const TablePage = () => {
@@ -27,24 +27,22 @@ const TablePage = () => {
                 </div>
             </Route>
 
-            <Route path="/Community/Edit">
-                <div className="main-board">
-                    <Edit/>
-                </div>
-            </Route>
-            <Route path="/Community/CSFix">
-                <div className="main-board">
-                    <Edit/>
-                </div>
-            </Route>
-            <Route path="/Community/QAFix">
-                <div className="main-board">
-                    <Edit/>
-                </div>
-            </Route>
+            <div className="main-board">
+                <Route path={`/Community/Review/:boardNo`}
+                       render = {(props) => <Review {...props}/>}>
 
-
-
+                </Route>
+            </div>
+            {/*<Route path="/Community/CSFix">*/}
+            {/*    <div className="main-board">*/}
+            {/*        <Edit/>*/}
+            {/*    </div>*/}
+            {/*</Route>*/}
+            {/*<Route path="/Community/QAFix">*/}
+            {/*    <div className="main-board">*/}
+            {/*        <Edit/>*/}
+            {/*    </div>*/}
+            {/*</Route>*/}
         </div>
     );
 };

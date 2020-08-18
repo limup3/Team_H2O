@@ -27,7 +27,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/pages" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -37,20 +37,20 @@
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
-    <property name="ts.external.directory.path" value="C:\Users\bit23\Desktop\king\frontend\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="C:\Users\lim_1\Desktop\Team_H2O\frontend\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lim_1\Desktop\Team_H2O\frontend\src" />
+      <recent name="C:\Users\bit23\Desktop\king\frontend\src\pages\Ambulance" />
+      <recent name="C:\Users\lim_1\Team_H2O_Frontend\src\helpers" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\lim_1\Desktop\Team_H2O\frontend\src\pages" />
       <recent name="C:\Users\lim_1\Desktop\Team_H2O\frontend\src" />
       <recent name="C:\Users\lim_1\Desktop\Team_H2O\frontend\public\admin_images" />
       <recent name="C:\Users\lim_1\Team_H2O\frontend\src\pages" />
       <recent name="C:\Users\lim_1\Team_H2O\frontend\src\admin\views" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\lim_1\Desktop\Team_H2O\frontend\src" />
-      <recent name="C:\Users\bit23\Desktop\king\frontend\src\pages\Ambulance" />
-      <recent name="C:\Users\lim_1\Team_H2O_Frontend\src\helpers" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -113,7 +113,8 @@
       <workItem from="1597139259982" duration="315000" />
       <workItem from="1597192221880" duration="25124000" />
       <workItem from="1597590373401" duration="123000" />
-      <workItem from="1597735515266" duration="693000" />
+      <workItem from="1597735515266" duration="856000" />
+      <workItem from="1597740370346" duration="789000" />
     </task>
     <servers />
   </component>

@@ -9,7 +9,7 @@ const Community = () => (
                 <div className="main-side">
                     <SideBar/>
                 </div>
-                <TablePage />
+                <TablePage/>
             </div>
         </Container>
     </>

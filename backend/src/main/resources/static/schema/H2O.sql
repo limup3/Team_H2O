@@ -37,8 +37,9 @@ CREATE TABLE Board
     `Content`        VARCHAR(150)    NULL,
     `Creation_Date`  VARCHAR(20)     NULL,
     `Category`       VARCHAR(20)     NULL,
-    `User_No`        INT             NOT NULL,
-    `Hospital_No`    INT             NOT NULL,
+    `Med_Category`   VARCHAR(20)     NULL,
+    `User_No`        INT             NULL,
+    `Hospital_No`    INT             NULL,
     PRIMARY KEY (Board_No)
 )default character set utf8 collate UTF8_GENERAL_CI;
 CREATE TABLE User
