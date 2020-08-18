@@ -6,6 +6,8 @@ import mockData from './data';
 import HospitalPagination from './components/HospitalPagination/HospitalPagination';
 import { usePagination } from '@material-ui/lab/Pagination';
 import HospitalPagination2 from './components/HospitalPagination/HospitalPagination';
+import ModalTestView from './Test/ModalTestView';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,8 +28,9 @@ const HospitalList = () => {
       <HospitalsToolbar />
       <div className={classes.content}>
         {/* <HospitalsTable hospitals={hospitals} /> */}
-        <HospitalPagination/>
+        {/* <HospitalPagination/> */}
         {/* <HospitalPagination2/> */}
+        <ModalTestView/>
       </div>
     </div>
   );

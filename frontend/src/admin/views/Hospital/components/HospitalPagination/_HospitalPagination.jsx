@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HospitalPagination = () => {
+const HospitalPagination3 = () => {7
 
   const classes = useStyles();
 
@@ -45,6 +45,9 @@ const HospitalPagination = () => {
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const nextPage = () => currentPage+1;
+  const prevPage = () => currentPage-1;
+
   // -- pagiatnion ---
 
 
@@ -82,7 +85,7 @@ const HospitalPagination = () => {
             </TableHead>
             <TableBody
             >
-              {posts.slice(0, 5).map(hospital => (
+              {posts.slice(0, 10).map(hospital => (
                 <TableRow
                 key={hospital.hospitalNo}
                 selected={posts.indexOf(hospital.id) !== -1}
@@ -112,4 +115,4 @@ const HospitalPagination = () => {
     </>
   )
 }
-export default HospitalPagination
+export default HospitalPagination3

@@ -21,12 +21,11 @@ const center = {
 
 const HospitalsMapBody = props => {
   const {HospitalsMapData} = props
-
     const { isLoaded, loadError } = useLoadScript({
       googleMapsApiKey: MAP_KEY,
       libraries,
-      region:'kr'
-  });
+      region: 'kr'
+    })
 
     const [selected, setSelected ] = useState({})
 

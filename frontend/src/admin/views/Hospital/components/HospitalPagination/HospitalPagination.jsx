@@ -16,9 +16,13 @@ import {
   TableRow,
   Typography,
   TablePagination,
-  Button as MuiButton
+  Button as MuiButton,
+  Modal
 } from '@material-ui/core';
+import {Button} from 'react-bootstrap'
 import Posts from './Pagination';
+import HospitalModal from './HospitalModal';
+import HospitalsInfo from '../../HospitalInfo';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,7 +68,14 @@ const HospitalPagination2 = () => {
       })
       setLoading(false);
   }, [])
-  
+  // ModalLine-------------------------------------------- START
+  const [show, setShow] = useState(false);
+  const [modalData, setModalData] = useState()
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  // ModalLine-------------------------------------------- END
+
   return (
     <>
       <Card>
@@ -85,13 +96,17 @@ const HospitalPagination2 = () => {
             </TableHead>
             <TableBody
             >
-              {posts.slice(0, 5).map(hospital => (
+              {posts.slice(0, 10).map(hospital => (
                 <TableRow
                 key={hospital.hospitalNo}
                 selected={posts.indexOf(hospital.id) !== -1}
                 >
-                  <TableCell align="center">{hospital.hospitalNo}</TableCell>
-                  <TableCell align="center">{hospital.hospitalName}</TableCell>
+                  <TableCell align="center">
+                    <MuiButton variant="primary" onClick={handleShow}>
+                          {hospital.hospitalName}
+                    </MuiButton>
+                    <HospitalModal/>
+                    </TableCell>
                   <TableCell align="center">{hospital.businessLicenseNumber}</TableCell>
                   <TableCell align="center">{hospital.logo}</TableCell>
                   <TableCell align="center">{hospital.addr}</TableCell>
