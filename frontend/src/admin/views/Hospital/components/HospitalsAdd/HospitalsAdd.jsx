@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios'
 import ImgButton, { imgSrc } from '../../../../helpers/ImgButton';
-import { Checkbox, FormControlLabel, FormGroup } from '@material-ui/core';
+import { Checkbox, FormControlLabel, FormGroup, Box } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  boxCss: {
+    border: '1px solid gray'
+  }
 }));
 
 
@@ -55,8 +58,8 @@ const UserAdd = () => {
 
   const history = useHistory();
 
-  const handleCheckBox = e => {
-    setChecked({checked, [e.tartget.name]: e.target.checked})
+  const handleCheckBox = event => {
+    setChecked({checked, [event.target.name]: event.target.checked })
   }
 
   const handleIdCheck = e => {
@@ -206,26 +209,30 @@ const UserAdd = () => {
                 />
                 </Grid>
                 <Grid>
-                <FormGroup>
-                  <FormControlLabel
+                  <FormGroup row>
+                    <Box width="100px"
+                         name="businessStatus"
+                         className={classes.boxCss}
+                         margin-right="10px">{"영업상태"}</Box>
+                    <FormControlLabel
+                      control={ 
+                        <Checkbox
+                          checked={checked.checkBox1}
+                          onChange={handleCheckBox}
+                          name="checkBox1"
+                          />}
+                          label="영업"
+                      />
+                      
+                    <FormControlLabel
                     control={ 
                       <Checkbox
-                        checked={checked.checkBox1}
+                        checked={checked.checkBox2}
                         onChange={handleCheckBox}
-                        name="checkBox1"
+                        name="checkBox2"
                         />}
-                        label="영업"
-                    />
-                    
-                  <FormControlLabel
-                  control={ 
-                    <Checkbox
-                      checked={checked.checkBox2}
-                      onChange={handleCheckBox}
-                      name="checkBox2"
-                      />}
-                      label="폐업"
-                    />
+                        label="폐업"
+                      />
                     </FormGroup>
                 </Grid>
 
