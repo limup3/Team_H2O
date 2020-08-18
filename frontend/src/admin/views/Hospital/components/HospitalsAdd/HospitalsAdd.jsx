@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios'
 import ImgButton, { imgSrc } from '../../../../helpers/ImgButton';
+import { Checkbox, FormControlLabel, FormGroup } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +33,7 @@ const UserAdd = () => {
   const classes = useStyles();
   const [hospitalName, setHospitalName] = useState("");
   const [businessLicenseNumber, setBusinessLicenseNumber] = useState("");
+  const [businessStatus, setBusinessStatus] = useState("");
   const [tel, setTel] = useState("")
   const [addr, setAddr] = useState("");
   const [hospitalType, setHospitalType] = useState("")
@@ -43,12 +45,19 @@ const UserAdd = () => {
   const [latitude, setLatitude] = useState("")
   const [longitude, setLongitude] = useState("")
   const [hospitalIdChecker, setHospitalIdChecker] = useState("")
-
+  const [checked, setChecked] = useState({
+    checkBox1 : false,
+    checkBox2 : false,
+  })
   //---------------- input -------------
   const [image, setImage] = useState(null) 
   //---------------- input -------------
 
   const history = useHistory();
+
+  const handleCheckBox = e => {
+    setChecked({checked, [e.tartget.name]: e.target.checked})
+  }
 
   const handleIdCheck = e => {
     setHospitalIdChecker("")
@@ -87,6 +96,7 @@ const UserAdd = () => {
     const userJson = {
       hospitalName: hospitalName,
       businessLicenseNumber: businessLicenseNumber,
+      businessStatus : businessStatus,
       tel: tel,
       addr: addr,
       hospitalType: hospitalType,
@@ -194,6 +204,29 @@ const UserAdd = () => {
                   value={addr}
                   onChange={e => setAddr(e.target.value)}
                 />
+                </Grid>
+                <Grid>
+                <FormGroup>
+                  <FormControlLabel
+                    control={ 
+                      <Checkbox
+                        checked={checked.checkBox1}
+                        onChange={handleCheckBox}
+                        name="checkBox1"
+                        />}
+                        label="영업"
+                    />
+                    
+                  <FormControlLabel
+                  control={ 
+                    <Checkbox
+                      checked={checked.checkBox2}
+                      onChange={handleCheckBox}
+                      name="checkBox2"
+                      />}
+                      label="폐업"
+                    />
+                    </FormGroup>
                 </Grid>
 
                 <Grid item xs={12}>
