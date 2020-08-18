@@ -52,18 +52,21 @@ public class HospitalServiceImpl implements HospitalService {
 
     @Override
     public Optional<Hospital> hospitalAdd(Hospital hospital) {
-//        Hospital createHospital = new Hospital();
-//        createHospital.setHospitalName(hospital.getHospitalName());
-//        createHospital.setBusinessLicenseNumber(hospital.getBusinessLicenseNumber());
-//        createHospital.setLogo(hospital.getLogo());
-//        createHospital.setAddr(hospital.getAddr());
-//        createHospital.setHospitalType(hospital.getHospitalType());
-//        createHospital.setMedicalPerson(hospital.getMedicalPerson());
-//        createHospital.setTel(hospital.getTel());
-//        createHospital.setLatitude(hospital.getLatitude());
-//        createHospital.setLongitude(hospital.getLongitude());
-//
-//        Hospital hospitalData = hospitalRepository.save(createHospital);
+        Hospital createHospital = new Hospital();
+        createHospital.setHospitalName(hospital.getHospitalName());
+        createHospital.setBusinessLicenseNumber(hospital.getBusinessLicenseNumber());
+        createHospital.setTel(hospital.getTel());
+        createHospital.setAddr(hospital.getAddr());
+        createHospital.setHospitalType(hospital.getHospitalType());
+        createHospital.setMedicalPeople(hospital.getMedicalPeople());
+        createHospital.setHospitalRoom(hospital.getHospitalRoom());
+        createHospital.setHospitalBed(hospital.getHospitalBed());
+        createHospital.setTypeDetail(hospital.getTypeDetail());
+        createHospital.setHospitalArea(hospital.getHospitalArea());
+        createHospital.setLatitude(hospital.getLatitude());
+        createHospital.setLongitude(hospital.getLongitude());
+
+        Hospital hospitalData = hospitalRepository.save(createHospital);
         return Optional.empty();
     }
 

@@ -41,6 +41,7 @@ public class HospitalController {
     @PostMapping("/hospitalAdd")
     public ResponseEntity<Hospital> hospitalAdd(@RequestBody Hospital hospital){
         Optional<Hospital> hospitalAdd = hospitalService.hospitalAdd(hospital);
+        System.out.println("병원 추가 확인");
         if(hospitalAdd.isPresent()){
             return ResponseEntity.ok().build();
         }else{

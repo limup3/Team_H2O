@@ -32,11 +32,14 @@ const UserAdd = () => {
   const classes = useStyles();
   const [hospitalName, setHospitalName] = useState("");
   const [businessLicenseNumber, setBusinessLicenseNumber] = useState("");
-  const [logo, setLogo] = useState("");
+  const [tel, setTel] = useState("")
   const [addr, setAddr] = useState("");
   const [hospitalType, setHospitalType] = useState("")
-  const [medicalPerson, setMedicalPerson] = useState("")
-  const [tel, setTel] = useState("")
+  const [medicalPeople,setMedicalPeople] = useState("")
+  const [hospitalRoom,setHospitalRoom] = useState("")
+  const [hospitalBed,setHospitalBed] = useState("")
+  const [hospitalArea,setHospitalArea] = useState("")
+  const [typeDetail,setTypeDetail] = useState("")
   const [latitude, setLatitude] = useState("")
   const [longitude, setLongitude] = useState("")
   const [hospitalIdChecker, setHospitalIdChecker] = useState("")
@@ -52,7 +55,7 @@ const UserAdd = () => {
     if(businessLicenseNumber){
     e.preventDefault();
     axios
-      .get(`http://localhost:8080/hospitals/BusinessLicenseCheck/${businessLicenseNumber}`)
+      .get(`http://localhost:8080/hospital/BusinessLicenseCheck/${businessLicenseNumber}`)
       .then(response => {
         alert("이미 등록된 병원입니다.");
         setHospitalIdChecker("unavailable")
@@ -72,7 +75,7 @@ const UserAdd = () => {
   const handleInpuLogo = async() => {
     const formData = new FormData()
     formData.append('file', image)
-    const res = await axios.post("/hospitals/logoUpload", formData)
+    const res = await axios.post("/hospital/logoUpload", formData)
 
   }
   //---------------- input -------------
@@ -84,24 +87,30 @@ const UserAdd = () => {
     const userJson = {
       hospitalName: hospitalName,
       businessLicenseNumber: businessLicenseNumber,
-      logo: logo,
+      tel: tel,
       addr: addr,
       hospitalType: hospitalType,
-      medicalPerson: medicalPerson,
-      tel: tel,
+      medicalPeople: medicalPeople,
+      hospitalRoom: hospitalRoom,
+      hospitalBed: hospitalBed,
+      hospitalArea: hospitalArea,
+      typeDetail: typeDetail,
       latitude: latitude,
       longitude: longitude
     }
     if(hospitalIdChecker==="available"){
-      axios.post(`http://localhost:8080/hospitals/hospitalAdd`, userJson)
+      axios.post(`http://localhost:8080/hospital/hospitalAdd`, userJson)
         .then(response => {
           alert("병원 등록 성공 !")
+          console.log(userJson)
           history.push("/admin/hospital")
             }
         ).catch(
           
         error => { 
           alert("병원 등록 실패")
+          
+          console.log(userJson)
           throw (error) 
         }
     );
@@ -124,94 +133,145 @@ const UserAdd = () => {
         </Typography>
         <form className={classes.form} >
           <Grid container spacing={2}>
-          <Grid item xs={8}>
-              <TextField
+                <Grid item xs={8}>
+                      <TextField
+                          variant="outlined"
+                          required
+                          fullWidth
+                          id="businessLicenseNumber"
+                          label="병원 사업자 등록번호"
+                          name="businessLicenseNumber"
+                          autoComplete="businessLicenseNumber"
+                          value={businessLicenseNumber || ''}
+                          onChange={e => setBusinessLicenseNumber(e.target.value)}
+                      />
+                </Grid>
+                <Grid item xs={4}
+                      container
+                      direction="column"
+                      justify="flex-end"
+                      alignItems="flex-end"
+                >
+                  <Button variant="outlined" color="secondary" onClick={handleIdCheck}>
+                    사업자 번호 중복 확인
+                  </Button>
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="hospitalName"
+                      label="병원 이름"
+                      name="hospitalName"
+                      autoComplete="hospitalName"
+                      value={hospitalName || ''}
+                      onChange={e => setHospitalName(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
                   variant="outlined"
                   required
                   fullWidth
-                  id="businessLicenseNumber"
-                  label="병원 사업자 등록번호"
-                  name="businessLicenseNumber"
-                  autoComplete="businessLicenseNumber"
-                  value={businessLicenseNumber || ''}
-                  onChange={e => setBusinessLicenseNumber(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={4}
-                  container
-                  direction="column"
-                  justify="flex-end"
-                  alignItems="flex-end"
-            >
-              <Button variant="outlined" color="secondary" onClick={handleIdCheck}>
-                사업자 번호 중복 확인
-              </Button>
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
+                  id="tel"
+                  label="연락처"
+                  name="tel"
+                  autoComplete="tel"
+                  value={tel}
+                  onChange={e => setTel(e.target.value)}
+                />
+                <Grid item xs={12}>
+                <TextField
+                  autoComplete="addr"
+                  name="addr"
                   variant="outlined"
                   required
                   fullWidth
-                  id="hospitalName"
-                  label="병원 이름"
-                  name="hospitalName"
-                  autoComplete="hospitalName"
-                  value={hospitalName || ''}
-                  onChange={e => setHospitalName(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                autoComplete="addr"
-                name="addr"
-                variant="outlined"
-                required
-                fullWidth
-                id="addr"
-                label="병원 주소"
-                autoFocus
-                value={addr}
-                onChange={e => setAddr(e.target.value)}
-              />
-            </Grid>
+                  id="addr"
+                  label="병원 주소"
+                  autoFocus
+                  value={addr}
+                  onChange={e => setAddr(e.target.value)}
+                />
+                </Grid>
 
-            <Grid item xs={12}>
-              <TextField
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="hospitalType"
+                    label="병원 형태"
+                    name="hospitalType"
+                    autoComplete="hospitalType"
+                    value={hospitalType}
+                    onChange={e => setHospitalType(e.target.value)}
+                  />
+                  </Grid>
+                <Grid item xs={12}>
+                <TextField
                 variant="outlined"
                 required
                 fullWidth
-                id="hospitalType"
-                label="병원 형태"
-                name="hospitalType"
-                autoComplete="hospitalType"
-                value={hospitalType}
-                onChange={e => setHospitalType(e.target.value)}
-              />
-              </Grid>
-              <Grid item xs={12}>
-              <TextField
-              variant="outlined"
-              required
-              fullWidth
-              id="medicalPerson"
-              label="병원 근무자 수"
-              name="medicalPerson"
-              autoComplete="medicalPerson"
-              value={medicalPerson}
-              onChange={e => setMedicalPerson(e.target.value)}
-            />
+                id="medicalPeople"
+                label="병원 근무자 수"
+                name="medicalPeople"
+                autoComplete="medicalPeople"
+                value={medicalPeople}
+                onChange={e => setMedicalPeople(e.target.value)}
+                />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                 variant="outlined"
                 required
                 fullWidth
-                id="tel"
-                label="연락처"
-                name="tel"
-                autoComplete="tel"
-                value={tel}
-                onChange={e => setTel(e.target.value)}
+                id="hospitalRoom"
+                label="hospitalRoom"
+                name="hospitalRoom"
+                autoComplete="hospitalRoom"
+                value={hospitalRoom}
+                onChange={e => setHospitalRoom(e.target.value)}
+              />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="hospitalBed"
+                label="hospitalBed"
+                name="hospitalBed"
+                autoComplete="hospitalBed"
+                value={hospitalBed}
+                onChange={e => setHospitalBed(e.target.value)}
+              />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="hospitalArea"
+                label="hospitalArea"
+                name="hospitalArea"
+                autoComplete="hospitalArea"
+                value={hospitalArea}
+                onChange={e => setHospitalArea(e.target.value)}
+              />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="typeDetail"
+                label="typeDetail"
+                name="typeDetail"
+                autoComplete="typeDetail"
+                value={typeDetail}
+                onChange={e => setTypeDetail(e.target.value)}
               />
               </Grid>
               <Grid item xs={12}>
@@ -253,7 +313,7 @@ const UserAdd = () => {
                   onChange={e => setLogo(e.target.value)}
               />
               </Grid> */}
-              <ImgButton />
+              {/* <ImgButton /> */}
             </Grid>
 
           <Button
@@ -266,7 +326,7 @@ const UserAdd = () => {
           >
             등록하기
           </Button>
-         
+         </Grid>
         </form>
       </div>
     </Container>

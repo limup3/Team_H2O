@@ -35,7 +35,7 @@ const ModalTestView = () => {
     useEffect(()=>{
         setLoading(true);
         axios
-          .get(`http://localhost:8080/hospitals/hospitalList`)
+          .get(`http://localhost:8080/hospital/hospitalList`)
           .then(response => {
             setPosts(response.data)
             console.log("엑시오스 연결")
@@ -94,7 +94,10 @@ const ModalTestView = () => {
                         </Modal.Header>
                         <Modal.Body>
                           {/* ------------------------------------------------------ */}
+
                           <ModalTestBody value={hospital.hospitalNo} posts={posts}/>
+
+
                           {/* ------------------------------------------------------ */}
                           
                           
