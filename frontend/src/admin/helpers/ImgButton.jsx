@@ -4,8 +4,8 @@ import { Row, Col } from 'react-bootstrap'
 import Image from 'react-bootstrap/Image'
 
 const outLined = {
-    width : '200px',
-    height : '200px',
+    width : '100px',
+    height : '100px',
     border:'1px solid gray',
 }
 
@@ -52,14 +52,14 @@ const ImgButton = () => {
         <Container>
             <Row >
                 <Col 
-                    xs={8}
+                    xs={12}
                     style={previewURL==null? outLined: outLinedComplete}
                     // style={outLined}
                     // style={outLinedComplete}
                     >
                     {previewURL==null? "이미지": null}
                     {preview}
-                </Col>
+                </Col><br/>
                 <Col xs={4}>
                     <input style={inputStyle}
                         accept="image/*"
