@@ -9,6 +9,7 @@ import "@reach/combobox/styles.css";
 import axios from "axios";
 import './doctorData'
 import { doctorData } from "./doctorData";
+import { useHistory } from "react-router-dom"
 
 const MAP_KEY ='AIzaSyDyYteoY6q3NQwsEHFrXfan_q_9VlIVsxk'
 //맵 키 
@@ -69,11 +70,19 @@ const HospitalMap = () =>{
 
     const [infoShow, setInfoShow]= useState(false)
 
+    const history = useHistory();
+
     const handleOpen = () => setInfoShow(true);
     
     const handleReservation = e => {
       e.preventDefault();
       handleOpen();
+    }
+
+    const handleBack = e => {
+      e.preventDefault();
+      alert("로그인시 이용 가능합니다.")
+      history.push("/")
     }
 
 
@@ -207,12 +216,22 @@ const HospitalMap = () =>{
                                   </tr>
                                 </MDBTableBody>
                               </MDBTable>
-                              </div >            
+                              </div >     
+                              {sessionStorage.userData &&
                                     <MDBBtn 
                                     style ={{
                                       right : '1.5%'
                                     }}
                                     gradient="blue" onClick={handleReservation} >진료 예약</MDBBtn>
+                              }       
+                              {!sessionStorage.userData &&
+                                <MDBBtn 
+                                    style ={{
+                                      right : '1.5%'
+                                    }}
+                                    gradient="blue" onClick={handleBack} >진료 예약</MDBBtn>
+                              }
+                              
                                 </MDBCardText>
                             </MDBCardBody>
                         </MDBCard>

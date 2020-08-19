@@ -16,12 +16,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const today = {
+  
+}
+
 
 const Reservation = ({match}) =>  {
-  const classes = useStyles();
-  const [selectedDate, setSelectedDate] = useState("2019-08-18T10:30")
 
-  console.log(JSON.stringify(match.params))
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+  var hours = today.getHours(); // 시
+  var minutes = today.getMinutes();  // 분
+  if(dd<10) {
+      dd='0'+dd
+  } 
+  if(mm<10) {
+      mm='0'+mm
+  } 
+  today = yyyy+'-'+mm+'-'+dd+'T'+hours+':'+minutes;
+  console.log(today)
+
+  const classes = useStyles();
+  const [selectedDate, setSelectedDate] = useState(today)
+
 
   return (
 
@@ -35,7 +54,7 @@ const Reservation = ({match}) =>  {
             }}>
         <br/>      
         <MDBCardTitle cascade className='text-center'>
-              <strong>방문진료 예약</strong>
+              <strong>방문진료 예약 </strong>
             </MDBCardTitle>
             <br/>  
           <div className={"reservation"}>
@@ -57,22 +76,23 @@ const Reservation = ({match}) =>  {
             <br/>  
         <MDBCardBody>
           
-        <h5>            
+        <h5 className="padding">            
               병원 이름 : {match.params.hospitalName}{' '}            
         </h5>
         <br/>
-        <h5>           
+        <h5 className="padding">           
               의사 : {match.params.name}{' '}          
         </h5>
         <br/>
-        <h5>
+        <h5 className="padding">
               진료과 : {match.params.medicalSubject}{' '}
         </h5>
         <br/>
-        <h5>
+        <h5 className="padding">
               예약 비용 : 5000원{' '}
         </h5>
         <br/>
+        <p className="paddingColor">상세내역은 이메일로 발송됩니다.</p>
         <br/>  
         <br/>  
 

@@ -18,10 +18,23 @@ const useStyles = makeStyles((theme) => ({
 
 
 const TelReservation = ({match}) =>  {
-  const classes = useStyles();
-  const [selectedDate, setSelectedDate] = useState("2019-08-18T10:30")
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+  var hours = today.getHours(); // 시
+  var minutes = today.getMinutes();  // 분
+  if(dd<10) {
+      dd='0'+dd
+  } 
+  if(mm<10) {
+      mm='0'+mm
+  } 
+  today = yyyy+'-'+mm+'-'+dd+'T'+hours+':'+minutes;
+  console.log(today)
 
-  console.log(JSON.stringify(match.params))
+  const classes = useStyles();
+  const [selectedDate, setSelectedDate] = useState(today)
 
   return (
 

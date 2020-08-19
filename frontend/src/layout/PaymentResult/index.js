@@ -34,13 +34,13 @@ const PaymentResult = () => {
         <p>{`결제에 ${resultType}하였습니다`}</p>
         <ul>
           <li>
-            <span>주문번호</span>
-            <span>{merchant_uid}</span>
+            <span>사용자 </span>
+            <span>{JSON.parse(sessionStorage.userData).name}</span>
           </li>
           {isSuccessed  ? (
             <li>
-              <span>아임포트 번호</span>
-              <span>{imp_uid}</span>
+              <span>이메일</span>
+              <span>{JSON.parse(sessionStorage.userData).email} 상세내역 발송</span>
             </li>
           ) : (
             <li>

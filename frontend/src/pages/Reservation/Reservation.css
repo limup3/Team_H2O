@@ -28,6 +28,10 @@
     text-align: center;
 }
 
-h5{
+.padding {
     padding-left: 25%;
+}
+.paddingColor {
+    padding-left: 25%;
+    color : #ff0000;
 }
