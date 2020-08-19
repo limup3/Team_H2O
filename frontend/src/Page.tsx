@@ -8,9 +8,7 @@ import {TeleMedicine, RtcRoom} from './pages/TeleMedicine'
 import {Community, CustomerServiceCenter, QueAn, Review,CSReview, Edit,QAFix,CSFix,QAReview,Fix } from './pages/Community'
 import {Login, SignUp, MyPage, UserModify, UserFindID, UserFindPW, UserDelete, } from './pages/Account'
 import './pages/Community/community.css'
-import { Reservation } from "./pages/Reservation";
-import Payment from "./layout/Payment";
-import PaymentResult from "./layout/PaymentResult";
+import { Reservation, TelReservation } from "./pages/Reservation";
 
 
 const Page = () => (
@@ -28,9 +26,18 @@ const Page = () => (
                     <Footer/>
             </Route>
             
-            <Route path="/Reservation">
+            <Route path="/Reservation/:hospitalName/:name/:medicalSubject">
                     <NavBar/>
-                    <Reservation/>
+                    <Route path={`/Reservation/:hospitalName/:name/:medicalSubject`}
+                       render = {(props) => <Reservation {...props}/>}>
+                    </Route>
+                    <Footer/>
+            </Route>
+            <Route path="/TelReservation/:hospitalName/:name/:medicalSubject">
+                    <NavBar/>
+                    <Route path={`/TelReservation/:hospitalName/:name/:medicalSubject`}
+                       render = {(props) => <TelReservation {...props}/>}>
+                    </Route>
                     <Footer/>
             </Route>
 

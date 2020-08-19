@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Reservation = ({match}) =>  {
+const TelReservation = ({match}) =>  {
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState("2019-08-18T10:30")
 
@@ -35,7 +35,7 @@ const Reservation = ({match}) =>  {
             }}>
         <br/>      
         <MDBCardTitle cascade className='text-center'>
-              <strong>방문진료 예약</strong>
+              <strong>화상진료 예약</strong>
             </MDBCardTitle>
             <br/>  
           <div className={"reservation"}>
@@ -92,4 +92,4 @@ const Reservation = ({match}) =>  {
 
   );
 }
-export default Reservation
+export default TelReservation

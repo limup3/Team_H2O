@@ -1,10 +1,13 @@
 package com.H2O.backend.doctor;
 
 
+import com.H2O.backend.util.etc.Box;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -16,9 +19,24 @@ public class DoctorController {
     private final DoctorRepository doctorRepository;
     private final DoctorService doctorService;
 
+    @Autowired
+    Box box;
+
     //csv파일 데이터베이스에 저장
     @GetMapping("/csv")
     public void csvRead(){ doctorService.readCsv(); }
+
+    //맵에 병원 띄우기
+    @GetMapping("/data")
+    public Map<?,?> hospitalData(){
+        System.out.println("들어옴");
+        Iterable<Doctor> data = doctorRepository.findAll();
+        box.put("doctorList", data);
+        System.out.println(box.get());
+        return box.get();
+        //Iterable for-each(반복문) 사용 가능한 클래스
+
+    }
 
     // 의사 추가
     @PostMapping("/doctorAdd")

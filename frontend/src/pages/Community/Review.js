@@ -20,6 +20,8 @@ const Review = ({match}) => {
         setValue(value)
     }
 
+    console.log(match)
+
 
     useEffect(()=>{
         console.log(`1`)
