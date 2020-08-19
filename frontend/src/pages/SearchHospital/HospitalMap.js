@@ -223,7 +223,7 @@ const HospitalMap = () =>{
                     </InfoWindow>
                     ) :null
            }
-           {
+           { 
                infoShow ? (
                    <InfoWindow
                        position = {{lat:selected.latitude, lng:selected.longitude}}
