@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
   boxCss: {
-    border: '1px solid gray'
+    marginTop: theme.spacing(3),
   }
 }));
 
@@ -52,17 +52,34 @@ const UserAdd = () => {
     checkBox1 : false,
     checkBox2 : false,
   })
-  //---------------- input -------------
-  const [image, setImage] = useState(null) 
-  //---------------- input -------------
+  //---------------- Image Upload -------------
+  // const [image, setImage] = useState(null) 
 
+  // const handleInputChange = e =>{
+  //   setImage(e.target.files[0])
+  // }
+  // const handleInpuLogo = async() => {
+  //   const formData = new FormData()
+  //   formData.append('file', image)
+  //   const res = await axios.post("/hospital/logoUpload", formData)
+
+  // }
+  //---------------- Image Upload  -------------
   const history = useHistory();
 
   const handleCheckBox = event => {
     setChecked({checked, [event.target.name]: event.target.checked })
+    if(event.target.checked===true){
+      switch(event.target.name){
+        case "checkBox1": return setBusinessStatus("영업중")
+        case "checkBox2": return setBusinessStatus("폐업")
+        default : return setBusinessStatus(); 
+      }
+      
+    }
   }
-
-  const handleIdCheck = e => {
+  
+  const handleIdCheck = e =>   {
     setHospitalIdChecker("")
     if(businessLicenseNumber){
     e.preventDefault();
@@ -80,17 +97,7 @@ const UserAdd = () => {
       alert("등록 여부를 확인하세요.")
     }
   }
-  //---------------- input -------------
-  const handleInputChange = e =>{
-    setImage(e.target.files[0])
-  }
-  const handleInpuLogo = async() => {
-    const formData = new FormData()
-    formData.append('file', image)
-    const res = await axios.post("/hospital/logoUpload", formData)
 
-  }
-  //---------------- input -------------
 
   const handleSubmit = e => {
     if(hospitalName){
@@ -115,7 +122,6 @@ const UserAdd = () => {
       axios.post(`http://localhost:8080/hospital/hospitalAdd`, userJson)
         .then(response => {
           alert("병원 등록 성공 !")
-          console.log(userJson)
           history.push("/admin/hospital")
             }
         ).catch(
@@ -145,19 +151,19 @@ const UserAdd = () => {
           병원 등록
         </Typography>
         <form className={classes.form} >
-          <Grid container spacing={2}>
+          <Grid container spacing={1}>
                 <Grid item xs={8}>
-                      <TextField
-                          variant="outlined"
-                          required
-                          fullWidth
-                          id="businessLicenseNumber"
-                          label="병원 사업자 등록번호"
-                          name="businessLicenseNumber"
-                          autoComplete="businessLicenseNumber"
-                          value={businessLicenseNumber || ''}
-                          onChange={e => setBusinessLicenseNumber(e.target.value)}
-                      />
+                  <TextField
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="businessLicenseNumber"
+                      label="병원 사업자 등록번호"
+                      name="businessLicenseNumber"
+                      autoComplete="businessLicenseNumber"
+                      value={businessLicenseNumber || ''}
+                      onChange={e => setBusinessLicenseNumber(e.target.value)}
+                  />
                 </Grid>
                 <Grid item xs={4}
                       container
@@ -166,7 +172,7 @@ const UserAdd = () => {
                       alignItems="flex-end"
                 >
                   <Button variant="outlined" color="secondary" onClick={handleIdCheck}>
-                    사업자 번호 중복 확인
+                    사업자 번호 <br/>확인
                   </Button>
                 </Grid>
                 <Grid item xs={12}>
@@ -182,7 +188,7 @@ const UserAdd = () => {
                       onChange={e => setHospitalName(e.target.value)}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} > 
                   <TextField
                   variant="outlined"
                   required
@@ -210,10 +216,12 @@ const UserAdd = () => {
                 </Grid>
                 <Grid>
                   <FormGroup row>
-                    <Box width="100px"
-                         name="businessStatus"
-                         className={classes.boxCss}
-                         margin-right="10px">{"영업상태"}</Box>
+                    <Box 
+                      marginRight="Auto"
+                      width="100px"
+                      name="businessStatus"
+                      className={classes.boxCss}
+                      margin-right="10px">{"영업상태"}</Box>
                     <FormControlLabel
                       control={ 
                         <Checkbox
@@ -223,7 +231,6 @@ const UserAdd = () => {
                           />}
                           label="영업"
                       />
-                      
                     <FormControlLabel
                     control={ 
                       <Checkbox

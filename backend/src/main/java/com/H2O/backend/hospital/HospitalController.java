@@ -42,7 +42,7 @@ public class HospitalController {
     public ResponseEntity<Hospital> hospitalAdd(@RequestBody Hospital hospital){
         Optional<Hospital> hospitalAdd = hospitalService.hospitalAdd(hospital);
         System.out.println("병원 추가 확인");
-        if(hospitalAdd.isPresent()){
+        if(!hospitalAdd.isPresent()){
             return ResponseEntity.ok().build();
         }else{
             return ResponseEntity.notFound().build();

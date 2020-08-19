@@ -12,55 +12,79 @@ import {
   Button
 } from '@material-ui/core';
 
-// const useStyles = makeStyles(theme => ({
-//   root: {},
-//   details: {
-//     display: 'flex'
-//   },
-//   avatar: {
-//     marginLeft: 'auto',
-//     height: 110,
-//     width: 100,
-//     flexShrink: 0,
-//     flexGrow: 0
-//   },
-//   progress: {
-//     marginTop: theme.spacing(2)
-//   },
-//   uploadButton: {
-//     marginRight: theme.spacing(2)
-//   }
-// }));
+const useStyles = makeStyles(theme => ({
+  root: {},
+  details: {
+    display: 'flex'
+  },
+  avatar: {
+    marginLeft: 'auto',
+    height: 110,
+    width: 100,
+    flexShrink: 0,
+    flexGrow: 0
+  },
+  progress: {
+    marginTop: theme.spacing(2)
+  },
+  uploadButton: {
+    marginRight: theme.spacing(2)
+  }
+}));
 
 const ModalTestBodyProfile = props => {
 
-  const {posts, value} = props
-  const key = props.hospitalNo
+  const { className, hospitalData} = props
 
-  useEffect(()=>{
-    console.log("프로필에서 확인")
-    console.log(posts)
-    console.log(value)
-  },[])
-
-  // const [posts, setposts] = useState({
-  // hospitalNo: '',
-  // hospitalName : '',
-  // businessLicenseNumber: '',
-  // addr: '',
-  // logo: '',
-  // hospitalType: '',
-  // medicalPerson: '',
-  // tel: '',
-  // latitude: '',
-  // longitude: ''})
+  const classes = useStyles();
 
   return (
     <Card
-      key={value}
-      // className={clsx(classes.root, className)}
+      className={clsx(classes.root, className)}
     >
-      {posts.hospitalNo}
+      <CardContent>
+        <div className={classes.details}>
+          <div>
+            <Typography
+              gutterBottom
+              variant="h2"
+            >
+             {hospitalData.hospitalName}
+            </Typography>
+            <Typography
+              className={classes.locationText}
+              color="textSecondary"
+              variant="body1"
+            >
+              병원 주소 : <br/> 
+              {hospitalData.addr}
+            </Typography>
+            <Typography
+              className={classes.dateText}
+              color="textSecondary"
+              variant="body1"
+            >
+              병원 형태 : <br/>
+              {hospitalData.hospitalType}
+            </Typography>
+          </div>
+          {/* <Avatar
+            className={classes.avatar}
+            src={hospitalData.avatarUrl}
+          /> */}
+        </div>
+      </CardContent>
+      <Divider />
+      <CardActions>
+        <Button
+          className={classes.uploadButton}
+          color="primary"
+          variant="text"
+        >
+          사진 등록
+        </Button>
+        <Button variant="text">사진 삭제</Button>
+      </CardActions>
     </Card>
   );
 };

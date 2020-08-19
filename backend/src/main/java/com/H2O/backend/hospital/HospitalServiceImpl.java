@@ -55,6 +55,7 @@ public class HospitalServiceImpl implements HospitalService {
         Hospital createHospital = new Hospital();
         createHospital.setHospitalName(hospital.getHospitalName());
         createHospital.setBusinessLicenseNumber(hospital.getBusinessLicenseNumber());
+        createHospital.setBusinessStatus(hospital.getBusinessStatus());
         createHospital.setTel(hospital.getTel());
         createHospital.setAddr(hospital.getAddr());
         createHospital.setHospitalType(hospital.getHospitalType());
