@@ -189,6 +189,25 @@ h1 {
     padding: 0.5rem;
     font-size: 2rem;
     width: 100%;
+    
+    position: absolute;
+}
+.mySearch {
+    position: absolute;
+    top: 4rem;
+    left: 50%;
+    height: 25px;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 60%;
+    z-index: 10;
+}
+.mySearch input {
+    padding: 0.5rem;
+    font-size: 2rem;
+    width: 100%;
+    
+    position: absolute;
 }
 
 .infowindow{

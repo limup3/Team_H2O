@@ -10,12 +10,7 @@ import axios from "axios";
 import './doctorData'
 import { doctorData } from "./doctorData";
 import { useHistory } from "react-router-dom"
-
-const MAP_KEY ='AIzaSyDyYteoY6q3NQwsEHFrXfan_q_9VlIVsxk'
-//맵 키 
-const libraries = ["places"];
-//구글 맵 places 라이브러리 호출
-//place = 애플리케이션이 정의 된 영역 내에서 시설, 지리적 위치 또는 주요 관심 지점과 같은 장소를 검색 할 수 있도록합니다
+import {Button, Col, Form, Row, Image} from "react-bootstrap";
 
 const mapContainerStyle = {
     width: "100%",
@@ -32,10 +27,36 @@ const center = {
     lng: 126.936887
 }
 
+const MAP_KEY ='AIzaSyDyYteoY6q3NQwsEHFrXfan_q_9VlIVsxk'
+//맵 키 
+const libraries = ["places"];
+//구글 맵 places 라이브러리 호출
+//place = 애플리케이션이 정의 된 영역 내에서 시설, 지리적 위치 또는 주요 관심 지점과 같은 장소를 검색 할 수 있도록합니다
+
 
 const HospitalMap = () =>{
+  const history = useHistory();
+  const { isLoaded,loadError } = useLoadScript({
+    googleMapsApiKey: MAP_KEY,
+    libraries,
+    region:'kr'
+});
     const [hospitalList, setHospitalList] = useState([])
-    // const [doctorList, setDoctorList] = useState([])
+    const [infoShow, setInfoShow] = useState(false)
+    const [searchInfoShow, setSearchInfoShow] = useState(false)
+
+    const [ selected, setSelected] = useState({})
+    //마커 찍기
+    const [ currentPosition, setCurrentPosition] = useState({})
+    //현재위치 찍기
+
+    //검색
+    const [searchedAddr,setSearchedAddr] = useState("");
+    const [selectedAddr, setSelectedAddr] = useState("")
+
+    const [selectedPc, setSelectedPc] = useState("")
+    const [ markers, setMarkers ] = useState([]);
+    const [searchLocation, setSearchLocation] = useState({})
 
     useEffect(()=>{
         axios.get(`http://localhost:8080/hospital/data`)
@@ -49,28 +70,55 @@ const HospitalMap = () =>{
         )
     },[]);
 
-  //   useEffect(()=>{
-  //     axios.get(`http://localhost:8080/doctor/data`)
-  //     .then(response => {
-  //         console.log(JSON.stringify(response.data.list))
-  //         setDoctorList(response.data.doctorList)
-  //     })
-  //     .catch(
-  //         error => {
-  //             throw (error)
-  //         }
-  //     )
-  // },[]);
+    Geocode.setApiKey(MAP_KEY);
+    Geocode.setLanguage('ko')
+    Geocode.fromLatLng(selected.lat, selected.lng).then(
+        response =>{
+            console.log(response)
+            const address = response.results[0].formatted_address
+            const length = response.results[0].address_components.length
+            const postcode = response.results[0].address_components[length-1].long_name
+            console.log(postcode.indexOf('-'))
+            if(postcode.indexOf('-') != -1){
+                setSelectedPc(postcode)
+            }else{
+                setSelectedPc("정보없음")
+            }
+            setSelectedAddr(address)
 
-    const { isLoaded,loadError } = useLoadScript({
-        googleMapsApiKey: MAP_KEY,
-        libraries,
-        region:'kr'
-    });
+            console.log(address)
+        },
+        error=>{
+            console.error(error)
+        }
+    );
 
-    const [infoShow, setInfoShow]= useState(false)
+    const mapRef = useRef();
+    //DOM 영역 직접 참조 
 
-    const history = useHistory();
+    const onMapLoad = useCallback((map)=>{
+      mapRef.current = map;
+    },[]);
+
+    const panTo = useCallback(({lat, lng}) => {
+      mapRef.current.panTo({lat, lng})
+      mapRef.current.setZoom(17)
+      } , [])
+  //변경 사항이 지도의 너비와 높이보다 작 으면 전환이 부드럽게 움직임
+  const onMapClick = useCallback((e)=>{
+    setMarkers((current)=>[
+        ...current,
+        {
+            lat: e.latLng.lat(),
+            lng: e.latLng.lng()
+        },
+    ]);
+    },[])
+    
+    if (loadError) return "Error";
+    if (!isLoaded) return "Loading...";
+
+  
 
     const handleOpen = () => setInfoShow(true);
     
@@ -85,27 +133,64 @@ const HospitalMap = () =>{
       history.push("/")
     }
 
+    function Search({panTo}) {
+      const {
+          ready,
+          value,
+          suggestions: {status, data},
+          setValue,
+          clearSuggestions
+      } = usePlacesAutocomplete({
+          requestOptions:{
+              location: { lat:()=> 37.5525892, lng:()=> 126.9367663 },
+              radius: 200*1000,
+          },
+      });
+      const handleInput = (e)=>{
+          setValue(e.target.value);
+      };
+      const handleSelect = async (address) =>{
+          setValue(address, false);
+          clearSuggestions();
 
+          try{
+              const result =await getGeocode({address});
 
-    const [ selected, setSelected] = useState({})
-    //마커 찍기
-    const [ currentPosition, setCurrentPosition] = useState({})
-    //현재위치 찍기
-    const mapRef = useRef();
-    //DOM 영역 직접 참조 
+              const {lat, lng} = await getLatLng(result[0]);
+              const postal_code = await getZipCode(result[0],false)
+              panTo({ lat, lng });
+              setSelectedPc(postal_code)
+              setSearchLocation({ lat, lng });
+              setSearchedAddr(address);
+          }catch (error) {
+              console.log("Error: ", error);
+          }
+      };
 
-    const onMapLoad = React.useCallback(map => {
-        mapRef.current = map;
-    }, []);
-
-    const panTo = useCallback(({lat, lng}) => {
-        mapRef.current.panTo({lat, lng})
-        mapRef.current.setZoom(17)
-    }, [])
-    //변경 사항이 지도의 너비와 높이보다 작 으면 전환이 부드럽게 움직임
-
-    if (loadError) return "Error";
-    if (!isLoaded) return "Loading...";
+      return(
+        
+          <div className="mySearch">
+            
+              <Combobox onSelect={handleSelect}>
+                  <ComboboxInput
+                      value = {value}
+                      onChange={handleInput}
+                      disabled={!ready}
+                      placeholder="Search your location"
+                      className={"from-control-plaintext"}
+                  />
+                  <ComboboxPopover>
+                      <ComboboxList>
+                          {status === "OK" &&
+                          data.map(({ id,description})=>(
+                              <ComboboxOption key={id} value={description}/>
+                          ))}
+                      </ComboboxList>
+                  </ComboboxPopover>
+              </Combobox>
+          </div>
+      );
+  }
 
     //Geolocation API는 사용자의 현재 위치를 가져오는 API로, 
     //지도에 사용자 위치를 표시하는 등 다양한 용도로 사용
@@ -135,7 +220,10 @@ const HospitalMap = () =>{
     
     return (
         <>
+        <br/><br/><br/><br/>
       
+        <Search panTo= {panTo}/>
+        
         <GoogleMap
             id="map"
             mapContainerStyle={mapContainerStyle}
@@ -143,9 +231,108 @@ const HospitalMap = () =>{
             center={center}
             options={options}
             onLoad={onMapLoad}
+            onClick={onMapClick}
         >
          
               <Locate panTo= {panTo} />
+              
+              {//지도마커 정보
+                    selected.location ? (
+                      <InfoWindow
+                          position ={selected.location}
+                          clickable={true}
+                          onCloseClick={()=>setSelected({})}
+                          >
+                          <div className="infowindow">
+                              <p>{selected.name}</p>
+                              <img src={selected.image} className="small-image" alt="rental"/>
+                              <p>주소:{selected.address}</p>
+                              <Row>
+                                  <Col xs={6} md={4}>
+                                      <Image src="holder.js/171x180" rounded />
+                                  </Col>
+                              </Row>
+                          </div>
+                      </InfoWindow>
+                  )
+                      :null
+              }
+              {//지역정보 검색
+                    searchLocation.lat ?
+                    <Marker
+                        position={searchLocation}
+
+                        onClick={()=>{
+                            setSelected(searchLocation)
+                            setSearchInfoShow(true)
+                        }}
+                        icon={{
+                            url: "https://image.flaticon.com/icons/svg/1181/1181732.svg",
+                            scaledSize: new window.google.maps.Size(40, 40)
+                        }}
+                        />
+                        :null
+                }
+                 {//인포윈도우 내용정보
+                    searchInfoShow ? (
+                      <InfoWindow
+                          position={{lat: selected.lat, lng: selected.lng}}
+                          onCloseClick={()=>{setSearchInfoShow(false);}}
+                          clickable={true}
+                      >
+                          <div className="infowindow">
+                              <MDBCol>
+                                  <MDBCard>
+                                      <MDBCardBody>
+                                          <MDBCardText>
+                                              <div>
+                                              <span>*상세주소 :</span><br/>
+                                                  <h2>{selectedAddr}</h2>
+                                              <span>*우편번호 :</span><br/>
+                                                  <h2>{selectedPc}</h2><br/>
+                                              </div>
+                                      </MDBCardText>
+                                      </MDBCardBody>
+                                  </MDBCard>
+                              </MDBCol>
+                          </div>
+                      </InfoWindow>
+                    ): null
+              
+                  }
+                {
+                    markers.map((marker,i)=>(
+                        <Marker
+                            key={i}
+                            onClick={()=>{
+                                setSelected(marker);
+                                setInfoShow(true)
+                            }}
+                            position={{ lat: marker.lat, lng: marker.lng }}
+
+                            icon={{
+                                    url: "https://image.flation.com/icons/svg/3198/3198588.svg",
+                                    scaledSize : new window.google.maps.Size(40,40)
+                            }}
+                        />
+                    ))
+                }
+                { // 내 위치
+                    currentPosition.lat ?
+                   <Marker
+                        position={currentPosition}
+                        onClick={() => {
+                            setSelected(currentPosition)
+                        }}
+                        icon={{
+                            url : "https://image.flaticon.com/icons/svg/727/727590.svg",
+                            scaledSize: new window.google.maps.Size(70, 70)
+                        }}
+
+                   />
+                   :null
+           }
+                
             { // 다중 마커찍기
                 hospitalList.map((store,i)=> (
                     <Marker
@@ -323,21 +510,7 @@ const HospitalMap = () =>{
                ) : null
            }
 
-           { // 내 위치
-                    currentPosition.lat ?
-                   <Marker
-                        position={currentPosition}
-                        onClick={() => {
-                            setSelected(currentPosition)
-                        }}
-                        icon={{
-                            url : "https://image.flaticon.com/icons/svg/727/727590.svg",
-                            scaledSize: new window.google.maps.Size(70, 70)
-                        }}
-
-                   />
-                   :null
-           }
+          
 
         </GoogleMap>
         </>
