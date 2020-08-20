@@ -104,6 +104,7 @@ const ModalTestBody = ({hospitalData, setClose, className}) => {
         .patch(`http://localhost:8080/hospital/modify/${businessLicenseNumber}`, hospitalJson)
         .then(response => {
           alert("병원 데이터 변경 성공")
+          history.push("/admin")
           history.push("/admin/hospital")
           setClose(false);
         })
@@ -113,10 +114,6 @@ const ModalTestBody = ({hospitalData, setClose, className}) => {
             throw(error)
           }  
         )
-      console.log("수정전")
-      console.log(hospitalData)
-      console.log("수정후")
-      console.log(hospitalJson)
     }
     return (
       

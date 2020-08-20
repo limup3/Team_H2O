@@ -11,44 +11,52 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  Button as MuiButton
+  TableFooter,
+  Button as MuiButton,
+  TablePagination
 } from '@material-ui/core';
 import { Button, Modal } from 'react-bootstrap'
 import ModalTestBody from './ModalTestBody';
+import PaginationAction from './PaginationAction'
 
 const ModalTestView = () => {
-    const [hospitalIdArr, setHospitalIdArr] = useState([])
+
     const [hospitalData, setHospitalData] = useState([])
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(false)
-    const [currentPage, setCurrentPage]=useState(1)
-    const [postsPerPage, setPostsPerPage] = useState(10)
 
     const [show, setShow] = useState(false);
-    const handleShow = () => setShow(true);
+    const [page, setPage] = useState(2);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+    
+    useEffect(()=>{
+      setLoading(true);
+      axios
+        .get(`http://localhost:8080/hospital/hospitalList`)
+        .then(response => {
+          setPosts(response.data)
+        })
+        .catch(error => {
+          alert("서버와의 연결이 되지 않았습니다.");
+        })
+        setLoading(false);
+    }, [])
+    
     const handleClose = () => {
       setShow(false)
     }
-    const [handleSwitch, setHandleSwitch] = useState({
-      show: false,
 
-    })
-      
-      useEffect(()=>{
-        setLoading(true);
-        axios
-          .get(`http://localhost:8080/hospital/hospitalList`)
-          .then(response => {
-            setPosts(response.data)
-          })
-          .catch(error => {
-            alert("서버와의 연결이 되지 않았습니다.");
-          })
-          setLoading(false);
-      }, [])
-    
+    const handleChangePage = (e, newPage) => {
+      setPage(newPage);
+    };
+  
+    const handleChangeRowsPerPage = (e) => {
+      setRowsPerPage(parseInt(e.target.value, 10));
+      setPage(0);
+    };
 
     return (
+        
         <>
         <Card>
         <CardContent>
@@ -68,7 +76,15 @@ const ModalTestView = () => {
             </TableHead>
 
               <TableBody>
-                {posts.slice(0,10).map((hospital, i) => (
+
+                {/* -------------pagination----------------- */}
+
+                {/* {posts.slice(0,10).map((hospital, i) => ( */}
+                  {(rowsPerPage > 0
+                    ? posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    : posts
+                    ).map((hospital, i) => (
+
                   <TableRow
                     align="center"
                     key={i}
@@ -93,7 +109,31 @@ const ModalTestView = () => {
                   </TableRow>
                 ))}
               </TableBody>
-                        
+
+
+              {/* ---------------------- Pagination ----------------------------------- */}
+
+              <TableFooter>
+              <TableRow>
+                <TablePagination
+                  rowsPerPageOptions={[10, 50, 100, { label: 'All', value: -1 }]}
+                  colSpan={3}
+                  count={posts.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  SelectProps={{
+                    inputProps: { 'aria-label': 'rows per page' },
+                    native: true,
+                  }}
+                  onChangePage={handleChangePage}
+                  onChangeRowsPerPage={handleChangeRowsPerPage}
+                  // ActionsComponent={TablePaginationActions}
+                />
+              </TableRow>
+            </TableFooter>
+              
+            {/* ---------------------- Pagination ----------------------------------- */}
+
                         
               {hospitalData.hospitalName? (
                 <Modal 
@@ -110,21 +150,27 @@ const ModalTestView = () => {
                 <Modal.Body>
                   <ModalTestBody hospitalData={hospitalData} setClose={(close)=>{setShow(close)}}/>
                   </Modal.Body>
-                {/* <Modal.Footer>
-                  <Button variant="primary" onClick={()=>{handleClose()}}>
-                    저장
-                  </Button>
-                  <Button variant="secondary" onClick={()=>{handleClose()}}>
-                    취소
-                  </Button>
-                </Modal.Footer> */}
               </Modal>):null}
           </Table>
+          {/* <PaginationAction
+            component="div"
+            rowsPerPageOptions={[10, 50, 100]}
+
+            count={posts.length}
+            page={page}
+            rowsPerPage={rowsPerPage}
+            onChangePage={handleChangePage}
+
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          /> */}
         </CardContent>
         </Card>
 
+        {/* -----------Pagination------------ */}
         </>
     )
 }
+
+
 
 export default ModalTestView
