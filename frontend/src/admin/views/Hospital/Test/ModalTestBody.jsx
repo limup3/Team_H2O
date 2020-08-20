@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react';
+import { useHistory } from 'react-router-dom';
+
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
@@ -16,6 +18,7 @@ import {
   FormGroup, 
   Box
 } from '@material-ui/core';
+import Axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,20 +29,21 @@ const useStyles = makeStyles(theme => ({
 const ModalTestBody = props => {
     const classes = useStyles();
 
-    const {className, hospitalData} = props
-    const [hospitalName, setHospitalName] = useState("")
-    const [businessLicenseNumber, setBusinessLicenseNumber] = useState("")
-    const [businessStatus, setBusinessStatus] = useState("");
-    const [tel, setTel] = useState("")
-    const [addr, setAddr] = useState("");
-    const [hospitalType, setHospitalType] = useState("")
-    const [medicalPeople,setMedicalPeople] = useState("")
-    const [hospitalRoom,setHospitalRoom] = useState("")
-    const [hospitalBed,setHospitalBed] = useState("")
-    const [hospitalArea,setHospitalArea] = useState("")
-    const [typeDetail,setTypeDetail] = useState("")
-    const [latitude, setLatitude] = useState("")
-    const [longitude, setLongitude] = useState("")
+    const {className, hospitalData} = props    
+    const [hospitalNo, setHospitalNo] = useState(hospitalData.hospitalNo)
+    const [hospitalName, setHospitalName] = useState(hospitalData.hospitalName)
+    const [businessLicenseNumber, setBusinessLicenseNumber] = useState(hospitalData.businessLicenseNumber)
+    const [businessStatus, setBusinessStatus] = useState(hospitalData.businessStatus);
+    const [tel, setTel] = useState(hospitalData.tel)
+    const [addr, setAddr] = useState(hospitalData.addr)
+    const [hospitalType, setHospitalType] = useState(hospitalData.hospitalType)
+    const [medicalPeople,setMedicalPeople] = useState(hospitalData.medicalPeople)
+    const [hospitalRoom,setHospitalRoom] = useState(hospitalData.hospitalRoom)
+    const [hospitalBed,setHospitalBed] = useState(hospitalData.hospitalBed)
+    const [hospitalArea,setHospitalArea] = useState(hospitalData.hospitalArea)
+    const [typeDetail,setTypeDetail] = useState(hospitalData.typeDetail)
+    const [latitude, setLatitude] = useState(hospitalData.latitude)
+    const [longitude, setLongitude] = useState(hospitalData.longitude)
     const [show, setShow] = useState()
     const [values, setValues] = useState([]);
 
@@ -47,25 +51,13 @@ const ModalTestBody = props => {
       checkBox1 : false,
       checkBox2 : false,
     })
+
+    const history = useHistory();
+
     useEffect(()=>{
-      // 초기값 설정
-      setHospitalName(hospitalData.hospitalName)
-      setBusinessLicenseNumber(hospitalData.businessLicenseNumber)
-      setBusinessStatus(hospitalData.businessStatus)
-      setTel(hospitalData.tel)
-      setAddr(hospitalData.addr)
-      setHospitalArea(hospitalData.hospitalArea)
-      setHospitalType(hospitalData.hospitalType)
-      setMedicalPeople(hospitalData.medicalPeople)
-      setHospitalRoom(hospitalData.hospitalRoom)
-      setHospitalBed(hospitalData.hospitalBed)
-      setTypeDetail(hospitalData.typeDetail)
-      setLatitude(hospitalData.latitude)
-      setLongitude(hospitalData.longitude)
-      
       switch(hospitalData.businessStatus){
         case `영업중`: return setChecked({...checked, checkBox1:true})
-        case `폐업`: return alert("케이스 폐업 작동")
+        case `폐업`: return setChecked({...checked, checkBox2:true})
       }
     }, [])
     
@@ -91,6 +83,7 @@ const ModalTestBody = props => {
    
     const handelModify = e => {
       const hospitalJson = {
+        hospitalNo : hospitalNo,
         hospitalName: hospitalName,
         businessLicenseNumber: businessLicenseNumber,
         businessStatus: businessStatus,
@@ -105,6 +98,21 @@ const ModalTestBody = props => {
         latitude : latitude,
         longitude : longitude,
       }
+      Axios
+        .patch(`http://localhost:8080/hospital/modify/${businessLicenseNumber}`, hospitalJson)
+        .then(response => {
+          alert("병원 데이터 변경 성공")
+          history.push("/admin/hospital")
+        })
+        .catch(
+          error => {
+            alert("병원 데이터 변경 실패")
+            throw(error)
+          }  
+        )
+      console.log("수정전")
+      console.log(hospitalData)
+      console.log("수정후")
       console.log(hospitalJson)
     }
     return (

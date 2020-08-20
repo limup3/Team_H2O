@@ -17,6 +17,8 @@ interface HospitalService {
 
     public void readCsv();
     Optional<Hospital> findHospitalByBusinessLicenseNumber(String businessLicenseNumber);
+    Optional<Hospital> findByBusinessLicenseNumber(String businessLicenseNumber);
+
     Hospital update(Hospital selectHospital);
     void delete(Hospital selectHospital);
     Optional<Hospital> hospitalAdd(Hospital hospital);
@@ -38,6 +40,11 @@ public class HospitalServiceImpl implements HospitalService {
     public Optional<Hospital> findHospitalByBusinessLicenseNumber(String businessLicenseNumber) {
         Optional<Hospital> licenseCheck = hospitalRepository.findByBusinessLicenseNumber(businessLicenseNumber);
         return licenseCheck;
+    }
+
+    @Override
+    public Optional<Hospital> findByBusinessLicenseNumber(String businessLicenseNumber) {
+        return Optional.empty();
     }
 
     @Override
