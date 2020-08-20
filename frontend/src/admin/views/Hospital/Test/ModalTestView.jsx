@@ -26,7 +26,9 @@ const ModalTestView = () => {
 
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(true);
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+      setShow(false)
+    }
     const [handleSwitch, setHandleSwitch] = useState({
       show: false,
 
@@ -83,6 +85,7 @@ const ModalTestView = () => {
               <TableCell align="center">연락처</TableCell>
               <TableCell align="center">위도</TableCell>
               <TableCell align="center">경도</TableCell>
+              <TableCell align="center">영업상태</TableCell>
             </TableHead>
 
             {/* <TableBody>
@@ -175,6 +178,8 @@ const ModalTestView = () => {
                     <TableCell align="center">{hospital.tel}</TableCell>
                     <TableCell align="center">{hospital.latitude}</TableCell>
                     <TableCell align="center">{hospital.longitude}</TableCell>
+                    <TableCell align="center">{hospital.businessStatus}</TableCell>
+                    
                   </TableRow>
                 ))}
               </TableBody>
@@ -197,14 +202,14 @@ const ModalTestView = () => {
                         <Modal.Body>
                           <ModalTestBody hospitalData={hospitalData}/>
                           </Modal.Body>
-                        <Modal.Footer>
+                        {/* <Modal.Footer>
                           <Button variant="primary" onClick={()=>{handleClose()}}>
                             저장
                           </Button>
                           <Button variant="secondary" onClick={()=>{handleClose()}}>
                             취소
                           </Button>
-                        </Modal.Footer>
+                        </Modal.Footer> */}
                       </Modal>
                       ):null}
 
