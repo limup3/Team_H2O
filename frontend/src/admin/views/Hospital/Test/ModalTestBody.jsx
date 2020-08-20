@@ -26,10 +26,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ModalTestBody = props => {
+const ModalTestBody = ({hospitalData, setClose, className}) => {
     const classes = useStyles();
 
-    const {className, hospitalData} = props    
+    // const {hospitalData} = props    
     const [hospitalNo, setHospitalNo] = useState(hospitalData.hospitalNo)
     const [hospitalName, setHospitalName] = useState(hospitalData.hospitalName)
     const [businessLicenseNumber, setBusinessLicenseNumber] = useState(hospitalData.businessLicenseNumber)
@@ -44,7 +44,7 @@ const ModalTestBody = props => {
     const [typeDetail,setTypeDetail] = useState(hospitalData.typeDetail)
     const [latitude, setLatitude] = useState(hospitalData.latitude)
     const [longitude, setLongitude] = useState(hospitalData.longitude)
-    const [show, setShow] = useState()
+    // const [close, setClose]= useState()
     const [values, setValues] = useState([]);
 
     const [checked, setChecked] = useState({
@@ -61,14 +61,16 @@ const ModalTestBody = props => {
       }
     }, [])
     
-    const handleClose = () => setShow(false);
-
-    const handleChange = event => {
-      setValues({
-        ...values,
-        [event.target.name]: event.target.value
-      });
-    };
+    const handleClose = () => {
+      setClose(false);
+    }
+    
+    // const handleChange = event => {
+    //   setValues({
+    //     ...values,
+    //     [event.target.name]: event.target.value
+    //   });
+    // };
     const handleCheckBox = event => {
       setChecked({checked, [event.target.name]: event.target.checked })
       if(event.target.checked===true){
@@ -103,6 +105,7 @@ const ModalTestBody = props => {
         .then(response => {
           alert("병원 데이터 변경 성공")
           history.push("/admin/hospital")
+          setClose(false);
         })
         .catch(
           error => {
@@ -292,15 +295,13 @@ const ModalTestBody = props => {
           </CardContent>
           <Divider />
           <CardActions>
-          <Button onClick={e => {
-            handelModify()}}
+          <Button onClick={e => {handelModify()}}
               color="primary"
               variant="contained"
             >
               변경된 정보 저장
             </Button>
-            <Button onClick={e => {
-              handleClose()}}
+            <Button onClick={e => {handleClose()}}
               variant="contained" 
               color="secondary"
             >
@@ -317,48 +318,3 @@ const ModalTestBody = props => {
   };
   
   export default ModalTestBody;
-
-  //--------------------------------------------------------------
-
-
-  //   return (
-  //   <div className={classes.root}>
-  //     <Grid
-  //       container
-  //       spacing={2}
-  //     >
-  //       <Grid
-  //         item
-  //         lg={8}
-  //         md={8}
-  //         xl={8}
-  //         xs={12}
-  //       >
-  //         <ModalTestBodyProfile hospitalData={hospitalData}/>
-  //         모달 자체 띄우기
-  //         <ModalTestBodyDetail hospitalData={hospitalData}/>
-
-
-
-
-
-
-
-  //       </Grid>
-
-
-  //       <Grid
-  //         item
-  //         lg={8}
-  //         md={12}
-  //         xl={8}
-  //         xs={12}
-  //       >
-  //         <ModalTestBodyDetail hospitalData={hospitalData}/>
-  //       </Grid>
-  //     </Grid>
-  //   </div>
-//   // );
-// };
-
-// export default ModalTestBody;

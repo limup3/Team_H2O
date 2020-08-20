@@ -46,27 +46,6 @@ const ModalTestView = () => {
           })
           setLoading(false);
       }, [])
-
-    // useEffect(()=>{
-    //     setLoading(true);
-    //     axios
-    //       .get(`http://localhost:8080/hospital/hospitalList`)
-    //       .then(response => {
-    //         const values = [];
-    //         const keys = []
-    //         Object.entries(response.data).forEach(([key, value])=>{
-    //           keys.push(key)
-    //           values.push(value)
-    //         })
-    //         setHospitalIdArr(keys)
-    //         setPosts(values)
-    //       })
-    //       .catch(error => {
-    //         alert("서버와의 연결이 되지 않았습니다.");
-    //       })
-    //       setLoading(false);
-    //   }, [])
-
     
 
     return (
@@ -87,75 +66,6 @@ const ModalTestView = () => {
               <TableCell align="center">경도</TableCell>
               <TableCell align="center">영업상태</TableCell>
             </TableHead>
-
-            {/* <TableBody>
-                {hospitals.slice(0, rowsPerPage).map(hospital => (
-                  <TableRow
-                    className={classes.tableRow}
-                    hover
-                    key={hospital.id}
-                    selected={selectedHospitals.indexOf(hospital.id) !== -1}
-                  >
-                    <TableCell padding="checkbox">
-                      <Checkbox
-                        checked={selectedHospitals.indexOf(hospital.id) !== -1}
-                        color="primary"
-                        onChange={event => handleSelectOne(event, hospital.id)}
-                        value="true"
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <div className={classes.nameContainer}>
-                        <Avatar
-                          className={classes.avatar}
-                          src={hospital.avatarUrl}
-                        >
-                          {getInitials(hospital.name)}
-                        </Avatar>
-                        <Typography variant="body1">
-                        -------------------- Modal Line ------------------
-                        
-                        <MuiButton variant="primary" onClick={handleShow}>
-                          {hospital.name}
-                        </MuiButton>
-                        <Modal 
-                          {...props} 
-                          show={show} 
-                          onHide={handleClose}
-                          size="lg"
-                          aria-labelledby="contained-modal-title-vcenter"
-                          centered
-                          scrollable={Boolean(true)}
-                          >
-                        <Modal.Header closeButton>
-                          <Modal.Title>등록 병원 정보</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body><HospitalInfo/></Modal.Body>
-                        <Modal.Footer>
-                          <Button variant="primary" onClick={handleClose}>
-                            저장
-                          </Button>
-                          <Button variant="secondary" onClick={handleClose}>
-                            취소
-                          </Button>
-                        </Modal.Footer>
-                      </Modal> 
-                        </Typography>
-
-                      </div>
-                    </TableCell>
-                    <TableCell>{hospital.homepage}</TableCell>
-                    <TableCell>
-                      {hospital.address}
-                    </TableCell>
-                    <TableCell>{hospital.phone}</TableCell>
-                    <TableCell>
-                      {moment(hospital.createdAt).format('DD/MM/YYYY')}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody> */}
-
 
               <TableBody>
                 {posts.slice(0,10).map((hospital, i) => (
@@ -183,87 +93,32 @@ const ModalTestView = () => {
                   </TableRow>
                 ))}
               </TableBody>
-
-              {/* -------------------- Modal Line ------------------ */}
                         
                         
               {hospitalData.hospitalName? (
                 <Modal 
-                          show={show} 
-                          onHide={handleClose}
-                          size="lg"
-                          aria-labelledby="contained-modal-title-vcenter"
-                          centered
-                          scrollable={Boolean(true)}
-                          >
-                        <Modal.Header closeButton>
-                          <Modal.Title>등록 병원 정보</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                          <ModalTestBody hospitalData={hospitalData}/>
-                          </Modal.Body>
-                        {/* <Modal.Footer>
-                          <Button variant="primary" onClick={()=>{handleClose()}}>
-                            저장
-                          </Button>
-                          <Button variant="secondary" onClick={()=>{handleClose()}}>
-                            취소
-                          </Button>
-                        </Modal.Footer> */}
-                      </Modal>
-                      ):null}
-
-            {/* -------------------- Modal Line ------------------ */}
-
-            {/* <TableBody>
-            {posts.map(hospital => (
-              
-              <tr key={hospital.hospitalNo}>
-              <th>{hospital.hospitalNo}</th>
-              <td>
-               <button onClick={handleProfile(hospital.hospitalName)}> 
-                {hospital.hospitalName}
-                </button> 
-                </td>
-              <td>{hospital.businessLicenseNumber}</td>
-              <td>{hospital.addr}</td>
-              <td>{hospital.hospitalType}</td>
-              <td>{hospital.medicalPeople}</td>
-              <td>{hospital.tel}</td>
-              <td>{hospital.latitude}</td>
-              <td>{hospital.longitude}</td>
-
-            </tr>
-          ))}
-            </TableBody> */}
-
-
-
-            {/* <TableBody>
-              {posts.map((hospital, i) => (
-                <TableRow
-                key={i}
-                selected={posts.indexOf(hospital.id) !== -1}
-                >
-                  <TableCell align="center">{hospital.hospitalNo}</TableCell>
-                  <TableCell align="center">
-                    <Typography>
-                      <MuiButton onClick={handleProfile(hospitalIdArr[i], hospital)}>
-                      {hospital.hospitalName}
-                      </MuiButton>
-                    </Typography>
-                  </TableCell>
-                  <TableCell align="center">{hospital.businessLicenseNumber}</TableCell>
-                  <TableCell align="center">{hospital.logo}</TableCell>
-                  <TableCell align="center">{hospital.addr}</TableCell>
-                  <TableCell align="center">{hospital.hospitalType}</TableCell>
-                  <TableCell align="center">{hospital.medicalPerson}</TableCell>
-                  <TableCell align="center">{hospital.tel}</TableCell>
-                  <TableCell align="center">{hospital.latitude}</TableCell>
-                  <TableCell align="center">{hospital.longitude}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody> */}
+                  show={show} 
+                  onHide={handleClose}
+                  size="lg"
+                  aria-labelledby="contained-modal-title-vcenter"
+                  centered
+                  scrollable={Boolean(true)}
+                  >
+                <Modal.Header closeButton>
+                  <Modal.Title>등록 병원 정보</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <ModalTestBody hospitalData={hospitalData} setClose={(close)=>{setShow(close)}}/>
+                  </Modal.Body>
+                {/* <Modal.Footer>
+                  <Button variant="primary" onClick={()=>{handleClose()}}>
+                    저장
+                  </Button>
+                  <Button variant="secondary" onClick={()=>{handleClose()}}>
+                    취소
+                  </Button>
+                </Modal.Footer> */}
+              </Modal>):null}
           </Table>
         </CardContent>
         </Card>
