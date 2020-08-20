@@ -10,6 +10,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import {loginReducer} from './pages/Account'
+import {reservationReducer} from './layout/Payment/index'
 import Page from './Page';
 import AdminPage from './AdminPage';
 import Payment from './layout/Payment';
@@ -18,8 +19,7 @@ import PaymentResult from './layout/PaymentResult';
 //rootReducer
 
 const rootReducer = combineReducers({
-  loginReducer,
-  
+  loginReducer,reservationReducer
 })
 
 const store = createStore(rootReducer,applyMiddleware(thunk))

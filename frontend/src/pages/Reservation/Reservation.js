@@ -36,7 +36,6 @@ const Reservation = ({match}) =>  {
       mm='0'+mm
   } 
   today = yyyy+'-'+mm+'-'+dd+'T'+hours+':'+minutes;
-  console.log(today)
 
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState(today)
@@ -92,15 +91,20 @@ const Reservation = ({match}) =>  {
               예약 비용 : 5000원{' '}
         </h5>
         <br/>
-        <p className="paddingColor">상세내역은 이메일로 발송됩니다.</p>
-        <br/>  
+
         <br/>  
 
     <MDBRow>
     <MDBCol md="4">
     </MDBCol>
     <MDBCol md="8">
-    <Payment/>
+    <Payment
+     title={"방문진료"} 
+     hospitalName={match.params.hospitalName} 
+     name={match.params.name} 
+     medicalSubject={match.params.medicalSubject}
+     selectedDate={selectedDate}
+     />
     </MDBCol>
     </MDBRow>
   

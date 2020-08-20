@@ -4,6 +4,7 @@ import Payment from "../../layout/Payment";
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { MDBCard, MDBCardBody, MDBCardTitle,  MDBCol, MDBRow } from 'mdbreact';
+
 const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
@@ -31,7 +32,6 @@ const TelReservation = ({match}) =>  {
       mm='0'+mm
   } 
   today = yyyy+'-'+mm+'-'+dd+'T'+hours+':'+minutes;
-  console.log(today)
 
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState(today)
@@ -70,30 +70,36 @@ const TelReservation = ({match}) =>  {
             <br/>  
         <MDBCardBody>
           
-        <h5>            
+        <h5 className="padding">            
               병원 이름 : {match.params.hospitalName}{' '}            
         </h5>
         <br/>
-        <h5>           
+        <h5 className="padding">           
               의사 : {match.params.name}{' '}          
         </h5>
         <br/>
-        <h5>
+        <h5 className="padding">
               진료과 : {match.params.medicalSubject}{' '}
         </h5>
         <br/>
-        <h5>
+        <h5 className="padding">
               예약 비용 : 5000원{' '}
         </h5>
         <br/>
-        <br/>  
+
         <br/>  
 
-    <MDBRow>
+        <MDBRow>
     <MDBCol md="4">
     </MDBCol>
     <MDBCol md="8">
-    <Payment/>
+    <Payment
+     title={"화상진료"} 
+     hospitalName={match.params.hospitalName} 
+     name={match.params.name} 
+     medicalSubject={match.params.medicalSubject}
+     selectedDate={selectedDate}
+     />
     </MDBCol>
     </MDBRow>
   

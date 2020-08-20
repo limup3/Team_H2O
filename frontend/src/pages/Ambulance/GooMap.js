@@ -1,4 +1,4 @@
-import React,{useState,useCallback,useRef} from "react";
+import React,{useState,useCallback,useRef, useEffect} from "react";
 import { GoogleMap,useLoadScript,Marker,InfoWindow,} from "@react-google-maps/api";
 import usePlacesAutocomplete, {getGeocode,getLatLng,getZipCode} from "use-places-autocomplete";
 import Geocode from 'react-geocode'
@@ -8,7 +8,6 @@ import './map.css'
 import "@reach/combobox/styles.css";
 import {Button, Col, Form, Row, Image} from "react-bootstrap";
 import mapdata from "./mapdata";
-
 
 const mapContainerStyle ={
     width: "100%",
@@ -28,6 +27,8 @@ const libraries = ["places"];
 
 
 const GooMap = () =>{
+      
+
     const { isLoaded,loadError } = useLoadScript({
         googleMapsApiKey: MAP_KEY,
         libraries,
