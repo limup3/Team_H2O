@@ -1,20 +1,40 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import { Icon, Button } from 'antd';
 import { useHistory } from 'react-router-dom';
 import queryString from 'query-string';
+import { useSelector } from 'react-redux';
+import { MDBBtn} from 'mdbreact';
+import { Modal } from 'react-bootstrap';
+import shortId from 'shortid'
+import './PaymentResult.css'
 
 const PaymentResult = () => {
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const selectorData = {
+    title : useSelector(state => state.reservationReducer.reservationData.title),
+    hospitalName : useSelector(state => state.reservationReducer.reservationData.hospitalName),
+    doctor : useSelector(state => state.reservationReducer.reservationData.name),
+    selectedDate : useSelector(state => state.reservationReducer.reservationData.selectedDate),
+    medicalSubject : useSelector(state => state.reservationReducer.reservationData.medicalSubject),
+  }
+
   const history = useHistory();
   const { location } = history;
   const { search } = location;
   const query = queryString.parse(search);
+
   const handleBack = e => {
     e.preventDefault()
     history.push('/')
     window.location.reload()
   }
-  const { merchant_uid, error_msg, imp_uid } = query;
+  const { error_msg} = query;
   const isSuccessed = getIsSuccessed();
   function getIsSuccessed() {
     const { success, imp_success } = query;
@@ -27,6 +47,8 @@ const PaymentResult = () => {
   const iconType = isSuccessed ? 'check-circle' : 'exclamation-circle';
   const resultType = isSuccessed ? '성공' : '실패';
   const colorType = isSuccessed ? '#52c41a' : '#f5222d';
+
+
   return (
     <Wrapper>
       <Container colorType={colorType}>
@@ -34,21 +56,116 @@ const PaymentResult = () => {
         <p>{`결제에 ${resultType}하였습니다`}</p>
         <ul>
           <li>
-            <span>주문번호</span>
-            <span>{merchant_uid}</span>
+            <span>사용자 </span>
+            <span>{JSON.parse(sessionStorage.userData).name}</span>
           </li>
+
           {isSuccessed  ? (
-            <li>
-              <span>아임포트 번호</span>
-              <span>{imp_uid}</span>
-            </li>
+            <>
+             <li>
+             <span>병원 </span>
+             <span>{selectorData.hospitalName}</span>
+           </li>
+           <br/>
+            <h5 className="textColor"> 예약정보를 확인해주세요 !! </h5>
+            </>
           ) : (
             <li>
               <span>에러 메시지</span>
               <span>{error_msg}</span>
             </li>
           )}
+          
         </ul>
+        
+        {isSuccessed && selectorData.title === "방문진료"  &&
+        <>
+        <Button 
+        className="textColor"
+        onClick={handleShow} >예약정보</Button>
+        <br/>
+        <Modal 
+          show={show} 
+          onHide={handleClose}
+          
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          scrollable={Boolean(true)}
+          >
+        <Modal.Header closeButton>
+          <Modal.Title>{JSON.parse(sessionStorage.reservationData).title} 정보</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            <p> 예약날짜  &nbsp; {selectorData.selectedDate}</p>
+            <br/>
+         
+            <p>고객  &emsp;&emsp; {JSON.parse(sessionStorage.userData).name}</p>
+            <br/>
+        
+            <p>병원  &emsp;&emsp; {selectorData.hospitalName}</p>
+            <br/>
+            <p>진료과  &emsp; {selectorData.medicalSubject}</p>
+            
+    
+            <br/>
+            <p>의사  &emsp;&emsp; {selectorData.doctor}</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <MDBBtn gradient="purple" onClick={handleClose}>
+            확인
+          </MDBBtn>
+        </Modal.Footer>
+        </Modal>
+            </>
+            }
+            
+        {isSuccessed && selectorData.title === "화상진료"  &&
+        <>
+        <Button 
+        className="textColor"
+        onClick={handleShow} >예약정보</Button>
+        <br/>
+        <Modal 
+          show={show} 
+          onHide={handleClose}
+          
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          scrollable={Boolean(true)}
+          >
+        <Modal.Header closeButton>
+          <Modal.Title>{selectorData.title} 정보</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            <p> 예약날짜  &nbsp; {selectorData.selectedDate}</p>
+            <br/>
+
+            <p> 화상진료  &nbsp; {shortId.generate()}</p>
+            <p className="textColorSize"> 예약시간 10분전에 화상진료 아이디로 접속해주세요</p>
+         
+            <p>고객  &emsp;&emsp; {JSON.parse(sessionStorage.userData).name}</p>
+            <br/>
+        
+            <p>병원  &emsp;&emsp; {selectorData.hospitalName}</p>
+            <br/>
+            <p>진료과  &emsp; {selectorData.medicalSubject}</p>
+            
+            <br/>
+            <p>의사  &emsp;&emsp; {selectorData.doctor}</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <MDBBtn gradient="purple" onClick={handleClose}>
+            확인
+          </MDBBtn>
+        </Modal.Footer>
+        </Modal>
+            </>
+            }
+
+        <br/>
+
+        
+
         <Button size="large" onClick={handleBack}>
           <Icon type="arrow-left" />
           돌아가기

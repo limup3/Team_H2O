@@ -52,24 +52,24 @@ public class Hospital {
             String hospitalArea,
             String typeDetail,
             String businessLicenseNumber){
-        this.hospitalName = hospitalName;
-        this.businessLicenseNumber = businessLicenseNumber;
         this.businessStatus = businessStatus;
         this.tel = tel;
         this.addr = addr;
+        this.hospitalName = hospitalName;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.hospitalType = hospitalType;
         this.medicalPeople = medicalPeople;
         this.hospitalRoom = hospitalRoom;
         this.hospitalBed = hospitalBed;
         this.hospitalArea = hospitalArea;
         this.typeDetail = typeDetail;
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.businessLicenseNumber = businessLicenseNumber;
     }
 
-//    @OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL)
-//    private List<Doctor> doctor;
-//
-//    @OneToMany(mappedBy = "hospital")
-//    private List<Board> board;
+    @OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL)
+    private List<Doctor> doctor;
+
+    @OneToMany(mappedBy = "hospital")
+    private List<Board> board;
 }

@@ -7,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -21,9 +22,13 @@ public class QHospital extends EntityPathBase<Hospital> {
 
     public final StringPath addr = createString("addr");
 
+    public final ListPath<com.H2O.backend.board.Board, com.H2O.backend.board.QBoard> board = this.<com.H2O.backend.board.Board, com.H2O.backend.board.QBoard>createList("board", com.H2O.backend.board.Board.class, com.H2O.backend.board.QBoard.class, PathInits.DIRECT2);
+
     public final StringPath businessLicenseNumber = createString("businessLicenseNumber");
 
     public final StringPath businessStatus = createString("businessStatus");
+
+    public final ListPath<com.H2O.backend.doctor.Doctor, com.H2O.backend.doctor.QDoctor> doctor = this.<com.H2O.backend.doctor.Doctor, com.H2O.backend.doctor.QDoctor>createList("doctor", com.H2O.backend.doctor.Doctor.class, com.H2O.backend.doctor.QDoctor.class, PathInits.DIRECT2);
 
     public final StringPath hospitalArea = createString("hospitalArea");
 

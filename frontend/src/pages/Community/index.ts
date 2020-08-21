@@ -1,17 +1,16 @@
 import Community from './Community'
-import Review from './Review'
-import Review2 from './Review2'
 import Edit from './Edit'
-import CustomerServiceCenter from "./CustomerServiceCenter";
+import Review from "./Review.js";
+import CustomerServiceCenter from "./CustomerServiceCenter.js";
 import QueAn from "./QueAn"
-import Fix from "./Fix"
-import CSReview from "./CSReview"
+import Fix from "./Fix.js"
+import CSReview from "./CSReview.js"
 import QAReview from "./QAReview"
 import CSFix from "./CSFix"
 import QAFix from "./QAFix"
-import CommunityTem from "./CommunityTem"
+import CommunityTem from "./CommunityTem";
 import SideBar from "./Sidebar";
 import TablePage from "./TablePage";
 export {
-    TablePage, Community,Review,Edit,CustomerServiceCenter,QueAn,CSFix,Fix,Review2,CSReview,QAReview,QAFix,CommunityTem,SideBar
+    TablePage,Community,Review,Edit,CustomerServiceCenter,QueAn,CSFix,Fix,CSReview,QAReview,QAFix,CommunityTem,SideBar
 }

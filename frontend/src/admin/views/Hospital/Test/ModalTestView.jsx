@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Pagination from '@material-ui/lab/Pagination';
 import axios from 'axios'
-
 import {
   Card,
   TableContainer,
@@ -15,19 +14,18 @@ import {
   Button as MuiButton,
   TablePagination,
   Paper,
-  Checkbox
+  Checkbox,
+  IconButton
 } from '@material-ui/core';
 import { Button, Modal, PageItem, Dropdown, DropdownButton} from 'react-bootstrap'
 import ModalTestBody from './ModalTestBody';
-
 import PropTypes from 'prop-types';
-import IconButton from '@material-ui/core/IconButton';
 import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
-
-
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
 const tableStyles = makeStyles({
   table: {
@@ -37,39 +35,31 @@ const tableStyles = makeStyles({
     alignItems: "center"
   },
   color: {
-    backgroundColor: "#282c34"
+    backgroundColor: "#282C34"
   }
 });
-
 const useStyles1 = makeStyles((theme) => ({
   root: {
     flexShrink: 0,
     marginLeft: theme.spacing(2.5),
   },
 }));
-
-
 const TablePaginationActions = (props) => {
   const classes = useStyles1();
   const theme = useTheme();
   const { count, page, rowsPerPage, onChangePage, setTablePagination } = props;
-
   const handleFirstPageButtonClick = (event) => {
     onChangePage(event, 0);
   };
-
   const handleBackButtonClick = (event) => {
     onChangePage(event, page - 1);
   };
-
   const handleNextButtonClick = (event) => {
     onChangePage(event, page + 1);
   };
-
   const handleLastPageButtonClick = (event) => {
     onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
   };
-
 return (
   <div className={classes.root}>
     <IconButton
@@ -99,33 +89,23 @@ return (
   </div>
 );
 }
-
 TablePaginationActions.propTypes = {
 count: PropTypes.number.isRequired,
 onChangePage: PropTypes.func.isRequired,
 page: PropTypes.number.isRequired,
 rowsPerPage: PropTypes.number.isRequired,
 };
-
-
-
 const ModalTestView = () => {
-
   const tableClasses = tableStyles();
     const [hospitalData, setHospitalData] = useState([])
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(false)
-
     const [show, setShow] = useState(false);
-
     // --------------Pagination ------------------------
     const [newPageSave, setNewPageSave] = useState()
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
-
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, posts.length - page * rowsPerPage);
-
-
     useEffect(()=>{
       setLoading(true);
       axios
@@ -138,24 +118,24 @@ const ModalTestView = () => {
         })
         setLoading(false);
     }, [])
-
     const handleClose = () => {
       setShow(false)
     }
-
     // ----------------- Pagination -----------------------------
     const handleChangePage = (e, newPage) => {
       setPage(newPage);
       setNewPageSave(newPage)
     };
-  
     const handleChangeRowsPerPage = (e) => {
       setRowsPerPage(parseInt(e.target.value, 10));
       setPage(0);
     };
 
+    const handleSortNameUp = () => {
+      
+    }
+
     return (
-        
         <>
         <Card>
         <TableContainer component={Paper}>
@@ -163,7 +143,12 @@ const ModalTestView = () => {
           >
             <TableRow>
               <TableCell componenent="th" align="center" scope="row">No.</TableCell>
-              <TableCell align="center">이름</TableCell>
+              <TableCell align="center">
+                <MuiButton
+                  onClick={handleSortNameUp}>
+                    이름{}
+                </MuiButton>
+              </TableCell>
               <TableCell align="center">사업자 번호</TableCell>
               <TableCell align="center">주소</TableCell>
               <TableCell align="center">병원 형태</TableCell>
@@ -172,15 +157,9 @@ const ModalTestView = () => {
               <TableCell align="center">위도</TableCell>
               <TableCell align="center">경도</TableCell>
               <TableCell align="center">영업상태</TableCell>
-
-              
-
             </TableRow>
-
               <TableBody>
-
                 {/* -------------pagination----------------- */}
-
                   {(rowsPerPage > 0
                     ? posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     : posts
@@ -196,7 +175,6 @@ const ModalTestView = () => {
                       >{hospital.hospitalName}
                       </MuiButton>
                     </TableCell>
-                    
                     <TableCell align="center">{hospital.businessLicenseNumber}</TableCell>
                     <TableCell align="center">{hospital.addr}</TableCell>
                     <TableCell align="center">{hospital.hospitalType}</TableCell>
@@ -205,7 +183,6 @@ const ModalTestView = () => {
                     <TableCell align="center">{hospital.latitude}</TableCell>
                     <TableCell align="center">{hospital.longitude}</TableCell>
                     <TableCell align="center">{hospital.businessStatus}</TableCell>
-                    
                   </TableRow>
                     ))}
                 {emptyRows > 0 && (
@@ -214,10 +191,7 @@ const ModalTestView = () => {
                   </TableRow>
           )}
               </TableBody>
-
-
               {/* ---------------------- Pagination ----------------------------------- */}
-
               <TableFooter>
               <TableRow>
                 <TablePagination
@@ -237,10 +211,7 @@ const ModalTestView = () => {
                 />
               </TableRow>
             </TableFooter>
-              
             {/* ---------------------- Pagination ----------------------------------- */}
-
-                        
               {hospitalData.hospitalName? (
                 <Modal 
                   show={show} 
@@ -263,12 +234,8 @@ const ModalTestView = () => {
           </Table>
         </TableContainer>
         </Card>
-
         {/* -----------Pagination------------ */}
         </>
     )
 }
-
-
-
 export default ModalTestView

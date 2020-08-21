@@ -5,13 +5,10 @@ import {MainTopPage, MainBottomPage} from './pages/splash-page'
 import {SearchHospital} from './pages/SearchHospital'
 import {Ambulance} from './pages/Ambulance'
 import {TeleMedicine, RtcRoom} from './pages/TeleMedicine'
-import {Community, CustomerServiceCenter, QueAn, Review,CSReview, Edit,Review2,QAFix,CSFix,Fix,CommunityTem,QAReview, TablePage} from './pages/Community'
+import {Community, CustomerServiceCenter, QueAn, Review,CSReview, Edit,QAFix,CSFix,QAReview,Fix } from './pages/Community'
 import {Login, SignUp, MyPage, UserModify, UserFindID, UserFindPW, UserDelete, } from './pages/Account'
 import './pages/Community/community.css'
-import { Reservation } from "./pages/Reservation";
-import Payment from "./layout/Payment";
-import PaymentResult from "./layout/PaymentResult";
-
+import { Reservation, TelReservation } from "./pages/Reservation";
 
 const Page = () => (
 
@@ -28,9 +25,19 @@ const Page = () => (
                     <Footer/>
             </Route>
             
-            <Route path="/Reservation">
+            <Route path="/Reservation/:hospitalName/:name/:medicalSubject">
                     <NavBar/>
-                    <Reservation/>
+                    <Route path={`/Reservation/:hospitalName/:name/:medicalSubject`}
+                       render = {(props) => <Reservation {...props}/>}>
+                    </Route>
+                    <Footer/>
+            </Route>
+            <Route path="/TelReservation/:hospitalName/:name/:medicalSubject">
+                    <NavBar/>
+                    <Route path={`/TelReservation/:hospitalName/:name/:medicalSubject`}
+                       render = {(props) => <TelReservation {...props}/>}>
+                    </Route>
+
                     <Footer/>
             </Route>
 
@@ -57,16 +64,29 @@ const Page = () => (
             </Route>
 
             <Route path="/Review">
-                    <NavBar/>
-                    <Review/>
-                    <Footer/>
+                <NavBar/>
+                <Route path={`/Community/Review/:boardNo`}
+                       render = {(props) => <Review {...props}/>}>
+                </Route>
+                <Footer/>
+            </Route>
+
+            <Route path="/Fix">
+                <NavBar/>
+                <Route path={`/Community/Fix/:boardNo`}
+                       render = {(props) => <Fix {...props}/>}>
+                </Route>
+                <Footer/>
             </Route>
 
             <Route path="/CSReview">
-                    <NavBar/>
-                    <CSReview/>
-                    <Footer/>
+            <NavBar/>
+            <Route path={`/Community/CSReview/:boardNo`}
+                   render = {(props) => <CSReview {...props}/>}>
             </Route>
+            <Footer/>
+        </Route>
+            
             <Route path="/CSFix">
                     <NavBar/>
                     <CSFix/>
@@ -131,19 +151,7 @@ const Page = () => (
                     <SignUp/>
                     <Footer/>
             </Route>
-
-            <Route path="/Review2">
-                    <NavBar/>
-                    <Review2/>
-                    <Footer/>
-            </Route>
-
-            <Route path="/Fix">
-                    <NavBar/>
-                    <Fix/>
-                    <Footer/>
-            </Route>
-            
+                  
             <React.Fragment>
                     <Route path="/TeleMedicine" exact component={RtcRoom}/>
                     <Route path="/TeleMedicine/:roomId" exact component={TeleMedicine}/>

@@ -26,15 +26,15 @@ public class QBoard extends EntityPathBase<Board> {
 
     public final StringPath category = createString("category");
 
-    public final ListPath<com.H2O.backend.comment.Comment, com.H2O.backend.comment.QComment> comment = this.<com.H2O.backend.comment.Comment, com.H2O.backend.comment.QComment>createList("comment", com.H2O.backend.comment.Comment.class, com.H2O.backend.comment.QComment.class, PathInits.DIRECT2);
+    public final NumberPath<Integer> click = createNumber("click", Integer.class);
 
     public final StringPath content = createString("content");
 
-    public final StringPath creationDate = createString("creationDate");
+    public final DatePath<java.time.LocalDate> creationDate = createDate("creationDate", java.time.LocalDate.class);
 
     public final com.H2O.backend.hospital.QHospital hospital;
 
-    public final StringPath hospitalStar = createString("hospitalStar");
+    public final StringPath medCategory = createString("medCategory");
 
     public final StringPath title = createString("title");
 

@@ -4,6 +4,7 @@ import Payment from "../../layout/Payment";
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { MDBCard, MDBCardBody, MDBCardTitle,  MDBCol, MDBRow } from 'mdbreact';
+
 const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
@@ -16,8 +17,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Reservation = ({match}) =>  {
 
+const TelReservation = ({match}) =>  {
   var today = new Date();
   var dd = today.getDate();
   var mm = today.getMonth()+1; //January is 0!
@@ -35,7 +36,6 @@ const Reservation = ({match}) =>  {
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState(today)
 
-
   return (
 
     <div>
@@ -48,7 +48,7 @@ const Reservation = ({match}) =>  {
             }}>
         <br/>      
         <MDBCardTitle cascade className='text-center'>
-              <strong>방문진료 예약 </strong>
+              <strong>화상진료 예약</strong>
             </MDBCardTitle>
             <br/>  
           <div className={"reservation"}>
@@ -89,12 +89,12 @@ const Reservation = ({match}) =>  {
 
         <br/>  
 
-    <MDBRow>
+        <MDBRow>
     <MDBCol md="4">
     </MDBCol>
     <MDBCol md="8">
     <Payment
-     title={"방문진료"} 
+     title={"화상진료"} 
      hospitalName={match.params.hospitalName} 
      name={match.params.name} 
      medicalSubject={match.params.medicalSubject}
@@ -111,4 +111,4 @@ const Reservation = ({match}) =>  {
 
   );
 }
-export default Reservation
+export default TelReservation

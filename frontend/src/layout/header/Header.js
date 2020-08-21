@@ -57,7 +57,6 @@ const handleLogout = () => {
 }
 
 export default ({ roundedHeaderButton = false, logoLink, links, className, collapseBreakpointClass = "lg" }) => {
-  console.log(sessionStorage.userData)
 
   const defaultLinks = [
     <NavLinks key={1} >

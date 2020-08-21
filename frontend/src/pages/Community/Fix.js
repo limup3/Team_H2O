@@ -1,23 +1,80 @@
-import React, {useState} from "react";
-import {Container,Form, Button,Modal,Table,} from "react-bootstrap";
+import React, {useEffect, useState} from "react";
+import {Container,Form, Button,Modal,Table,Col} from "react-bootstrap";
 import {Link, useHistory} from "react-router-dom";
 import './styles.css'
 import './community.css'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css';
+import axios from "axios"
 
 
-
-const Fix = () => {
-    const [value, setValue] = useState('')
+const Fix = ({match}) => {
     const [show, setShow] = useState(false);
     const history = useHistory();
+    const [value, setValue] = useState('')
+    const [title, setTitle] = useState('')
+    const [postList, setPostList] = useState('')
 
-    const handleClose = (e:any) => {
+    const handleClose = (e) => {
         e.preventDefault();
         history.push("/Review")
         setShow(false);
     }
+
+
+    const getContent = e =>{
+        e.preventDefault();
+        console.log(`title ${setPostList}`)
+        axios
+            .get(`http://localhost:8080/board/list/medCategory/${match.params.boardNo}`)
+            .then((res)=>{
+                sessionStorage.setItem("board",JSON.stringify(res.data))
+                setPostList(res.data)
+                setTitle(res.data)
+            })
+            .catch((err)=>{
+                throw err;
+            })
+    }
+
+    useEffect(() => {
+        // const title =sessionStorage.getItem("title")
+        // setTitle(title)
+        // setBoardNo(match.params.boardNo)
+        axios
+            .get(`http://localhost:8080/board/list/medCategory/${match.params.boardNo}`)
+            .then((res)=>{
+                // console.log(data);
+                // setPostList(data)
+                setTitle(res.data.title)
+                setValue(res.data.value)
+            })
+            .catch((err)=>{
+                throw err;
+            })
+    }, [])
+
+    const newContant = e =>{
+        e.preventDefault()
+        const board ={
+            title : title,
+            content : value,
+        }
+        if(title ==="" || value ==="" ){
+            alert('입력창을 다채워주세요')
+        }else{
+            axios
+                .patch(`http://localhost:8080/board/update/${match.params.boardNo}`, board)
+                .then((res)=>{
+                    console.log(res.data)
+                    window.location.href="/Community"
+                })
+                .catch((err)=>{
+                    throw err;
+                })
+        }
+    }
+
 
     const handleShow = () => setShow(true);
 
@@ -61,19 +118,25 @@ const Fix = () => {
 
                         </td>
                         <td>
-                            <textPath>
+                            <textPath
+                                value={value}
+                                onChange={getContent}
+                            >
+                                <Form.Label column sm={1} style={{textAlign : 'center'}}>
+                                    제목
+                                </Form.Label>
+                                <Col>
+                                    <Form.Control onChange={e=>setTitle(e.target.value)} value={title} as="input"/>
+                                </Col>
                                 <ReactQuill
                                     theme="snow"
                                     value={value}
                                     onChange={setValue}
                                     modules={modules}
                                     formats={formats}
-                                ><textPath>
-                                Great to spend time with Mike Singletary while going to Texas. He’s one of the greatest football players ever — A strong man and a really good person. Great being with you Mike! pic.twitter.com/lWsYn4lhOm
-                                </textPath>
-                                </ReactQuill>
-                                </textPath>
-
+                                />
+                                    {postList.title}
+                            </textPath>
                         </td>
                         <td>2020.07.31</td>
                     </tr>
@@ -82,15 +145,15 @@ const Fix = () => {
                 <div className="fix-btn">
                     <tr>
                         <td>
-                    <Button className="fix-sub" variant="primary" onClick={handleShow}
-                    >Submit
-                    </Button>
+                            <Button className="fix-sub" variant="primary" onClick={handleShow}
+                            >Submit
+                            </Button>
                         </td>
-                    <td>
-                    <Button className="fix-can" variant="danger">
-                        <Link to="/Review">Cancel</Link>
-                    </Button>
-                    </td>
+                        <td>
+                            <Button className="fix-can" variant="danger">
+                                <Link to="/Review">Cancel</Link>
+                            </Button>
+                        </td>
                     </tr>
                     <Modal show={show} onHide={handleClose}>
                         <Modal.Header closeButton>
@@ -101,7 +164,7 @@ const Fix = () => {
                             <Button onClick={handleClose}>
                                 Close
                             </Button>
-                            <Button  onClick={handleClose}>
+                            <Button  onClick={newContant}>
                                 Submit
                             </Button>
                         </Modal.Footer>

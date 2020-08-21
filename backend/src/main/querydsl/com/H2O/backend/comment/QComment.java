@@ -30,7 +30,7 @@ public class QComment extends EntityPathBase<Comment> {
 
     public final StringPath content = createString("content");
 
-    public final StringPath creationDate = createString("creationDate");
+    public final DatePath<java.time.LocalDate> creationDate = createDate("creationDate", java.time.LocalDate.class);
 
     public final StringPath sequenceNo = createString("sequenceNo");
 
