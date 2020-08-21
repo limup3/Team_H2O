@@ -2,10 +2,6 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 
 import { HospitalsToolbar, HospitalsTable } from './components';
-import mockData from './data';
-import HospitalPagination from './components/HospitalPagination/HospitalPagination';
-import { usePagination } from '@material-ui/lab/Pagination';
-import HospitalPagination2 from './components/HospitalPagination/HospitalPagination';
 import ModalTestView from './Test/ModalTestView';
 
 
@@ -20,9 +16,6 @@ const useStyles = makeStyles(theme => ({
 
 const HospitalList = () => {
   const classes = useStyles();
-
-  const [hospitals] = useState(mockData);
-
   return (
     <div className={classes.root}>
       <HospitalsToolbar />

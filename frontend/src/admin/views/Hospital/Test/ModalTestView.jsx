@@ -16,9 +16,8 @@ import {
   TablePagination,
   Paper
 } from '@material-ui/core';
-import { Button, Modal } from 'react-bootstrap'
+import { Button, Modal, PageItem } from 'react-bootstrap'
 import ModalTestBody from './ModalTestBody';
-import PaginationAction from './PaginationAction'
 
 import PropTypes from 'prop-types';
 import IconButton from '@material-ui/core/IconButton';
@@ -110,7 +109,6 @@ rowsPerPage: PropTypes.number.isRequired,
 const ModalTestView = () => {
 
   const tableClasses = tableStyles();
-
     const [hospitalData, setHospitalData] = useState([])
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(false)
@@ -118,7 +116,8 @@ const ModalTestView = () => {
     const [show, setShow] = useState(false);
 
     // --------------Pagination ------------------------
-    const [page, setPage] = useState(1);
+    const [newPageSave, setNewPageSave] = useState()
+    const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, posts.length - page * rowsPerPage);
@@ -135,7 +134,7 @@ const ModalTestView = () => {
         })
         setLoading(false);
     }, [])
-    
+
     const handleClose = () => {
       setShow(false)
     }
@@ -143,12 +142,16 @@ const ModalTestView = () => {
     // ----------------- Pagination -----------------------------
     const handleChangePage = (e, newPage) => {
       setPage(newPage);
+      setNewPageSave(newPage)
     };
   
     const handleChangeRowsPerPage = (e) => {
       setRowsPerPage(parseInt(e.target.value, 10));
       setPage(0);
     };
+
+    console.log("-2-View")
+    console.log(newPageSave)
 
     return (
         
@@ -174,7 +177,6 @@ const ModalTestView = () => {
 
                 {/* -------------pagination----------------- */}
 
-                {/* {posts.slice(0,10).map((hospital, i) => ( */}
                   {(rowsPerPage > 0
                     ? posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     : posts
@@ -249,21 +251,13 @@ const ModalTestView = () => {
                   <Modal.Title>등록 병원 정보</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <ModalTestBody hospitalData={hospitalData} setClose={(close)=>{setShow(close)}}/>
+                  <ModalTestBody 
+                    hospitalData={hospitalData} 
+                    setClose={(close)=>{setShow(close)}}
+                    />
                   </Modal.Body>
               </Modal>):null}
           </Table>
-          {/* <PaginationAction
-            component="div"
-            rowsPerPageOptions={[10, 50, 100]}
-
-            count={posts.length}
-            page={page}
-            rowsPerPage={rowsPerPage}
-            onChangePage={handleChangePage}
-
-            onChangeRowsPerPage={handleChangeRowsPerPage}
-          /> */}
         </TableContainer>
         </Card>
 

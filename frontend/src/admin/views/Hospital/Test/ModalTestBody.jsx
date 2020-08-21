@@ -26,9 +26,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ModalTestBody = ({hospitalData, setClose, className}) => {
+const ModalTestBody = (props) => {
     const classes = useStyles();
-
+    const {hospitalData, setClose, className} = props
     // const {hospitalData} = props    
     const [hospitalNo, setHospitalNo] = useState(hospitalData.hospitalNo)
     const [hospitalName, setHospitalName] = useState(hospitalData.hospitalName)
@@ -46,7 +46,7 @@ const ModalTestBody = ({hospitalData, setClose, className}) => {
     const [longitude, setLongitude] = useState(hospitalData.longitude)
     // const [close, setClose]= useState()
     const [values, setValues] = useState([]);
-
+    
     const [checked, setChecked] = useState({
       checkBox1 : false,
       checkBox2 : false,
@@ -60,7 +60,8 @@ const ModalTestBody = ({hospitalData, setClose, className}) => {
         case `폐업`: return setChecked({...checked, checkBox2:true})
       }
     }, [])
-    
+
+
     const handleClose = () => {
       setClose(false);
     }
@@ -104,9 +105,11 @@ const ModalTestBody = ({hospitalData, setClose, className}) => {
         .patch(`http://localhost:8080/hospital/modify/${businessLicenseNumber}`, hospitalJson)
         .then(response => {
           alert("병원 데이터 변경 성공")
+          setClose(false);
+          
           history.push("/admin")
           history.push("/admin/hospital")
-          setClose(false);
+
         })
         .catch(
           error => {
