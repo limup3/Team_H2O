@@ -14,9 +14,10 @@ import {
   TableFooter,
   Button as MuiButton,
   TablePagination,
-  Paper
+  Paper,
+  Checkbox
 } from '@material-ui/core';
-import { Button, Modal, PageItem } from 'react-bootstrap'
+import { Button, Modal, PageItem, Dropdown, DropdownButton} from 'react-bootstrap'
 import ModalTestBody from './ModalTestBody';
 
 import PropTypes from 'prop-types';
@@ -25,6 +26,8 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
+
+
 
 const tableStyles = makeStyles({
   table: {
@@ -122,6 +125,14 @@ const ModalTestView = () => {
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, posts.length - page * rowsPerPage);
 
+
+    // -------------- Pagination2-----------------
+    const [order, setOrder] = useState('asc');
+    const [orderBy, setOrderBy] = useState('calories');
+    const [selected, setSelected] = useState([]);
+    const [dense, setDense] = useState(false);
+
+
     useEffect(()=>{
       setLoading(true);
       axios
@@ -150,8 +161,48 @@ const ModalTestView = () => {
       setPage(0);
     };
 
-    console.log("-2-View")
-    console.log(newPageSave)
+    // ----------------- Pagination2 -----------------------------
+
+    const handleRequestSort = (event, property) => {
+      const isAsc = orderBy === property && order === 'asc';
+      setOrder(isAsc ? 'desc' : 'asc');
+      setOrderBy(property);
+    };
+    const handleSelectAllClick = (event) => {
+      if (event.target.checked) {
+        const newSelecteds = posts.map((n) => n.name);
+        setSelected(newSelecteds);
+        return;
+      }
+      setSelected([]);
+    };
+  
+    const handleClick = (event, name) => {
+      const selectedIndex = selected.indexOf(name);
+      let newSelected = [];
+  
+      if (selectedIndex === -1) {
+        newSelected = newSelected.concat(selected, name);
+      } else if (selectedIndex === 0) {
+        newSelected = newSelected.concat(selected.slice(1));
+      } else if (selectedIndex === selected.length - 1) {
+        newSelected = newSelected.concat(selected.slice(0, -1));
+      } else if (selectedIndex > 0) {
+        newSelected = newSelected.concat(
+          selected.slice(0, selectedIndex),
+          selected.slice(selectedIndex + 1),
+        );
+      }
+  
+      setSelected(newSelected);
+    };
+  
+    const handleChangeDense = (event) => {
+      setDense(event.target.checked);
+    };
+  
+    const isSelected = (name) => selected.indexOf(name) !== -1;
+
 
     return (
         
@@ -171,6 +222,9 @@ const ModalTestView = () => {
               <TableCell align="center">위도</TableCell>
               <TableCell align="center">경도</TableCell>
               <TableCell align="center">영업상태</TableCell>
+
+              
+
             </TableRow>
 
               <TableBody>
@@ -180,13 +234,22 @@ const ModalTestView = () => {
                   {(rowsPerPage > 0
                     ? posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     : posts
-                    ).map((hospital, i) => (
+                    ).map((hospital, i) => {
+                      const isItemSelected = isSelected(posts.name);
+                      const labelId = `enhanced-table-checkbox-${i}`;
 
+                  return (
                   <TableRow
                     align="center"
                     key={i}
                     onClick={()=>setHospitalData(hospital)}
                   >
+                    <TableCell padding="checkbox">
+                        <Checkbox
+                          checked={isItemSelected}
+                          inputProps={{ 'aria-labelledby': labelId }}
+                        />
+                    </TableCell>
                     <TableCell align="center">{hospital.hospitalNo}</TableCell>
                     <TableCell align="center">
                       <MuiButton variant="light" onClick={()=>setShow(true)}
@@ -204,7 +267,7 @@ const ModalTestView = () => {
                     <TableCell align="center">{hospital.businessStatus}</TableCell>
                     
                   </TableRow>
-                ))}
+                    )})}
                 {emptyRows > 0 && (
                   <TableRow style={{ height: 53 * emptyRows }}>
                     <TableCell colSpan={6} />
