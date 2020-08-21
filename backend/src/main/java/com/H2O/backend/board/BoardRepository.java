@@ -16,12 +16,12 @@ public List<Board> findAllByMedCategory(String medCategory);
 
 public Board findAllByTitle(String title);
 
-
 public Board deleteAllByBoardNo(String boardNo);
+//public Board modifyByBoard(String boardNo);
 
-@Modifying(clearAutomatically = true, flushAutomatically = true)
-@Query(value="update board set content = :content where boardNo = :boardNo",nativeQuery=true)
-public void update(@Param("content") String content, @Param("boardNo") String boardNo);
+//@Modifying(clearAutomatically = true, flushAutomatically = true)
+//@Query(value="update board set content = :content where boardNo = :boardNo",nativeQuery=true)
+//public void update(@Param("content")String content, @Param("boardNo")String boardNo );
 
 
 }

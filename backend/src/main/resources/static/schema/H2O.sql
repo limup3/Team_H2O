@@ -35,11 +35,12 @@ CREATE TABLE Board
     `Hospital_Star`  VARCHAR(10)     NULL,
     `Title`          VARCHAR(80)     NULL,
     `Content`        VARCHAR(150)    NULL,
-    `Creation_Date`  VARCHAR(20)     NULL,
+    `Creation_Date`  DATE     NULL,
     `Category`       VARCHAR(20)     NULL,
     `Med_Category`   VARCHAR(20)     NULL,
     `User_No`        INT             NULL,
     `Hospital_No`    INT             NULL,
+    `Click`          INT             NULL,
     PRIMARY KEY (Board_No)
 )default character set utf8 collate UTF8_GENERAL_CI;
 CREATE TABLE User
@@ -90,7 +91,7 @@ CREATE TABLE Comments
 (
     `Comments_No`     INT             NOT NULL    AUTO_INCREMENT,
     `Content`         VARCHAR(255)    NULL,
-    `Creation_Date`   VARCHAR(20)     NULL,
+    `Creation_Date`   DATE     NULL,
     `Board_No`        INT             NULL,
     `Comments_Reply`  VARCHAR(255)    NULL,
     `Sequence_No`     INT             NULL,

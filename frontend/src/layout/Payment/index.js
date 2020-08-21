@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from 'react';
 import {useHistory} from 'react-router-dom';
 import { MDBBtn} from 'mdbreact';
@@ -40,18 +39,6 @@ const Payment = (props) => {
   dispatch(reservationAction({reservationData}))
 
 
-=======
-import React, { useState, } from 'react';
-import {useHistory } from 'react-router-dom';
-import { MDBBtn} from 'mdbreact';
-import queryString from 'query-string';
-
-
-const Payment = () => {
-
-  const history = useHistory();
-
->>>>>>> deokhaeng
     const onClickPayment = () => {
         const { IMP } = window;
         IMP.init('imp75154757');
@@ -64,26 +51,18 @@ const Payment = () => {
             amount: '5000', // 가격
             buyer_name : '홍길동', // 구매자 이름
             buyer_tel: '010-1234-5678', // 구매자 번호
-<<<<<<< HEAD
             buyer_email: 'limup3@gmail.com' // 구매자 이메일
-=======
-            buyer_email: 'lim_1994@naver.com' // 구매자 이메일
->>>>>>> deokhaeng
         }
     
         IMP.request_pay(data, callback);
     }
 
-<<<<<<< HEAD
    
 
-=======
->>>>>>> deokhaeng
     function callback(response) {
         const query = queryString.stringify(response);
         history.push(`/payment/result?${query}`);
       }
-<<<<<<< HEAD
       return (
         <>
             <MDBBtn 
@@ -92,12 +71,6 @@ const Payment = () => {
             onClick={() => onClickPayment()}
 
             >결제하기</MDBBtn>
-=======
-
-      return (
-        <>
-            <MDBBtn gradient="purple" size="lg" onClick={() => onClickPayment()}>결제하기</MDBBtn>
->>>>>>> deokhaeng
         </>
     );
 

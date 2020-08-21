@@ -89,7 +89,7 @@ const Edit = () => {
                                     onChange={(e)=>setCategory(e.target.value)}
                             >
                                 <option value="항목선택">항목선택</option>{''}
-                                <option value="자유게시판" >자유게시판</option>
+                                <option value="자유게시판">자유게시판</option>
                                 <option value="고객서비스센터">고객서비스센터</option>
                                 <option value="Q&A">Q&A</option>
                             </select> <br/>
@@ -140,8 +140,7 @@ const Edit = () => {
                         <Form>
                             <Form.Group>
                                 <Form.File id="exampleFormControlFile1" label="사진 및 동영상 올리기" />
-                                <Button className="Submit" variant="primary" onClick={handleShow}
-                                >Submit</Button>
+
                                 <Modal show={show} onHide={handleClose}>
                                     <Modal.Header closeButton>
                                         <Modal.Title>전송 확인</Modal.Title>
@@ -161,6 +160,9 @@ const Edit = () => {
                                 <Button className="Cancel" variant="danger">
                                     <Link to="/Community">Cancel</Link>
                                 </Button>
+                                <Button className="Submit" variant="primary" onClick={handleShow}
+                                >Submit</Button>
+
 
                             </Form.Group>
                         </Form>

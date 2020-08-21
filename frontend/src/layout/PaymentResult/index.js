@@ -1,13 +1,8 @@
-<<<<<<< HEAD
 import React, {useState} from 'react';
-=======
-import React from 'react';
->>>>>>> deokhaeng
 import styled from 'styled-components';
 import { Icon, Button } from 'antd';
 import { useHistory } from 'react-router-dom';
 import queryString from 'query-string';
-<<<<<<< HEAD
 import { useSelector } from 'react-redux';
 import { MDBBtn} from 'mdbreact';
 import { Modal } from 'react-bootstrap';
@@ -29,28 +24,17 @@ const PaymentResult = () => {
     medicalSubject : useSelector(state => state.reservationReducer.reservationData.medicalSubject),
   }
 
-=======
-
-const PaymentResult = () => {
->>>>>>> deokhaeng
   const history = useHistory();
   const { location } = history;
   const { search } = location;
   const query = queryString.parse(search);
-<<<<<<< HEAD
 
-=======
->>>>>>> deokhaeng
   const handleBack = e => {
     e.preventDefault()
     history.push('/')
     window.location.reload()
   }
-<<<<<<< HEAD
   const { error_msg} = query;
-=======
-  const { merchant_uid, error_msg, imp_uid } = query;
->>>>>>> deokhaeng
   const isSuccessed = getIsSuccessed();
   function getIsSuccessed() {
     const { success, imp_success } = query;
@@ -63,11 +47,8 @@ const PaymentResult = () => {
   const iconType = isSuccessed ? 'check-circle' : 'exclamation-circle';
   const resultType = isSuccessed ? '성공' : '실패';
   const colorType = isSuccessed ? '#52c41a' : '#f5222d';
-<<<<<<< HEAD
 
 
-=======
->>>>>>> deokhaeng
   return (
     <Wrapper>
       <Container colorType={colorType}>
@@ -75,7 +56,6 @@ const PaymentResult = () => {
         <p>{`결제에 ${resultType}하였습니다`}</p>
         <ul>
           <li>
-<<<<<<< HEAD
             <span>사용자 </span>
             <span>{JSON.parse(sessionStorage.userData).name}</span>
           </li>
@@ -89,23 +69,12 @@ const PaymentResult = () => {
            <br/>
             <h5 className="textColor"> 예약정보를 확인해주세요 !! </h5>
             </>
-=======
-            <span>주문번호</span>
-            <span>{merchant_uid}</span>
-          </li>
-          {isSuccessed  ? (
-            <li>
-              <span>아임포트 번호</span>
-              <span>{imp_uid}</span>
-            </li>
->>>>>>> deokhaeng
           ) : (
             <li>
               <span>에러 메시지</span>
               <span>{error_msg}</span>
             </li>
           )}
-<<<<<<< HEAD
           
         </ul>
         
@@ -197,9 +166,6 @@ const PaymentResult = () => {
 
         
 
-=======
-        </ul>
->>>>>>> deokhaeng
         <Button size="large" onClick={handleBack}>
           <Icon type="arrow-left" />
           돌아가기

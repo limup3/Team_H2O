@@ -1,4 +1,3 @@
-import React from 'react';
 
 export const mapdata = [
     {
@@ -8,9 +7,9 @@ export const mapdata = [
         "branch_address":null,
         "x_value":37.550999,
         "y_value":126.8589698,
-        "info":"서울시 서대문구 홍은동 동신병원입니다."
-        // "image":"서울시 서대문구 홍은동 동신병원입니다."
-
+        "info":"서울시 서대문구 홍은동 동신병원입니다.",
+        "website" : "http://www.dshospital.co.kr/",
+        "TelePhone" : "02-396-9161"
     },
     {
         "sights_id":2,
@@ -19,7 +18,9 @@ export const mapdata = [
         "branch_address":null,
         "x_value":37.493433,
         "y_value":126.923457,
-        "info":"서울시 서대문구 홍은동 동신병원입니다."
+        "info":"서울시 서대문구 홍은동 동신병원입니다.",
+        "website" : "http://www.dshospital.co.kr/",
+        "TelePhone" : "02-396-9161"
     },
     {
         "sights_id":3,
@@ -28,7 +29,9 @@ export const mapdata = [
         "branch_address":null,
         "x_value":37.506995,
         "y_value":126.961064,
-        "info":"서울시 서대문구 홍은동 동신병원입니다."
+        "info":"서울시 서대문구 홍은동 동신병원입니다.",
+        "website" : "http://www.dshospital.co.kr/",
+        "TelePhone" : "02-396-9161"
     },
     {
         "sights_id":4,
@@ -37,7 +40,9 @@ export const mapdata = [
         "branch_address":null,
         "x_value":37.4841955,
         "y_value":126.932492,
-        "info":"서울시 서대문구 홍은동 동신병원입니다."
+        "info":"서울시 서대문구 홍은동 동신병원입니다.",
+        "website" : "http://www.dshospital.co.kr/",
+        "TelePhone" : "02-396-9161"
     },
     {
         "sights_id":5,
@@ -55,7 +60,9 @@ export const mapdata = [
         "branch_address":null,
         "x_value":37.5672914,
         "y_value":126.966939,
-        "info":"서울시 서대문구 홍은동 동신병원입니다."
+        "info":"서울시 서대문구 홍은동 동신병원입니다.",
+        "website" : "http://www.dshospital.co.kr/",
+        "TelePhone" : "02-396-9161"
     },
     {
         "sights_id":7,

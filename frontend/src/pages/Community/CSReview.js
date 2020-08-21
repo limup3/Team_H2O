@@ -8,7 +8,8 @@ import axios from "axios";
 import ReactQuill from "react-quill";
 import {localeData} from "moment";
 
-const Review = ({match}) => {
+const CSReview = ({match}) => {
+
   const [postList, setPostList] = useState('')
   const [content, setContent] = useState('')
   const [title, setTitle] = useState('')
@@ -19,7 +20,7 @@ const Review = ({match}) => {
   const history = useHistory()
 
   const handleQuill = (value) => {
-     setContent(value)
+    setContent(value)
   }
 
 
@@ -48,7 +49,7 @@ const Review = ({match}) => {
     console.log(`boardNo : ${boardNo}, title : ${title}, content : ${content}`)
     // setReadOnly(false)
     const uploadData = {
-    // boardNo: boardNo,
+      // boardNo: boardNo,
       title: title,
       content: content,
       creationDate: creationDate
@@ -82,37 +83,72 @@ const Review = ({match}) => {
       .delete(`http://localhost:8080/board/list/delete/${match.params.boardNo}`)
       .then((res) => {
         console.log(res)
-        history.push('/Community')
+        history.push('/CustomerServiceCenter')
       })
       .catch((err) => {
         throw err;
       })
   }
 
+
+  const [value, setValue] = useState('')
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const modules = {
-    toolbar: [
-      ['bold', 'italic', 'underline', 'strike', 'link', 'image']
-
-    ]
+      toolbar: [
+          ['bold', 'italic', 'underline', 'strike', 'link', 'image']
+      ]
   }
-
   const formats = [
-    'bold',
-    'italic',
-    'underline',
-    'strike',
-    'link',
-    'image']
-
+      'bold',
+      'italic',
+      'underline',
+      'strike',
+      'link',
+      'image'
+  ]
   return (
     <>
-      {/*<h2 style={{'display': 'hidden'}}>BoardNo : {boardNo}</h2>*/}
-      {/*<h2>BoardNo : {boardNo}</h2>*/}
-      {/*/!*<h2>localDate : {creationDate(LocalDateTime.now())}</h2>*!/*/}
-      {/*<button onClick={()=>setClick(click+1)}>click me! : {click}</button>*/}
-      {/*<h2>CreateDate : {creationDate}</h2>*/}
-
       <Container>
+        {/*<div className="Rev-tab">*/}
+        {/*    <Table striped bordered hover size="sm">*/}
+        {/*        <thead>*/}
+        {/*        <tr>*/}
+        {/*            <th style={{width:"180px"}}>사용자</th>*/}
+        {/*            <th>내용</th>*/}
+        {/*            <th style={{width:"150px"}}>게시날짜</th>*/}
+        {/*        </tr>*/}
+        {/*        </thead>*/}
+        {/*        <tbody>*/}
+        {/*        <tr className="Rev">*/}
+        {/*            <td>*/}
+        {/*                <textPath*/}
+        {/*                    className="use-pic">*/}
+        {/*                    Donald J. Trump @realDonaldTrump*/}
+        {/*                </textPath>*/}
+        {/*            </td>*/}
+        {/*            <td>*/}
+        {/*                <textPath>*/}
+        {/*                    원하는 서비스를 제공받을수가 없습니다,  오류를 해결해주세요.*/}
+        {/*                </textPath>*/}
+        {/*            </td>*/}
+        {/*            <td>2020.07.31</td>*/}
+        {/*        </tr>*/}
+        {/*        </tbody>*/}
+        {/*    </Table>*/}
+        {/*    <Button className="fix-btn" variant="secondary" >*/}
+        {/*        <Link to='/CSFix'>수정하기</Link></Button>*/}
+        {/*    <Form.Group className="comment">*/}
+        {/*        <button className='comment-btn' >댓글 :</button>*/}
+        {/*        <Form.Control type="text" placeholder="Normal text" />*/}
+        {/*        <Button className="fix-btn" variant="secondary" >*/}
+        {/*            <Link to='/CSReview'>댓글달기</Link>*/}
+        {/*        </Button>*/}
+        {/*    </Form.Group>*/}
+        {/*</div>*/}
+
         <div className="Rev-tab">
           <textPath>
             <Link to="/https://twitter.com/realdonaldtrump">
@@ -131,13 +167,13 @@ const Review = ({match}) => {
 
               <th>
                 제목 :
-                  {readOnly && title}
+                {readOnly && title}
 
-                  {!readOnly && (
-                    <input
-                      value={title}
-                      onChange={e=>setTitle(e.target.value)}
-                    />)}
+                {!readOnly && (
+                  <input
+                    value={title}
+                    onChange={e=>setTitle(e.target.value)}
+                  />)}
 
               </th>
               <th style={{width: "150px"}}>게시날짜</th>
@@ -164,15 +200,15 @@ const Review = ({match}) => {
                   readOnly
                 />}
 
-                  {!readOnly &&
-                  <ReactQuill  // 수정하기 클릭이후 내용정보 수정하기 사용가능.
-                    theme="snow"
-                    value={content}
-                    onChange={handleQuill}
-                    modules={modules}
-                    formats={formats}
-                  />
-                  }
+                {!readOnly &&
+                <ReactQuill  // 수정하기 클릭이후 내용정보 수정하기 사용가능.
+                  theme="snow"
+                  value={content}
+                  onChange={handleQuill}
+                  modules={modules}
+                  formats={formats}
+                />
+                }
               </td>
               <td>{creationDate}</td>
             </tr>
@@ -180,7 +216,7 @@ const Review = ({match}) => {
           </Table>
 
           <textPath>
-            
+
             {readOnly &&
             <div>
               <Button className="fix-btn" //클릭시 수정하기 모드로 변환
@@ -230,4 +266,5 @@ const Review = ({match}) => {
   );
 };
 
-export default Review;
+export default CSReview;
+

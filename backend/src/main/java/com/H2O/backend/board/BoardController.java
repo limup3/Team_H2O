@@ -3,6 +3,9 @@ package com.H2O.backend.board;
 import com.H2O.backend.util.boardEnum.Messenger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,19 +28,25 @@ public class BoardController {
     public ResponseEntity<List<Board>> getAllBoardList(@RequestBody Board board){
         Board Bdata = new Board();
         Bdata.setTitle(board.getTitle());
-        System.out.println(board.getTitle());
+//        System.out.println(board.getTitle());
 
         Bdata.setContent(board.getContent());
-        System.out.println(board.getContent());
+//        System.out.println(board.getContent());
 
         Bdata.setCreationDate(board.getCreationDate());
-        System.out.println(board.getCreationDate());
+//        System.out.println(board.getCreationDate());
 
         Bdata.setMedCategory(board.getMedCategory());
-        System.out.println(board.getMedCategory());
+//        System.out.println(board.getMedCategory());
 
         Bdata.setCategory(board.getCategory());
-        System.out.println(board.getCategory());
+//        System.out.println(board.getCategory());
+
+        Bdata.setClick(board.getClick());
+        System.out.println(board.getClick());
+
+        Bdata.setCreationDate(LocalDate.now());
+//        System.out.println(board.getCreationDate());
 
         boardRepository.save(Bdata);
         List<Board> boardList = boardService.findAll();
@@ -52,25 +61,14 @@ public class BoardController {
     }
 
 
-    @GetMapping("/list/medCategory/{title}")
-    public Board getFindTitle(@PathVariable String title){
-        System.out.println(title);
-        Board findTitle = boardService.findTitle(title);
-        System.out.println(findTitle);
-        return findTitle;
+    @GetMapping("/list/medCategory/{BoarNo}")
+    public Board getFindTitle(@PathVariable String BoarNo){
+        System.out.println(BoarNo);
+        Board findBoarNo = boardService.findTitle(BoarNo);
+        System.out.println(findBoarNo);
+        return findBoarNo;
     }
 
-    @GetMapping("/list/getOne/{boardNo}")
-    public Optional<Board> getOneBoardNo(@PathVariable String boardNo){
-        return boardService.findBoardNo(Long.parseLong(boardNo));
-    }
-
-//    @DeleteMapping("/list/delete/{title}")
-//    public Messenger getDeleteBoard(@PathVariable String title){
-//        System.out.println(title);
-//        boardService.delete(title);
-//        return Messenger.SUCCEESS;
-//    }
 
     @DeleteMapping("/list/delete/{boardNo}")
     public Messenger getDeleteBoard(@PathVariable String boardNo){
@@ -89,12 +87,31 @@ public class BoardController {
         return findOne;
     }
 
-    @PostMapping("/modify")
-    public Messenger getModifyBoard(@RequestBody Board board){
-//        boardService.update(board);
-        return Messenger.SUCCEESS;
+    @PatchMapping("/modify/{boardNo}")
+    public Messenger getModifyBoard(@RequestBody Board board,
+                                    @PathVariable String boardNo){
+        Optional<Board> getOne = boardService.findBoardNo(Long.parseLong(boardNo));
+        Board result =  getOne.get();
+        try{
+            result.setContent(board.getContent());
+            result.setTitle(board.getTitle());
+            boardRepository.save(result);
+            return Messenger.SUCCEESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            return Messenger.FAIL;
+        }
     }
-//    @GetMapping("/search")
-//    public BoardRepository(@Repository)
 
+    @GetMapping("/list/getOne/{boardNo}")
+    public Optional<Board> getOneBoardNo(@PathVariable String boardNo){
+        System.out.println(boardService.findBoardNo(Long.parseLong(boardNo)));
+        boardService.click(Long.parseLong(boardNo));
+        return boardService.findBoardNo(Long.parseLong(boardNo));
+    }
+//
+//    @GetMapping("/click/{boardNo}")
+//    public Optional<Board> getOneClick(@PathVariable int boardNo){
+//        return;
+//    }
 }

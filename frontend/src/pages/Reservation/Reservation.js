@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-<<<<<<< HEAD
 const Reservation = ({match}) =>  {
 
   var today = new Date();
@@ -36,12 +35,6 @@ const Reservation = ({match}) =>  {
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState(today)
 
-=======
-
-const Reservation = () =>  {
-  const classes = useStyles();
-  const [selectedDate, setSelectedDate] = useState("2019-08-18T10:30")
->>>>>>> deokhaeng
 
   return (
 
@@ -55,11 +48,7 @@ const Reservation = () =>  {
             }}>
         <br/>      
         <MDBCardTitle cascade className='text-center'>
-<<<<<<< HEAD
               <strong>방문진료 예약 </strong>
-=======
-              <strong>병원 예약</strong>
->>>>>>> deokhaeng
             </MDBCardTitle>
             <br/>  
           <div className={"reservation"}>
@@ -81,7 +70,6 @@ const Reservation = () =>  {
             <br/>  
         <MDBCardBody>
           
-<<<<<<< HEAD
         <h5 className="padding">            
               병원 이름 : {match.params.hospitalName}{' '}            
         </h5>
@@ -99,32 +87,12 @@ const Reservation = () =>  {
         </h5>
         <br/>
 
-=======
-        <h5>            
-              병원 이름 : 신촌 세브란스 병원{' '}            
-        </h5>
-        <br/>
-        <h5>           
-              의사 : 구윤서{' '}          
-        </h5>
-        <br/>
-        <h5>
-              진료과 : 이비인후과{' '}
-        </h5>
-        <br/>
-        <h5>
-              예약 비용 : 5000원{' '}
-        </h5>
-        <br/>
-        <br/>  
->>>>>>> deokhaeng
         <br/>  
 
     <MDBRow>
     <MDBCol md="4">
     </MDBCol>
     <MDBCol md="8">
-<<<<<<< HEAD
     <Payment
      title={"방문진료"} 
      hospitalName={match.params.hospitalName} 
@@ -132,9 +100,6 @@ const Reservation = () =>  {
      medicalSubject={match.params.medicalSubject}
      selectedDate={selectedDate}
      />
-=======
-    <Payment/>
->>>>>>> deokhaeng
     </MDBCol>
     </MDBRow>
   

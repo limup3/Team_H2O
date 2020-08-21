@@ -2,24 +2,33 @@ import React, {useState,useEffect} from 'react';
 import './community.css'
 import {Button, Table,Form,Col} from "react-bootstrap";
 import axios from 'axios'
-import {Link} from "react-router-dom";
-
-
-const POST_LIST = "POST_LIST";
-export const postListReducer = (state = [], action) =>{
-    switch (action.type){
-        case POST_LIST:
-            return action.payload;
-        default:
-            return state;
-    }
-}
-
+import {Link, useHistory} from "react-router-dom";
+import {MDBCol, MDBPageItem, MDBPageNav, MDBPagination, MDBRow} from "mdbreact";
 const CommunityTem = () => {
     const [postList, setPostList] = useState([])
     const [medCategory, setMedCategory] = useState('')
     const [sendList, setSendList] = useState([])
+    const [creationDate, setCreationDate] = useState('')
+    const [click, setClick] = useState(0);
+    const [state, setState] = useState('')
+    const history = useHistory()
 
+
+
+
+    useEffect(() => {
+        axios
+            .get('http://localhost:8080/board/list')
+            .then(({data})=>{
+                console.log(data);
+                setPostList(data);
+                setCreationDate(data);
+                setClick(data);
+            })
+            .catch((err)=>{
+                throw err;
+            })
+    }, [])
 
 const changeCategory = (e)=>{
         if (e.target.value==='전체보기'){
@@ -35,9 +44,12 @@ const changeCategory = (e)=>{
             })
 
         }
-
-
 }
+
+    const handleClick=()=>{
+        setState(state.value+1);
+    }
+
 
     const getBoard = () =>{
         console.log(medCategory)
@@ -60,17 +72,7 @@ const changeCategory = (e)=>{
         window.location.href="/Review"
     }
 
-    useEffect(() => {
-        axios
-            .get('http://localhost:8080/board/list')
-            .then(({data})=>{
-                console.log(data);
-                setPostList(data)
-            })
-            .catch((err)=>{
-                throw err;
-            })
-    }, [])
+
 
 
     return (
@@ -90,7 +92,7 @@ const changeCategory = (e)=>{
                             >
                                 <option>진료과구분</option>
                                 <option>전체보기</option>
-                                <option >정형외과</option>
+                                <option>정형외과</option>
                                 <option>내과</option>
                                 <option>신경과</option>
                                 <option>소아과</option>
@@ -111,26 +113,57 @@ const changeCategory = (e)=>{
                     </tr>
                     </thead>
                     <tbody>
-                        {sendList && sendList.map((info,i)=>(
+                        {sendList && sendList.reverse().map((info,i)=>(
                             <tr key={i}>
                                 <td>{i+1}</td>
                                 <td>empty</td>
                                 {/*<td>{info.user.userId}</td>*/}
                                 <td>{info.medCategory}</td>
-                                <td id="title"><Link to={`/Community/Review/${info.boardNo}`}>{info.title}</Link></td>
+                                <td id="title" onClick={()=>setClick(click+1)}>
+                                        <Link to={`/Community/Review/${info.boardNo}`}>{info.title}</Link>
+                                </td>
                                 {/*<td>{info.content}</td>*/}
-                                <td>empty</td>
-                                <td>empty</td>
+                                <td>{info.creationDate}</td>
+                                <td>{info.click}</td>
                             </tr>
                         ))}
                     </tbody>
                 </Table>
+
                 <div className="button-right">
-                    <Button variant="outline-dark " onClick={()=>{ window.location.href ="/Edit"}}>글쓰기</Button>
+                    <Button variant="outline-dark " onClick={()=>{history.push('/Edit')}}>글쓰기</Button>
                 </div>
-                {/*<Button  onClick={updateBoard}>*/}
-                {/*    Submit*/}
-                {/*</Button>*/}
+
+                <div>
+                    <MDBRow>
+                        <MDBCol>
+                            <MDBPagination className="mb-5">
+                                <MDBPageItem>
+                                    <MDBPageNav aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </MDBPageNav>
+                                </MDBPageItem>
+                                <MDBPageItem>
+                                    <MDBPageNav>
+                                        1
+                                    </MDBPageNav>
+                                </MDBPageItem>
+                                <MDBPageItem>
+                                    <MDBPageNav>2</MDBPageNav>
+                                </MDBPageItem>
+                                <MDBPageItem>
+                                    <MDBPageNav>3</MDBPageNav>
+                                </MDBPageItem>
+                                <MDBPageItem>
+                                    <MDBPageNav aria-label="Previous">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </MDBPageNav>
+                                </MDBPageItem>
+                            </MDBPagination>
+                        </MDBCol>
+                    </MDBRow>
+                </div>
+
             </div>
 
         </>

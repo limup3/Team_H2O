@@ -3,7 +3,6 @@ import { GoogleMap,useLoadScript,Marker,InfoWindow,} from "@react-google-maps/ap
 import usePlacesAutocomplete, {getGeocode,getLatLng,getZipCode} from "use-places-autocomplete";
 import Geocode from 'react-geocode'
 import {Combobox,ComboboxInput, ComboboxPopover,ComboboxList, ComboboxOption,} from "@reach/combobox";
-<<<<<<< HEAD
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCol,MDBCardImage,MDBRow, MDBView, MDBLink,  MDBTable, MDBTableBody } from 'mdbreact';
 import './map.css'
 import "@reach/combobox/styles.css";
@@ -12,19 +11,6 @@ import './doctorData'
 import { doctorData } from "./doctorData";
 import { useHistory } from "react-router-dom"
 import {Col, Row, Image} from "react-bootstrap";
-=======
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCol,MDBCardImage,MDBRow, MDBView, MDBLink,  MDBTable, MDBTableBody, MDBTableHead  } from 'mdbreact';
-import './map.css'
-import "@reach/combobox/styles.css";
-import {Button, Col, Form, Row, Image} from "react-bootstrap";
-import axios from "axios";
-
-const MAP_KEY ='AIzaSyDyYteoY6q3NQwsEHFrXfan_q_9VlIVsxk'
-//맵 키 
-const libraries = ["places"];
-//구글 맵 places 라이브러리 호출
-//place = 애플리케이션이 정의 된 영역 내에서 시설, 지리적 위치 또는 주요 관심 지점과 같은 장소를 검색 할 수 있도록합니다
->>>>>>> deokhaeng
 
 const mapContainerStyle = {
     width: "100%",
@@ -36,7 +22,6 @@ const options = {
     zoomControl: true,
 }
 
-<<<<<<< HEAD
 const MAP_KEY ='AIzaSyDyYteoY6q3NQwsEHFrXfan_q_9VlIVsxk'
 //맵 키 
 const libraries = ["places"];
@@ -74,24 +59,10 @@ const HospitalMap = () =>{
             sessionStorage.removeItem("search")
         }
         },[])
-=======
-const center = {
-    lat: 37.554880,
-    lng: 126.936887
-}
-
-
-const HospitalMap = () =>{
-    const [hospitalList, setHospitalList] = useState([])
->>>>>>> deokhaeng
 
     useEffect(()=>{
         axios.get(`http://localhost:8080/hospital/data`)
         .then(response => {
-<<<<<<< HEAD
-=======
-            console.log(JSON.stringify(response))
->>>>>>> deokhaeng
             setHospitalList(response.data.list)
         })
         .catch(
@@ -101,7 +72,6 @@ const HospitalMap = () =>{
         )
     },[]);
 
-<<<<<<< HEAD
     Geocode.setApiKey(MAP_KEY);
     Geocode.setLanguage('ko')
     
@@ -136,29 +106,10 @@ const HospitalMap = () =>{
     const handleOpen = () => setInfoShow(true);
     
     const handleReservation = e => {
-=======
-    const { isLoaded,loadError } = useLoadScript({
-        googleMapsApiKey: MAP_KEY,
-        libraries,
-        region:'kr'
-    });
-
-    const [ reservation, setReservation] = useState({})
-
-    const [infoShow, setInfoShow]= useState(false)
-
-    const handleReload = () => {
-        window.location.reload()
-      }
-
-    const handleOpen = () => setInfoShow(true);
-    const handleCheck = e => {
->>>>>>> deokhaeng
       e.preventDefault();
       handleOpen();
     }
 
-<<<<<<< HEAD
     const handleBack = e => {
       e.preventDefault();
       alert("로그인시 이용 가능합니다.")
@@ -222,27 +173,6 @@ const HospitalMap = () =>{
           </div>
       );
   }
-=======
-    const [ selected, setSelected] = useState({})
-    //마커 찍기
-    const [ currentPosition, setCurrentPosition] = useState({})
-    //현재위치 찍기
-    const mapRef = useRef();
-    //DOM 영역 직접 참조 
-
-    const onMapLoad = React.useCallback(map => {
-        mapRef.current = map;
-    }, []);
-
-    const panTo = useCallback(({lat, lng}) => {
-        mapRef.current.panTo({lat, lng})
-        mapRef.current.setZoom(17)
-    }, [])
-    //변경 사항이 지도의 너비와 높이보다 작 으면 전환이 부드럽게 움직임
-
-    if (loadError) return "Error";
-    if (!isLoaded) return "Loading...";
->>>>>>> deokhaeng
 
     //Geolocation API는 사용자의 현재 위치를 가져오는 API로, 
     //지도에 사용자 위치를 표시하는 등 다양한 용도로 사용
@@ -264,31 +194,21 @@ const HospitalMap = () =>{
                 )
             }}
             >
-<<<<<<< HEAD
                <img src="https://image.flaticon.com/icons/svg/3198/3198467.svg" alt="user location"/>
-=======
-                
-               <img src="https://image.flaticon.com/icons/svg/3198/3198467.svg"/>
->>>>>>> deokhaeng
             </button>
         )
     }
     
     return (
         <>
-<<<<<<< HEAD
         <br/><br/><br/><br/>
       
         <Search panTo= {panTo}/>
         
-=======
-      
->>>>>>> deokhaeng
         <GoogleMap
             id="map"
             mapContainerStyle={mapContainerStyle}
             zoom={17}
-<<<<<<< HEAD
             center={firstLoca}
             options={options}
             onLoad={onMapLoad}
@@ -394,14 +314,6 @@ const HospitalMap = () =>{
                    :null
            }
                 
-=======
-            center={center}
-            options={options}
-            onLoad={onMapLoad}
-        >
-         
-              <Locate panTo= {panTo} />
->>>>>>> deokhaeng
             { // 다중 마커찍기
                 hospitalList.map((store,i)=> (
                     <Marker
@@ -427,10 +339,6 @@ const HospitalMap = () =>{
                    <InfoWindow 
                         position = {{lat:selected.latitude, lng:selected.longitude}}
                         clickable={true}
-<<<<<<< HEAD
-=======
-                        onClick={() => setReservation({})}
->>>>>>> deokhaeng
                         onCloseClick={() => setSelected({})} 
 
                     >
@@ -444,7 +352,6 @@ const HospitalMap = () =>{
                                 <MDBTable>
                                   <br/>
                                
-<<<<<<< HEAD
                                 <MDBTableBody>
                                   <tr>
                                     <th className="thColor">{selected.hospitalType}</th>
@@ -493,53 +400,6 @@ const HospitalMap = () =>{
                                     gradient="blue" onClick={handleBack} >진료 예약</MDBBtn>
                               }
                               
-=======
-      <MDBTableBody>
-        <tr>
-          <th>{selected.hospitalType}</th>
-          <td></td>
-         
-        </tr>
-        <tr>
-          <th>전화번호</th>
-          <td>{selected.tel}</td>
-        </tr>
-        <tr>
-          <th>주소</th>
-          <td>{selected.addr}</td>
-        </tr>
-        <tr>
-          <th>의료인수</th>
-          <td>{selected.medicalPeople}</td>
-        </tr>
-        <tr>
-          <th>입원실수</th>
-          <td>{selected.hospitalRoom}</td>
-        </tr>
-        <tr>
-          <th>병상수</th>
-          <td>{selected.hospitalBed}</td>
-        </tr>
-        <tr>
-          <th>총면적</th>
-          <td>{selected.hospitalArea}</td>
-        </tr>
-      </MDBTableBody>
-    </MDBTable>
-    </div >            
-                                
-                                
-                                {/* <br/>
-                                <p>{selected.hospitalType}</p><br/>
-                                    <p>전화번호 : {selected.tel}</p><br/>
-                                    <p>주소 : {selected.addr}</p><br/>
-                                    <p>의료인수 : {selected.medicalPeople}</p><br/>
-                                    <p>입원실수 : {selected.hospitalRoom}</p><br/>
-                                    <p>병상수 : {selected.hospitalBed}</p><br/>
-                                    <p>총면적 : {selected.hospitalArea}</p><br/> */}
-                                    <MDBBtn gradient="blue" onClick={handleCheck}>진료 예약</MDBBtn>
-                                    <MDBBtn gradient="blue">화상 진료</MDBBtn>
->>>>>>> deokhaeng
                                 </MDBCardText>
                             </MDBCardBody>
                         </MDBCard>
@@ -547,11 +407,7 @@ const HospitalMap = () =>{
                     </InfoWindow>
                     ) :null
            }
-<<<<<<< HEAD
            { 
-=======
-           {
->>>>>>> deokhaeng
                infoShow ? (
                    <InfoWindow
                        position = {{lat:selected.latitude, lng:selected.longitude}}
@@ -559,7 +415,6 @@ const HospitalMap = () =>{
                        clickable={true}
                     >
                        <div>
-<<<<<<< HEAD
                          
                        <MDBCardTitle>{selected.hospitalName} 의사 리스트</MDBCardTitle><br/>
                        <MDBRow>
@@ -630,183 +485,13 @@ const HospitalMap = () =>{
                         </MDBCol>
                       ))}
                         </MDBRow>
-=======
-                       <MDBCardTitle>{selected.hospitalName} 의사 리스트</MDBCardTitle><br/>
-                       <MDBRow>
-      <MDBCol md='4'>
-        <MDBCard wide cascade>
-          <MDBView cascade>
-            <MDBCardImage
-              hover
-              overlay='white-slight'
-              className='card-img-top'
-              src='http://hub.khnmc.or.kr/mng/upload/docinfo/1531109799046_D06CAE30BCC0D658__IMG_1237.jpg'
-              alt='Card cap'
-            />
-          </MDBView>
-
-          <MDBCardBody cascade className='text-center'>
-            <MDBCardTitle className='card-title'>
-              <strong>강민서</strong>
-            </MDBCardTitle>
-
-            <p className='font-weight-bold blue-text'>이비인후피부과</p>
-
-            <MDBCardText>
-            여드름, 한방미용시술, 성형수술후관리{' '}
-            </MDBCardText>
-            <MDBLink to="/Reservation">
-            <MDBBtn gradient="purple">예약</MDBBtn>
-            </MDBLink>
-          </MDBCardBody>
-        </MDBCard>
-      </MDBCol>
-
-      <MDBCol md='4'>
-        <MDBCard wide cascade>
-          <MDBView cascade>
-            <MDBCardImage
-              hover
-              overlay='white-slight'
-              className='card-img-top'
-              src='http://hub.khnmc.or.kr/mng/upload/docinfo/1525414257937_AC15C724AD6C%20AD50C218_h.jpg'
-              alt='Card cap'
-            />
-          </MDBView>
-
-          <MDBCardBody cascade className='text-center'>
-            <MDBCardTitle className='card-title'>
-              <strong>강윤구</strong>
-            </MDBCardTitle>
-
-            <p className='font-weight-bold blue-text'>치과교정과</p>
-
-            <MDBCardText>
-            성인교정, 성장기교정, 투명교정, 악안면 기형 교정, 턱관절교정{' '}
-            </MDBCardText>
-            <MDBLink to="/Reservation">
-            <MDBBtn gradient="purple">예약</MDBBtn>
-            </MDBLink>
-          </MDBCardBody>
-        </MDBCard>
-      </MDBCol>
-
-      <MDBCol md='4'>
-        <MDBCard wide cascade>
-          <MDBView cascade>
-            <MDBCardImage
-              hover
-              overlay='white-slight'
-              className='card-img-top'
-              src='http://hub.khnmc.or.kr/mng/upload/docinfo/1543307784609_AE40ACE0C6B4-AD50C218_h.jpg'
-              alt='Card cap'
-            />
-          </MDBView>
-
-          <MDBCardBody cascade className='text-center'>
-            <MDBCardTitle className='card-title'>
-              <strong>김고운</strong>
-            </MDBCardTitle>
-
-            <p className='font-weight-bold blue-text'>한방재활의학과</p>
-
-            <MDBCardText>
-            (한방비만체형클리닉) 부분비만(매선요법), 소아비만, 산후비만{' '}
-            </MDBCardText>
-            <MDBLink to="/Reservation">
-            <MDBBtn gradient="purple">예약</MDBBtn>
-            </MDBLink>
-          </MDBCardBody>
-        </MDBCard>
-      </MDBCol>
-      </MDBRow>
-        <br/><br/>
-      <MDBRow>
-      <MDBCol md='4'>
-        <MDBCard wide cascade>
-          <MDBView cascade>
-            <MDBCardImage
-              hover
-              overlay='white-slight'
-              className='card-img-top'
-              src='http://hub.khnmc.or.kr/mng/upload/docinfo/1525925418375_AE40AE30D0DD%20AD50C218_h.jpg'
-              alt='Card cap'
-            />
-          </MDBView>
-
-          <MDBCardBody cascade className='text-center'>
-            <MDBCardTitle className='card-title'>
-              <strong>김기택</strong>
-            </MDBCardTitle>
-
-            <p className='font-weight-bold blue-text'>정형외과</p>
-
-            <MDBCardText>
-            척추질환, 강직성척추염, 척추측만증{' '}
-            </MDBCardText>
-            <MDBLink to="/Reservation">
-            <MDBBtn gradient="purple">예약</MDBBtn>
-            </MDBLink>
-          </MDBCardBody>
-        </MDBCard>
-      </MDBCol>
-
-      <MDBCol md='4'>
-        <MDBCard wide cascade>
-          <MDBView cascade>
-            <MDBCardImage
-              hover
-              overlay='white-slight'
-              className='card-img-top'
-              src='http://hub.khnmc.or.kr/mng/upload/docinfo/1544085075343_D06CAE30BCC0D658_B9C8CDE8ACFC%20AC15C885B9CCAD50C218.jpg'
-              alt='Card cap'
-            />
-          </MDBView>
-
-          <MDBCardBody cascade className='text-center'>
-            <MDBCardTitle className='card-title'>
-              <strong>강종만</strong>
-            </MDBCardTitle>
-
-            <p className='font-weight-bold blue-text'>마취통증의학과</p>
-
-            <MDBCardText>
-            수술 전후 척추통증, 급성 및 만성 통증 관리{' '}
-            </MDBCardText>
-            <MDBLink to="/Reservation">
-            <MDBBtn gradient="purple">예약</MDBBtn>
-            </MDBLink>
-          </MDBCardBody>
-        </MDBCard>
-      </MDBCol>
-
-      </MDBRow>
->>>>>>> deokhaeng
                        </div>
                    </InfoWindow>
 
                ) : null
            }
 
-<<<<<<< HEAD
           
-=======
-           { // 내 위치
-                    currentPosition.lat ?
-                   <Marker
-                        position={currentPosition}
-                        onClick={() => {
-                            setSelected(currentPosition)
-                        }}
-                        icon={{
-                            url : "https://image.flaticon.com/icons/svg/727/727590.svg",
-                            scaledSize: new window.google.maps.Size(70, 70)
-                        }}
-
-                   />
-                   :null
-           }
->>>>>>> deokhaeng
 
         </GoogleMap>
         </>
