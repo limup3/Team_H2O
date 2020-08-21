@@ -81,7 +81,7 @@ CREATE TABLE Doctor
     `Position`        VARCHAR(20)     NULL,
     `Detail_Data`     VARCHAR(255)    NULL,
     `Specialized`     VARCHAR(255)    NULL,
-    `Medical_Subject`  VARCHAR(100)    NULL,
+    `Medical_Subject`  VARCHAR(100)   NULL,
     `Birthday`        VARCHAR(20)     NULL,
     `Hospital_No`     INT             NULL,
     PRIMARY KEY (Doctor_No)

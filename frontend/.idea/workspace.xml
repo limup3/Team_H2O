@@ -27,7 +27,11 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/pages" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+>>>>>>> deokhaeng
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -40,11 +44,14 @@
     <property name="ts.external.directory.path" value="C:\Users\lim_1\Desktop\Team_H2O\frontend\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
+<<<<<<< HEAD
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\lim_1\Desktop\Team_H2O\frontend\src" />
       <recent name="C:\Users\bit23\Desktop\king\frontend\src\pages\Ambulance" />
       <recent name="C:\Users\lim_1\Team_H2O_Frontend\src\helpers" />
     </key>
+=======
+>>>>>>> deokhaeng
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\lim_1\Desktop\Team_H2O\frontend\src\pages" />
       <recent name="C:\Users\lim_1\Desktop\Team_H2O\frontend\src" />
@@ -52,6 +59,23 @@
       <recent name="C:\Users\lim_1\Team_H2O\frontend\src\pages" />
       <recent name="C:\Users\lim_1\Team_H2O\frontend\src\admin\views" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lim_1\Desktop\Team_H2O\frontend\src" />
+      <recent name="C:\Users\bit23\Desktop\king\frontend\src\pages\Ambulance" />
+      <recent name="C:\Users\lim_1\Team_H2O_Frontend\src\helpers" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -113,8 +137,12 @@
       <workItem from="1597139259982" duration="315000" />
       <workItem from="1597192221880" duration="25124000" />
       <workItem from="1597590373401" duration="123000" />
+<<<<<<< HEAD
       <workItem from="1597735515266" duration="856000" />
       <workItem from="1597740370346" duration="1399000" />
+=======
+      <workItem from="1597735515266" duration="693000" />
+>>>>>>> deokhaeng
     </task>
     <servers />
   </component>

@@ -59,7 +59,7 @@ const HospitalPagination2 = () => {
   useEffect(()=>{
     setLoading(true);
     axios
-      .get(`http://localhost:8080/hospitals/hospitalList`)
+      .get(`http://localhost:8080/hospital/hospitalList`)
       .then(response => {
         setPosts(response.data)
       })

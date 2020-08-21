@@ -28,10 +28,15 @@
     text-align: center;
 }
 
+<<<<<<< HEAD
 .padding {
     padding-left: 25%;
 }
 .paddingColor {
     padding-left: 25%;
     color : #ff0000;
+=======
+h5{
+    padding-left: 25%;
+>>>>>>> deokhaeng
 }

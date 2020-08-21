@@ -28,8 +28,11 @@ public class QHospital extends EntityPathBase<Hospital> {
 
     public final StringPath businessStatus = createString("businessStatus");
 
+<<<<<<< HEAD
     public final ListPath<com.H2O.backend.doctor.Doctor, com.H2O.backend.doctor.QDoctor> doctor = this.<com.H2O.backend.doctor.Doctor, com.H2O.backend.doctor.QDoctor>createList("doctor", com.H2O.backend.doctor.Doctor.class, com.H2O.backend.doctor.QDoctor.class, PathInits.DIRECT2);
 
+=======
+>>>>>>> deokhaeng
     public final StringPath hospitalArea = createString("hospitalArea");
 
     public final NumberPath<Integer> hospitalBed = createNumber("hospitalBed", Integer.class);

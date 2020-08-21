@@ -41,7 +41,8 @@ public class HospitalController {
     @PostMapping("/hospitalAdd")
     public ResponseEntity<Hospital> hospitalAdd(@RequestBody Hospital hospital){
         Optional<Hospital> hospitalAdd = hospitalService.hospitalAdd(hospital);
-        if(hospitalAdd.isPresent()){
+        System.out.println("병원 추가 확인");
+        if(!hospitalAdd.isPresent()){
             return ResponseEntity.ok().build();
         }else{
             return ResponseEntity.notFound().build();
@@ -53,9 +54,13 @@ public class HospitalController {
     @GetMapping("/BusinessLicenseCheck/{businessLicenseNumber}")
     public ResponseEntity<Hospital> businessLicenseCheck(@PathVariable String businessLicenseNumber){
         Optional<Hospital> licenseCheckResult = hospitalService.findHospitalByBusinessLicenseNumber(businessLicenseNumber);
+        System.out.println("작동?");
+        System.out.println(licenseCheckResult);
         if(licenseCheckResult.isPresent()){
+            System.out.println("1");
             return ResponseEntity.ok().build();
         }else{
+            System.out.println("2");
             return ResponseEntity.notFound().build();
         }
     }
@@ -74,6 +79,37 @@ public class HospitalController {
         return null;
     }
 
+    // 병원 정보 변경
+    @PatchMapping("/modify/{businessLicenseNumber}")
+    public ResponseEntity<Hospital> modify(@PathVariable String businessLicenseNumber, @RequestBody Hospital hospital){
+
+        Optional<Hospital> modifyHospital = hospitalService.findHospitalByBusinessLicenseNumber(businessLicenseNumber);
+
+        if(modifyHospital.isPresent()){
+            modifyHospital.ifPresent(selectHospital -> {
+                selectHospital.setHospitalName(hospital.getHospitalName());
+                selectHospital.setBusinessLicenseNumber(hospital.getBusinessLicenseNumber());
+                selectHospital.setBusinessStatus(hospital.getBusinessStatus());
+                selectHospital.setTel(hospital.getTel());
+                selectHospital.setAddr(hospital.getAddr());
+                selectHospital.setHospitalType(hospital.getHospitalType());
+                selectHospital.setMedicalPeople(hospital.getMedicalPeople());
+                selectHospital.setHospitalRoom(hospital.getHospitalRoom());
+                selectHospital.setHospitalBed(hospital.getHospitalBed());
+                selectHospital.setHospitalArea(hospital.getHospitalArea());
+                selectHospital.setTypeDetail(hospital.getTypeDetail());
+                selectHospital.setLatitude(hospital.getLatitude());
+                selectHospital.setLongitude(hospital.getLongitude());
+                hospitalRepository.save(selectHospital);
+                System.out.println("--------");
+                System.out.println(selectHospital);
+            });
+            return ResponseEntity.ok(modifyHospital.get());
+        } else{
+            System.out.println("업데이트 실패");
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 
 }

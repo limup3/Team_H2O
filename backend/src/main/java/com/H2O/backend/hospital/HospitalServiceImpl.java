@@ -17,6 +17,8 @@ interface HospitalService {
 
     public void readCsv();
     Optional<Hospital> findHospitalByBusinessLicenseNumber(String businessLicenseNumber);
+    Optional<Hospital> findByBusinessLicenseNumber(String businessLicenseNumber);
+
     Hospital update(Hospital selectHospital);
     void delete(Hospital selectHospital);
     Optional<Hospital> hospitalAdd(Hospital hospital);
@@ -41,6 +43,11 @@ public class HospitalServiceImpl implements HospitalService {
     }
 
     @Override
+    public Optional<Hospital> findByBusinessLicenseNumber(String businessLicenseNumber) {
+        return Optional.empty();
+    }
+
+    @Override
     public Hospital update(Hospital selectHospital) {
         return hospitalRepository.save(selectHospital);
     }
@@ -52,18 +59,22 @@ public class HospitalServiceImpl implements HospitalService {
 
     @Override
     public Optional<Hospital> hospitalAdd(Hospital hospital) {
-//        Hospital createHospital = new Hospital();
-//        createHospital.setHospitalName(hospital.getHospitalName());
-//        createHospital.setBusinessLicenseNumber(hospital.getBusinessLicenseNumber());
-//        createHospital.setLogo(hospital.getLogo());
-//        createHospital.setAddr(hospital.getAddr());
-//        createHospital.setHospitalType(hospital.getHospitalType());
-//        createHospital.setMedicalPerson(hospital.getMedicalPerson());
-//        createHospital.setTel(hospital.getTel());
-//        createHospital.setLatitude(hospital.getLatitude());
-//        createHospital.setLongitude(hospital.getLongitude());
-//
-//        Hospital hospitalData = hospitalRepository.save(createHospital);
+        Hospital createHospital = new Hospital();
+        createHospital.setHospitalName(hospital.getHospitalName());
+        createHospital.setBusinessLicenseNumber(hospital.getBusinessLicenseNumber());
+        createHospital.setBusinessStatus(hospital.getBusinessStatus());
+        createHospital.setTel(hospital.getTel());
+        createHospital.setAddr(hospital.getAddr());
+        createHospital.setHospitalType(hospital.getHospitalType());
+        createHospital.setMedicalPeople(hospital.getMedicalPeople());
+        createHospital.setHospitalRoom(hospital.getHospitalRoom());
+        createHospital.setHospitalBed(hospital.getHospitalBed());
+        createHospital.setTypeDetail(hospital.getTypeDetail());
+        createHospital.setHospitalArea(hospital.getHospitalArea());
+        createHospital.setLatitude(hospital.getLatitude());
+        createHospital.setLongitude(hospital.getLongitude());
+
+        Hospital hospitalData = hospitalRepository.save(createHospital);
         return Optional.empty();
     }
 
