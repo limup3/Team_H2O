@@ -26,7 +26,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Team_H2O-kyungmin (3)/Team_H2O-kyungmin" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Team_H2O-woojun/frontend" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -98,6 +98,8 @@
       <workItem from="1597128835325" duration="4261000" />
       <workItem from="1597139259982" duration="315000" />
       <workItem from="1597192221880" duration="25124000" />
+      <workItem from="1597279988297" duration="8166000" />
+      <workItem from="1597365310014" duration="1654000" />
     </task>
     <servers />
   </component>
@@ -123,33 +125,33 @@
     </ignored-roots>
   </component>
   <component name="WindowStateProjectService">
-    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1597136008452">
+    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1597366282218">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1597136008452" />
-    <state width="1845" height="162" key="GridCell.Tab.0.bottom" timestamp="1597209750642">
+    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1597366282218" />
+    <state width="1639" height="251" key="GridCell.Tab.0.bottom" timestamp="1597370822672">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1845" height="162" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597209750642" />
-    <state width="1845" height="162" key="GridCell.Tab.0.center" timestamp="1597209750642">
+    <state width="1639" height="251" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597370822672" />
+    <state width="1639" height="251" key="GridCell.Tab.0.center" timestamp="1597370822672">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1845" height="162" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597209750642" />
-    <state width="1845" height="162" key="GridCell.Tab.0.left" timestamp="1597209750642">
+    <state width="1639" height="251" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597370822672" />
+    <state width="1639" height="251" key="GridCell.Tab.0.left" timestamp="1597370822672">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1845" height="162" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597209750642" />
-    <state width="1845" height="162" key="GridCell.Tab.0.right" timestamp="1597209750642">
+    <state width="1639" height="251" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597370822672" />
+    <state width="1639" height="251" key="GridCell.Tab.0.right" timestamp="1597370822672">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1845" height="162" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597209750642" />
+    <state width="1639" height="251" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597370822672" />
     <state x="601" y="245" key="run.anything.popup" timestamp="1597210700527">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="601" y="245" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1597210700527" />
-    <state x="983" y="232" width="670" height="58" key="search.everywhere.popup" timestamp="1597193669837">
+    <state x="983" y="232" width="672" height="160" key="search.everywhere.popup" timestamp="1597306972414">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="983" y="232" width="670" height="58" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1597193669837" />
+    <state x="983" y="232" width="672" height="160" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1597306972414" />
   </component>
 </project>
