@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 const UserDelete = () => {
   
   const classes = useStyles();
-  const [userId, setUserId] = useState(JSON.parse(sessionStorage.userData).userId);
+  const [userId] = useState(JSON.parse(sessionStorage.userData).userId);
   const [password,setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -43,7 +43,6 @@ const UserDelete = () => {
   
   const handleWithDraw = e => {
     e.preventDefault();
-    console.log(userId)
     const userJson = {
       userId: userId,
       password: password,

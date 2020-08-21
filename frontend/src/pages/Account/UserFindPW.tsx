@@ -52,9 +52,7 @@ const UserFindPW = () => {
   axios.get(`http://localhost:8080/user/findPw?userId=${userId}&name=${userName}&phone=${phoneNumber}`)
     .then(response => {
       alert('성공')
-      console.log(response) 
       setUserNo(response.data.userNo);
-      console.log(response.data.userNo)
       setShow(true);
     }
     ).catch(

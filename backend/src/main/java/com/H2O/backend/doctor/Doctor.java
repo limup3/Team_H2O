@@ -16,11 +16,11 @@ import java.util.List;
 @ToString
 @Component
 @NoArgsConstructor
-@Table(name="doctor", uniqueConstraints={@UniqueConstraint(columnNames = {"doctors_license"})})
+@Table(name="doctor")
 public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="doctor_no") private Long doctorNo;
+    @Column(name = "doctor_no") private Long doctorNo;
     @Column(name = "doctors_license", nullable = false) private String doctorsLicense;
     @Column(name = "doctor_name") private String doctorName;
     @Column(name = "hospital_name") private String hospitalName;
@@ -31,14 +31,16 @@ public class Doctor {
     @Column(name = "birthday", nullable = false) private String birthday;
 
     @Builder
-    public Doctor(String doctorName,
+    public Doctor(
                   String doctorsLicense,
+                  String doctorName,
                   String hospitalName,
                   String position,
                   String detailData,
                   String specialized,
                   String medicalSubject,
                   String birthday){
+        this.doctorsLicense = doctorsLicense;
         this.doctorName = doctorName;
         this.hospitalName= hospitalName;
         this.position = position;
@@ -46,7 +48,6 @@ public class Doctor {
         this.specialized = specialized;
         this.medicalSubject = medicalSubject;
         this.birthday = birthday;
-        this.doctorsLicense = doctorsLicense;
     }
 
 

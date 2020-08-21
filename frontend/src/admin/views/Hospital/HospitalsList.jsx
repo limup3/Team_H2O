@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 
 import { HospitalsToolbar, HospitalsTable } from './components';
-import mockData from './data';
+import ModalTestView from './Test/ModalTestView';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,15 +16,14 @@ const useStyles = makeStyles(theme => ({
 
 const HospitalList = () => {
   const classes = useStyles();
-
-  const [hospitals] = useState(mockData);
-
   return (
     <div className={classes.root}>
       <HospitalsToolbar />
       <div className={classes.content}>
-        <HospitalsTable hospitals={hospitals} />
-
+        {/* <HospitalsTable hospitals={hospitals} /> */}
+        {/* <HospitalPagination/> */}
+        {/* <HospitalPagination2/> */}
+        <ModalTestView/>
       </div>
     </div>
   );

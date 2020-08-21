@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState }  from 'react';
 import styled from "styled-components";
 import tw from "twin.macro";
 //eslint-disable-next-line
@@ -9,6 +9,8 @@ import {Link} from "react-router-dom";
 import { ReactComponent as SvgDecoratorBlob1 } from "../../helpers/images/svg-decorator-blob-1.svg";
 import DesignIllustration from "../../helpers/images/design-illustration-2.svg";
 import CustomersLogoStripImage from "../../helpers/images/customers-logo-strip.png";
+import Geocode from "react-geocode";
+
 
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col lg:flex-row lg:items-center max-w-screen-xl mx-auto py-20 md:py-24`;
@@ -45,6 +47,19 @@ const CustomersLogoStrip = styled.div`
 `;
 
 const MainTopPage = () => {
+  const [location, setLocation] = useState("")
+  Geocode.setApiKey("AIzaSyDyYteoY6q3NQwsEHFrXfan_q_9VlIVsxk");
+  Geocode.setLanguage("kr");
+  Geocode.setRegion("kr");
+  Geocode.fromAddress(location).then(
+    response => {
+      const { lat, lng } = response.results[0].geometry.location;
+      sessionStorage.setItem("search",JSON.stringify({lat,lng}))
+    },
+    error => {
+      console.error(error);
+    }
+  );
   return (
     <>
     <AnimationRevealPage>
@@ -56,10 +71,15 @@ const MainTopPage = () => {
               <span tw="text-primary-500">Easy to Search!</span>
             </Heading>
             <Paragraph>
-            [ 간편하게 병원 비교검색하고 원하는 병원 찾기 ]
+            [ 간편하게 원하는 병원 찾기 ]
             </Paragraph>
             <Actions>
-              <input type="text" placeholder="Search Hospital" />
+              <input 
+              type="text" 
+              placeholder="Search Hospital" 
+              value={location}
+              onChange={e => setLocation(e.target.value)}
+              />
               <Link to="/SearchHospital">
               <button>Click!</button>
               </Link>

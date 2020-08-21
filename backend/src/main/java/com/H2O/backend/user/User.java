@@ -2,7 +2,6 @@ package com.H2O.backend.user;
 
 import com.H2O.backend.reservation.Reservation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +26,8 @@ public class User {
     @Column(name = "admin_check", nullable = false, columnDefinition = "boolean default 0") private Integer adminCheck;
     @Column(name = "email", nullable = false) private String email;
     @Column(name = "history") private String history;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Reservation> reservation;
 

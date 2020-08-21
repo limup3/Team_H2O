@@ -55,9 +55,7 @@ const UserFindID = () => {
     axios.get(`http://localhost:8080/user/findId?name=${name}&phone=${phone}`)
     .then(response => {
       alert('성공')
-      console.log(response)
       setUserId(response.data.userId);
-      console.log(response.data.userId)
       setShow(!show);
       
     }
