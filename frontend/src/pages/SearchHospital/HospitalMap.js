@@ -3,14 +3,14 @@ import { GoogleMap,useLoadScript,Marker,InfoWindow,} from "@react-google-maps/ap
 import usePlacesAutocomplete, {getGeocode,getLatLng,getZipCode} from "use-places-autocomplete";
 import Geocode from 'react-geocode'
 import {Combobox,ComboboxInput, ComboboxPopover,ComboboxList, ComboboxOption,} from "@reach/combobox";
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCol,MDBCardImage,MDBRow, MDBView, MDBLink,  MDBTable, MDBTableBody, MDBTableHead  } from 'mdbreact';
+import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCol,MDBCardImage,MDBRow, MDBView, MDBLink,  MDBTable, MDBTableBody } from 'mdbreact';
 import './map.css'
 import "@reach/combobox/styles.css";
 import axios from "axios";
 import './doctorData'
 import { doctorData } from "./doctorData";
 import { useHistory } from "react-router-dom"
-import {Button, Col, Form, Row, Image} from "react-bootstrap";
+import {Col, Row, Image} from "react-bootstrap";
 
 const mapContainerStyle = {
     width: "100%",
@@ -20,11 +20,6 @@ const mapContainerStyle = {
 const options = {
     // disableDefaultUI : true,
     zoomControl: true,
-}
-
-const center = {
-    lat: 37.554880,
-    lng: 126.936887
 }
 
 const MAP_KEY ='AIzaSyDyYteoY6q3NQwsEHFrXfan_q_9VlIVsxk'
@@ -51,12 +46,19 @@ const HospitalMap = () =>{
     //현재위치 찍기
 
     //검색
-    const [searchedAddr,setSearchedAddr] = useState("");
-    const [selectedAddr, setSelectedAddr] = useState("")
+    const [selectedAddr] = useState("")
 
     const [selectedPc, setSelectedPc] = useState("")
     const [ markers, setMarkers ] = useState([]);
     const [searchLocation, setSearchLocation] = useState({})
+    const [firstLoca,setFirstLoca]= useState({lat: 37.554880, lng: 126.936887});
+
+    useEffect(() =>{
+        if(sessionStorage.search !== undefined) {
+            setFirstLoca({lat: JSON.parse(sessionStorage.search).lat, lng: JSON.parse(sessionStorage.search).lng})
+            sessionStorage.removeItem("search")
+        }
+        },[])
 
     useEffect(()=>{
         axios.get(`http://localhost:8080/hospital/data`)
@@ -72,26 +74,7 @@ const HospitalMap = () =>{
 
     Geocode.setApiKey(MAP_KEY);
     Geocode.setLanguage('ko')
-    Geocode.fromLatLng(selected.lat, selected.lng).then(
-        response =>{
-            console.log(response)
-            const address = response.results[0].formatted_address
-            const length = response.results[0].address_components.length
-            const postcode = response.results[0].address_components[length-1].long_name
-            console.log(postcode.indexOf('-'))
-            if(postcode.indexOf('-') != -1){
-                setSelectedPc(postcode)
-            }else{
-                setSelectedPc("정보없음")
-            }
-            setSelectedAddr(address)
-
-            console.log(address)
-        },
-        error=>{
-            console.error(error)
-        }
-    );
+    
 
     const mapRef = useRef();
     //DOM 영역 직접 참조 
@@ -161,7 +144,6 @@ const HospitalMap = () =>{
               panTo({ lat, lng });
               setSelectedPc(postal_code)
               setSearchLocation({ lat, lng });
-              setSearchedAddr(address);
           }catch (error) {
               console.log("Error: ", error);
           }
@@ -212,8 +194,7 @@ const HospitalMap = () =>{
                 )
             }}
             >
-                
-               <img src="https://image.flaticon.com/icons/svg/3198/3198467.svg"/>
+               <img src="https://image.flaticon.com/icons/svg/3198/3198467.svg" alt="user location"/>
             </button>
         )
     }
@@ -228,7 +209,7 @@ const HospitalMap = () =>{
             id="map"
             mapContainerStyle={mapContainerStyle}
             zoom={17}
-            center={center}
+            center={firstLoca}
             options={options}
             onLoad={onMapLoad}
             onClick={onMapClick}

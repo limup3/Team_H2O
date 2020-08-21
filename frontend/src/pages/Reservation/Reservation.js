@@ -16,11 +16,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const today = {
-  
-}
-
-
 const Reservation = ({match}) =>  {
 
   var today = new Date();

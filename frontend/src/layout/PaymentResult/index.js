@@ -16,8 +16,6 @@ const PaymentResult = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  console.log(JSON.stringify(useSelector(state => state.reservationReducer.reservationData)))
-
   const selectorData = {
     title : useSelector(state => state.reservationReducer.reservationData.title),
     hospitalName : useSelector(state => state.reservationReducer.reservationData.hospitalName),
@@ -36,7 +34,7 @@ const PaymentResult = () => {
     history.push('/')
     window.location.reload()
   }
-  const { merchant_uid, error_msg, imp_uid } = query;
+  const { error_msg} = query;
   const isSuccessed = getIsSuccessed();
   function getIsSuccessed() {
     const { success, imp_success } = query;

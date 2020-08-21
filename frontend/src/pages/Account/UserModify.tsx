@@ -51,7 +51,6 @@ const UserModify = () => {
       email: email,
       phone: phoneNumber
     }
-    console.log(userId)
     axios.patch(`http://localhost:8080/user/modify/${userId}`, userJson)
           .then(response => {
             alert("데이터 변경 성공")

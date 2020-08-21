@@ -1,4 +1,4 @@
-import React, { useState, } from 'react';
+import React from 'react';
 import {useHistory} from 'react-router-dom';
 import { MDBBtn} from 'mdbreact';
 import queryString from 'query-string';
@@ -61,7 +61,6 @@ const Payment = (props) => {
 
     function callback(response) {
         const query = queryString.stringify(response);
-        console.log(query)
         history.push(`/payment/result?${query}`);
       }
       return (
