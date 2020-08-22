@@ -93,7 +93,7 @@ const PaymentResult = () => {
           scrollable={Boolean(true)}
           >
         <Modal.Header closeButton>
-          <Modal.Title>{JSON.parse(sessionStorage.reservationData).title} 정보</Modal.Title>
+          <Modal.Title>{selectorData.title} 정보</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <p> 예약날짜  &nbsp; {selectorData.selectedDate}</p>

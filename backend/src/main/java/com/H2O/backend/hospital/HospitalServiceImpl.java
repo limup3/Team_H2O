@@ -103,6 +103,8 @@ public class HospitalServiceImpl implements HospitalService {
 //                System.out.println(csvRecord.get(8));
 //                System.out.println(csvRecord.get(9));
 //                System.out.println(csvRecord.get(10));
+//                System.out.println(csvRecord.get(11));
+//                System.out.println(csvRecord.get(12));
                 hospitalRepository.save(new Hospital(
                         csvRecord.get(0),
                         csvRecord.get(1),

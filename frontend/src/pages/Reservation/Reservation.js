@@ -34,6 +34,7 @@ const Reservation = ({match}) =>  {
 
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState(today)
+  const title = "방문진료"
 
 
   return (
@@ -47,8 +48,8 @@ const Reservation = ({match}) =>  {
                left: "35%",
             }}>
         <br/>      
-        <MDBCardTitle cascade className='text-center'>
-              <strong>방문진료 예약 </strong>
+        <MDBCardTitle className='text-center'>
+              <strong>{title} 예약 </strong>
             </MDBCardTitle>
             <br/>  
           <div className={"reservation"}>
@@ -94,7 +95,7 @@ const Reservation = ({match}) =>  {
     </MDBCol>
     <MDBCol md="8">
     <Payment
-     title={"방문진료"} 
+     title={title} 
      hospitalName={match.params.hospitalName} 
      name={match.params.name} 
      medicalSubject={match.params.medicalSubject}
