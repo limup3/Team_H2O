@@ -106,6 +106,14 @@ const ModalTestView = () => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, posts.length - page * rowsPerPage);
+    // -------------------- Sort -----------------------
+    const [sort, setSort]=useState({
+      no:  "Basic" || "Asc" || "Dsc",
+      name: "Basic" || "Asc" || "Dsc",
+      people: "Basic" || "Asc" || "Dsc"
+    })
+
+
     useEffect(()=>{
       setLoading(true);
       axios
@@ -131,8 +139,41 @@ const ModalTestView = () => {
       setPage(0);
     };
 
-    const handleSortNameUp = () => {
-      
+    const handleSortName = () => {
+      if(sort.name==="Basic"){
+        setSort({...sort, name:"Asc"})
+        }
+      if(sort.name==="Asc"){
+      setSort({...sort, name:"Dsc"})
+        }
+      if(sort.name==="Dsc"){
+      setSort({...sort, name:"Basic"})
+        }
+    // (sort.nowName===null||"Basic")? setSort({...sort, name:"Asc", nowName:"Asc"}) : null
+    }
+
+    const handleSortNo = () => {
+      if(sort.no==="Basic"){
+        setSort({...sort, no:"Asc"})
+        }
+      if(sort.no==="Asc"){
+      setSort({...sort, no:"Dsc"})
+        }
+      if(sort.no==="Dsc"){
+      setSort({...sort, no:"Basic"})
+        }
+    }
+
+    const handleSortPeople = () => {
+      if(sort.people==="Basic"){
+        setSort({...sort, people:"Asc"})
+        }
+      if(sort.people==="Asc"){
+      setSort({...sort, people:"Dsc"})
+        }
+      if(sort.people==="Dsc"){
+      setSort({...sort, people:"Basic"})
+        }
     }
 
     return (
@@ -142,17 +183,33 @@ const ModalTestView = () => {
           <Table className={tableClasses.table} aria-label="custom pagination table"
           >
             <TableRow>
-              <TableCell componenent="th" align="center" scope="row">No.</TableCell>
+              <TableCell componenent="th" align="center" scope="row">
+                <MuiButton
+                  onClick={handleSortNo}>
+                    No.
+                    {sort.no==="Asc" && <ArrowUpwardIcon fontSize="small"/>}
+                    {sort.no==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
+                  </MuiButton>
+                </TableCell>
               <TableCell align="center">
                 <MuiButton
-                  onClick={handleSortNameUp}>
-                    이름{}
+                  onClick={handleSortName}>
+                    이름
+                    {sort.name==="Asc" && <ArrowUpwardIcon fontSize="small"/>}
+                    {sort.name==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
                 </MuiButton>
               </TableCell>
               <TableCell align="center">사업자 번호</TableCell>
               <TableCell align="center">주소</TableCell>
               <TableCell align="center">병원 형태</TableCell>
-              <TableCell align="center">의료인 수</TableCell>
+              <TableCell align="center">
+                <MuiButton
+                  onClick={handleSortPeople}>
+                    의료인 수
+                    {sort.people==="Asc" && <ArrowUpwardIcon fontSize="small"/>}
+                    {sort.people==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
+                 </MuiButton>
+                </TableCell>
               <TableCell align="center">연락처</TableCell>
               <TableCell align="center">위도</TableCell>
               <TableCell align="center">경도</TableCell>
