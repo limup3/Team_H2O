@@ -15,9 +15,10 @@ import {
   TablePagination,
   Paper,
   Checkbox,
-  IconButton
+  IconButton,
+  Select 
 } from '@material-ui/core';
-import { Button, Modal, PageItem, Dropdown, DropdownButton} from 'react-bootstrap'
+import { Button, Modal, PageItem, Dropdown, DropdownButton } from 'react-bootstrap'
 import ModalTestBody from './ModalTestBody';
 import PropTypes from 'prop-types';
 import FirstPageIcon from '@material-ui/icons/FirstPage';
@@ -26,6 +27,12 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+
+
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
 
 const tableStyles = makeStyles({
   table: {
@@ -38,12 +45,25 @@ const tableStyles = makeStyles({
     backgroundColor: "#282C34"
   }
 });
+
 const useStyles1 = makeStyles((theme) => ({
   root: {
     flexShrink: 0,
     marginLeft: theme.spacing(2.5),
   },
 }));
+
+const selectStyle = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
+
+
 const TablePaginationActions = (props) => {
   const classes = useStyles1();
   const theme = useTheme();
@@ -97,6 +117,8 @@ rowsPerPage: PropTypes.number.isRequired,
 };
 const ModalTestView = () => {
   const tableClasses = tableStyles();
+  const selectBox = selectStyle()
+
     const [hospitalData, setHospitalData] = useState([])
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(false)
@@ -110,7 +132,8 @@ const ModalTestView = () => {
     const [sort, setSort]=useState({
       no:  "Basic" || "Asc" || "Dsc",
       name: "Basic" || "Asc" || "Dsc",
-      people: "Basic" || "Asc" || "Dsc"
+      people: "Basic" || "Asc" || "Dsc",
+      status : "All" || "Open" || "Close"
     })
 
 
@@ -176,6 +199,12 @@ const ModalTestView = () => {
         }
     }
 
+    // ----------------------- dropdown ---------------------------
+    
+    const handleChangeStatus = event => {
+      setSort({...sort, status:event.target.value});
+    }
+
     return (
         <>
         <Card>
@@ -213,7 +242,23 @@ const ModalTestView = () => {
               <TableCell align="center">연락처</TableCell>
               <TableCell align="center">위도</TableCell>
               <TableCell align="center">경도</TableCell>
-              <TableCell align="center">영업상태</TableCell>
+              <TableCell align="center">
+
+              <FormControl className={selectBox.formControl}>
+                 <InputLabel id="demo-simple-select-label">영업상태</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={sort.status}
+                  onChange={handleChangeStatus}
+                >
+                  <MenuItem value={"All"}>전체보기</MenuItem>
+                  <MenuItem value={"Open"}>영업중</MenuItem>
+                  <MenuItem value={"Close"}>폐업</MenuItem>
+                </Select>
+              </FormControl>
+
+              </TableCell>
             </TableRow>
               <TableBody>
                 {/* -------------pagination----------------- */}
