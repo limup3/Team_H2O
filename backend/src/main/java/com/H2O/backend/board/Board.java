@@ -7,7 +7,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Getter
@@ -24,6 +23,10 @@ public class Board {
     @Column(name = "creation_date") private LocalDate creationDate;
     @Column(name = "category", nullable = false) private String category;
     @Column(name = "med_Category", nullable = false) private String medCategory;
+    @Column(name = "customer_Category", nullable = false) private String customerCategory;
+    @Column(name = "question_Category", nullable = false) private String questionCategory;
+
+
     @Column(name = "click") private int click;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -35,18 +38,18 @@ public class Board {
     @JoinColumn(name = "hospital_no")
     private Hospital hospital;
 
-/*  @JsonManagedReference
-    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
-    private List<Comment> comment;*/
 
     @Builder
     public Board(String title, String content,String medCategory,
-                 LocalDate creationDate, String category, int click){
+                 LocalDate creationDate, String category,String customerCategory,
+                 String questionCategory, int click){
         this.title=title;
         this.content=content;
         this.creationDate=creationDate;
         this.category=category;
         this.medCategory=medCategory;
+        this.customerCategory=customerCategory;
+        this.questionCategory=questionCategory;
         this.click=click;
     }
 }

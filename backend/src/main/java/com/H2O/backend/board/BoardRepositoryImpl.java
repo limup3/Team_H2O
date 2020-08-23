@@ -6,12 +6,9 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 interface IBoardRepository {//I , 커스텀 쿼리를 짜서 컨트롤러로 보낸다.
-
     List<Board> findOneByWord(String cateWord);
     void findOneByClick(Long board);
     void modify(Board boardNo);
@@ -58,13 +55,4 @@ public class BoardRepositoryImpl extends QuerydslRepositorySupport implements IB
                     .set(board.creationDate,boardNo.getCreationDate())
                     .execute();
     }
-
-//    @Override
-//    public void dateTime(Date boardNo) {
-//        jpaQueryFactory
-//                .update(board)
-//                .where(board.boardNo.eq(boardNo))
-//                    .set(board.creationDate, boardNo)
-//                    .execute();
-//    }
 }

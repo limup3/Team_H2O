@@ -39,7 +39,31 @@
 
 }
 .fix-btn{
-    margin-left: 80%;
+    margin-left: 70%;
+    font-size: large;
+}
+.creationDate{
+    font-size: large;
+}
+.btn-font{
+    font-size: large;
+}
+.use-pic{
+    font-size: x-large;
+}
+.table-menusize{
+    font-size: large;
+}
+.table-search{
+    width: 60%;
+    font-size: large;
+}
+.table-head{
+    font-size: large;
+    width: 20%;
+}
+.content-font{
+    font-size: x-large;
 }
 .cmt-btn{
     margin-left: 85%;
@@ -238,6 +262,23 @@ body {
     width: 120px;
     height: 40px;
     margin-right: 300px;
+    font-size: large;
+}
+.form-select-title{
+    width: 240px;
+    height: 40px;
+    font-size: large;
+}
+.form-num{
+    width: 100px;
+    font-size: large;
+}
+.pagiantion-comu{
+    margin-left: 40%;
+}
+.form-user{
+    width: 100px;
+    font-size: large;
 }
 .cate-label{
     font-size: large;
@@ -265,7 +306,7 @@ body {
 
 .main-board{
     width: 85%;
-    height: 680px;
+    height: 700px;
     background-color: #f6fafe;
     float: right;
     border-left: solid purple 1px;
@@ -286,7 +327,7 @@ body {
 }
 .main-bigboard{
     width: 100%;
-    height: 680px;
+    height: 700px;
     max-width: 1300px;
 }
 .search-form{

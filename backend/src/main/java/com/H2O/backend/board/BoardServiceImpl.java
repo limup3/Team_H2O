@@ -18,7 +18,9 @@ interface BoardService {
     Optional<Board> findBoardNo(Long boardNo);
     void modify(Board boardNo);
     void click(Long boardNo);
+    List<Board> getAllBoardList();
 
+    List<Board> findByCategory(String category);
 }
     @Service
     public class BoardServiceImpl implements BoardService {
@@ -61,7 +63,22 @@ interface BoardService {
             boardRepository.findOneByClick(boardNo);
         }
 
+        @Override
+        public List<Board> getAllBoardList() {
+            return boardRepository.findAll(); //페이지네이션
+            }
 
+        @Override
+        public List<Board> findByCategory(String category) {
+            switch (category){
+                case "boardUser": category="자유게시판"; break;
+                case "customerServiceCenter": category="고객서비스센터"; break;
+                case "questionAnswer": category="Q&A"; break;
+                default :
+                    System.out.println("test");
+            }
+            return boardRepository.findByCategory(category);
+        }
 
         @Override
         public Board findTitle(String title) {
@@ -69,8 +86,4 @@ interface BoardService {
         }
     }
 
-//    public Board findOne(String searchWord){
-//
-//        return boardRepository.findOneByWord(searchWord);
-//    }
 
