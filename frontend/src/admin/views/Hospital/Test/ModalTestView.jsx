@@ -121,6 +121,7 @@ const ModalTestView = () => {
 
     const [hospitalData, setHospitalData] = useState([])
     const [posts, setPosts] = useState([])
+    const [sparePosts, setSparePosts] = useState([])
     const [loading, setLoading] = useState(false)
     const [show, setShow] = useState(false);
     // --------------Pagination ------------------------
@@ -133,9 +134,10 @@ const ModalTestView = () => {
       no:  "Basic" || "Asc" || "Dsc",
       name: "Basic" || "Asc" || "Dsc",
       people: "Basic" || "Asc" || "Dsc",
-      status : "All" || "Open" || "Close"
+      // status : "All" || "영업중" || "폐업"
     })
-
+    const [status, setStatus] = useState("전체보기")
+    const [sendList, setSendList] =useState([])
 
     useEffect(()=>{
       setLoading(true);
@@ -143,11 +145,16 @@ const ModalTestView = () => {
         .get(`http://localhost:8080/hospital/hospitalList`)
         .then(response => {
           setPosts(response.data)
+          setSendList(response.data)
         })
         .catch(error => {
           alert("서버와의 연결이 되지 않았습니다.");
         })
         setLoading(false);
+      //   if(sort.status==={}||"Basic"){
+          
+      //   }else if(sort.status==="Asc"||"Dsc"){
+      // }
     }, [])
     const handleClose = () => {
       setShow(false)
@@ -161,49 +168,154 @@ const ModalTestView = () => {
       setRowsPerPage(parseInt(e.target.value, 10));
       setPage(0);
     };
+    // ------------------- Sort ------------------------------
+    const basicSort = () => {
+      posts.sort(function(a,b){
+        if(a.hospitalNo > b.hospitalNo){
+          return 1;
+        }
+        if(a.hospitalNo < b.hospitalNo){
+          return -1;
+        }
+        return 0
+        }
+      )
+    }
 
     const handleSortName = () => {
       if(sort.name==="Basic"){
         setSort({...sort, name:"Asc"})
-        }
+        posts.sort(function(a,b){
+          let hospitalNameA = a.hospitalName.toUpperCase()
+          let hospitalNameB = b.hospitalName.toUpperCase()
+          if(hospitalNameA > hospitalNameB){
+            return 1;
+          }
+          if(hospitalNameA < hospitalNameB){
+            return -1;
+          }
+          return 0
+          }
+        )
+      }
+
       if(sort.name==="Asc"){
-      setSort({...sort, name:"Dsc"})
-        }
-      if(sort.name==="Dsc"){
-      setSort({...sort, name:"Basic"})
-        }
+        setSort({...sort, name:"Dsc"})
+        posts.sort(function(a,b){
+          let hospitalNameA = a.hospitalName.toLowerCase()
+          let hospitalNameB = b.hospitalName.toLowerCase()
+          if(hospitalNameA < hospitalNameB){
+            return 1;
+          }
+          if(hospitalNameA > hospitalNameB){
+            return -1;
+          }
+          return 0
+
+          }
+        )
+
+        console.log("DSC")
+        console.log(posts)
+      }
+        if(sort.name==="Dsc"){
+        setSort({...sort, name:"Basic"})
+        basicSort()
+      }
     // (sort.nowName===null||"Basic")? setSort({...sort, name:"Asc", nowName:"Asc"}) : null
     }
 
     const handleSortNo = () => {
       if(sort.no==="Basic"){
         setSort({...sort, no:"Asc"})
+
+        posts.sort(function(a,b){
+          if(a.hospitalNo > b.hospitalNo){
+            return 1;
+          }
+          if(a.hospitalNo < b.hospitalNo){
+            return -1;
+          }
+          return 0
+          }
+        )
+
         }
       if(sort.no==="Asc"){
       setSort({...sort, no:"Dsc"})
+
+      posts.sort(function(a,b){
+        if(a.hospitalNo > b.hospitalNo){
+          return -1;
+        }
+        if(a.hospitalNo < b.hospitalNo){
+          return 1;
+        }
+        return 0
+        }
+      )
+
+        
         }
       if(sort.no==="Dsc"){
       setSort({...sort, no:"Basic"})
-        }
+      basicSort()
+      }
     }
 
     const handleSortPeople = () => {
       if(sort.people==="Basic"){
         setSort({...sort, people:"Asc"})
+        posts.sort(function(a,b){
+          if(a.medicalPeople > b.medicalPeople){
+            return 1;
+          }
+          if(a.medicalPeople < b.medicalPeople){
+            return -1;
+          }
+          return 0
+          }
+        )
         }
       if(sort.people==="Asc"){
       setSort({...sort, people:"Dsc"})
+      posts.sort(function(a,b){
+        if(a.medicalPeople > b.medicalPeople){
+          return -1;
+        }
+        if(a.medicalPeople < b.medicalPeople){
+          return 1;
+        }
+        return 0
+        }
+      )
         }
       if(sort.people==="Dsc"){
       setSort({...sort, people:"Basic"})
+      basicSort()
         }
     }
 
     // ----------------------- dropdown ---------------------------
     
     const handleChangeStatus = event => {
-      setSort({...sort, status:event.target.value});
+      // setStatus("")
+      setStatus(event.target.value)
+      console.log(event.target.value)
+      if(event.target.value==="전체보기"){
+        setSendList(posts)
+      }else{
+        setSendList([])
+        posts.forEach(post=>{
+          if (post.businessStatus.indexOf(status)) {
+            setSendList((sendList)=>[...sendList, post])
+          }
+        })
+
+      }
+      
     }
+
 
     return (
         <>
@@ -249,12 +361,12 @@ const ModalTestView = () => {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={sort.status}
+                  value={status}
                   onChange={handleChangeStatus}
                 >
-                  <MenuItem value={"All"}>전체보기</MenuItem>
-                  <MenuItem value={"Open"}>영업중</MenuItem>
-                  <MenuItem value={"Close"}>폐업</MenuItem>
+                  <MenuItem value={"전체보기"}>전체보기</MenuItem>
+                  <MenuItem value={"영업중"}>영업중</MenuItem>
+                  <MenuItem value={"폐업"}>폐업</MenuItem>
                 </Select>
               </FormControl>
 
@@ -263,9 +375,16 @@ const ModalTestView = () => {
               <TableBody>
                 {/* -------------pagination----------------- */}
                   {(rowsPerPage > 0
-                    ? posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    : posts
+                    // ? posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    // : posts
+
+                    ? sendList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    : sendList
+
+                    
                     ).map((hospital, i) => (
+                      
+
                   <TableRow
                     align="center"
                     key={i}
@@ -286,6 +405,11 @@ const ModalTestView = () => {
                     <TableCell align="center">{hospital.longitude}</TableCell>
                     <TableCell align="center">{hospital.businessStatus}</TableCell>
                   </TableRow>
+
+                    
+                    
+                    
+                    
                     ))}
                 {emptyRows > 0 && (
                   <TableRow style={{ height: 53 * emptyRows }}>
