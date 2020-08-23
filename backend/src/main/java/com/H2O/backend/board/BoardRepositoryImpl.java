@@ -13,8 +13,9 @@ import java.util.List;
 interface IBoardRepository {//I , 커스텀 쿼리를 짜서 컨트롤러로 보낸다.
 
     List<Board> findOneByWord(String cateWord);
-    void findOneByClick(Long board);
+    void findOneByClick(Long sboard);
     void modify(Board boardNo);
+
 }
 
 @Repository
@@ -38,6 +39,9 @@ public class BoardRepositoryImpl extends QuerydslRepositorySupport implements IB
                 .limit(5)
                 .fetch();
     }
+
+
+
     @Override
     public void findOneByClick(Long boardNo) {
         jpaQueryFactory

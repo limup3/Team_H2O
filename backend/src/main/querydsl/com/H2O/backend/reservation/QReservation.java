@@ -28,15 +28,13 @@ public class QReservation extends EntityPathBase<Reservation> {
 
     public final com.H2O.backend.doctor.QDoctor doctor;
 
-    public final StringPath gubun = createString("gubun");
-
     public final StringPath prescription = createString("prescription");
 
-    public final NumberPath<Long> reservationId = createNumber("reservationId", Long.class);
+    public final StringPath price = createString("price");
 
     public final NumberPath<Long> reservationNo = createNumber("reservationNo", Long.class);
 
-    public final StringPath time = createString("time");
+    public final StringPath reservationType = createString("reservationType");
 
     public final com.H2O.backend.user.QUser user;
 

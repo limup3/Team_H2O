@@ -4,6 +4,8 @@ import {Button, Table,Form,Col} from "react-bootstrap";
 import axios from 'axios'
 import {Link, useHistory} from "react-router-dom";
 import {MDBCol, MDBPageItem, MDBPageNav, MDBPagination, MDBRow} from "mdbreact";
+import Posts from './Posts';
+import Pagination from './Pagination';
 const CommunityTem = () => {
     const [postList, setPostList] = useState([])
     const [medCategory, setMedCategory] = useState('')
@@ -13,7 +15,37 @@ const CommunityTem = () => {
     const [state, setState] = useState('')
     const history = useHistory()
 
+    const [currentPage, setCurrentPage] = useState(1)
+    //현재페이지
+    const [postsPerPage] = useState(10)
+    //한 페이지에서 보여줄 수 있는 postList 수
 
+    const [loading, setLoading] = useState(false)
+
+    const indexOfLastPost = currentPage * postsPerPage;
+    //해당 페이지에서 마지막 postList의 index 번호
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    //해당 페이지에서 첫번째 post의 index 번호
+    const currentPosts = sendList.slice(indexOfFirstPost, indexOfLastPost);
+    // 각 페이지에서 보여질 포스트 배열
+
+    // Change page
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+
+    const nextPage = () => {
+        if (currentPage < currentPosts.length) {
+        setCurrentPage(currentPage + 1);
+        } else if (postsPerPage < currentPosts.length) {
+        setCurrentPage(currentPage + 1);
+        } else {
+        setCurrentPage(currentPage);
+        }
+          };
+     const prevPage = () => {
+        if (currentPage > 1) {
+        setCurrentPage(currentPage - 1);
+        }
+    };
 
 
     useEffect(() => {
@@ -90,7 +122,8 @@ const changeCategory = (e)=>{
                                 value={medCategory}
                                 onChange={changeCategory}
                             >
-                                <option>진료과구분</option>
+
+                                <option>진료과분류</option>
                                 <option>전체보기</option>
                                 <option>정형외과</option>
                                 <option>내과</option>
@@ -113,20 +146,7 @@ const changeCategory = (e)=>{
                     </tr>
                     </thead>
                     <tbody>
-                        {sendList && sendList.reverse().map((info,i)=>(
-                            <tr key={i}>
-                                <td>{i+1}</td>
-                                <td>empty</td>
-                                {/*<td>{info.user.userId}</td>*/}
-                                <td>{info.medCategory}</td>
-                                <td id="title" onClick={()=>setClick(click+1)}>
-                                        <Link to={`/Community/Review/${info.boardNo}`}>{info.title}</Link>
-                                </td>
-                                {/*<td>{info.content}</td>*/}
-                                <td>{info.creationDate}</td>
-                                <td>{info.click}</td>
-                            </tr>
-                        ))}
+                    <Posts sendList={currentPosts} loading={loading} />
                     </tbody>
                 </Table>
 
@@ -135,33 +155,13 @@ const changeCategory = (e)=>{
                 </div>
 
                 <div>
-                    <MDBRow>
-                        <MDBCol>
-                            <MDBPagination className="mb-5">
-                                <MDBPageItem>
-                                    <MDBPageNav aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </MDBPageNav>
-                                </MDBPageItem>
-                                <MDBPageItem>
-                                    <MDBPageNav>
-                                        1
-                                    </MDBPageNav>
-                                </MDBPageItem>
-                                <MDBPageItem>
-                                    <MDBPageNav>2</MDBPageNav>
-                                </MDBPageItem>
-                                <MDBPageItem>
-                                    <MDBPageNav>3</MDBPageNav>
-                                </MDBPageItem>
-                                <MDBPageItem>
-                                    <MDBPageNav aria-label="Previous">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </MDBPageNav>
-                                </MDBPageItem>
-                            </MDBPagination>
-                        </MDBCol>
-                    </MDBRow>
+                <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={sendList.length}
+                    paginate={paginate}
+                    nextPage={nextPage}
+                    prevPage={prevPage}
+                />
                 </div>
 
             </div>

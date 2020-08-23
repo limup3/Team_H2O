@@ -79,7 +79,7 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
       <PrimaryLink css={roundedHeaderButton && tw`rounded-full`}href="/SignUp">Sign Up</PrimaryLink>
       }
       {sessionStorage.userData &&
-      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`}href="/MyPage">MyPage</PrimaryLink>
+      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`}href="/UserModify">MyPage</PrimaryLink>
       }       
      
     </NavLinks>
