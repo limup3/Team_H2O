@@ -128,7 +128,6 @@ const ModalTestView = () => {
     const [newPageSave, setNewPageSave] = useState()
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, posts.length - page * rowsPerPage);
     // -------------------- Sort -----------------------
     const [sort, setSort]=useState({
       no:  "Basic" || "Asc" || "Dsc",
@@ -170,7 +169,7 @@ const ModalTestView = () => {
     };
     // ------------------- Sort ------------------------------
     const basicSort = () => {
-      posts.sort(function(a,b){
+      sendList.sort(function(a,b){
         if(a.hospitalNo > b.hospitalNo){
           return 1;
         }
@@ -185,7 +184,7 @@ const ModalTestView = () => {
     const handleSortName = () => {
       if(sort.name==="Basic"){
         setSort({...sort, name:"Asc"})
-        posts.sort(function(a,b){
+        sendList.sort(function(a,b){
           let hospitalNameA = a.hospitalName.toUpperCase()
           let hospitalNameB = b.hospitalName.toUpperCase()
           if(hospitalNameA > hospitalNameB){
@@ -201,7 +200,7 @@ const ModalTestView = () => {
 
       if(sort.name==="Asc"){
         setSort({...sort, name:"Dsc"})
-        posts.sort(function(a,b){
+        sendList.sort(function(a,b){
           let hospitalNameA = a.hospitalName.toLowerCase()
           let hospitalNameB = b.hospitalName.toLowerCase()
           if(hospitalNameA < hospitalNameB){
@@ -229,7 +228,7 @@ const ModalTestView = () => {
       if(sort.no==="Basic"){
         setSort({...sort, no:"Asc"})
 
-        posts.sort(function(a,b){
+        sendList.sort(function(a,b){
           if(a.hospitalNo > b.hospitalNo){
             return 1;
           }
@@ -244,7 +243,7 @@ const ModalTestView = () => {
       if(sort.no==="Asc"){
       setSort({...sort, no:"Dsc"})
 
-      posts.sort(function(a,b){
+      sendList.sort(function(a,b){
         if(a.hospitalNo > b.hospitalNo){
           return -1;
         }
@@ -266,7 +265,7 @@ const ModalTestView = () => {
     const handleSortPeople = () => {
       if(sort.people==="Basic"){
         setSort({...sort, people:"Asc"})
-        posts.sort(function(a,b){
+        sendList.sort(function(a,b){
           if(a.medicalPeople > b.medicalPeople){
             return 1;
           }
@@ -279,7 +278,7 @@ const ModalTestView = () => {
         }
       if(sort.people==="Asc"){
       setSort({...sort, people:"Dsc"})
-      posts.sort(function(a,b){
+      sendList.sort(function(a,b){
         if(a.medicalPeople > b.medicalPeople){
           return -1;
         }
@@ -301,13 +300,13 @@ const ModalTestView = () => {
     const handleChangeStatus = event => {
       // setStatus("")
       setStatus(event.target.value)
-      console.log(event.target.value)
       if(event.target.value==="전체보기"){
+        setSendList()
         setSendList(posts)
       }else{
         setSendList([])
         posts.forEach(post=>{
-          if (post.businessStatus.indexOf(status)) {
+          if (post.businessStatus.includes(event.target.value)){
             setSendList((sendList)=>[...sendList, post])
           }
         })
@@ -316,6 +315,7 @@ const ModalTestView = () => {
       
     }
 
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, sendList.length - page * rowsPerPage);
 
     return (
         <>
@@ -375,7 +375,7 @@ const ModalTestView = () => {
               <TableBody>
                 {/* -------------pagination----------------- */}
                   {(rowsPerPage > 0
-                    // ? posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    // ? sendList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     // : posts
 
                     ? sendList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -424,7 +424,7 @@ const ModalTestView = () => {
                   classesName ={tableClasses.TablePagination}
                   rowsPerPageOptions={[10, 50, 100, { label: 'All', value: -1 }]}
                   colSpan={7}
-                  count={posts.length}
+                  count={sendList.length}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   SelectProps={{
