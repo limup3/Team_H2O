@@ -44,15 +44,7 @@ const DoctorsToolbar = props => {
       <div className={classes.row}>
         <h1 className={classes.headline}>병원 관리</h1>
         <span className={classes.spacer} />
-        <Button 
-          className={classes.importButton}
-          >
-            Import
-        </Button>
-        <Button 
-        className={classes.exportButton}
-          >Export
-        </Button>
+        
         <Link to="/admin/DoctorsAdd">
         <Button
           color="primary"
@@ -62,12 +54,12 @@ const DoctorsToolbar = props => {
           </Button>
         </Link>
       </div>
-      <div className={classes.row}>
+      {/* <div className={classes.row}>
         <SearchInput
           className={classes.searchInput}
           placeholder="의사 검색"
         />
-      </div>
+      </div> */}
     </div>
   );
 };

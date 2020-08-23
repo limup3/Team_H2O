@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { DoctorsTable, DoctorsToolbar}  from './components';
 import mockData from './data';
+import DoctorTestView from './Test/DoctorTestView';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,7 +22,7 @@ const DoctorsList = () => {
     <div className={classes.root}>
       <DoctorsToolbar />
       <div className={classes.content}>
-        <DoctorsTable doctors={doctors} />
+        <DoctorTestView/>
       </div>
     </div>
   );

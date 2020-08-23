@@ -1,5 +1,2 @@
-export { default as HospitalDetails } from './HospitalDetails'
-export { default as HospitalProfile } from './HospitalProfile'
 export { default as HospitalsAdd } from './HospitalsAdd'
-export { default as HospitalsTable } from './HospitalsTable'
 export { default as HospitalsToolbar } from './HospitalsToolbar'

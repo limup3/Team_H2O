@@ -15,7 +15,6 @@ import java.util.List;
 @Setter
 @ToString
 @Component
-@NoArgsConstructor
 @Table(name="doctor")
 public class Doctor {
     @Id
@@ -29,6 +28,8 @@ public class Doctor {
     @Column(name = "specialized", nullable = false) private String specialized;
     @Column(name = "medical_subject", nullable = false) private String medicalSubject;
     @Column(name = "birthday", nullable = false) private String birthday;
+
+    public Doctor(){}
 
     @Builder
     public Doctor(
@@ -58,4 +59,6 @@ public class Doctor {
     @JsonIgnore
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
     private List<Reservation> reservations;
+
+
 }

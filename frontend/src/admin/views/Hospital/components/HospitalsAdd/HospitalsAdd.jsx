@@ -145,6 +145,10 @@ const UserAdd = () => {
   }
   }
 
+  const handleCancel = () => {
+    history.push('/admin/hospital')
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -384,6 +388,20 @@ const UserAdd = () => {
           >
             등록하기
           </Button>
+
+          <Button
+            fullWidth
+            className={classes.cancel}
+            onClick={handleCancel}
+            variant="contained"
+            style={{
+              color: 'white',
+              backgroundColor: "#FF4537"
+            }}
+          >
+            취소하기
+          </Button>
+
          </Grid>
         </form>
       </div>
