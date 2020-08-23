@@ -51,6 +51,7 @@ const UserAdd = () => {
   const [checked, setChecked] = useState({
     checkBox1 : false,
     checkBox2 : false,
+    checkBox3 : false,
   })
   //---------------- Image Upload -------------
   // const [image, setImage] = useState(null) 
@@ -73,6 +74,7 @@ const UserAdd = () => {
       switch(event.target.name){
         case "checkBox1": return setBusinessStatus("영업중")
         case "checkBox2": return setBusinessStatus("폐업")
+        case "checkBox3": return setBusinessStatus("휴업")
         default : return setBusinessStatus(); 
       }
       
@@ -240,6 +242,15 @@ const UserAdd = () => {
                         />}
                         label="폐업"
                       />
+                      <FormControlLabel
+                      control={ 
+                        <Checkbox
+                          checked={checked.checkBox3}
+                          onChange={handleCheckBox}
+                          name="checkBox3"
+                          />}
+                          label="휴업"
+                        />
                     </FormGroup>
                 </Grid>
 
@@ -275,7 +286,7 @@ const UserAdd = () => {
                 required
                 fullWidth
                 id="hospitalRoom"
-                label="hospitalRoom"
+                label="병실수"
                 name="hospitalRoom"
                 autoComplete="hospitalRoom"
                 value={hospitalRoom}
@@ -288,7 +299,7 @@ const UserAdd = () => {
                 required
                 fullWidth
                 id="hospitalBed"
-                label="hospitalBed"
+                label="병상수"
                 name="hospitalBed"
                 autoComplete="hospitalBed"
                 value={hospitalBed}
@@ -301,7 +312,7 @@ const UserAdd = () => {
                 required
                 fullWidth
                 id="hospitalArea"
-                label="hospitalArea"
+                label="병원 크기"
                 name="hospitalArea"
                 autoComplete="hospitalArea"
                 value={hospitalArea}
@@ -314,7 +325,7 @@ const UserAdd = () => {
                 required
                 fullWidth
                 id="typeDetail"
-                label="typeDetail"
+                label="병원 상세정보"
                 name="typeDetail"
                 autoComplete="typeDetail"
                 value={typeDetail}

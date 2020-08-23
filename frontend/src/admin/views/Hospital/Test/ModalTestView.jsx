@@ -133,7 +133,6 @@ const ModalTestView = () => {
       no:  "Basic" || "Asc" || "Dsc",
       name: "Basic" || "Asc" || "Dsc",
       people: "Basic" || "Asc" || "Dsc",
-      // status : "All" || "영업중" || "폐업"
     })
     const [status, setStatus] = useState("전체보기")
     const [sendList, setSendList] =useState([])
@@ -367,6 +366,7 @@ const ModalTestView = () => {
                   <MenuItem value={"전체보기"}>전체보기</MenuItem>
                   <MenuItem value={"영업중"}>영업중</MenuItem>
                   <MenuItem value={"폐업"}>폐업</MenuItem>
+                  <MenuItem value={"휴업"}>휴업</MenuItem>
                 </Select>
               </FormControl>
 

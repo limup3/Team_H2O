@@ -50,6 +50,7 @@ const ModalTestBody = (props) => {
     const [checked, setChecked] = useState({
       checkBox1 : false,
       checkBox2 : false,
+      checkBox3 : false,
     })
 
     const history = useHistory();
@@ -58,6 +59,7 @@ const ModalTestBody = (props) => {
       switch(hospitalData.businessStatus){
         case `영업중`: return setChecked({...checked, checkBox1:true})
         case `폐업`: return setChecked({...checked, checkBox2:true})
+        case `휴업`: return setChecked({...checked, checkBox3:true})
       }
     }, [])
 
@@ -78,6 +80,7 @@ const ModalTestBody = (props) => {
         switch(event.target.name){
           case "checkBox1": return setBusinessStatus("영업중")
           case "checkBox2": return setBusinessStatus("폐업")
+          case "checkBox3": return setBusinessStatus("휴업")
           default : return setBusinessStatus(); 
         }
         
@@ -204,6 +207,16 @@ const ModalTestBody = (props) => {
                         />}
                         label="폐업"
                       />
+                      <FormControlLabel
+                      control={ 
+                        <Checkbox
+                          defaultChecked
+                          checked={checked.checkBox3}
+                          onChange={handleCheckBox}
+                          name="checkBox3"
+                          />}
+                          label="휴업"
+                        />
                     </FormGroup>
                 </Grid>
               <Grid
@@ -256,6 +269,64 @@ const ModalTestBody = (props) => {
                   value={values.tel}
                   variant="outlined"
                 />
+              </Grid>
+              <Grid
+                item
+                md={12}
+                xs={12}
+              >
+                <TextField
+                  fullWidth
+                  defaultValue={hospitalData.hospitalRoom}
+                  label="병실수"
+                  margin="dense"
+                  name="hospitalRoom"
+                  onChange={e => setHospitalRoom(e.target.value)}
+                  required
+                  value={values.hospitalRoom}
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid
+                item
+                md={12}
+                xs={12}
+              >
+                <TextField
+                  fullWidth
+                  defaultValue={hospitalData.hospitalBed}
+                  label="병상수"
+                  margin="dense"
+                  name="hospitalBed"
+                  onChange={e => setHospitalBed(e.target.value)}
+                  required
+                  value={values.hospitalBed}
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid
+                item
+                md={12}
+                xs={12}
+              >
+                <TextField
+                  fullWidth
+                  defaultValue={hospitalData.hospitalArea}
+                  label="병원크기"
+                  margin="dense"
+                  name="hospitalArea"
+                  onChange={e => setHospitalArea(e.target.value)}
+                  required
+                  value={values.hospitalArea}
+                  variant="outlined"
+                />
+              </Grid>
+              
+              <Grid
+                item
+                md={12}
+                xs={12}
+              >
               </Grid>
               <Grid
                 item
