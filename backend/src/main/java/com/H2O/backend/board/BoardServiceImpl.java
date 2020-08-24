@@ -30,7 +30,7 @@ interface BoardService {
     void click(Long boardNo);
 //    List<Board> getBoardPage(int pageNumber);
     List<Board> getAllBoardList();
-
+    List<Board> boardList();
     List<Board> findByCategory(String category);
 }
     @Service
@@ -80,6 +80,11 @@ interface BoardService {
         public List<Board> getAllBoardList() {
             return boardRepository.findAll(); //페이지네이션
             }
+
+        @Override
+        public List<Board> boardList() {
+            return boardRepository.findAll();
+        }
 
         @Override
         public List<Board> findByCategory(String category) {

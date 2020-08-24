@@ -1,5 +1,6 @@
 package com.H2O.backend.board;
 
+import com.H2O.backend.doctor.Doctor;
 import com.H2O.backend.util.boardEnum.Messenger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +26,8 @@ public class BoardController {
 
     //csv파일 데이터베이스에 저장
     @GetMapping("/csv")
-    public void csvRead(){
-        boardService.readCsv(); }
+    public void csvRead(){ boardService.readCsv(); }
+
 
     //글쓰기 업로드
     @PostMapping("/update")
@@ -41,7 +42,6 @@ public class BoardController {
         Bdata.setCategory(board.getCategory());
         Bdata.setClick(board.getClick());
         Bdata.setCreationDate(LocalDate.now());
-
         boardRepository.save(Bdata);
         List<Board> boardList = boardService.findAll();
         return ResponseEntity.ok(boardList);
@@ -54,7 +54,6 @@ public class BoardController {
         System.out.println(boardList.toString());
         return ResponseEntity.ok(boardList);
     }
-
     //삭제
     @DeleteMapping("/list/delete/{boardNo}")
     public Messenger getDeleteBoard(@PathVariable String boardNo){
@@ -63,7 +62,6 @@ public class BoardController {
         boardService.delete(deleteResult);
         return Messenger.SUCCEESS;
     }
-
     //수정
     @PatchMapping("/modify/{boardNo}")
     public Messenger getModifyBoard(@RequestBody Board board,
@@ -80,7 +78,6 @@ public class BoardController {
             return Messenger.FAIL;
         }
     }
-
     //리스트에서 진료카테고리별
     @GetMapping("/list/{medCategory}")
     public List<Board> getMedCateBoard(@PathVariable String medCategory){
@@ -89,7 +86,6 @@ public class BoardController {
         System.out.println(findOne);
         return findOne;
     }
-
     //클릭
     @GetMapping("/list/getOne/{boardNo}")
     public Optional<Board> getOneBoardNo(@PathVariable String boardNo){
@@ -97,4 +93,13 @@ public class BoardController {
         boardService.click(Long.parseLong(boardNo));
         return boardService.findBoardNo(Long.parseLong(boardNo));
     }
+
+    // 의사 테이블 리스트
+    @GetMapping("/boardList")
+    public ResponseEntity<List<Board>> boardList() {
+        List<Board> boardList = boardService.boardList();
+        System.out.println(boardList);
+        return ResponseEntity.ok(boardList);
+    }
+
 }

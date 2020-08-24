@@ -115,7 +115,7 @@ public class UserController {
     public ResponseEntity<User> modify(@PathVariable String userId, @RequestBody User user) {
         System.out.println("회원 정보 변경 진입");
         Optional<User> modifyUser = userService.findUserByUserId(user.getUserId());
-
+        System.out.println(modifyUser);
         if(modifyUser.isPresent()){
             modifyUser.ifPresent(selectUser ->{
                 selectUser.setName(user.getName());

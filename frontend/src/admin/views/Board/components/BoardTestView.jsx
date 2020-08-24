@@ -131,19 +131,21 @@ const BoardTestView = () => {
     // -------------------- Sort -----------------------
     const [sort, setSort]=useState({
       no:  "Basic" || "Asc" || "Dsc",
-      name: "Basic" || "Asc" || "Dsc",
-      people: "Basic" || "Asc" || "Dsc",
+      title: "Basic" || "Asc" || "Dsc",
+      category: "Basic" || "Asc" || "Dsc"
     })
     const [status, setStatus] = useState("전체보기")
+    const [category, setCategory] = useState("카테고리")
     const [sendList, setSendList] =useState([])
 
     useEffect(()=>{
       setLoading(true);
       axios
-        .get(`http://localhost:8080/board/list`)
+        .get(`http://localhost:8080/board/boardList`)
         .then(response => {
           setPosts(response.data)
           setSendList(response.data)
+          console.log(response.data)
         })
         .catch(error => {
           alert("서버와의 연결이 되지 않았습니다.");
@@ -169,10 +171,10 @@ const BoardTestView = () => {
     // ------------------- Sort ------------------------------
     const basicSort = () => {
       sendList.sort(function(a,b){
-        if(a.hospitalNo > b.hospitalNo){
+        if(a.boardNo > b.boardNo){
           return 1;
         }
-        if(a.hospitalNo < b.hospitalNo){
+        if(a.boardNo < b.boardNo){
           return -1;
         }
         return 0
@@ -228,10 +230,10 @@ const BoardTestView = () => {
         setSort({...sort, no:"Asc"})
 
         sendList.sort(function(a,b){
-          if(a.hospitalNo > b.hospitalNo){
+          if(a.boardNo > b.boardNo){
             return 1;
           }
-          if(a.hospitalNo < b.hospitalNo){
+          if(a.boardNo < b.boardNo){
             return -1;
           }
           return 0
@@ -243,10 +245,10 @@ const BoardTestView = () => {
       setSort({...sort, no:"Dsc"})
 
       sendList.sort(function(a,b){
-        if(a.hospitalNo > b.hospitalNo){
+        if(a.boardNo > b.boardNo){
           return -1;
         }
-        if(a.hospitalNo < b.hospitalNo){
+        if(a.boardNo < b.boardNo){
           return 1;
         }
         return 0
@@ -261,42 +263,10 @@ const BoardTestView = () => {
       }
     }
 
-    const handleSortPeople = () => {
-      if(sort.people==="Basic"){
-        setSort({...sort, people:"Asc"})
-        sendList.sort(function(a,b){
-          if(a.medicalPeople > b.medicalPeople){
-            return 1;
-          }
-          if(a.medicalPeople < b.medicalPeople){
-            return -1;
-          }
-          return 0
-          }
-        )
-        }
-      if(sort.people==="Asc"){
-      setSort({...sort, people:"Dsc"})
-      sendList.sort(function(a,b){
-        if(a.medicalPeople > b.medicalPeople){
-          return -1;
-        }
-        if(a.medicalPeople < b.medicalPeople){
-          return 1;
-        }
-        return 0
-        }
-      )
-        }
-      if(sort.people==="Dsc"){
-      setSort({...sort, people:"Basic"})
-      basicSort()
-        }
-    }
 
     // ----------------------- dropdown ---------------------------
     
-    const handleChangeStatus = event => {
+    const handleChangeCategory = event => {
       // setStatus("")
       setStatus(event.target.value)
       if(event.target.value==="전체보기"){
@@ -312,7 +282,11 @@ const BoardTestView = () => {
 
       }
       
-    }
+    } 
+    
+
+
+
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, sendList.length - page * rowsPerPage);
 
@@ -331,25 +305,26 @@ const BoardTestView = () => {
                     {sort.no==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
                   </MuiButton>
                 </TableCell>
+              <TableCell align="center"> 글쓴이 </TableCell>
+              <TableCell align="center">카테고리</TableCell>
+              <TableCell align="center">
+                <MuiButton
+                  onClick={handleChangeCategory}
+                  >
+                    의료 카테고리
+                    {sort.category==="Asc" && <ArrowUpwardIcon fontSize="small"/>}
+                    {sort.category==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
+                 </MuiButton>
+                </TableCell>
               <TableCell align="center">
                 <MuiButton
                   onClick={handleSortTitle}>
-                    작성자
+                    제목
                     {sort.title==="Asc" && <ArrowUpwardIcon fontSize="small"/>}
                     {sort.title==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
                 </MuiButton>
               </TableCell>
-              <TableCell align="center">카테고리</TableCell>
-              <TableCell align="center">제목</TableCell>
               <TableCell align="center">내용</TableCell>
-              <TableCell align="center">
-                <MuiButton
-                  onClick={handleSortPeople}>
-                    의료 카테고리
-                    {sort.people==="Asc" && <ArrowUpwardIcon fontSize="small"/>}
-                    {sort.people==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
-                 </MuiButton>
-                </TableCell>
               <TableCell align="center">조회수</TableCell>
               {/* <TableCell align="center">
               <FormControl className={selectBox.formControl}>
@@ -387,20 +362,17 @@ const BoardTestView = () => {
                     key={i}
                     onClick={()=>setHospitalData(hospital)}
                   >
-                    <TableCell align="center">{hospital.hospitalNo}</TableCell>
+                    <TableCell align="center">{hospital.boardNo}</TableCell>
                     <TableCell align="center">
                       <MuiButton variant="light" onClick={()=>setShow(true)}
-                      >{hospital.hospitalName}
+                      >{hospital.userNo}
                       </MuiButton>
                     </TableCell>
-                    <TableCell align="center">{hospital.businessLicenseNumber}</TableCell>
-                    <TableCell align="center">{hospital.addr}</TableCell>
-                    <TableCell align="center">{hospital.hospitalType}</TableCell>
-                    <TableCell align="center">{hospital.medicalPeople}</TableCell>
-                    <TableCell align="center">{hospital.tel}</TableCell>
-                    <TableCell align="center">{hospital.latitude}</TableCell>
-                    <TableCell align="center">{hospital.longitude}</TableCell>
-                    <TableCell align="center">{hospital.businessStatus}</TableCell>
+                    <TableCell align="center">{hospital.category}</TableCell>
+                    <TableCell align="center">{hospital.medCategory}</TableCell>
+                    <TableCell align="center">{hospital.title}</TableCell>
+                    <TableCell align="center">{hospital.content}</TableCell>
+                    <TableCell align="center">{hospital.click}</TableCell>
                   </TableRow>
 
                     
