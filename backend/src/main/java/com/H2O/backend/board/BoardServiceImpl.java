@@ -1,15 +1,25 @@
 package com.H2O.backend.board;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
 @Component
 interface BoardService {
+
+    public void readCsv();
     List<Board> findAll();
     void delete(Board board);
     Board update(Board selectBoard);
@@ -18,7 +28,10 @@ interface BoardService {
     Optional<Board> findBoardNo(Long boardNo);
     void modify(Board boardNo);
     void click(Long boardNo);
+//    List<Board> getBoardPage(int pageNumber);
+    List<Board> getAllBoardList();
 
+    List<Board> findByCategory(String category);
 }
     @Service
     public class BoardServiceImpl implements BoardService {
@@ -27,6 +40,8 @@ interface BoardService {
         public BoardServiceImpl(BoardRepository boardRepository) {
             this.boardRepository = boardRepository;
         }
+
+
 
         @Override
         public List<Board> findAll() {
@@ -61,6 +76,63 @@ interface BoardService {
             boardRepository.findOneByClick(boardNo);
         }
 
+        @Override
+        public List<Board> getAllBoardList() {
+            return boardRepository.findAll(); //페이지네이션
+            }
+
+        @Override
+        public List<Board> findByCategory(String category) {
+            switch (category){
+                case "boardUser": category="자유게시판"; break;
+                case "customerServiceCenter": category="고객서비스센터"; break;
+                case "questionAnswer": category="Q&A"; break;
+                default :
+                    System.out.println("test");
+            }
+            return boardRepository.findByCategory(category);
+        }
+
+        @Override
+        public void readCsv() {
+            InputStream is = getClass().getResourceAsStream("/static/csv/board.csv");
+            LocalDate formattedDate = null;  //Declare LocalDate variable to receive the formatted date.
+            DateTimeFormatter dateTimeFormatter;  //Declare date formatter
+            String rawDate = "2020-08-23";  //Test string that holds a date to format and parse.
+
+            dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE;
+
+            formattedDate = formattedDate.parse(String.format(rawDate, dateTimeFormatter));
+
+            LocalDate localDate = LocalDate.now();
+            try {
+                BufferedReader fileReader = new BufferedReader(new InputStreamReader(is,"UTF-8"));
+                CSVParser csvParser = new CSVParser(fileReader, CSVFormat.DEFAULT);
+                Iterable<CSVRecord> csvRecords = csvParser.getRecords();
+                for(CSVRecord csvRecord : csvRecords){
+                System.out.println(csvRecord.get(0));
+                System.out.println(csvRecord.get(1));
+                System.out.println(csvRecord.get(2));
+                System.out.println(csvRecord.get(3));
+                System.out.println(csvRecord.get(4));
+                System.out.println(csvRecord.get(5));
+                System.out.println(csvRecord.get(6));
+                System.out.println(csvRecord.get(7));
+                    boardRepository.save(new Board(
+                            csvRecord.get(0),
+                            csvRecord.get(1),
+                            LocalDate.parse(csvRecord.get(2)),
+                            csvRecord.get(3),
+//                            formattedDate.parse(String.format(csvRecord.get(3), dateTimeFormatter)),
+                            csvRecord.get(4),
+                            csvRecord.get(5),
+                            csvRecord.get(6),
+                            Integer.parseInt(csvRecord.get(7))));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
 
         @Override
@@ -69,8 +141,4 @@ interface BoardService {
         }
     }
 
-//    public Board findOne(String searchWord){
-//
-//        return boardRepository.findOneByWord(searchWord);
-//    }
 

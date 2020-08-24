@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 interface IBoardRepository {//I , 커스텀 쿼리를 짜서 컨트롤러로 보낸다.
-
+//    List<Board> postList();
     List<Board> findOneByWord(String cateWord);
     void findOneByClick(Long board);
     void modify(Board boardNo);
@@ -27,6 +27,14 @@ public class BoardRepositoryImpl extends QuerydslRepositorySupport implements IB
         this.jpaQueryFactory = jpaQueryFactory;
     }
 
+//
+//    @Override
+//    public List<Board> postList() {
+//        List<Board> list = jpaQueryFactory.select(Projections.fields(Board.class,board.title,
+//                board.medCategory,board.content,board.boardNo,board.category,board.creationDate)).from(board)
+//                .where(board.boardYn.eq(true).and(board.deleteYn.isFalse())).fetch();
+//        return null;
+//    }
 
     @Override
     public List<Board> findOneByWord(String cateWord) {
@@ -58,13 +66,4 @@ public class BoardRepositoryImpl extends QuerydslRepositorySupport implements IB
                     .set(board.creationDate,boardNo.getCreationDate())
                     .execute();
     }
-
-//    @Override
-//    public void dateTime(Date boardNo) {
-//        jpaQueryFactory
-//                .update(board)
-//                .where(board.boardNo.eq(boardNo))
-//                    .set(board.creationDate, boardNo)
-//                    .execute();
-//    }
 }
