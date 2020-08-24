@@ -43,8 +43,8 @@ const UsersToolbar = props => {
       className={clsx(classes.root, className)}
     >
       
-      <div className={classes.row}>
-      <h1 className={classes.headline}>사용자 관리</h1>
+      <div className={classes.row}
+                  style={{fontWeight:"bold", fontSize:"x-large"}}>사용자 관리
         <span className={classes.spacer} />
         
           <Link to="/admin/UserAdd">

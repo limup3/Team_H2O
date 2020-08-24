@@ -32,10 +32,10 @@ const UserTestBody = (props) => {
     // const {UserData} = props    
     const [userNo, setUserNo] = useState(UserData.userNo)
     const [userId, setUserId] = useState(UserData.userId)
-    const [name, setName] = useState("");
+    const [name, setName] = useState(UserData.name);
     const [password, setPassword] = useState(UserData.password)
     const [email, setEmail] = useState(UserData.email);
-    const [phone, setPhone] = useState(UserData.phoneNumber)
+    const [phone, setPhone] = useState(UserData.phone)
     const [birthday, setBirthday] = useState(UserData.birthday)
 
     // const [close, setClose]= useState()

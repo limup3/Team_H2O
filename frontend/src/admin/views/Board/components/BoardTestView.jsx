@@ -49,7 +49,7 @@ const tableStyles = makeStyles({
 const useStyles1 = makeStyles((theme) => ({
   root: {
     flexShrink: 0,
-    marginLeft: theme.spacing(2.5),
+    marginLeft: theme.spacing(1.5),
   },
 }));
 
@@ -59,7 +59,7 @@ const selectStyle = makeStyles((theme) => ({
     minWidth: 120,
   },
   selectEmpty: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(1),
   },
 }));
 
@@ -132,11 +132,16 @@ const BoardTestView = () => {
     const [sort, setSort]=useState({
       no:  "Basic" || "Asc" || "Dsc",
       title: "Basic" || "Asc" || "Dsc",
-      category: "Basic" || "Asc" || "Dsc"
+      category: "Basic" || "Asc" || "Dsc",
+      click: "Basic" || "Asc" || "Dsc",
     })
     const [status, setStatus] = useState("전체보기")
     const [category, setCategory] = useState("카테고리")
     const [sendList, setSendList] =useState([])
+
+
+    const [medCategory, setMedcategory] = useState('')
+    const [creationDate, setCreationDate] =useState('')
 
     useEffect(()=>{
       setLoading(true);
@@ -199,8 +204,8 @@ const BoardTestView = () => {
         )
       }
 
-      if(sort.name==="Asc"){
-        setSort({...sort, name:"Dsc"})
+      if(sort.title==="Asc"){
+        setSort({...sort, title:"Dsc"})
         sendList.sort(function(a,b){
           let boardTitleA = a.title.toLowerCase()
           let boardTitleB = b.title.toLowerCase()
@@ -218,8 +223,8 @@ const BoardTestView = () => {
         console.log("DSC")
         console.log(posts)
       }
-        if(sort.name==="Dsc"){
-        setSort({...sort, name:"Basic"})
+        if(sort.title==="Dsc"){
+        setSort({...sort, title:"Basic"})
         basicSort()
       }
     // (sort.nowName===null||"Basic")? setSort({...sort, name:"Asc", nowName:"Asc"}) : null
@@ -264,25 +269,65 @@ const BoardTestView = () => {
     }
 
 
+
+    const handleSortClick = () => {
+      if(sort.click==="Basic"){
+        setSort({...sort, click:"Asc"})
+
+        sendList.sort(function(a,b){
+          if(a.click > b.click){
+            return 1;
+          }
+          if(a.click < b.click){
+            return -1;
+          }
+          return 0
+          }
+        )
+
+        }
+      if(sort.click==="Asc"){
+      setSort({...sort, click:"Dsc"})
+
+      sendList.sort(function(a,b){
+        if(a.click > b.click){
+          return -1;
+        }
+        if(a.click < b.click){
+          return 1;
+        }
+        return 0
+        }
+      )
+
+        
+        }
+      if(sort.click==="Dsc"){
+      setSort({...sort, click:"Basic"})
+      basicSort()
+      }
+    }
+
     // ----------------------- dropdown ---------------------------
     
     const handleChangeCategory = event => {
-      // setStatus("")
       setStatus(event.target.value)
       if(event.target.value==="전체보기"){
-        setSendList()
         setSendList(posts)
+        console.log(posts)
       }else{
         setSendList([])
         posts.forEach(post=>{
-          if (post.businessStatus.includes(event.target.value)){
+          if(event.target.value==="category" && post.category === "자유게시판"){
             setSendList((sendList)=>[...sendList, post])
+          }else if(event.target.value==="questionCategory" && post.category === "Q&A"){
+            setSendList((sendList)=>[...sendList, post])
+          }else if(event.target.value==="customerCategory" && post.category === "고객서비스센터"){
+          setSendList((sendList)=>[...sendList, post])
           }
         })
-
-      }
-      
-    } 
+     } 
+    }
     
 
 
@@ -306,16 +351,93 @@ const BoardTestView = () => {
                   </MuiButton>
                 </TableCell>
               <TableCell align="center"> 글쓴이 </TableCell>
-              <TableCell align="center">카테고리</TableCell>
               <TableCell align="center">
-                <MuiButton
-                  onClick={handleChangeCategory}
+                
+              <FormControl className={selectBox.formControl}>
+                 <InputLabel>카테고리</InputLabel>
+                  <Select
+                    value={status}
+                    onChange={handleChangeCategory}>
+                      <MenuItem value="전체보기">전체보기</MenuItem>
+                      <MenuItem value="category">자유게시판</MenuItem>
+                      <MenuItem value="customerCategory">고객서비스</MenuItem>
+                      <MenuItem value="questionCategory">질의응답</MenuItem>
+                    </Select>
+                  </FormControl>
+              </TableCell>
+              <TableCell align="center">카테고리</TableCell>
+              {/* {status==="자유게시판" && 
+              <TableCell align="center">
+                <FormControl className={selectBox.formControl}>
+                  <InputLabel id="demo-simple-select-label">*진료과구분</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={medCategory}
+                    onChange={e=>setMedcategory(e.target.value)}
                   >
-                    의료 카테고리
-                    {sort.category==="Asc" && <ArrowUpwardIcon fontSize="small"/>}
-                    {sort.category==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
-                 </MuiButton>
-                </TableCell>
+                    <MenuItem value={"전체보기"}>전체보기</MenuItem>
+                    <MenuItem value={"정형외과"}>정형외과</MenuItem>
+                    <MenuItem value={"내과"}>내과</MenuItem>
+                    <MenuItem value={"성형외과"}>성형외과</MenuItem>
+                    <MenuItem value={"흉부외과"}>흉부외과</MenuItem>
+                    <MenuItem value={"마취통증의학과"}>마취통증의학과</MenuItem>
+                    <MenuItem value={"가정의학과"}>가정의학과</MenuItem>
+                    <MenuItem value={"정신과"}>정신과</MenuItem>
+                    <MenuItem value={"이비인후과"}>이비인후과</MenuItem>
+                    <MenuItem value={"일반외과"}>일반외과</MenuItem>
+                    <MenuItem value={"재활의학과"}>재활의학과</MenuItem>
+                    <MenuItem value={"신경과"}>신경과</MenuItem>
+                    <MenuItem value={"소아과"}>소아과</MenuItem>
+                    <MenuItem value={"피부과"}>피부과</MenuItem>
+                    <MenuItem value={"여성의학과"}>여성의학과</MenuItem>
+
+                  </Select>
+                </FormControl>
+              </TableCell>}
+
+              {status==="고객서비스센터" && 
+              <TableCell align="center">
+                <FormControl className={selectBox.formControl}>
+                  <InputLabel id="demo-simple-select-label">*서비스구분</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={medCategory}
+                    onChange={e=>setMedcategory(e.target.value)}
+                  >
+                    <MenuItem value={"전체보기"}>전체보기</MenuItem>
+                    <MenuItem value={"서비스"}>서비스</MenuItem>
+                    <MenuItem value={"결제"}>결제</MenuItem>
+                    <MenuItem value={"오류"}>오류</MenuItem>
+                    
+                  </Select>
+                </FormControl>
+              </TableCell>}
+
+              {status==="Q&A" && 
+              <TableCell align="center">
+                <FormControl className={selectBox.formControl}>
+                  <InputLabel id="demo-simple-select-label">*사용구분</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={medCategory}
+                    onChange={e=>setMedcategory(e.target.value)}
+                  >
+                    <MenuItem value={"전체보기"}>전체보기</MenuItem>
+                    <MenuItem value={"사용질문"}>사용질문</MenuItem>
+                    <MenuItem value={"결제질문"}>결제질문</MenuItem>
+                    <MenuItem value={"오류질문"}>오류질문</MenuItem>
+                    
+                  </Select>
+                </FormControl>
+              </TableCell>}
+               */}
+
+
+
+
               <TableCell align="center">
                 <MuiButton
                   onClick={handleSortTitle}>
@@ -325,24 +447,13 @@ const BoardTestView = () => {
                 </MuiButton>
               </TableCell>
               <TableCell align="center">내용</TableCell>
-              <TableCell align="center">조회수</TableCell>
-              {/* <TableCell align="center">
-              <FormControl className={selectBox.formControl}>
-                 <InputLabel id="demo-simple-select-label">영업상태</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={status}
-                  onChange={handleChangeStatus}
-                >
-                  <MenuItem value={"전체보기"}>전체보기</MenuItem>
-                  <MenuItem value={"영업중"}>영업중</MenuItem>
-                  <MenuItem value={"폐업"}>폐업</MenuItem>
-                  <MenuItem value={"휴업"}>휴업</MenuItem>
-                </Select>
-              </FormControl>
-
-              </TableCell> */}
+              <TableCell align="center"><MuiButton
+                  onClick={handleSortClick}>
+                    조회수
+                    {sort.click==="Asc" && <ArrowUpwardIcon fontSize="small"/>}
+                    {sort.click==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
+                  </MuiButton></TableCell>
+              
             </TableRow>
               <TableBody>
                 {/* -------------pagination----------------- */}

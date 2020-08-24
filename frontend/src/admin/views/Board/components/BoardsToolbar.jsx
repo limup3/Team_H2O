@@ -50,8 +50,8 @@ const BoardToolbar = props => {
       {...rest}
       className={clsx(classes.root, className)}
     >
-      <div className={classes.row}>
-        <h1 className={classes.headline}>병원 관리</h1>
+      <div className={classes.row}
+      style={{fontWeight:"bold", fontSize:"x-large"}}>게시판 관리
         <span className={classes.spacer} />
         {/* <Button 
           className={classes.importButton}
@@ -62,14 +62,14 @@ const BoardToolbar = props => {
         className={classes.exportButton}
           >리스트 파일 확인
         </Button> */}
-        <Link to="/admin/HospitalsAdd">
+        {/* <Link to="/admin/HospitalsAdd">
         <Button
           color="primary"
           variant="contained"
           >
           병원 등록
           </Button>
-        </Link>
+        </Link> */}
       </div>
       {/* 추후 도입예정
       <div className={classes.row}>
