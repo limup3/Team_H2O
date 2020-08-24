@@ -50,8 +50,9 @@ CREATE TABLE User
     `Name`              VARCHAR(20)     NULL,
     `Password`          VARCHAR(20)     NOT NULL,
     `Phone`             VARCHAR(30)     NULL,
-    `Admin_Check`       BOOLEAN         NULL,
+    `Admin_Check`       INT         NULL,
     `Email`             VARCHAR(50)     NULL,
+    `Birthday`          VARCHAR(20)     NULL,
     `History`           VARCHAR(150)    NULL,
     PRIMARY KEY (User_No)
 )default character set utf8 collate UTF8_GENERAL_CI;

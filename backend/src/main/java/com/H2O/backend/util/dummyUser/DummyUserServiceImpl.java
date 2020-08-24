@@ -23,7 +23,7 @@ public class DummyUserServiceImpl implements DummyUserService{
     @Override
     public List<User> createDummyUser() {
         List<User> userList = new ArrayList<>();
-        for(int i = 0; i < 1000; i++) {
+        for(int i = 0; i < 500; i++) {
             User user = new User();
             user.setUserId(DummyUser.generateRandomId()+DummyUser.generateRandomNo2());
             user.setPassword(DummyUser.generateRandomPw()+DummyUser.generateRandomPwNum());

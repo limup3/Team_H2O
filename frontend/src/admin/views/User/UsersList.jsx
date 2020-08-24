@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 
-import { UsersToolbar, UsersTable } from './components';
-import mockData from './data';
+import { UsersToolbar } from './components';
+import axios from 'axios';
+import UserTestView from './Test/UserTestView';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,15 +16,31 @@ const useStyles = makeStyles(theme => ({
 
 const UsersList = () => {
   const classes = useStyles();
+  const [posts, setPosts] = useState([]) 
+  const [sendList, setSendList]= useState([])
 
-  const [users] = useState(mockData);
+  const handleCreate = () => {
+    axios
+        .post(`http://localhost:8080/dummy/user-generator`)
+        .then(response => {
+          setPosts(response.data)
+        })
+        .catch(error => {
+          alert("서버와의 연결이 되지 않았습니다.");
+        })
+
+  }
+
 
   return (
     <div className={classes.root}>
       <UsersToolbar />
       <div className={classes.content}>
-        <UsersTable users={users} />
+        <UserTestView/>
       </div>
+      {/* <button onClick={handleCreate}>
+      유저 더미 데이터 생성
+      </button> */}
     </div>
   );
 };
