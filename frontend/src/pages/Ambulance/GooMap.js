@@ -61,7 +61,7 @@ const GooMap = () =>{
             }else{
                 setSelectedPc("정보없음")
             }
-            setSelectedAddr(address)
+            // setSelectedAddr(address)
 
             console.log(address)
         },
@@ -201,6 +201,7 @@ const GooMap = () =>{
                                 <p>{selected.name}</p>
                                 <img src={selected.image} className="small-image" alt="rental"/>
                                 <p>주소:{selected.address}</p>
+                                
                                 <Row>
                                     <Col xs={6} md={4}>
                                         <Image src="https://image.flaticon.com/icons/svg/3198/3198467.svg" rounded />
@@ -266,7 +267,9 @@ const GooMap = () =>{
                         <Marker
                             key={i}
                             position={{lat:store.x_value, lng:store.y_value}}
-                            onClick={()=>setSelected(store)}
+                            onClick={
+                                ()=>{setSelected(store)
+                                setSelectedAddr(store.street_address)}}
                             icon={{
                                 url: "https://image.flaticon.com/icons/svg/1786/1786525.svg",
                                 scaledSize: new window.google.maps.Size(40, 40)

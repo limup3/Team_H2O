@@ -1,8 +1,17 @@
 package com.H2O.backend.user;
 
+import com.H2O.backend.doctor.Doctor;
+import com.H2O.backend.hospital.Hospital;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -21,6 +30,9 @@ interface UserService {
     Optional<User> findPw(String userId, String name, String phone);
 
     Optional<User> signUp(User user);
+    public void readCsv();
+    List<User> userList();
+
 }
 @Service
 public class UserServiceImpl implements UserService {
@@ -74,10 +86,53 @@ public class UserServiceImpl implements UserService {
         createUser.setPhone(user.getPhone());
         createUser.setEmail(user.getEmail());
         createUser.setAdminCheck(0);
+        createUser.setBirthday("1995-04-27");
+
 
         System.out.println(createUser);
         User userData = userRepository.save(createUser);
         return Optional.of(userData);
 
+    }
+
+    @Override
+    public void readCsv() {
+        InputStream is = getClass().getResourceAsStream("/static/csv/user.csv");
+
+        try {
+            BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            CSVParser csvParser = new CSVParser(fileReader, CSVFormat.DEFAULT);
+            Iterable<CSVRecord> csvRecords = csvParser.getRecords();
+            for (CSVRecord csvRecord : csvRecords) {
+                System.out.println(csvRecord.get(0));
+                System.out.println(csvRecord.get(1));
+                System.out.println(csvRecord.get(2));
+                System.out.println(csvRecord.get(3));
+                System.out.println(csvRecord.get(4));
+                System.out.println(csvRecord.get(5));
+                System.out.println(csvRecord.get(6));
+                System.out.println(csvRecord.get(7));
+//                System.out.println(csvRecord.get(9));
+//                System.out.println(csvRecord.get(10));
+                userRepository.save(new User(
+                        csvRecord.get(0),
+                        csvRecord.get(1),
+                        csvRecord.get(2),
+                        csvRecord.get(3),
+                        Integer.parseInt(csvRecord.get(4)),
+                        csvRecord.get(5),
+                        csvRecord.get(6),
+                        csvRecord.get(7)
+                ));
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<User> userList() {
+        return userRepository.findAll();
     }
 }

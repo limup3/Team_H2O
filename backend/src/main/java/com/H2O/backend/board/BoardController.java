@@ -23,6 +23,10 @@ public class BoardController {
         this.boardService = boardService;
     }
 
+    //csv파일 데이터베이스에 저장
+    @GetMapping("/csv")
+    public void csvRead(){ boardService.readCsv(); }
+
 
     @PostMapping("/update")
     public ResponseEntity<List<Board>> getAllBoardList(@RequestBody Board board){
@@ -39,6 +43,12 @@ public class BoardController {
         Bdata.setMedCategory(board.getMedCategory());
 //        System.out.println(board.getMedCategory());
 
+        Bdata.setCustomerCategory(board.getCustomerCategory());
+//        System.out.println(board.getMedCategory());
+
+        Bdata.setQuestionCategory(board.getQuestionCategory());
+//        System.out.println(board.getMedCategory());
+
         Bdata.setCategory(board.getCategory());
 //        System.out.println(board.getCategory());
 
@@ -53,13 +63,19 @@ public class BoardController {
         return ResponseEntity.ok(boardList);
     }
 
-    @GetMapping("/list")
-    public ResponseEntity<List<Board>> getAllBoardList() {
-        List<Board> boardList = boardService.findAll();
+    @GetMapping("/list/get/{category}")
+    public ResponseEntity<List<Board>> getBoardList(@PathVariable String category) {
+        System.out.println(category);
+        List<Board> boardList = boardService.findByCategory(category);
         System.out.println(boardList.toString());
         return ResponseEntity.ok(boardList);
     }
 
+//    @GetMapping("/list/{pageNumber}")
+//    public ResponseEntity<List<Board>> getAllBoardListPage(@PathVariable int pageNumber){
+//        List<Board> boardList = boardService.getBoardPage(pageNumber);
+//        return ResponseEntity.ok(boardList);
+//    }
 
     @GetMapping("/list/medCategory/{BoarNo}")
     public Board getFindTitle(@PathVariable String BoarNo){

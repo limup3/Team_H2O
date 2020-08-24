@@ -19,7 +19,7 @@ import {
   Select 
 } from '@material-ui/core';
 import { Button, Modal, PageItem, Dropdown, DropdownButton } from 'react-bootstrap'
-import ModalTestBody from './ModalTestBody';
+import UserTestBody from './UserTestBody';
 import PropTypes from 'prop-types';
 import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
@@ -41,8 +41,11 @@ const tableStyles = makeStyles({
   TablePagination:{
     alignItems: "center"
   },
-  color: {
+  backGroundColor: {
     backgroundColor: "#282C34"
+  },
+  fontColor : {
+    color:'white'
   }
 });
 
@@ -115,13 +118,12 @@ onChangePage: PropTypes.func.isRequired,
 page: PropTypes.number.isRequired,
 rowsPerPage: PropTypes.number.isRequired,
 };
-const ModalTestView = () => {
+const UserTestView = () => {
   const tableClasses = tableStyles();
   const selectBox = selectStyle()
 
-    const [hospitalData, setHospitalData] = useState([])
+    const [UserData, setUserData] = useState([])
     const [posts, setPosts] = useState([])
-    const [sparePosts, setSparePosts] = useState([])
     const [loading, setLoading] = useState(false)
     const [show, setShow] = useState(false);
     // --------------Pagination ------------------------
@@ -132,15 +134,17 @@ const ModalTestView = () => {
     const [sort, setSort]=useState({
       no:  "Basic" || "Asc" || "Dsc",
       name: "Basic" || "Asc" || "Dsc",
-      people: "Basic" || "Asc" || "Dsc",
+      id: "Basic" || "Asc" || "Dsc",
+      birthday: "Basic" || "Asc" || "Dsc"
     })
-    const [status, setStatus] = useState("전체보기")
+    // const [status, setStatus] = useState("전체보기")
     const [sendList, setSendList] =useState([])
 
     useEffect(()=>{
       setLoading(true);
+      console.log("접속 확인")
       axios
-        .get(`http://localhost:8080/hospital/hospitalList`)
+        .get(`http://localhost:8080/user/userList`)
         .then(response => {
           setPosts(response.data)
           setSendList(response.data)
@@ -153,6 +157,10 @@ const ModalTestView = () => {
           
       //   }else if(sort.status==="Asc"||"Dsc"){
       // }
+      console.log("엑시오스 데이터")
+      console.log(posts)
+      console.log("접속 완료")
+
     }, [])
     const handleClose = () => {
       setShow(false)
@@ -167,12 +175,13 @@ const ModalTestView = () => {
       setPage(0);
     };
     // ------------------- Sort ------------------------------
+
     const basicSort = () => {
       sendList.sort(function(a,b){
-        if(a.hospitalNo > b.hospitalNo){
+        if(a.userNo > b.userNo){
           return 1;
         }
-        if(a.hospitalNo < b.hospitalNo){
+        if(a.userNo < b.userNo){
           return -1;
         }
         return 0
@@ -184,12 +193,12 @@ const ModalTestView = () => {
       if(sort.name==="Basic"){
         setSort({...sort, name:"Asc"})
         sendList.sort(function(a,b){
-          let hospitalNameA = a.hospitalName.toUpperCase()
-          let hospitalNameB = b.hospitalName.toUpperCase()
-          if(hospitalNameA > hospitalNameB){
+          let nameA = a.name.toUpperCase()
+          let nameB = b.name.toUpperCase()
+          if(nameA > nameB){
             return 1;
           }
-          if(hospitalNameA < hospitalNameB){
+          if(nameA < nameB){
             return -1;
           }
           return 0
@@ -200,21 +209,18 @@ const ModalTestView = () => {
       if(sort.name==="Asc"){
         setSort({...sort, name:"Dsc"})
         sendList.sort(function(a,b){
-          let hospitalNameA = a.hospitalName.toLowerCase()
-          let hospitalNameB = b.hospitalName.toLowerCase()
-          if(hospitalNameA < hospitalNameB){
+          let nameA = a.name.toLowerCase()
+          let nameB = b.name.toLowerCase()
+          if(nameA < nameB){
             return 1;
           }
-          if(hospitalNameA > hospitalNameB){
+          if(nameA > nameB){
             return -1;
           }
           return 0
 
           }
         )
-
-        console.log("DSC")
-        console.log(posts)
       }
         if(sort.name==="Dsc"){
         setSort({...sort, name:"Basic"})
@@ -228,10 +234,10 @@ const ModalTestView = () => {
         setSort({...sort, no:"Asc"})
 
         sendList.sort(function(a,b){
-          if(a.hospitalNo > b.hospitalNo){
+          if(a.userNo > b.userNo){
             return 1;
           }
-          if(a.hospitalNo < b.hospitalNo){
+          if(a.userNo < b.userNo){
             return -1;
           }
           return 0
@@ -243,10 +249,10 @@ const ModalTestView = () => {
       setSort({...sort, no:"Dsc"})
 
       sendList.sort(function(a,b){
-        if(a.hospitalNo > b.hospitalNo){
+        if(a.userNo > b.userNo){
           return -1;
         }
-        if(a.hospitalNo < b.hospitalNo){
+        if(a.userNo < b.userNo){
           return 1;
         }
         return 0
@@ -261,58 +267,84 @@ const ModalTestView = () => {
       }
     }
 
-    const handleSortPeople = () => {
-      if(sort.people==="Basic"){
-        setSort({...sort, people:"Asc"})
+    const handleSortId = () => {
+      if(sort.id==="Basic"){
+        setSort({...sort, id:"Asc"})
         sendList.sort(function(a,b){
-          if(a.medicalPeople > b.medicalPeople){
+          let idA = a.userId.toLowerCase()
+          let idB = b.userId.toLowerCase()
+          if(idA < idB){
+            return -1;
+          }
+          if(idA > idB){
             return 1;
           }
-          if(a.medicalPeople < b.medicalPeople){
+          return 0
+          }
+        )
+      }
+      if(sort.id==="Asc"){
+        setSort({...sort, id:"Dsc"})
+        sendList.sort(function(a,b){
+          let idA = a.userId.toLowerCase()
+          let idB = b.userId.toLowerCase()
+          if(idA < idB){
+            return 1;
+          }
+          if(idA > idB){
             return -1;
           }
           return 0
           }
         )
-        }
-      if(sort.people==="Asc"){
-      setSort({...sort, people:"Dsc"})
-      sendList.sort(function(a,b){
-        if(a.medicalPeople > b.medicalPeople){
-          return -1;
-        }
-        if(a.medicalPeople < b.medicalPeople){
-          return 1;
-        }
-        return 0
-        }
-      )
-        }
-      if(sort.people==="Dsc"){
-      setSort({...sort, people:"Basic"})
-      basicSort()
-        }
+      }if(sort.id==="Dsc"){
+        setSort({...sort, id:"Basic"})
+        basicSort()
+      }
     }
 
+    const handleSortBirthday = () => {
+      if(sort.birthday==="Basic"){
+        setSort({...sort, birthday:"Asc"})
+        sendList.sort(function(a,b){
+          a = new Date(a.birthday)
+          b = new Date(b.birthday)
+          return a>b? 1: a<b? -1: 0
+        }
+        )}
+        
+      if(sort.birthday==="Asc"){
+        setSort({...sort, birthday:"Dsc"})
+        sendList.sort(function(a,b){
+          a = new Date(a.birthday)
+          b = new Date(b.birthday)
+          return a>b? -1: a<b? 1: 0
+        }
+        )}
+      if(sort.birthday==="Dsc"){
+        setSort({...sort, birthday:"Basic"})
+        basicSort()
+      }
+    }
     // ----------------------- dropdown ---------------------------
     
-    const handleChangeStatus = event => {
-      // setStatus("")
-      setStatus(event.target.value)
-      if(event.target.value==="전체보기"){
-        setSendList()
-        setSendList(posts)
-      }else{
-        setSendList([])
-        posts.forEach(post=>{
-          if (post.businessStatus.includes(event.target.value)){
-            setSendList((sendList)=>[...sendList, post])
-          }
-        })
+    // const handleChangeStatus = event => {
+    //   // setStatus("")
+    //   setStatus(event.target.value)
+    //   if(event.target.value==="전체보기"){
+    //     setSendList()
+    //     setSendList(posts)
+    //   }else{
+    //     setSendList([])
+    //     posts.forEach(post=>{
+    //       if (post.businessStatus.includes(event.target.value)){
+    //         setSendList((sendList)=>[...sendList, post])
+    //       }
+    //     })
 
-      }
+    //   }
       
-    }
+    // }
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, sendList.length - page * rowsPerPage);
 
@@ -320,12 +352,14 @@ const ModalTestView = () => {
         <>
         <Card>
         <TableContainer component={Paper}>
-          <Table className={tableClasses.table} aria-label="custom pagination table"
+          <Table className={tableClasses.table}
           >
-            <TableRow>
+            <TableRow 
+              className={tableClasses.fontColor}>
               <TableCell componenent="th" align="center" scope="row">
                 <MuiButton
-                  onClick={handleSortNo}>
+                  onClick={handleSortNo}
+                  >
                     No.
                     {sort.no==="Asc" && <ArrowUpwardIcon fontSize="small"/>}
                     {sort.no==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
@@ -333,29 +367,36 @@ const ModalTestView = () => {
                 </TableCell>
               <TableCell align="center">
                 <MuiButton
-                  onClick={handleSortName}>
+                  onClick={handleSortName}
+                  >
                     이름
                     {sort.name==="Asc" && <ArrowUpwardIcon fontSize="small"/>}
                     {sort.name==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
                 </MuiButton>
               </TableCell>
-              <TableCell align="center">사업자 번호</TableCell>
-              <TableCell align="center">주소</TableCell>
-              <TableCell align="center">병원 형태</TableCell>
               <TableCell align="center">
-                <MuiButton
-                  onClick={handleSortPeople}>
-                    의료인 수
-                    {sort.people==="Asc" && <ArrowUpwardIcon fontSize="small"/>}
-                    {sort.people==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
+              <MuiButton
+                  onClick={handleSortId}
+                  >
+                유저 ID
+                  {sort.id==="Asc" && <ArrowUpwardIcon fontSize="small"/>}
+                  {sort.id==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
                  </MuiButton>
                 </TableCell>
               <TableCell align="center">연락처</TableCell>
-              <TableCell align="center">위도</TableCell>
-              <TableCell align="center">경도</TableCell>
+              <TableCell align="center">이메일 주소</TableCell>
+              <TableCell>
+              <MuiButton
+                  onClick={handleSortBirthday}
+                  >
+                생년월일
+                  {sort.birthday==="Asc" && <ArrowUpwardIcon fontSize="small"/>}
+                  {sort.birthday==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
+                 </MuiButton>
+                </TableCell>
               <TableCell align="center">
 
-              <FormControl className={selectBox.formControl}>
+              {/* <FormControl className={selectBox.formControl}>
                  <InputLabel id="demo-simple-select-label">영업상태</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
@@ -368,7 +409,7 @@ const ModalTestView = () => {
                   <MenuItem value={"폐업"}>폐업</MenuItem>
                   <MenuItem value={"휴업"}>휴업</MenuItem>
                 </Select>
-              </FormControl>
+              </FormControl> */}
 
               </TableCell>
             </TableRow>
@@ -382,28 +423,24 @@ const ModalTestView = () => {
                     : sendList
 
                     
-                    ).map((hospital, i) => (
+                    ).map((User, i) => (
                       
 
                   <TableRow
                     align="center"
                     key={i}
-                    onClick={()=>setHospitalData(hospital)}
+                    onClick={()=>setUserData(User)}
                   >
-                    <TableCell align="center">{hospital.hospitalNo}</TableCell>
+                    <TableCell align="center">{User.userNo}</TableCell>
                     <TableCell align="center">
                       <MuiButton variant="light" onClick={()=>setShow(true)}
-                      >{hospital.hospitalName}
+                      >{User.name}
                       </MuiButton>
                     </TableCell>
-                    <TableCell align="center">{hospital.businessLicenseNumber}</TableCell>
-                    <TableCell align="center">{hospital.addr}</TableCell>
-                    <TableCell align="center">{hospital.hospitalType}</TableCell>
-                    <TableCell align="center">{hospital.medicalPeople}</TableCell>
-                    <TableCell align="center">{hospital.tel}</TableCell>
-                    <TableCell align="center">{hospital.latitude}</TableCell>
-                    <TableCell align="center">{hospital.longitude}</TableCell>
-                    <TableCell align="center">{hospital.businessStatus}</TableCell>
+                    <TableCell align="center">{User.userId}</TableCell>
+                    <TableCell align="center">{User.phone}</TableCell>
+                    <TableCell align="center">{User.email}</TableCell>
+                    <TableCell align="center">{User.birthday}</TableCell>
                   </TableRow>
 
                     
@@ -438,7 +475,7 @@ const ModalTestView = () => {
               </TableRow>
             </TableFooter>
             {/* ---------------------- Pagination ----------------------------------- */}
-              {hospitalData.hospitalName? (
+              {UserData.name? (
                 <Modal 
                   show={show} 
                   onHide={handleClose}
@@ -448,11 +485,11 @@ const ModalTestView = () => {
                   scrollable={Boolean(true)}
                   >
                 <Modal.Header closeButton>
-                  <Modal.Title>등록 병원 정보</Modal.Title>
+                  <Modal.Title>등록된 유저 정보</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <ModalTestBody 
-                    hospitalData={hospitalData} 
+                  <UserTestBody 
+                    UserData={UserData} 
                     setClose={(close)=>{setShow(close)}}
                     />
                   </Modal.Body>
@@ -464,4 +501,4 @@ const ModalTestView = () => {
         </>
     )
 }
-export default ModalTestView
+export default UserTestView

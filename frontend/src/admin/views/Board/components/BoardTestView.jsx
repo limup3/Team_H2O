@@ -19,7 +19,6 @@ import {
   Select 
 } from '@material-ui/core';
 import { Button, Modal, PageItem, Dropdown, DropdownButton } from 'react-bootstrap'
-import ModalTestBody from './ModalTestBody';
 import PropTypes from 'prop-types';
 import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
@@ -33,6 +32,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
+import BoardTestBody from './BoardTestBody';
 
 const tableStyles = makeStyles({
   table: {
@@ -115,7 +115,7 @@ onChangePage: PropTypes.func.isRequired,
 page: PropTypes.number.isRequired,
 rowsPerPage: PropTypes.number.isRequired,
 };
-const ModalTestView = () => {
+const BoardTestView = () => {
   const tableClasses = tableStyles();
   const selectBox = selectStyle()
 
@@ -131,19 +131,21 @@ const ModalTestView = () => {
     // -------------------- Sort -----------------------
     const [sort, setSort]=useState({
       no:  "Basic" || "Asc" || "Dsc",
-      name: "Basic" || "Asc" || "Dsc",
-      people: "Basic" || "Asc" || "Dsc",
+      title: "Basic" || "Asc" || "Dsc",
+      category: "Basic" || "Asc" || "Dsc"
     })
     const [status, setStatus] = useState("전체보기")
+    const [category, setCategory] = useState("카테고리")
     const [sendList, setSendList] =useState([])
 
     useEffect(()=>{
       setLoading(true);
       axios
-        .get(`http://localhost:8080/hospital/hospitalList`)
+        .get(`http://localhost:8080/board/boardList`)
         .then(response => {
           setPosts(response.data)
           setSendList(response.data)
+          console.log(response.data)
         })
         .catch(error => {
           alert("서버와의 연결이 되지 않았습니다.");
@@ -169,10 +171,10 @@ const ModalTestView = () => {
     // ------------------- Sort ------------------------------
     const basicSort = () => {
       sendList.sort(function(a,b){
-        if(a.hospitalNo > b.hospitalNo){
+        if(a.boardNo > b.boardNo){
           return 1;
         }
-        if(a.hospitalNo < b.hospitalNo){
+        if(a.boardNo < b.boardNo){
           return -1;
         }
         return 0
@@ -180,16 +182,16 @@ const ModalTestView = () => {
       )
     }
 
-    const handleSortName = () => {
-      if(sort.name==="Basic"){
-        setSort({...sort, name:"Asc"})
+    const handleSortTitle = () => {
+      if(sort.title==="Basic"){
+        setSort({...sort, title:"Asc"})
         sendList.sort(function(a,b){
-          let hospitalNameA = a.hospitalName.toUpperCase()
-          let hospitalNameB = b.hospitalName.toUpperCase()
-          if(hospitalNameA > hospitalNameB){
+          let boardTitleA = a.title.toUpperCase()
+          let boardTitleB = b.title.toUpperCase()
+          if(boardTitleA > boardTitleB){
             return 1;
           }
-          if(hospitalNameA < hospitalNameB){
+          if(boardTitleA < boardTitleB){
             return -1;
           }
           return 0
@@ -200,12 +202,12 @@ const ModalTestView = () => {
       if(sort.name==="Asc"){
         setSort({...sort, name:"Dsc"})
         sendList.sort(function(a,b){
-          let hospitalNameA = a.hospitalName.toLowerCase()
-          let hospitalNameB = b.hospitalName.toLowerCase()
-          if(hospitalNameA < hospitalNameB){
+          let boardTitleA = a.title.toLowerCase()
+          let boardTitleB = b.title.toLowerCase()
+          if(boardTitleA < boardTitleB){
             return 1;
           }
-          if(hospitalNameA > hospitalNameB){
+          if(boardTitleA > boardTitleB){
             return -1;
           }
           return 0
@@ -228,10 +230,10 @@ const ModalTestView = () => {
         setSort({...sort, no:"Asc"})
 
         sendList.sort(function(a,b){
-          if(a.hospitalNo > b.hospitalNo){
+          if(a.boardNo > b.boardNo){
             return 1;
           }
-          if(a.hospitalNo < b.hospitalNo){
+          if(a.boardNo < b.boardNo){
             return -1;
           }
           return 0
@@ -243,10 +245,10 @@ const ModalTestView = () => {
       setSort({...sort, no:"Dsc"})
 
       sendList.sort(function(a,b){
-        if(a.hospitalNo > b.hospitalNo){
+        if(a.boardNo > b.boardNo){
           return -1;
         }
-        if(a.hospitalNo < b.hospitalNo){
+        if(a.boardNo < b.boardNo){
           return 1;
         }
         return 0
@@ -261,42 +263,10 @@ const ModalTestView = () => {
       }
     }
 
-    const handleSortPeople = () => {
-      if(sort.people==="Basic"){
-        setSort({...sort, people:"Asc"})
-        sendList.sort(function(a,b){
-          if(a.medicalPeople > b.medicalPeople){
-            return 1;
-          }
-          if(a.medicalPeople < b.medicalPeople){
-            return -1;
-          }
-          return 0
-          }
-        )
-        }
-      if(sort.people==="Asc"){
-      setSort({...sort, people:"Dsc"})
-      sendList.sort(function(a,b){
-        if(a.medicalPeople > b.medicalPeople){
-          return -1;
-        }
-        if(a.medicalPeople < b.medicalPeople){
-          return 1;
-        }
-        return 0
-        }
-      )
-        }
-      if(sort.people==="Dsc"){
-      setSort({...sort, people:"Basic"})
-      basicSort()
-        }
-    }
 
     // ----------------------- dropdown ---------------------------
     
-    const handleChangeStatus = event => {
+    const handleChangeCategory = event => {
       // setStatus("")
       setStatus(event.target.value)
       if(event.target.value==="전체보기"){
@@ -312,7 +282,11 @@ const ModalTestView = () => {
 
       }
       
-    }
+    } 
+    
+
+
+
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, sendList.length - page * rowsPerPage);
 
@@ -331,30 +305,28 @@ const ModalTestView = () => {
                     {sort.no==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
                   </MuiButton>
                 </TableCell>
+              <TableCell align="center"> 글쓴이 </TableCell>
+              <TableCell align="center">카테고리</TableCell>
               <TableCell align="center">
                 <MuiButton
-                  onClick={handleSortName}>
-                    이름
-                    {sort.name==="Asc" && <ArrowUpwardIcon fontSize="small"/>}
-                    {sort.name==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
-                </MuiButton>
-              </TableCell>
-              <TableCell align="center">사업자 번호</TableCell>
-              <TableCell align="center">주소</TableCell>
-              <TableCell align="center">병원 형태</TableCell>
-              <TableCell align="center">
-                <MuiButton
-                  onClick={handleSortPeople}>
-                    의료인 수
-                    {sort.people==="Asc" && <ArrowUpwardIcon fontSize="small"/>}
-                    {sort.people==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
+                  onClick={handleChangeCategory}
+                  >
+                    의료 카테고리
+                    {sort.category==="Asc" && <ArrowUpwardIcon fontSize="small"/>}
+                    {sort.category==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
                  </MuiButton>
                 </TableCell>
-              <TableCell align="center">연락처</TableCell>
-              <TableCell align="center">위도</TableCell>
-              <TableCell align="center">경도</TableCell>
               <TableCell align="center">
-
+                <MuiButton
+                  onClick={handleSortTitle}>
+                    제목
+                    {sort.title==="Asc" && <ArrowUpwardIcon fontSize="small"/>}
+                    {sort.title==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
+                </MuiButton>
+              </TableCell>
+              <TableCell align="center">내용</TableCell>
+              <TableCell align="center">조회수</TableCell>
+              {/* <TableCell align="center">
               <FormControl className={selectBox.formControl}>
                  <InputLabel id="demo-simple-select-label">영업상태</InputLabel>
                 <Select
@@ -370,7 +342,7 @@ const ModalTestView = () => {
                 </Select>
               </FormControl>
 
-              </TableCell>
+              </TableCell> */}
             </TableRow>
               <TableBody>
                 {/* -------------pagination----------------- */}
@@ -390,20 +362,17 @@ const ModalTestView = () => {
                     key={i}
                     onClick={()=>setHospitalData(hospital)}
                   >
-                    <TableCell align="center">{hospital.hospitalNo}</TableCell>
+                    <TableCell align="center">{hospital.boardNo}</TableCell>
                     <TableCell align="center">
                       <MuiButton variant="light" onClick={()=>setShow(true)}
-                      >{hospital.hospitalName}
+                      >{hospital.userNo}
                       </MuiButton>
                     </TableCell>
-                    <TableCell align="center">{hospital.businessLicenseNumber}</TableCell>
-                    <TableCell align="center">{hospital.addr}</TableCell>
-                    <TableCell align="center">{hospital.hospitalType}</TableCell>
-                    <TableCell align="center">{hospital.medicalPeople}</TableCell>
-                    <TableCell align="center">{hospital.tel}</TableCell>
-                    <TableCell align="center">{hospital.latitude}</TableCell>
-                    <TableCell align="center">{hospital.longitude}</TableCell>
-                    <TableCell align="center">{hospital.businessStatus}</TableCell>
+                    <TableCell align="center">{hospital.category}</TableCell>
+                    <TableCell align="center">{hospital.medCategory}</TableCell>
+                    <TableCell align="center">{hospital.title}</TableCell>
+                    <TableCell align="center">{hospital.content}</TableCell>
+                    <TableCell align="center">{hospital.click}</TableCell>
                   </TableRow>
 
                     
@@ -451,7 +420,7 @@ const ModalTestView = () => {
                   <Modal.Title>등록 병원 정보</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <ModalTestBody 
+                  <BoardTestBody 
                     hospitalData={hospitalData} 
                     setClose={(close)=>{setShow(close)}}
                     />
@@ -464,4 +433,4 @@ const ModalTestView = () => {
         </>
     )
 }
-export default ModalTestView
+export default BoardTestView

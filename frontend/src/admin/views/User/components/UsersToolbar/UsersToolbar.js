@@ -46,15 +46,7 @@ const UsersToolbar = props => {
       <div className={classes.row}>
       <h1 className={classes.headline}>사용자 관리</h1>
         <span className={classes.spacer} />
-        <Button 
-          className={classes.importButton}
-          >
-            Import
-        </Button>
-        <Button 
-        className={classes.exportButton}
-          >Export
-        </Button>
+        
           <Link to="/admin/UserAdd">
           <Button
             color="primary"
@@ -64,12 +56,12 @@ const UsersToolbar = props => {
           </Button>
         </Link>
       </div>
-      <div className={classes.row}>
+      {/* <div className={classes.row}>
         <SearchInput
           className={classes.searchInput}
           placeholder="사용자 검색(Search user)"
         />
-      </div>
+      </div> */}
     </div>
   );
 };

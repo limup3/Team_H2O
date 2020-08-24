@@ -11,7 +11,7 @@ import javax.persistence.*;
 
 @Entity @Getter
 @Setter
-@ToString(exclude = {"user","ambulance","doctor"})
+@ToString
 @Component
 @NoArgsConstructor
 @Table(name = "reservation")
@@ -30,28 +30,17 @@ public class Reservation {
     @JoinColumn(name="doctor_no")
     private Doctor doctor;
 
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
-
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="ambulance_no")
     private Ambulance ambulance;
 
-    public void setAmbulance(Ambulance ambulance) {
-        this.ambulance = ambulance;
-    }
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_no")
     private User user;
 
-    public void setUser(User user){
-        this.user = user;
-    }
 
 
     @Builder

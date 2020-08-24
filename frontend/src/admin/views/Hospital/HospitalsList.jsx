@@ -18,11 +18,8 @@ const HospitalList = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <HospitalsToolbar />
+      <HospitalsToolbar/>
       <div className={classes.content}>
-        {/* <HospitalsTable hospitals={hospitals} /> */}
-        {/* <HospitalPagination/> */}
-        {/* <HospitalPagination2/> */}
         <ModalTestView/>
       </div>
     </div>

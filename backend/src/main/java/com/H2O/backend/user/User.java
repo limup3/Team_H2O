@@ -13,8 +13,7 @@ import java.util.List;
 @Setter
 @ToString
 @Component
-@NoArgsConstructor
-@Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id"})})
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,20 +24,25 @@ public class User {
     @Column(name = "phone", nullable = false) private String phone;
     @Column(name = "admin_check", nullable = false, columnDefinition = "boolean default 0") private Integer adminCheck;
     @Column(name = "email", nullable = false) private String email;
+    @Column(name = "birthday", nullable = false) private String birthday;
     @Column(name = "history") private String history;
+
+    public User(){}
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Reservation> reservation;
 
+
     @Builder
-    public User(String userId, String name, String password, String phone, int adminCheck, String email, String history){
+    public User(String userId, String name, String password, String phone, int adminCheck, String email, String birthday, String history){
         this.userId = userId;
         this.name = name;
         this.password = password;
         this.phone = phone;
         this.adminCheck = adminCheck;
         this.email = email;
+        this.birthday = birthday;
         this.history = history;
     }
 

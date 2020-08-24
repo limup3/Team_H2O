@@ -5,9 +5,9 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
 
-import SearchIcon from '@material-ui/icons/Search';
+// import SearchIcon from '@material-ui/icons/Search';
 
-import { SearchInput } from '../../../../components';
+// import { SearchInput } from '../../../../components';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const HospitalsToolbar = props => {
+const BoardToolbar = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
@@ -90,8 +90,8 @@ const HospitalsToolbar = props => {
   );
 };
 
-HospitalsToolbar.propTypes = {
+BoardToolbar.propTypes = {
   className: PropTypes.string
 };
 
-export default HospitalsToolbar;
+export default BoardToolbar;

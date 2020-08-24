@@ -32,9 +32,13 @@ public class QBoard extends EntityPathBase<Board> {
 
     public final DatePath<java.time.LocalDate> creationDate = createDate("creationDate", java.time.LocalDate.class);
 
+    public final StringPath customerCategory = createString("customerCategory");
+
     public final com.H2O.backend.hospital.QHospital hospital;
 
     public final StringPath medCategory = createString("medCategory");
+
+    public final StringPath questionCategory = createString("questionCategory");
 
     public final StringPath title = createString("title");
 

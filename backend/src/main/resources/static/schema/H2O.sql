@@ -12,7 +12,7 @@ CREATE TABLE Ambulance
     `Ambulance_Name`  VARCHAR(50)    NOT NULL,
     `Addr`            VARCHAR(45)    NULL,
     `Tel`             VARCHAR(45)    NULL,
-    `HomePage`        VARCHAR(45)    NULL,
+    `Home_Page`        VARCHAR(45)    NULL,
     `Count`           VARCHAR(45)    NULL,
     PRIMARY KEY (Ambulance_No)
 )default character set utf8 collate UTF8_GENERAL_CI;
@@ -31,12 +31,13 @@ CREATE TABLE Reservation
 CREATE TABLE Board
 (
     `Board_No`       INT             NOT NULL    AUTO_INCREMENT,
-    `Hospital_Star`  VARCHAR(10)     NULL,
     `Title`          VARCHAR(100)    NULL,
     `Content`        VARCHAR(300)    NULL,
     `Creation_Date`  DATE            NULL,
     `Category`       VARCHAR(20)     NULL,
     `Med_Category`   VARCHAR(20)     NULL,
+    `Customer_Category`   VARCHAR(20)     NULL,
+    `Question_Category`   VARCHAR(20)     NULL,
     `User_No`        INT             NULL,
     `Hospital_No`    INT             NULL,
     `Click`          INT             NULL,
@@ -49,8 +50,9 @@ CREATE TABLE User
     `Name`              VARCHAR(20)     NULL,
     `Password`          VARCHAR(20)     NOT NULL,
     `Phone`             VARCHAR(30)     NULL,
-    `Admin_Check`       BOOLEAN         NULL,
+    `Admin_Check`       INT             NULL,
     `Email`             VARCHAR(50)     NULL,
+    `Birthday`          VARCHAR(20)     NULL,
     `History`           VARCHAR(150)    NULL,
     PRIMARY KEY (User_No)
 )default character set utf8 collate UTF8_GENERAL_CI;

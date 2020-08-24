@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const UserAdd = () => {
+const BoardAdd = () => {
   const classes = useStyles();
   const [hospitalName, setHospitalName] = useState("");
   const [businessLicenseNumber, setBusinessLicenseNumber] = useState("");
@@ -408,4 +408,4 @@ const UserAdd = () => {
     </Container>
   );
 }
-export default UserAdd
+export default BoardAdd

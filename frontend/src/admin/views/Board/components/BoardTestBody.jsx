@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ModalTestBody = (props) => {
+const BoardTestBody = (props) => {
     const classes = useStyles();
     const {hospitalData, setClose, className} = props
     // const {hospitalData} = props    
@@ -384,8 +384,8 @@ const ModalTestBody = (props) => {
     );
   };
   
-  ModalTestBody.propTypes = {
+  BoardTestBody.propTypes = {
     className: PropTypes.string
   };
   
-  export default ModalTestBody;
+  export default BoardTestBody;

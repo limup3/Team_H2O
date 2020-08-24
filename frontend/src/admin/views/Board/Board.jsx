@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { DoctorsTable, DoctorsToolbar}  from './components';
-import mockData from './data';
-import DoctorTestView from './Test/DoctorTestView';
+import BoardToolbar from './components/BoardsToolbar';
+import BoardTestView from './components/BoardTestView';
+
+
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -13,19 +15,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const DoctorsList = () => {
+const Board = () => {
   const classes = useStyles();
-
-  const [doctors] = useState(mockData);
-
   return (
     <div className={classes.root}>
-      <DoctorsToolbar />
+      <BoardToolbar/>
       <div className={classes.content}>
-        <DoctorTestView/>
+        <BoardTestView/>
       </div>
     </div>
   );
 };
 
-export default DoctorsList;
+export default Board;
