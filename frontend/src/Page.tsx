@@ -9,6 +9,7 @@ import {Community, Edit} from './pages/Community'
 import {Login, SignUp, MyPage, UserModify, UserFindID, UserFindPW, UserDelete, } from './pages/Account'
 import './pages/Community/community.css'
 import { Reservation, TelReservation } from "./pages/Reservation";
+import CarReservation from "./pages/Reservation/CarReservation";
 
 const Page = () => (
 
@@ -34,6 +35,13 @@ const Page = () => (
                     </Route>
 
                     <Footer/>
+            </Route>
+            <Route path="/CarReservation/:content/:name/:startAddr/:endAddr/:postcode">
+                <NavBar/>
+                <Route path={`/CarReservation/:content/:name/:startAddr/:endAddr/:postcode`}
+                       render = {(props) => <CarReservation {...props}/>}>
+                </Route>
+                <Footer/>
             </Route>
 
 
