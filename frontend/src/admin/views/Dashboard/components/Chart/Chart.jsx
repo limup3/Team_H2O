@@ -18,8 +18,6 @@ import {
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 import { ChartBar, ChartDounut, ChartMix } from './components';
-import { Data } from '@react-google-maps/api';
-import axios from 'axios'
 
 // import axios from 'axios';
 
@@ -39,13 +37,12 @@ const useStyles = makeStyles((theme) => ({
 
 const Chart = props => {
   const { className, data, ...rest } = props;
- 
 
   const classes = useStyles();
-  //
+
   const [anchorEl, setAnchorEl] = useState(null);
   const [chartType, setChartType] = useState("도넛형")
-  // CheckBox
+  const [chartValue, setChartValue] = useState("")
   const [checked, setChecked] = useState({
     checkBox_Age: false,
     checkBox_Sex: false,
@@ -55,6 +52,10 @@ const Chart = props => {
     checkBox_ChartData: ""
   })
 
+  useEffect(()=>{
+    setChecked({...checked, checkBox_Age:true})
+  },[])
+  
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -62,134 +63,20 @@ const Chart = props => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const [chartData, setChartData]= useState()
-  const [chartData2, setChartData2]= useState()
-  const [chartData3, setChartData3]= useState()
-  const [chartValue, setChartValue] = useState("")
-  const [yyyy,setYyyy] = useState(new Date().getFullYear())
-    
-
-  const [userData, setUserData] = useState([])
-  const [loading, setLoading] = useState(false)
-
-
-  const chartValueInput = props => {
-    let i =0
-    let j =0
-    let k =0
-    if(props==="Age"){
-      userData.forEach((chart)=>{
-        if(yyyy-parseInt(chart.birthday.substr(0,4))>=10
-          &&yyyy-parseInt(chart.birthday.substr(0,4))<20
-        ){
-          i++
-        }
-      })
-    }
-    if(props==="Age"){
-      userData.forEach((chart)=>{
-        if(yyyy-parseInt(chart.birthday.substr(0,4))>=20
-          &&yyyy-parseInt(chart.birthday.substr(0,4))<30
-        ){
-          j++
-        }
-      })
-    }
-    if(props==="Age"){
-      userData.forEach((chart)=>{
-        if(yyyy-parseInt(chart.birthday.substr(0,4))>=30
-          &&yyyy-parseInt(chart.birthday.substr(0,4))<40
-        ){
-          k++
-        }
-      })
-    }
-    setChartData(i)
-    setChartData2(j)
-    setChartData3(k)
-    setChartValue(props)
-
-  }
-
-
-
-
 
   const handleChange = event => {
     setChecked({checked, [event.target.name]: event.target.checked })
     if(event.target.checked===true){
       switch(event.target.name){
-        case "checkBox_Age": return chartValueInput("Age")
-        case "checkBox_Sex": return chartValueInput("Sex")
-        case "checkBox_Location": return chartValueInput("Location")
-        case "checkBox_days": return chartValueInput("Days")
+        case "checkBox_Age": return setChartValue("Age")
+        case "checkBox_Sex": return setChartValue("Sex")
+        case "checkBox_Location": return setChartValue("Location")
+        case "checkBox_days": return setChartValue("Days")
       }
     }
   }
 
   
-
-  useEffect(()=>{
-    setChecked({...checked, checkBox_Age:true})
-
-    axios
-      .get(`http://localhost:8080/user/userList`)
-      .then(response => {
-        setUserData(response.data)
-        let data = response.data
-        
-        const chartValueInput = data => {
-          let i =0
-          let j =0
-          let k =0
-            data.forEach((chart)=>{
-              if(yyyy-parseInt(chart.birthday.substr(0,4))>=10
-                &&yyyy-parseInt(chart.birthday.substr(0,4))<20
-              ){
-                i++
-              }
-            })
-            data.forEach((chart)=>{
-              if(yyyy-parseInt(chart.birthday.substr(0,4))>=20
-                &&yyyy-parseInt(chart.birthday.substr(0,4))<30
-              ){
-                j++
-              }
-            })
-            data.forEach((chart)=>{
-              if(yyyy-parseInt(chart.birthday.substr(0,4))>=30
-                &&yyyy-parseInt(chart.birthday.substr(0,4))<40
-              ){
-                k++
-              }
-            })
-          setChartData(i)
-          setChartData2(j)
-          setChartData3(k)
-          setChartValue(response.data)
-          console.log(i)
-          console.log(j)
-          console.log(k)
-        }
-        chartValueInput(data)
-
-
-
-      })
-      .catch(error => {
-        alert("서버와의 연결이 되지 않았습니다.");
-      })
-      setLoading(false)
-
-    console.log("유즈이펙트")
-    console.log(data)
-
-    
-    console.log("차트에서 유즈이펙트")
-    console.log(props)
-  },[])
-  
-  //
   return (
     <Card
       {...rest}
@@ -198,14 +85,13 @@ const Chart = props => {
       <CardHeader
         action={
           <div>
-          <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} size="small" variant="text" >
+          <Button onClick={handleClick} size="small" variant="text" >
           
           {chartType}
         
           <ArrowDropDownIcon />
           </Button>
           <Menu
-          id="simple-menu"
           anchorEl={anchorEl}
           keepMounted
           open={Boolean(anchorEl)}
@@ -213,7 +99,6 @@ const Chart = props => {
         >
           <MenuItem onClick={()=> {setAnchorEl(null); setChartType("도넛형"); }}>도넛형</MenuItem>
           <MenuItem onClick={()=> {setAnchorEl(null); setChartType("바형")}}>바형</MenuItem>
-          {/* <MenuItem onClick={()=> {setAnchorEl(null); setChartType("종합형")}}>종합형</MenuItem> */}
         </Menu>
         </div>}
         
@@ -259,20 +144,12 @@ const Chart = props => {
       </CardActions>
       <Divider />
       <CardContent>
-        {chartType === "도넛형" ? 
+        {chartType==="도넛형"&& 
           <ChartDounut 
-            chartValue = {chartValue}
-            chartData = {chartData}
-            chartData2 = {chartData2}
-            chartData3 = {chartData3}
-            data={data}/>
-          : chartType === "바형"
-          ? <ChartBar 
-            chartValue={chartValue}
-            data={data}/>: 
-          <ChartMix 
-            chartValue={chartValue}
-            data={data}/>}
+            chartValue = {chartValue}/>}
+        {chartType === "바형"&&
+          <ChartBar 
+            chartValue={chartValue}/>}
       </CardContent>
     </Card>
   );

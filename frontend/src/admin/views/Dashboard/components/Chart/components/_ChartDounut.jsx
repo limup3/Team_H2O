@@ -1,26 +1,25 @@
 import React, {useState, useEffect} from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import axios from 'axios';
+import data from '../../../../Doctor/data';
+import {Button} from '@material-ui/core'
 
 const ChartSize = {
     height : '50px'
   }
-  
 
-const DoughnutChart = props => {  
+
+
+const DoughnutChart2 = props => {
   const [chart, setChart] = useState({})
-  const {chartValue} = props
-  const [userData, setUserData] = useState([])
-  const [loading, setLoading] = useState('')
-  const yyyy = new Date().getFullYear()
-
+  const {chartValue, chartData} = props
+  const [chartData2, setChartData2]= useState([]) 
   const ageData = {
     labels: [
       '10대 미만', '10대', '20대', '30대', '40대', '50대', '60대', '70대 이상'
     ],
     datasets: [{
       label: '연령별 이용자',
-      data: userData,
+      data: chartData,
       backgroundColor: [
       '#ff6a6d',
       '#e28965',
@@ -44,8 +43,8 @@ const DoughnutChart = props => {
       borderWidth : 1
     }]
   }
-
-  const sexData = {
+  
+  const sexData = data => ({
     labels: ['남성', '여성'],
     datasets: [{
       label: '성별 이용자',
@@ -60,8 +59,8 @@ const DoughnutChart = props => {
       ],
       borderWidth : 1
     }]
-  };
-
+  });
+  
   const locationData = {
     labels: ['서울시 금천구', '서울시 광진구', '서울시 종로구', '서울시 마포구', '서울시 용산구'],
     datasets: [{
@@ -84,14 +83,15 @@ const DoughnutChart = props => {
       borderWidth : 1
     }]
   };
+  
 
-  const daysData = {
+  const daysData = props => ({
     labels: [
       '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월','10월','11월','12월'
     ],
     datasets: [{
       label: '월별 이용자',
-      data: [65, 59, 80, 81, 56, 55, 40, 34, 21, 55, 78, 95],
+      data: chartData,
       backgroundColor: [
         '#ff6a6d',
         '#e28965',
@@ -122,58 +122,31 @@ const DoughnutChart = props => {
       ],
       borderWidth : 1
     }]
-  };
+  });
 
 
-  
+
+    
+
   useEffect(()=>{
-    axios
-      .get(`http://localhost:8080/user/userList`)
-      .then(response => {
-        let axiosData = []
-        let count = 0
-        if(chartValue===""||"Age"){
-          for(let i=0; i<=7; i++){
-            response.data.forEach((chart)=>{
-              if(yyyy-parseInt(chart.birthday.substr(0,4))>=(i)*10
-                &&yyyy-parseInt(chart.birthday.substr(0,4))<(i+1)*10
-                ){
-                  count = count+1
-                }
-              }
-            )
-            axiosData.push(count)
-            count=0
-          }
-        }
-        if(chartValue==="Days"){
-          for(let i=0; i<=7; i++){
-            response.data.forEach((chart)=>{
-              if(parseInt(chart.birthday.substr(5,2))===i+1){
-                count = count+1
-                }
-              }
-            )
-            axiosData.push(count)
-            count=0
-          }
-        }setUserData(axiosData)
-        
-      })
-      .catch(error => {
-        alert("서버와의 연결이 되지 않았습니다.");
-      })
-      setLoading(false);
-
-    const switchCase = (param) =>{
-      switch(param){
+    let chartData1 = []
+    setChartData2(chartData)
+    if(chartData===0){
+      chartData1 = chartData2
+    }
+    const switchCase = (chartValue, chartData) =>{
+      switch(chartValue){
         case "Age": return setChart(ageData) 
-        case "Sex": return setChart(sexData) 
-        case "Days": return setChart(daysData)
-        case "Location": return setChart(locationData)
+        case "Sex": return setChart(sexData(chartData)) 
+        case "Days": return setChart(daysData(chartData))
+        case "Location": return setChart(locationData(chartData))
           }
         }
-    switchCase(chartValue)
+    switchCase(chartValue, chartData)
+    console.log("도넛차트")
+    console.log(chartValue)
+    console.log(chartData)
+
   },[chartValue])
 
   
@@ -198,4 +171,4 @@ const DoughnutChart = props => {
       }
     }
 
-  export default DoughnutChart
+  export default DoughnutChart2
