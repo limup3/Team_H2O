@@ -123,7 +123,7 @@ public class UserController {
                 selectUser.setPhone(user.getPhone());
                 selectUser.setEmail(user.getEmail());
                 selectUser.setPassword(user.getPassword());
-                selectUser.setBirthday("1995-04-27");
+                selectUser.setBirthday(user.getBirthday());
                 userRepository.save(selectUser);
                 System.out.println(selectUser);
             });

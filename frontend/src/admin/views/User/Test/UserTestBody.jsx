@@ -94,7 +94,6 @@ const UserTestBody = (props) => {
       Axios
         .patch(`http://localhost:8080/user/modify/{userId}`, UserJson)
         .then(response => {
-          
           alert("병원 데이터 변경 성공")
           setClose(false);
           history.push("/admin")

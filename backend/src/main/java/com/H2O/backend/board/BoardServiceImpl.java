@@ -30,6 +30,7 @@ interface BoardService {
     void click(Long boardNo);
 //    List<Board> getBoardPage(int pageNumber);
     List<Board> getAllBoardList();
+    List<Board> boardList();
 
     List<Board> findByCategory(String category);
 }
@@ -82,6 +83,11 @@ interface BoardService {
             }
 
         @Override
+        public List<Board> boardList() {
+            return boardRepository.findAll();
+        }
+
+        @Override
         public List<Board> findByCategory(String category) {
             switch (category){
                 case "boardUser": category="자유게시판"; break;
@@ -96,34 +102,18 @@ interface BoardService {
         @Override
         public void readCsv() {
             InputStream is = getClass().getResourceAsStream("/static/csv/board.csv");
-            LocalDate formattedDate = null;  //Declare LocalDate variable to receive the formatted date.
-            DateTimeFormatter dateTimeFormatter;  //Declare date formatter
-            String rawDate = "2020-08-23";  //Test string that holds a date to format and parse.
 
-            dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE;
-
-            formattedDate = formattedDate.parse(String.format(rawDate, dateTimeFormatter));
-
-            LocalDate localDate = LocalDate.now();
             try {
                 BufferedReader fileReader = new BufferedReader(new InputStreamReader(is,"UTF-8"));
                 CSVParser csvParser = new CSVParser(fileReader, CSVFormat.DEFAULT);
                 Iterable<CSVRecord> csvRecords = csvParser.getRecords();
                 for(CSVRecord csvRecord : csvRecords){
-                System.out.println(csvRecord.get(0));
-                System.out.println(csvRecord.get(1));
-                System.out.println(csvRecord.get(2));
-                System.out.println(csvRecord.get(3));
-                System.out.println(csvRecord.get(4));
-                System.out.println(csvRecord.get(5));
-                System.out.println(csvRecord.get(6));
-                System.out.println(csvRecord.get(7));
+
                     boardRepository.save(new Board(
                             csvRecord.get(0),
                             csvRecord.get(1),
                             LocalDate.parse(csvRecord.get(2)),
                             csvRecord.get(3),
-//                            formattedDate.parse(String.format(csvRecord.get(3), dateTimeFormatter)),
                             csvRecord.get(4),
                             csvRecord.get(5),
                             csvRecord.get(6),

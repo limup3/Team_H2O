@@ -41,8 +41,9 @@ const DoctorsToolbar = props => {
       {...rest}
       className={clsx(classes.root, className)}
     >
-      <div className={classes.row}>
-        <h1 className={classes.headline}>병원 관리</h1>
+      <div className={classes.row}      
+            style={{fontWeight:"bold", fontSize:"x-large"}}>의사 관리
+
         <span className={classes.spacer} />
         
         <Link to="/admin/DoctorsAdd">

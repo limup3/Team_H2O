@@ -50,8 +50,8 @@ const HospitalsToolbar = props => {
       {...rest}
       className={clsx(classes.root, className)}
     >
-      <div className={classes.row}>
-        <h1 className={classes.headline}>병원 관리</h1>
+      <div className={classes.row}
+              style={{fontWeight:"bold", fontSize:"x-large"}}>병원 관리
         <span className={classes.spacer} />
         {/* <Button 
           className={classes.importButton}

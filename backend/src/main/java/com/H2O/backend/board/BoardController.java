@@ -27,42 +27,25 @@ public class BoardController {
     @GetMapping("/csv")
     public void csvRead(){ boardService.readCsv(); }
 
-
+    //글쓰기 업로드
     @PostMapping("/update")
     public ResponseEntity<List<Board>> getAllBoardList(@RequestBody Board board){
         Board Bdata = new Board();
         Bdata.setTitle(board.getTitle());
-//        System.out.println(board.getTitle());
-
         Bdata.setContent(board.getContent());
-//        System.out.println(board.getContent());
-
         Bdata.setCreationDate(board.getCreationDate());
-//        System.out.println(board.getCreationDate());
-
         Bdata.setMedCategory(board.getMedCategory());
-//        System.out.println(board.getMedCategory());
-
         Bdata.setCustomerCategory(board.getCustomerCategory());
-//        System.out.println(board.getMedCategory());
-
         Bdata.setQuestionCategory(board.getQuestionCategory());
-//        System.out.println(board.getMedCategory());
-
         Bdata.setCategory(board.getCategory());
-//        System.out.println(board.getCategory());
-
         Bdata.setClick(board.getClick());
-        System.out.println(board.getClick());
-
         Bdata.setCreationDate(LocalDate.now());
-//        System.out.println(board.getCreationDate());
-
         boardRepository.save(Bdata);
         List<Board> boardList = boardService.findAll();
         return ResponseEntity.ok(boardList);
     }
 
+    //카테고리별 리스트 빼오기
     @GetMapping("/list/get/{category}")
     public ResponseEntity<List<Board>> getBoardList(@PathVariable String category) {
         System.out.println(category);
@@ -70,12 +53,14 @@ public class BoardController {
         System.out.println(boardList.toString());
         return ResponseEntity.ok(boardList);
     }
-
-//    @GetMapping("/list/{pageNumber}")
-//    public ResponseEntity<List<Board>> getAllBoardListPage(@PathVariable int pageNumber){
-//        List<Board> boardList = boardService.getBoardPage(pageNumber);
-//        return ResponseEntity.ok(boardList);
-//    }
+    //삭제
+    @DeleteMapping("/list/delete/{boardNo}")
+    public Messenger getDeleteBoard(@PathVariable String boardNo){
+        Optional<Board> result = boardService.findBoardNo(Long.parseLong(boardNo));
+        Board deleteResult = result.get();
+        boardService.delete(deleteResult);
+        return Messenger.SUCCEESS;
+    }
 
     @GetMapping("/list/medCategory/{BoarNo}")
     public Board getFindTitle(@PathVariable String BoarNo){
@@ -85,16 +70,7 @@ public class BoardController {
         return findBoarNo;
     }
 
-
-    @DeleteMapping("/list/delete/{boardNo}")
-    public Messenger getDeleteBoard(@PathVariable String boardNo){
-        Optional<Board> result = boardService.findBoardNo(Long.parseLong(boardNo));
-        Board deleteResult = result.get();
-        boardService.delete(deleteResult);
-        return Messenger.SUCCEESS;
-    }
-
-
+    //리스트에서 진료카테고리별
     @GetMapping("/list/{medCategory}")
     public List<Board> getMedCateBoard(@PathVariable String medCategory){
         System.out.println(medCategory);
@@ -103,6 +79,7 @@ public class BoardController {
         return findOne;
     }
 
+    //수정
     @PatchMapping("/modify/{boardNo}")
     public Messenger getModifyBoard(@RequestBody Board board,
                                     @PathVariable String boardNo){
@@ -118,16 +95,19 @@ public class BoardController {
             return Messenger.FAIL;
         }
     }
-
+    //클릭
     @GetMapping("/list/getOne/{boardNo}")
     public Optional<Board> getOneBoardNo(@PathVariable String boardNo){
         System.out.println(boardService.findBoardNo(Long.parseLong(boardNo)));
         boardService.click(Long.parseLong(boardNo));
         return boardService.findBoardNo(Long.parseLong(boardNo));
     }
-//
-//    @GetMapping("/click/{boardNo}")
-//    public Optional<Board> getOneClick(@PathVariable int boardNo){
-//        return;
-//    }
+
+    // 의사 테이블 리스트
+    @GetMapping("/boardList")
+    public ResponseEntity<List<Board>> boardList() {
+        List<Board> boardList = boardService.boardList();
+        System.out.println(boardList);
+        return ResponseEntity.ok(boardList);
+    }
 }

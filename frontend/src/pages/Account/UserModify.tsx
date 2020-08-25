@@ -39,6 +39,7 @@ const UserModify = () => {
   const [userName, setUserName] = useState(JSON.parse(sessionStorage.userData).name);
   const [email, setEmail] = useState(JSON.parse(sessionStorage.userData).email);
   const [phoneNumber, setPhoneNumber] = useState(JSON.parse(sessionStorage.userData).phone)
+  const [birthday, setBirthday] = useState(JSON.parse(sessionStorage.userData).birthday)
 
   const history = useHistory();
 
@@ -49,7 +50,8 @@ const UserModify = () => {
       password: password,
       name: userName,
       email: email,
-      phone: phoneNumber
+      phone: phoneNumber,
+      birthday: birthday
     }
     axios.patch(`http://localhost:8080/user/modify/${userId}`, userJson)
           .then(response => {
@@ -145,6 +147,19 @@ const UserModify = () => {
             value={email}
             onChange={e => setEmail(e.target.value)}
           />
+            </Grid>
+            <Grid item xs={12}>
+            <TextField
+            variant="outlined"
+            required
+            fullWidth
+            id="birthday"
+            label="Birthday"
+            name="birthday"
+            autoComplete="birthday"
+            value={birthday}
+            onChange={e => setBirthday(e.target.value)}
+            />
             </Grid>
             <Grid item xs={12}>
             </Grid>

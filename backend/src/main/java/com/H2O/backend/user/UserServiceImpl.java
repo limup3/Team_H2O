@@ -86,7 +86,7 @@ public class UserServiceImpl implements UserService {
         createUser.setPhone(user.getPhone());
         createUser.setEmail(user.getEmail());
         createUser.setAdminCheck(0);
-        createUser.setBirthday("1995-04-27");
+        createUser.setBirthday(user.getBirthday());
 
 
         System.out.println(createUser);
