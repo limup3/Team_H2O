@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
+import axios from 'axios'
 
 import {
   Budget,
@@ -20,6 +21,68 @@ const useStyles = makeStyles(theme => ({
 const Dashboard = () => {
   const classes = useStyles();
 
+
+
+    const [userData, setUserData] = useState([])
+    const [hospitalData, setHospitalData] = useState([])
+    const [doctorData, setDoctorData] = useState([])
+    const [boardData, setBoardData] = useState([])
+
+
+    const [loading, setLoading] = useState(false)
+    const [sendList, setSendList] =useState([])
+
+    useEffect(()=>{
+      setLoading(true);
+
+      axios
+      .get(`http://localhost:8080/user/userList`)
+      .then(response => {
+        setUserData(response.data)
+      })
+      .catch(error => {
+        alert("서버와의 연결이 되지 않았습니다.");
+      })
+      setLoading(false);
+
+      axios
+        .get(`http://localhost:8080/hospital/hospitalList`)
+        .then(response => {
+          setHospitalData(response.data)
+        })
+        .catch(error => {
+          alert("서버와의 연결이 되지 않았습니다.");
+        })
+        setLoading(false);
+
+      axios
+      .get(`http://localhost:8080/doctor/doctorList`)
+      .then(response => {
+        setDoctorData(response.data)
+      })
+      .catch(error => {
+        alert("서버와의 연결이 되지 않았습니다.");
+      })
+      setLoading(false);
+
+      axios
+        .get(`http://localhost:8080/board/boardList`)
+        .then(response => {
+          setBoardData(response.data)
+        })
+        .catch(error => {
+          alert("서버와의 연결이 되지 않았습니다.");
+        })
+        setLoading(false);
+
+      
+    }, [])
+
+
+
+
+
+
   return (
     <div className={classes.root}>
       <Grid
@@ -33,7 +96,7 @@ const Dashboard = () => {
           xl={3}
           xs={12}
         >
-          <Budget />
+          <Budget data={userData}/>
         </Grid>
         <Grid
           item
@@ -42,7 +105,7 @@ const Dashboard = () => {
           xl={3}
           xs={12}
         >
-          <TotalUsers />
+          <TotalUsers data={doctorData} />
         </Grid>
         <Grid
           item
@@ -51,7 +114,7 @@ const Dashboard = () => {
           xl={3}
           xs={12}
         >
-          <TasksProgress />
+          <TasksProgress data={hospitalData} />
         </Grid>
         <Grid
           item
@@ -60,7 +123,7 @@ const Dashboard = () => {
           xl={3}
           xs={12}
         >
-          <TotalProfit />
+          <TotalProfit data={boardData}/>
         </Grid>
         <Grid
           item
@@ -69,7 +132,7 @@ const Dashboard = () => {
           xl={6}
           xs={12}
         >
-          <Chart />
+          <Chart/>
         </Grid>
         <Grid
           item

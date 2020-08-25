@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const TotalProfit = props => {
-  const { className, ...rest } = props;
+  const { className, data, ...rest } = props;
 
   const classes = useStyles();
 
@@ -52,13 +52,13 @@ const TotalProfit = props => {
               gutterBottom
               variant="body2"
             >
-              총 수익
+              작성된 게시글 수
             </Typography>
             <Typography
               color="inherit"
               variant="h3"
             >
-              $23,200
+              {data.length}개의 글
             </Typography>
           </Grid>
           <Grid item>
