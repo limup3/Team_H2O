@@ -132,21 +132,21 @@ const Chart = props => {
               name="checkBox_Location" />}
             label="지역"
         />
-        <FormControlLabel
+        {/* <FormControlLabel
           control={
             <Checkbox 
               checked={checked.checkBox_days} 
               onChange={handleChange} 
               name="checkBox_days" />}
             label="기간"
-        />
+        /> */}
         </FormGroup>
       </CardActions>
       <Divider />
       <CardContent>
         {chartType==="도넛형"&& 
           <ChartDounut 
-            chartValue = {chartValue}/>}
+          chartValue = {chartValue}/>}
         {chartType === "바형"&&
           <ChartBar 
             chartValue={chartValue}/>}

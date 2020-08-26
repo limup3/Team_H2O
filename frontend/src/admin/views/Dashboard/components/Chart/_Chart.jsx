@@ -243,14 +243,14 @@ const Chart2 = props => {
               name="checkBox_Location" />}
             label="지역"
         />
-        <FormControlLabel
+        {/* <FormControlLabel
           control={
             <Checkbox 
               checked={checked.checkBox_days} 
               onChange={handleChange} 
               name="checkBox_days" />}
             label="기간"
-        />
+        /> */}
         </FormGroup>
       </CardActions>
       <Divider />

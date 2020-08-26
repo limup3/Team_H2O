@@ -7,7 +7,7 @@ const ChartSize = {
   }
   
 
-const DoughnutChart = props => {  
+const DoughnutChart2 = props => {  
   const [chart, setChart] = useState({})
   const {chartValue} = props
   const [showChart, setShowChart]=useState()
@@ -130,7 +130,6 @@ const DoughnutChart = props => {
 
   
   useEffect(()=>{
-    setUserData([])
     axios
       .get(`http://localhost:8080/user/userList`)
       .then(response => {
@@ -220,4 +219,4 @@ const DoughnutChart = props => {
       ) 
     }
 
-  export default DoughnutChart
+  export default DoughnutChart2
