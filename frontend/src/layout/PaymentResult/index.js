@@ -61,7 +61,7 @@ const PaymentResult = () => {
 
 
     const reservationJson = {
-      reservarionType : selectorData.title,
+      reservationType : selectorData.title,
       date : selectorData.selectedDate,
 
     }

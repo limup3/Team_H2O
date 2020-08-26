@@ -8,8 +8,8 @@ const goToRoom = (history, roomId) => {
 
 
 const RtcRoom = ({history}) => {
-    let [roomId, setRoomId] = useState(shortId.generate());
-
+    let [roomId, setRoomId] = useState("");
+    
     return (
 
         <div className="room-wrapper">

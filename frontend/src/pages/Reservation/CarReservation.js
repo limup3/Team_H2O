@@ -92,7 +92,7 @@ const CarReservation = ({match}) =>  {
             </h5>
             <br/>
             <h5 className="padding">
-              예약 비용 : 6000원{' '}
+              예약 비용 : 5000원{' '}
             </h5>
             <br/>
             <br/>

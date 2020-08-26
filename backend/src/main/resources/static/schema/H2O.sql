@@ -19,13 +19,13 @@ CREATE TABLE Ambulance
 CREATE TABLE Reservation
 (
     `Reservation_No`   INT             NOT NULL    AUTO_INCREMENT,
-    `Reservation_Type` VARCHAR(20)         NULL,
+    `Reservation_Type` VARCHAR(20)     NULL,
     `Date`             VARCHAR(50)     NULL,
     `Price`            VARCHAR(20)     NULL,
     `Prescription`     VARCHAR(100)    NULL,
-    `User_No`          INT             NOT NULL,
-    `Doctor_No`        INT             NOT NULL,
-    `Ambulance_No`     INT             NOT NULL,
+    `User_No`          INT             NULL,
+    `Doctor_No`        INT             NULL,
+    `Ambulance_No`     INT             NULL,
     PRIMARY KEY (Reservation_No)
 )default character set utf8 collate UTF8_GENERAL_CI;
 CREATE TABLE Board

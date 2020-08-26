@@ -113,7 +113,7 @@ const HospitalMap = () =>{
     const handleBack = e => {
       e.preventDefault();
       alert("로그인시 이용 가능합니다.")
-      history.push("/")
+      history.push("/Login")
     }
 
     function Search({panTo}) {
