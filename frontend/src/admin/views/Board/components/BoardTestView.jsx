@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Pagination from '@material-ui/lab/Pagination';
 import axios from 'axios'
 import {
   Card,
@@ -8,17 +7,15 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableHead,
   TableRow,
   TableFooter,
   Button as MuiButton,
   TablePagination,
   Paper,
-  Checkbox,
   IconButton,
   Select 
 } from '@material-ui/core';
-import { Button, Modal, PageItem, Dropdown, DropdownButton } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
 import PropTypes from 'prop-types';
 import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
@@ -30,7 +27,6 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import BoardTestBody from './BoardTestBody';
 
@@ -67,7 +63,7 @@ const selectStyle = makeStyles((theme) => ({
 const TablePaginationActions = (props) => {
   const classes = useStyles1();
   const theme = useTheme();
-  const { count, page, rowsPerPage, onChangePage, setTablePagination } = props;
+  const { count, page, rowsPerPage, onChangePage } = props;
   const handleFirstPageButtonClick = (event) => {
     onChangePage(event, 0);
   };
@@ -121,11 +117,8 @@ const BoardTestView = () => {
 
     const [hospitalData, setHospitalData] = useState([])
     const [posts, setPosts] = useState([])
-    const [sparePosts, setSparePosts] = useState([])
-    const [loading, setLoading] = useState(false)
     const [show, setShow] = useState(false);
     // --------------Pagination ------------------------
-    const [newPageSave, setNewPageSave] = useState()
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     // -------------------- Sort -----------------------
@@ -136,30 +129,18 @@ const BoardTestView = () => {
       click: "Basic" || "Asc" || "Dsc",
     })
     const [status, setStatus] = useState("전체보기")
-    const [category, setCategory] = useState("카테고리")
     const [sendList, setSendList] =useState([])
 
-
-    const [medCategory, setMedcategory] = useState('')
-    const [creationDate, setCreationDate] =useState('')
-
     useEffect(()=>{
-      setLoading(true);
       axios
         .get(`http://localhost:8080/board/boardList`)
         .then(response => {
           setPosts(response.data)
           setSendList(response.data)
-          console.log(response.data)
         })
         .catch(error => {
           alert("서버와의 연결이 되지 않았습니다.");
         })
-        setLoading(false);
-      //   if(sort.status==={}||"Basic"){
-          
-      //   }else if(sort.status==="Asc"||"Dsc"){
-      // }
     }, [])
     const handleClose = () => {
       setShow(false)
@@ -167,7 +148,6 @@ const BoardTestView = () => {
     // ----------------- Pagination -----------------------------
     const handleChangePage = (e, newPage) => {
       setPage(newPage);
-      setNewPageSave(newPage)
     };
     const handleChangeRowsPerPage = (e) => {
       setRowsPerPage(parseInt(e.target.value, 10));
@@ -220,14 +200,11 @@ const BoardTestView = () => {
           }
         )
 
-        console.log("DSC")
-        console.log(posts)
       }
         if(sort.title==="Dsc"){
         setSort({...sort, title:"Basic"})
         basicSort()
       }
-    // (sort.nowName===null||"Basic")? setSort({...sort, name:"Asc", nowName:"Asc"}) : null
     }
 
     const handleSortNo = () => {
@@ -314,7 +291,6 @@ const BoardTestView = () => {
       setStatus(event.target.value)
       if(event.target.value==="전체보기"){
         setSendList(posts)
-        console.log(posts)
       }else{
         setSendList([])
         posts.forEach(post=>{
@@ -341,16 +317,16 @@ const BoardTestView = () => {
         <TableContainer component={Paper}>
           <Table className={tableClasses.table} aria-label="custom pagination table"
           >
-            <TableRow>
+            <TableRow style={{width:10}}>
               <TableCell componenent="th" align="center" scope="row">
-                <MuiButton
+                <MuiButton 
                   onClick={handleSortNo}>
                     No.
                     {sort.no==="Asc" && <ArrowUpwardIcon fontSize="small"/>}
                     {sort.no==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
                   </MuiButton>
                 </TableCell>
-              <TableCell align="center"> 글쓴이 </TableCell>
+              <TableCell align="center" style={{width:50}}> 글쓴이 </TableCell>
               <TableCell align="center">
                 
               <FormControl className={selectBox.formControl}>
@@ -365,89 +341,19 @@ const BoardTestView = () => {
                     </Select>
                   </FormControl>
               </TableCell>
-              <TableCell align="center">카테고리</TableCell>
-              {/* {status==="자유게시판" && 
-              <TableCell align="center">
-                <FormControl className={selectBox.formControl}>
-                  <InputLabel id="demo-simple-select-label">*진료과구분</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={medCategory}
-                    onChange={e=>setMedcategory(e.target.value)}
-                  >
-                    <MenuItem value={"전체보기"}>전체보기</MenuItem>
-                    <MenuItem value={"정형외과"}>정형외과</MenuItem>
-                    <MenuItem value={"내과"}>내과</MenuItem>
-                    <MenuItem value={"성형외과"}>성형외과</MenuItem>
-                    <MenuItem value={"흉부외과"}>흉부외과</MenuItem>
-                    <MenuItem value={"마취통증의학과"}>마취통증의학과</MenuItem>
-                    <MenuItem value={"가정의학과"}>가정의학과</MenuItem>
-                    <MenuItem value={"정신과"}>정신과</MenuItem>
-                    <MenuItem value={"이비인후과"}>이비인후과</MenuItem>
-                    <MenuItem value={"일반외과"}>일반외과</MenuItem>
-                    <MenuItem value={"재활의학과"}>재활의학과</MenuItem>
-                    <MenuItem value={"신경과"}>신경과</MenuItem>
-                    <MenuItem value={"소아과"}>소아과</MenuItem>
-                    <MenuItem value={"피부과"}>피부과</MenuItem>
-                    <MenuItem value={"여성의학과"}>여성의학과</MenuItem>
-
-                  </Select>
-                </FormControl>
-              </TableCell>}
-
-              {status==="고객서비스센터" && 
-              <TableCell align="center">
-                <FormControl className={selectBox.formControl}>
-                  <InputLabel id="demo-simple-select-label">*서비스구분</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={medCategory}
-                    onChange={e=>setMedcategory(e.target.value)}
-                  >
-                    <MenuItem value={"전체보기"}>전체보기</MenuItem>
-                    <MenuItem value={"서비스"}>서비스</MenuItem>
-                    <MenuItem value={"결제"}>결제</MenuItem>
-                    <MenuItem value={"오류"}>오류</MenuItem>
-                    
-                  </Select>
-                </FormControl>
-              </TableCell>}
-
-              {status==="Q&A" && 
-              <TableCell align="center">
-                <FormControl className={selectBox.formControl}>
-                  <InputLabel id="demo-simple-select-label">*사용구분</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={medCategory}
-                    onChange={e=>setMedcategory(e.target.value)}
-                  >
-                    <MenuItem value={"전체보기"}>전체보기</MenuItem>
-                    <MenuItem value={"사용질문"}>사용질문</MenuItem>
-                    <MenuItem value={"결제질문"}>결제질문</MenuItem>
-                    <MenuItem value={"오류질문"}>오류질문</MenuItem>
-                    
-                  </Select>
-                </FormControl>
-              </TableCell>}
-               */}
-
-
-
+              <TableCell align="center" style={{width:100}}>카테고리</TableCell>
 
               <TableCell align="center">
                 <MuiButton
-                  onClick={handleSortTitle}>
+                  onClick={handleSortTitle}
+                  style={{width:"auto"}}>
                     제목
                     {sort.title==="Asc" && <ArrowUpwardIcon fontSize="small"/>}
                     {sort.title==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
                 </MuiButton>
               </TableCell>
               <TableCell align="center">내용</TableCell>
-              <TableCell align="center"><MuiButton
+              <TableCell align="center" style={{width:50}}><MuiButton
                   onClick={handleSortClick}>
                     조회수
                     {sort.click==="Asc" && <ArrowUpwardIcon fontSize="small"/>}
@@ -458,8 +364,6 @@ const BoardTestView = () => {
               <TableBody>
                 {/* -------------pagination----------------- */}
                   {(rowsPerPage > 0
-                    // ? sendList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    // : posts
 
                     ? sendList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     : sendList

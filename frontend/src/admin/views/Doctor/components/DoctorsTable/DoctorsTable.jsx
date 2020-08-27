@@ -205,7 +205,7 @@ const DoctorsTable = props => {
                     <TableCell>
                       {doctor.position}
                     </TableCell>
-                    <TableCell >{doctor.detailData},</TableCell>
+                    <TableCell >{doctor.detailData}</TableCell>
                     <TableCell >{doctor.medicalSubject}</TableCell>
                     <TableCell >
                       {moment(doctor.createdAt).format('DD/MM/YYYY')}

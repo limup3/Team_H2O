@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import data from '../../../../Doctor/data';
-import {Button} from '@material-ui/core'
 
 const ChartSize = {
     height : '50px'
@@ -10,12 +8,11 @@ const ChartSize = {
 
 
 const DoughnutChart = props => {
-  console.log("차트에 왔니?")
   const [chart, setChart] = useState({})
-  const {chartValue, data} = props
+  const {chartValue} = props
 
 
-  const ageData = props => ({
+  const ageData = {
     labels: [
       '10대', '20대', '30대', '40대', '50대', '60대', '70대', '80대 이상'
     ],
@@ -44,9 +41,9 @@ const DoughnutChart = props => {
       ],
       borderWidth : 1
     }]
-  })
+  }
   
-  const sexData = data => ({
+  const sexData ={
     labels: ['남성', '여성'],
     datasets: [{
       label: '성별 이용자',
@@ -61,7 +58,7 @@ const DoughnutChart = props => {
       ],
       borderWidth : 1
     }]
-  });
+  };
   
   const locationData = {
     labels: ['서울시 금천구', '서울시 광진구', '서울시 종로구', '서울시 마포구', '서울시 용산구'],
@@ -131,48 +128,14 @@ const DoughnutChart = props => {
     
 
   useEffect(()=>{
-    console.log("useEffect")
     
-    console.log(chartValue)
-    setChart({
-      labels: [
-        '10대', '20대', '30대', '40대', '50대', '60대', '70대', '80대 이상'
-      ],
-      datasets: [{
-        label: '연령별 이용자',
-        data: [props.chartData, props.chartData2, props.chartData3, 81, 56, 55, 40, 34],
-        backgroundColor: [
-        '#ff6a6d',
-        '#e28965',
-        '#e7cd61',
-        '#a0b8a1',
-        '#63d365',
-        '#0693e3',
-        '#c79c9f',
-        '#c78ee7'
-        ],
-        hoverBackgroundColor: [
-        '#ff6a6d',
-        '#e28965',
-        '#e7cd61',
-        '#a0b8a1',
-        '#63d365',
-        '#0693e3',
-        '#c79c9f',
-        '#c78ee7'
-        ],
-        borderWidth : 1
-      }]
-    })
-    
-
-  
     const switchCase = (param) =>{
       switch(param){
-        case "Age": return setChart(ageData(props)) 
+        case "Age": return setChart(ageData) 
         case "Sex": return setChart(sexData) 
         case "Days": return setChart(daysData)
         case "Location": return setChart(locationData)
+        default : return setChart(ageData)
           }
         }
     switchCase(chartValue, props)

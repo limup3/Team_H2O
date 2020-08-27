@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import BoardToolbar from './components/BoardsToolbar';
 import BoardTestView from './components/BoardTestView';

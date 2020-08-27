@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Pagination from '@material-ui/lab/Pagination';
 import axios from 'axios'
 import {
   Card,
@@ -8,17 +7,14 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableHead,
   TableRow,
   TableFooter,
   Button as MuiButton,
   TablePagination,
   Paper,
-  Checkbox,
   IconButton,
-  Select 
 } from '@material-ui/core';
-import { Button, Modal, PageItem, Dropdown, DropdownButton } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
 import UserTestBody from './UserTestBody';
 import PropTypes from 'prop-types';
 import FirstPageIcon from '@material-ui/icons/FirstPage';
@@ -27,12 +23,6 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-
-
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
 
 const tableStyles = makeStyles({
   table: {
@@ -56,21 +46,12 @@ const useStyles1 = makeStyles((theme) => ({
   },
 }));
 
-const selectStyle = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-}));
 
 
 const TablePaginationActions = (props) => {
   const classes = useStyles1();
   const theme = useTheme();
-  const { count, page, rowsPerPage, onChangePage, setTablePagination } = props;
+  const { count, page, rowsPerPage, onChangePage } = props;
   const handleFirstPageButtonClick = (event) => {
     onChangePage(event, 0);
   };
@@ -120,14 +101,10 @@ rowsPerPage: PropTypes.number.isRequired,
 };
 const UserTestView = () => {
   const tableClasses = tableStyles();
-  const selectBox = selectStyle()
 
     const [UserData, setUserData] = useState([])
-    const [posts, setPosts] = useState([])
-    const [loading, setLoading] = useState(false)
     const [show, setShow] = useState(false);
     // --------------Pagination ------------------------
-    const [newPageSave, setNewPageSave] = useState()
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     // -------------------- Sort -----------------------
@@ -137,29 +114,17 @@ const UserTestView = () => {
       id: "Basic" || "Asc" || "Dsc",
       birthday: "Basic" || "Asc" || "Dsc"
     })
-    // const [status, setStatus] = useState("전체보기")
     const [sendList, setSendList] =useState([])
 
     useEffect(()=>{
-      setLoading(true);
-      console.log("접속 확인")
       axios
         .get(`http://localhost:8080/user/userList`)
         .then(response => {
-          setPosts(response.data)
           setSendList(response.data)
         })
         .catch(error => {
           alert("서버와의 연결이 되지 않았습니다.");
         })
-        setLoading(false);
-      //   if(sort.status==={}||"Basic"){
-          
-      //   }else if(sort.status==="Asc"||"Dsc"){
-      // }
-      console.log("엑시오스 데이터")
-      console.log(posts)
-      console.log("접속 완료")
 
     }, [])
     const handleClose = () => {
@@ -168,7 +133,6 @@ const UserTestView = () => {
     // ----------------- Pagination -----------------------------
     const handleChangePage = (e, newPage) => {
       setPage(newPage);
-      setNewPageSave(newPage)
     };
     const handleChangeRowsPerPage = (e) => {
       setRowsPerPage(parseInt(e.target.value, 10));
@@ -226,7 +190,6 @@ const UserTestView = () => {
         setSort({...sort, name:"Basic"})
         basicSort()
       }
-    // (sort.nowName===null||"Basic")? setSort({...sort, name:"Asc", nowName:"Asc"}) : null
     }
 
     const handleSortNo = () => {
@@ -326,25 +289,6 @@ const UserTestView = () => {
         basicSort()
       }
     }
-    // ----------------------- dropdown ---------------------------
-    
-    // const handleChangeStatus = event => {
-    //   // setStatus("")
-    //   setStatus(event.target.value)
-    //   if(event.target.value==="전체보기"){
-    //     setSendList()
-    //     setSendList(posts)
-    //   }else{
-    //     setSendList([])
-    //     posts.forEach(post=>{
-    //       if (post.businessStatus.includes(event.target.value)){
-    //         setSendList((sendList)=>[...sendList, post])
-    //       }
-    //     })
-
-    //   }
-      
-    // }
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, sendList.length - page * rowsPerPage);
 
@@ -396,28 +340,11 @@ const UserTestView = () => {
                 </TableCell>
               <TableCell align="center">
 
-              {/* <FormControl className={selectBox.formControl}>
-                 <InputLabel id="demo-simple-select-label">영업상태</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={status}
-                  onChange={handleChangeStatus}
-                >
-                  <MenuItem value={"전체보기"}>전체보기</MenuItem>
-                  <MenuItem value={"영업중"}>영업중</MenuItem>
-                  <MenuItem value={"폐업"}>폐업</MenuItem>
-                  <MenuItem value={"휴업"}>휴업</MenuItem>
-                </Select>
-              </FormControl> */}
-
               </TableCell>
             </TableRow>
               <TableBody>
                 {/* -------------pagination----------------- */}
                   {(rowsPerPage > 0
-                    // ? sendList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    // : posts
 
                     ? sendList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     : sendList

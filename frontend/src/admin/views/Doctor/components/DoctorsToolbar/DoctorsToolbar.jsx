@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
-import { SearchInput } from '../../../../components';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -55,12 +54,6 @@ const DoctorsToolbar = props => {
           </Button>
         </Link>
       </div>
-      {/* <div className={classes.row}>
-        <SearchInput
-          className={classes.searchInput}
-          placeholder="의사 검색"
-        />
-      </div> */}
     </div>
   );
 };

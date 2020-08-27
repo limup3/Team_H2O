@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -48,8 +48,6 @@ const DoctorAdd = () => {
   const handleIdCheck = e => {
     setLicenseChecker("")
     if(doctorsLicense){
-      console.log("--1--")
-      console.log(doctorsLicense)
     e.preventDefault();
     axios
       .get(`http://localhost:8080/doctor/licenseCheck/${doctorsLicense}`)

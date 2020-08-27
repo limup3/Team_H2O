@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios'
-import ImgButton, { imgSrc } from '../../../../helpers/ImgButton';
 import { Checkbox, FormControlLabel, FormGroup, Box } from '@material-ui/core';
 
 
@@ -53,19 +52,7 @@ const UserAdd = () => {
     checkBox2 : false,
     checkBox3 : false,
   })
-  //---------------- Image Upload -------------
-  // const [image, setImage] = useState(null) 
-
-  // const handleInputChange = e =>{
-  //   setImage(e.target.files[0])
-  // }
-  // const handleInpuLogo = async() => {
-  //   const formData = new FormData()
-  //   formData.append('file', image)
-  //   const res = await axios.post("/hospital/logoUpload", formData)
-
-  // }
-  //---------------- Image Upload  -------------
+  
   const history = useHistory();
 
   const handleCheckBox = event => {
@@ -131,7 +118,6 @@ const UserAdd = () => {
         error => { 
           alert("병원 등록 실패")
           
-          console.log(userJson)
           throw (error) 
         }
     );
@@ -362,20 +348,7 @@ const UserAdd = () => {
                 onChange={e => setLongitude(e.target.value)}
                 />
               </Grid>
-               {/* <Grid item xs={8}>
-              <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="logo"
-                  label="로고"
-                  name="logo"
-                  autoComplete="logo"
-                  value={logo}
-                  onChange={e => setLogo(e.target.value)}
-              />
-              </Grid> */}
-              {/* <ImgButton /> */}
+               
             </Grid>
 
           <Button
