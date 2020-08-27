@@ -80,16 +80,20 @@ const UserDelete = () => {
           MemberShip WithDraw
         </Typography>
         <form className={classes.form} >
+
+
+
           <Grid container spacing={2}> 
             <Grid item xs={12}>
               <TextField
                   variant="outlined"
                   required
                   fullWidth
-                  id="Password"
+                  id="password"
                   label="Password"
-                  name="Password"
-                  autoComplete="Password"
+                  type="password"
+                  name="password"
+                  autoComplete="password"
                   value={password}
                   onChange={e => setPassword(e.target.value)}
               />
@@ -100,10 +104,11 @@ const UserDelete = () => {
                   variant="outlined"
                   required
                   fullWidth
-                  id="confirmPassword"
+                  id="password"
                   label="Confirm Password"
-                  name="confirmPassword"
-                  autoComplete="confirmPassword"
+                  type="password"
+                  name="password"
+                  autoComplete="password"
                   value={confirmPassword}
                   onChange={e => setConfirmPassword(e.target.value)}
               />

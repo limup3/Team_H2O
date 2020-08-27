@@ -22,7 +22,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(2, 0, 1),
+  },
+  cancel: {
+    margin: theme.spacing(1,0,0),
   },
 }));
 
@@ -45,6 +48,8 @@ const DoctorAdd = () => {
   const handleIdCheck = e => {
     setLicenseChecker("")
     if(doctorsLicense){
+      console.log("--1--")
+      console.log(doctorsLicense)
     e.preventDefault();
     axios
       .get(`http://localhost:8080/doctor/licenseCheck/${doctorsLicense}`)
@@ -100,6 +105,9 @@ const DoctorAdd = () => {
     }
   }
 
+  const handleCancel = () => {
+    history.push('/admin/doctor')
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -237,6 +245,19 @@ const DoctorAdd = () => {
             onClick={handleSubmit}
           >
             등록하기
+          </Button>
+
+          <Button
+            fullWidth
+            className={classes.cancel}
+            onClick={handleCancel}
+            variant="contained"
+            style={{
+              color: 'white',
+              backgroundColor: "#FF4537"
+            }}
+          >
+            취소하기
           </Button>
          
         </form>

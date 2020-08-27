@@ -41,6 +41,7 @@ const SignUp = () => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("")
+  const [birthday, setBirthday] = useState("")
 
   const history = useHistory();
 
@@ -62,7 +63,8 @@ const SignUp = () => {
       password: password,
       name: userName,
       email: email,
-      phone: phoneNumber
+      phone: phoneNumber,
+      birthday: birthday
     }
     axios.post(`http://localhost:8080/user/signUp`, userJson)
         .then(response => {
@@ -166,6 +168,19 @@ const SignUp = () => {
             autoComplete="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
+          />
+            </Grid>
+            <Grid item xs={12}>
+            <TextField
+            variant="outlined"
+            required
+            fullWidth
+            id="birthday"
+            label="Birthday"
+            name="birthday"
+            autoComplete="birthday"
+            value={birthday}
+            onChange={e => setBirthday(e.target.value)}
           />
             </Grid>
             <Grid item xs={12}>

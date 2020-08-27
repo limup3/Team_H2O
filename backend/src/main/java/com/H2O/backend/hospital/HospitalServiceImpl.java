@@ -92,19 +92,19 @@ public class HospitalServiceImpl implements HospitalService {
             CSVParser csvParser = new CSVParser(fileReader, CSVFormat.DEFAULT);
             Iterable<CSVRecord> csvRecords = csvParser.getRecords();
             for(CSVRecord csvRecord : csvRecords){
-                System.out.println(csvRecord.get(0));
-                System.out.println(csvRecord.get(1));
-                System.out.println(csvRecord.get(2));
-                System.out.println(csvRecord.get(3));
-                System.out.println(csvRecord.get(4));
-                System.out.println(csvRecord.get(5));
-                System.out.println(csvRecord.get(6));
-                System.out.println(csvRecord.get(7));
-                System.out.println(csvRecord.get(8));
-                System.out.println(csvRecord.get(9));
-                System.out.println(csvRecord.get(10));
-                System.out.println(csvRecord.get(11));
-                System.out.println(csvRecord.get(12));
+//                System.out.println(csvRecord.get(0));
+//                System.out.println(csvRecord.get(1));
+//                System.out.println(csvRecord.get(2));
+//                System.out.println(csvRecord.get(3));
+//                System.out.println(csvRecord.get(4));
+//                System.out.println(csvRecord.get(5));
+//                System.out.println(csvRecord.get(6));
+//                System.out.println(csvRecord.get(7));
+//                System.out.println(csvRecord.get(8));
+//                System.out.println(csvRecord.get(9));
+//                System.out.println(csvRecord.get(10));
+//                System.out.println(csvRecord.get(11));
+//                System.out.println(csvRecord.get(12));
                 hospitalRepository.save(new Hospital(
                         csvRecord.get(0),
                         csvRecord.get(1),

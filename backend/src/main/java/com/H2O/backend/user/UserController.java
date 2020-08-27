@@ -1,10 +1,12 @@
 package com.H2O.backend.user;
 
+import com.H2O.backend.hospital.Hospital;
 import lombok.AllArgsConstructor;
 import org.junit.Assert;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -17,6 +19,12 @@ public class UserController {
     private final UserRepository userRepository;
     private final UserService userService;
 
+
+    // csv 파일 데이터베이스에 저장
+    @GetMapping("/csv")
+    public void csvRead(){
+        userService.readCsv();
+    }
 
     //회원가입
     @PostMapping("/signUp")
@@ -105,7 +113,8 @@ public class UserController {
     //회원정보 변경
     @PatchMapping("/modify/{userId}")
     public ResponseEntity<User> modify(@PathVariable String userId, @RequestBody User user) {
-
+        System.out.println("회원 정보 변경 진입");
+        System.out.println(user);
         Optional<User> modifyUser = userService.findUserByUserId(user.getUserId());
 
         if(modifyUser.isPresent()){
@@ -114,7 +123,9 @@ public class UserController {
                 selectUser.setPhone(user.getPhone());
                 selectUser.setEmail(user.getEmail());
                 selectUser.setPassword(user.getPassword());
+                selectUser.setBirthday(user.getBirthday());
                 userRepository.save(selectUser);
+                System.out.println(selectUser);
             });
             return ResponseEntity.ok(modifyUser.get());
         } else {
@@ -137,6 +148,14 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
 
+    }
+
+    // 유저 테이블 리스트
+    @GetMapping("/userList")
+    public ResponseEntity<List<User>> userList() {
+        List<User> userList = userService.userList();
+        System.out.println(userList);
+        return ResponseEntity.ok(userList);
     }
 
     }

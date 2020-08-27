@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Budget = props => {
-  const { className, ...rest } = props;
+  const { className, data, ...rest } = props;
 
   const classes = useStyles();
 
@@ -62,9 +62,9 @@ const Budget = props => {
               gutterBottom
               variant="body2"
             >
-              보유 금액(BUDGET)
+              이용자 수
             </Typography>
-            <Typography variant="h3">$24,000</Typography>
+            <Typography variant="h3">{data.length}명</Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>
@@ -84,7 +84,7 @@ const Budget = props => {
             className={classes.caption}
             variant="caption"
           >
-            Since last month
+            전월 대비 증감량
           </Typography>
         </div>
       </CardContent>

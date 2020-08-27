@@ -67,11 +67,11 @@ const Sidebar = props => {
       icon: <DvrIcon/>
     },
     
-    {
-      title: '세팅',
-      href: '/admin/settings',
-      icon: <SettingsIcon />
-    }
+    // {
+    //   title: '세팅',
+    //   href: '/admin/settings',
+    //   icon: <SettingsIcon />
+    // }
   ];
 
   return (

@@ -5,6 +5,7 @@ export const doctorData = [
         "medicalSubject":"이비인후피부과",
         "detail":"여드름, 한방미용시술, 성형수술후관리,아토피피부염",
         "img":"http://hub.khnmc.or.kr/mng/upload/docinfo/1531109799046_D06CAE30BCC0D658__IMG_1237.jpg"
+        
 
     },
     {

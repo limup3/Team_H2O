@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import styled from 'styled-components';
 import { Icon, Button } from 'antd';
 import { useHistory } from 'react-router-dom';
@@ -8,6 +8,8 @@ import { MDBBtn} from 'mdbreact';
 import { Modal } from 'react-bootstrap';
 import shortId from 'shortid'
 import './PaymentResult.css'
+import axios from 'axios'
+
 
 const PaymentResult = () => {
 
@@ -27,8 +29,9 @@ const PaymentResult = () => {
     postcode : useSelector(state => state.reservationReducer.reservationData.postcode),
     content : useSelector(state => state.reservationReducer.reservationData.content),
 
-
   }
+
+
 
   const history = useHistory();
   const { location } = history;
@@ -53,6 +56,29 @@ const PaymentResult = () => {
   const iconType = isSuccessed ? 'check-circle' : 'exclamation-circle';
   const resultType = isSuccessed ? '성공' : '실패';
   const colorType = isSuccessed ? '#52c41a' : '#f5222d';
+
+  useEffect(()=> {
+
+
+    const reservationJson = {
+      reservarionType : selectorData.title,
+      date : selectorData.selectedDate,
+
+    }
+
+    if(resultType == '성공') {
+      axios.post(`http://localhost:8080/reservation/register`, reservationJson)
+      .then(res => {
+        }
+      ).catch(
+        
+        error => {
+        throw (error)
+        }
+      )
+    }
+
+  },[])
 
 
   return (
@@ -99,7 +125,7 @@ const PaymentResult = () => {
           scrollable={Boolean(true)}
           >
         <Modal.Header closeButton>
-          <Modal.Title>{JSON.parse(sessionStorage.reservationData).title} 정보</Modal.Title>
+          <Modal.Title>{selectorData.title} 정보</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <p> 예약날짜  &nbsp; {selectorData.selectedDate}</p>
@@ -168,7 +194,7 @@ const PaymentResult = () => {
             </>
             }
 
-        {isSuccessed && selectorData.title === "응급차"  &&
+      {isSuccessed && selectorData.title === "응급차"  &&
         <>
           <Button
             className="textColor"

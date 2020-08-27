@@ -23,6 +23,10 @@ public class BoardController {
         this.boardService = boardService;
     }
 
+    //csv파일 데이터베이스에 저장
+    @GetMapping("/csv")
+    public void csvRead(){ boardService.readCsv(); }
+
     //글쓰기 업로드
     @PostMapping("/update")
     public ResponseEntity<List<Board>> getAllBoardList(@RequestBody Board board){
@@ -36,11 +40,11 @@ public class BoardController {
         Bdata.setCategory(board.getCategory());
         Bdata.setClick(board.getClick());
         Bdata.setCreationDate(LocalDate.now());
-
         boardRepository.save(Bdata);
         List<Board> boardList = boardService.findAll();
         return ResponseEntity.ok(boardList);
     }
+
     //카테고리별 리스트 빼오기
     @GetMapping("/list/get/{category}")
     public ResponseEntity<List<Board>> getBoardList(@PathVariable String category) {
@@ -49,7 +53,6 @@ public class BoardController {
         System.out.println(boardList.toString());
         return ResponseEntity.ok(boardList);
     }
-
     //삭제
     @DeleteMapping("/list/delete/{boardNo}")
     public Messenger getDeleteBoard(@PathVariable String boardNo){
@@ -57,6 +60,23 @@ public class BoardController {
         Board deleteResult = result.get();
         boardService.delete(deleteResult);
         return Messenger.SUCCEESS;
+    }
+
+    @GetMapping("/list/medCategory/{BoarNo}")
+    public Board getFindTitle(@PathVariable String BoarNo){
+        System.out.println(BoarNo);
+        Board findBoarNo = boardService.findTitle(BoarNo);
+        System.out.println(findBoarNo);
+        return findBoarNo;
+    }
+
+    //리스트에서 진료카테고리별
+    @GetMapping("/list/{medCategory}")
+    public List<Board> getMedCateBoard(@PathVariable String medCategory){
+        System.out.println(medCategory);
+        List<Board> findOne = boardService.findOneBoard(medCategory);
+        System.out.println(findOne);
+        return findOne;
     }
 
     //수정
@@ -75,21 +95,19 @@ public class BoardController {
             return Messenger.FAIL;
         }
     }
-
-    //리스트에서 진료카테고리별
-    @GetMapping("/list/{medCategory}")
-    public List<Board> getMedCateBoard(@PathVariable String medCategory){
-        System.out.println(medCategory);
-        List<Board> findOne = boardService.findOneBoard(medCategory);
-        System.out.println(findOne);
-        return findOne;
-    }
-
     //클릭
     @GetMapping("/list/getOne/{boardNo}")
     public Optional<Board> getOneBoardNo(@PathVariable String boardNo){
         System.out.println(boardService.findBoardNo(Long.parseLong(boardNo)));
         boardService.click(Long.parseLong(boardNo));
         return boardService.findBoardNo(Long.parseLong(boardNo));
+    }
+
+    // 의사 테이블 리스트
+    @GetMapping("/boardList")
+    public ResponseEntity<List<Board>> boardList() {
+        List<Board> boardList = boardService.boardList();
+        System.out.println(boardList);
+        return ResponseEntity.ok(boardList);
     }
 }

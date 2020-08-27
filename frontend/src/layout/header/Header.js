@@ -63,7 +63,7 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
       <NavLink className="navColor" href="/SearchHospital">병원찾기</NavLink>
       <NavLink className="navColor" href="/Ambulance">응급차 호출</NavLink>
       <NavLink className="navColor" href="/TeleMedicine" target="_blank">화상 진료</NavLink>
-      <NavLink className="navColor" href="/Community/userBoard">커뮤니티</NavLink>
+      <NavLink className="navColor" href="/Community/userboard">커뮤니티</NavLink>
       <NavLink className="navColor" href="/Admin" target="_blank">관리자(임시)</NavLink>
       {!sessionStorage.userData &&
         <NavLink className="navColor" href="/Login" tw="lg:ml-12!">
@@ -79,7 +79,7 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
       <PrimaryLink css={roundedHeaderButton && tw`rounded-full`}href="/SignUp">Sign Up</PrimaryLink>
       }
       {sessionStorage.userData &&
-      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`}href="/MyPage">MyPage</PrimaryLink>
+      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`}href="/UserModify">MyPage</PrimaryLink>
       }       
      
     </NavLinks>

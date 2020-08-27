@@ -14,16 +14,26 @@ import {
   Button as MuiButton,
   TablePagination,
   Paper,
-  Checkbox
+  Checkbox,
+  IconButton,
+  Select 
 } from '@material-ui/core';
-import { Button, Modal, PageItem, Dropdown, DropdownButton} from 'react-bootstrap'
+import { Button, Modal, PageItem, Dropdown, DropdownButton } from 'react-bootstrap'
 import ModalTestBody from './ModalTestBody';
 import PropTypes from 'prop-types';
-import IconButton from '@material-ui/core/IconButton';
 import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+
+
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+
 const tableStyles = makeStyles({
   table: {
     minWidth: 500,
@@ -35,12 +45,25 @@ const tableStyles = makeStyles({
     backgroundColor: "#282C34"
   }
 });
+
 const useStyles1 = makeStyles((theme) => ({
   root: {
     flexShrink: 0,
     marginLeft: theme.spacing(2.5),
   },
 }));
+
+const selectStyle = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
+
+
 const TablePaginationActions = (props) => {
   const classes = useStyles1();
   const theme = useTheme();
@@ -94,26 +117,42 @@ rowsPerPage: PropTypes.number.isRequired,
 };
 const ModalTestView = () => {
   const tableClasses = tableStyles();
+  const selectBox = selectStyle()
+
     const [hospitalData, setHospitalData] = useState([])
     const [posts, setPosts] = useState([])
+    const [sparePosts, setSparePosts] = useState([])
     const [loading, setLoading] = useState(false)
     const [show, setShow] = useState(false);
     // --------------Pagination ------------------------
     const [newPageSave, setNewPageSave] = useState()
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, posts.length - page * rowsPerPage);
+    // -------------------- Sort -----------------------
+    const [sort, setSort]=useState({
+      no:  "Basic" || "Asc" || "Dsc",
+      name: "Basic" || "Asc" || "Dsc",
+      people: "Basic" || "Asc" || "Dsc",
+    })
+    const [status, setStatus] = useState("전체보기")
+    const [sendList, setSendList] =useState([])
+
     useEffect(()=>{
       setLoading(true);
       axios
         .get(`http://localhost:8080/hospital/hospitalList`)
         .then(response => {
           setPosts(response.data)
+          setSendList(response.data)
         })
         .catch(error => {
           alert("서버와의 연결이 되지 않았습니다.");
         })
         setLoading(false);
+      //   if(sort.status==={}||"Basic"){
+          
+      //   }else if(sort.status==="Asc"||"Dsc"){
+      // }
     }, [])
     const handleClose = () => {
       setShow(false)
@@ -127,6 +166,156 @@ const ModalTestView = () => {
       setRowsPerPage(parseInt(e.target.value, 10));
       setPage(0);
     };
+    // ------------------- Sort ------------------------------
+    const basicSort = () => {
+      sendList.sort(function(a,b){
+        if(a.hospitalNo > b.hospitalNo){
+          return 1;
+        }
+        if(a.hospitalNo < b.hospitalNo){
+          return -1;
+        }
+        return 0
+        }
+      )
+    }
+
+    const handleSortName = () => {
+      if(sort.name==="Basic"){
+        setSort({...sort, name:"Asc"})
+        sendList.sort(function(a,b){
+          let hospitalNameA = a.hospitalName.toUpperCase()
+          let hospitalNameB = b.hospitalName.toUpperCase()
+          if(hospitalNameA > hospitalNameB){
+            return 1;
+          }
+          if(hospitalNameA < hospitalNameB){
+            return -1;
+          }
+          return 0
+          }
+        )
+      }
+
+      if(sort.name==="Asc"){
+        setSort({...sort, name:"Dsc"})
+        sendList.sort(function(a,b){
+          let hospitalNameA = a.hospitalName.toLowerCase()
+          let hospitalNameB = b.hospitalName.toLowerCase()
+          if(hospitalNameA < hospitalNameB){
+            return 1;
+          }
+          if(hospitalNameA > hospitalNameB){
+            return -1;
+          }
+          return 0
+
+          }
+        )
+
+        console.log("DSC")
+        console.log(posts)
+      }
+        if(sort.name==="Dsc"){
+        setSort({...sort, name:"Basic"})
+        basicSort()
+      }
+    // (sort.nowName===null||"Basic")? setSort({...sort, name:"Asc", nowName:"Asc"}) : null
+    }
+
+    const handleSortNo = () => {
+      if(sort.no==="Basic"){
+        setSort({...sort, no:"Asc"})
+
+        sendList.sort(function(a,b){
+          if(a.hospitalNo > b.hospitalNo){
+            return 1;
+          }
+          if(a.hospitalNo < b.hospitalNo){
+            return -1;
+          }
+          return 0
+          }
+        )
+
+        }
+      if(sort.no==="Asc"){
+      setSort({...sort, no:"Dsc"})
+
+      sendList.sort(function(a,b){
+        if(a.hospitalNo > b.hospitalNo){
+          return -1;
+        }
+        if(a.hospitalNo < b.hospitalNo){
+          return 1;
+        }
+        return 0
+        }
+      )
+
+        
+        }
+      if(sort.no==="Dsc"){
+      setSort({...sort, no:"Basic"})
+      basicSort()
+      }
+    }
+
+    const handleSortPeople = () => {
+      if(sort.people==="Basic"){
+        setSort({...sort, people:"Asc"})
+        sendList.sort(function(a,b){
+          if(a.medicalPeople > b.medicalPeople){
+            return 1;
+          }
+          if(a.medicalPeople < b.medicalPeople){
+            return -1;
+          }
+          return 0
+          }
+        )
+        }
+      if(sort.people==="Asc"){
+      setSort({...sort, people:"Dsc"})
+      sendList.sort(function(a,b){
+        if(a.medicalPeople > b.medicalPeople){
+          return -1;
+        }
+        if(a.medicalPeople < b.medicalPeople){
+          return 1;
+        }
+        return 0
+        }
+      )
+        }
+      if(sort.people==="Dsc"){
+      setSort({...sort, people:"Basic"})
+      basicSort()
+        }
+    }
+
+    // ----------------------- dropdown ---------------------------
+    
+    const handleChangeStatus = event => {
+      // setStatus("")
+      setStatus(event.target.value)
+      if(event.target.value==="전체보기"){
+        setSendList()
+        setSendList(posts)
+      }else{
+        setSendList([])
+        posts.forEach(post=>{
+          if (post.businessStatus.includes(event.target.value)){
+            setSendList((sendList)=>[...sendList, post])
+          }
+        })
+
+      }
+      
+    }
+
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, sendList.length - page * rowsPerPage);
+
     return (
         <>
         <Card>
@@ -134,23 +323,68 @@ const ModalTestView = () => {
           <Table className={tableClasses.table} aria-label="custom pagination table"
           >
             <TableRow>
-              <TableCell componenent="th" align="center" scope="row">No.</TableCell>
-              <TableCell align="center">이름</TableCell>
+              <TableCell componenent="th" align="center" scope="row">
+                <MuiButton
+                  onClick={handleSortNo}>
+                    No.
+                    {sort.no==="Asc" && <ArrowUpwardIcon fontSize="small"/>}
+                    {sort.no==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
+                  </MuiButton>
+                </TableCell>
+              <TableCell align="center">
+                <MuiButton
+                  onClick={handleSortName}>
+                    이름
+                    {sort.name==="Asc" && <ArrowUpwardIcon fontSize="small"/>}
+                    {sort.name==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
+                </MuiButton>
+              </TableCell>
               <TableCell align="center">사업자 번호</TableCell>
               <TableCell align="center">주소</TableCell>
               <TableCell align="center">병원 형태</TableCell>
-              <TableCell align="center">의료인 수</TableCell>
+              <TableCell align="center">
+                <MuiButton
+                  onClick={handleSortPeople}>
+                    의료인 수
+                    {sort.people==="Asc" && <ArrowUpwardIcon fontSize="small"/>}
+                    {sort.people==="Dsc" && <ArrowDownwardIcon fontSize="small"/>}
+                 </MuiButton>
+                </TableCell>
               <TableCell align="center">연락처</TableCell>
               <TableCell align="center">위도</TableCell>
               <TableCell align="center">경도</TableCell>
-              <TableCell align="center">영업상태</TableCell>
+              <TableCell align="center">
+
+              <FormControl className={selectBox.formControl}>
+                 <InputLabel id="demo-simple-select-label">영업상태</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={status}
+                  onChange={handleChangeStatus}
+                >
+                  <MenuItem value={"전체보기"}>전체보기</MenuItem>
+                  <MenuItem value={"영업중"}>영업중</MenuItem>
+                  <MenuItem value={"폐업"}>폐업</MenuItem>
+                  <MenuItem value={"휴업"}>휴업</MenuItem>
+                </Select>
+              </FormControl>
+
+              </TableCell>
             </TableRow>
               <TableBody>
                 {/* -------------pagination----------------- */}
                   {(rowsPerPage > 0
-                    ? posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    : posts
+                    // ? sendList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    // : posts
+
+                    ? sendList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    : sendList
+
+                    
                     ).map((hospital, i) => (
+                      
+
                   <TableRow
                     align="center"
                     key={i}
@@ -171,6 +405,11 @@ const ModalTestView = () => {
                     <TableCell align="center">{hospital.longitude}</TableCell>
                     <TableCell align="center">{hospital.businessStatus}</TableCell>
                   </TableRow>
+
+                    
+                    
+                    
+                    
                     ))}
                 {emptyRows > 0 && (
                   <TableRow style={{ height: 53 * emptyRows }}>
@@ -185,7 +424,7 @@ const ModalTestView = () => {
                   classesName ={tableClasses.TablePagination}
                   rowsPerPageOptions={[10, 50, 100, { label: 'All', value: -1 }]}
                   colSpan={7}
-                  count={posts.length}
+                  count={sendList.length}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   SelectProps={{

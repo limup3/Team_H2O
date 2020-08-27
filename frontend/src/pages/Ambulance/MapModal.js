@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import { MDBBtn,MDBLink} from 'mdbreact';
+import { MDBBtn} from 'mdbreact';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import './map.css'
@@ -26,18 +26,7 @@ const MapModal=(props)=> {
   const history = useHistory()
   console.log(props.name)
   const [open, setOpen] = useState(false);
-  // const [infoShow, setInfoShow] = useState(false)
-  // const [searchInfoShow, setSearchInfoShow] = useState(false)
-  const [ selected, setSelected] = useState({})
-  const [ name, setName] =useState('')
-  const [ content, setContent] =useState('')
 
-  //출발
-  const [ searchedAddr,setSearchedAddr] = useState("");
-  //도착
-  const [ selectedAddr, setSelectedAddr] = useState("");
-  //우편번호
-  const [ selectedPc, setSelectedPc ] = useState("")
 
   const handleClose = () => {
     setOpen(false);
@@ -62,8 +51,7 @@ const MapModal=(props)=> {
     e.preventDefault();
     alert("선택하신 예약서비스로 넘어가겠습니다.")
     history.push(`/CarReservation/${props.content}/${props.name}/${props.startAddr}/${props.endAddr}/${props.postcode}`)
-    {/*  ${content.content}/${name.name}/${searchedAddr.startAddr}/${selectedAddr.endAddr}/
-            ${selectedPc.postcode}*/}
+   
   }
 
   return (
@@ -91,8 +79,8 @@ const MapModal=(props)=> {
             <p id="transition-modal-description">선택하신 출발지, 목적지, 예약일을 확인해주시고, (긴급, 예약)을 선택해주세요.</p>
 
             <MDBBtn
-              className="modal-btn-emergency"
-              gradient="blue"              //className="modal-btn-reservation"
+              size="lg"
+              gradient="blue"          
               onClick={emergancyButton}
               style ={{
                 right : '1.5%'
@@ -100,16 +88,10 @@ const MapModal=(props)=> {
             >
               긴급서비스
             </MDBBtn>
-            {/*name={name}*/}
-            {/*content={content}*/}
-            {/*startAddr={searchedAddr}*/}
-            {/*endAddr={selectedAddr}*/}
-            {/*postcode={selectedPc}*/}
-          {/*  ${content.content}/${name.name}/${searchedAddr.startAddr}/${selectedAddr.endAddr}/
-            ${selectedPc.postcode}*/}
             {sessionStorage.userData && (
 
             <MDBBtn
+              size="lg"
               style ={{
                 right : '1.5%'
               }}
@@ -120,6 +102,7 @@ const MapModal=(props)=> {
 
             {!sessionStorage.userData &&
             <MDBBtn
+              size="lg"
               style ={{
                 right : '1.5%'
               }}
@@ -129,14 +112,6 @@ const MapModal=(props)=> {
         </Fade>
       </Modal>
 
-      {/*{doctor.id &&*/}
-      {/*  <MDBBtn*/}
-      {/*    style = {{*/}
-      {/*      right : '25px',*/}
-      {/*      width : '140px'*/}
-      {/*    }}*/}
-      {/*    gradient="purple">방문진료</MDBBtn>*/}
-      {/*}*/}
 
     </div>
   );

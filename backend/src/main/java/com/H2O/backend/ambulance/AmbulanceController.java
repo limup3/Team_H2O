@@ -9,6 +9,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/ambulance")
 public class AmbulanceController {
 
-
-
 }

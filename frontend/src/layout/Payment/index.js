@@ -38,7 +38,6 @@ const Payment = (props) => {
     endAddr : props.endAddr,
     postcode : props.postcode,
     content : props.content
-
 }
 
   dispatch(reservationAction({reservationData}))

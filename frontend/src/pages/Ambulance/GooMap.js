@@ -1,9 +1,9 @@
 import React,{useState,useCallback,useRef} from "react";
-import {GoogleMap, useLoadScript, Marker, InfoWindow, Polyline,} from "@react-google-maps/api";
+import {GoogleMap, useLoadScript, Marker, InfoWindow} from "@react-google-maps/api";
 import usePlacesAutocomplete, {getGeocode,getLatLng,getZipCode} from "use-places-autocomplete";
 import Geocode from 'react-geocode'
 import {Combobox,ComboboxInput, ComboboxPopover,ComboboxList, ComboboxOption,} from "@reach/combobox";
-import { MDBCard, MDBCardBody,MDBCardText, MDBCol } from 'mdbreact';
+import { MDBCard,MDBCardText } from 'mdbreact';
 import './map.css'
 import "@reach/combobox/styles.css";
 import {Button, Col, Form, Row, Image} from "react-bootstrap";
@@ -20,8 +20,8 @@ const options = {
     zoomControl:true,
 };
 const center ={
-    lat:37.550928,
-    lng:126.867306
+    lat:37.564214,
+    lng:127.001699
 }
 
 const MAP_KEY ='AIzaSyDyYteoY6q3NQwsEHFrXfan_q_9VlIVsxk'
@@ -51,13 +51,13 @@ const GooMap = () =>{
 
     const [ markers, setMarkers ] = useState([]);
     const [ searchLocation, setSearchLocation ] = useState({})
-
-    const handleOpen = () => setInfoShow(true);
-
-    const handleReservation = e => {
-        e.preventDefault();
-        handleOpen();
-    }
+    //
+    // const handleOpen = () => setInfoShow(true);
+    //
+    // // const handleReservation = e => {
+    // //     e.preventDefault();
+    // //     handleOpen();
+    // // }
 
 
     Geocode.setApiKey(MAP_KEY);
@@ -189,7 +189,7 @@ const GooMap = () =>{
     }
     
     return(
-        <>gs
+        <>
             <br/><br/><br/><br/>
             <Search panTo={panTo}/>
         <div className="map_container map_box">
@@ -355,22 +355,23 @@ const GooMap = () =>{
                     ): null
                     
                 }
-                <Polyline
-                  path={[selected,
-                      searchLocation]}
 
-                  visible={true}
-                  options={{
-                      strokeColor: "#fa0a1a",
-                      strokeOpacity: 1,
-                      strokeWeight: 3,
-                      icons:[
-                          {icon: {path:window.google.maps.SymbolPath.default},
-                              offset: "0",
-                              repeat: "40px"},
-                      ]
-                  }}>
-                </Polyline>
+                {/*<Polyline*/}
+                {/*  path={[selected,*/}
+                {/*      searchLocation]}*/}
+
+                {/*  visible={true}*/}
+                {/*  options={{*/}
+                {/*      strokeColor: "#fa0a1a",*/}
+                {/*      strokeOpacity: 1,*/}
+                {/*      strokeWeight: 3,*/}
+                {/*      icons:[*/}
+                {/*          {icon: {path:window.google.maps.SymbolPath.default},*/}
+                {/*              offset: "0",*/}
+                {/*              repeat: "40px"},*/}
+                {/*      ]*/}
+                {/*  }}>*/}
+                {/*</Polyline>*/}
             </GoogleMap>
 
                     <div className="map_container search_box">
@@ -408,7 +409,9 @@ const GooMap = () =>{
                                     </div>
                                     <div>
                                         <Col  className="my-1 col-auto">
-                                            <Button type="initialize" className="map-inibtn">초기화</Button>
+                                            <Button type="initialize" className="map-inibtn"
+
+                                            ><Link to="/GooMap"/>초기화</Button>
                                         </Col>
                                     </div>
                             </Form.Row>

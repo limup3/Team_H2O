@@ -31,9 +31,10 @@ const UserAdd = () => {
   const classes = useStyles();
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
-  const [userName, setUserName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("")
+  const [phone, setPhone] = useState("")
+  const [birthday, setBirthday] = useState("")
   const [idChecker, setIdChecker] = useState("")
 
   const history = useHistory();
@@ -64,9 +65,10 @@ const UserAdd = () => {
     const userJson = {
       userId: userId,
       password: password,
-      name: userName,
+      name: name,
       email: email,
-      phone: phoneNumber
+      phone: phone,
+      birthday: birthday
     }
     if(idChecker==="available"){
       axios.post(`http://localhost:8080/user/signUp`, userJson)
@@ -89,6 +91,10 @@ const UserAdd = () => {
     }else{
       alert("입력되지 않은 정보가 있습니다.")
     }
+  }
+
+  const handleCancel = () => {
+    history.push('/admin/user')
   }
 
   return (
@@ -140,16 +146,16 @@ const UserAdd = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                autoComplete="userName"
-                name="userName"
+                autoComplete="name"
+                name="name"
                 variant="outlined"
                 required
                 fullWidth
-                id="userName"
+                id="name"
                 label="이름"
                 autoFocus
-                value={userName}
-                onChange={e => setUserName(e.target.value)}
+                value={name}
+                onChange={e => setName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -157,12 +163,12 @@ const UserAdd = () => {
                 variant="outlined"
                 required
                 fullWidth
-                id="phoneNumber"
+                id="phone"
                 label="연락처"
-                name="phoneNumber"
-                autoComplete="phoneNumber"
-                value={phoneNumber}
-                onChange={e => setPhoneNumber(e.target.value)}
+                name="phone"
+                autoComplete="phone"
+                value={phone}
+                onChange={e => setPhone(e.target.value)}
               />
             </Grid>
             
@@ -179,6 +185,19 @@ const UserAdd = () => {
             onChange={e => setEmail(e.target.value)}
           />
             </Grid>
+            <Grid item xs={12}>
+            <TextField
+            variant="outlined"
+            required
+            fullWidth
+            id="birthday"
+            label="생년월일"
+            name="birthday"
+            autoComplete="birthday"
+            value={birthday}
+            onChange={e => setBirthday(e.target.value)}
+          />
+            </Grid>
           </Grid>
 
           <Button
@@ -191,7 +210,18 @@ const UserAdd = () => {
           >
             등록하기
           </Button>
-         
+          <Button
+            fullWidth
+            className={classes.cancel}
+            onClick={handleCancel}
+            variant="contained"
+            style={{
+              color: 'white',
+              backgroundColor: "#FF4537"
+            }}
+          >
+            취소하기
+          </Button>
         </form>
       </div>
     </Container>

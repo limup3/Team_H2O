@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const TasksProgress = props => {
-  const { className, ...rest } = props;
+  const { className, data, ...rest } = props;
 
   const classes = useStyles();
 
@@ -71,9 +71,9 @@ const TasksProgress = props => {
               gutterBottom
               variant="body2"
             >
-              병원 등록 수
+              가맹 병원
             </Typography>
-            <Typography variant="h3">71</Typography>
+            <Typography variant="h3">{data.length}</Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>
@@ -93,7 +93,7 @@ const TasksProgress = props => {
             className={classes.caption}
             variant="caption"
           >
-            Since last month
+            전월 대비 증감량
           </Typography>
         </div>
       </CardContent>

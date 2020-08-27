@@ -1,19 +1,16 @@
 package com.H2O.backend.ambulance;
 
-import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
 @Repository
-interface IAmbulanceRepositoryy{
+interface AmbulanceRepository extends JpaRepository<Ambulance, Long>, AmbulanceService {}
 
-        }
+interface AmbulanceService {}
 
-public class AmbulanceRepositoryImpl extends QuerydslRepositorySupport implements IAmbulanceRepositoryy {
-
-
-    public AmbulanceRepositoryImpl(JPAQueryFactory jpaQueryFactory) {
+class AmbulanceRepositoryImpl extends QuerydslRepositorySupport implements AmbulanceService {
+    public AmbulanceRepositoryImpl() {
         super(Ambulance.class);
     }
 }
