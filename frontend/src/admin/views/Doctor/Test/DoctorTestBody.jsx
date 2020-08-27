@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { useHistory } from 'react-router-dom';
 
 import clsx from 'clsx';
@@ -13,10 +13,6 @@ import {
   Grid,
   Button,
   TextField,
-  Checkbox, 
-  FormControlLabel, 
-  FormGroup, 
-  Box
 } from '@material-ui/core';
 import Axios from 'axios';
 
@@ -29,7 +25,6 @@ const useStyles = makeStyles(theme => ({
 const DoctorTestBody = (props) => {
     const classes = useStyles();
     const {doctorData, setClose, className} = props
-    // const {doctorData} = props    
     const [doctorNo, setDoctorNo] = useState(doctorData.doctorNo)
     const [doctorName, setDoctorName] = useState(doctorData.doctorName)
     const [doctorsLicense, setDoctorsLicense] = useState(doctorData.doctorsLicense)
@@ -39,49 +34,15 @@ const DoctorTestBody = (props) => {
     const [specialized, setSpecialized] = useState(doctorData.specialized)
     const [medicalSubject, setMedicalSubject] = useState(doctorData.medicalSubject)
     const [birthday, setBirthday] = useState(doctorData.birthday)
-
-    // const [close, setClose]= useState()
     const [values, setValues] = useState([]);
-    
-    const [checked, setChecked] = useState({
-      checkBox1 : false,
-      checkBox2 : false,
-      checkBox3 : false,
-    })
+
 
     const history = useHistory();
-
-    // useEffect(()=>{
-    //   switch(doctorData.businessStatus){
-    //     case `영업중`: return setChecked({...checked, checkBox1:true})
-    //     case `폐업`: return setChecked({...checked, checkBox2:true})
-    //     case `휴업`: return setChecked({...checked, checkBox3:true})
-    //   }
-    // }, [])
 
 
     const handleClose = () => {
       setClose(false);
     }
-    
-    // const handleChange = event => {
-    //   setValues({
-    //     ...values,
-    //     [event.target.name]: event.target.value
-    //   });
-    // };
-    // const handleCheckBox = event => {
-    //   setChecked({checked, [event.target.name]: event.target.checked })
-    //   if(event.target.checked===true){
-    //     switch(event.target.name){
-    //       case "checkBox1": return setBusinessStatus("영업중")
-    //       case "checkBox2": return setBusinessStatus("폐업")
-    //       case "checkBox3": return setBusinessStatus("휴업")
-    //       default : return setBusinessStatus(); 
-    //     }
-        
-    //   }
-    // }
    
     const handelModify = e => {
       const doctorJson = {
@@ -95,14 +56,11 @@ const DoctorTestBody = (props) => {
         medicalSubject : medicalSubject,
         birthday : birthday
       }
-      console.log(doctorJson)
       Axios
         .patch(`http://localhost:8080/doctor/modify/${doctorsLicense}`, doctorJson)
         .then(response => {
           alert("병원 데이터 변경 성공")
           setClose(false);
-          
-          // history.push("/admin")
           history.push("/admin/doctor")
 
         })
@@ -168,49 +126,7 @@ const DoctorTestBody = (props) => {
                   variant="outlined"
                 />
               </Grid>
-              {/* <Grid
-                item
-                md={12}
-                xs={12}
-              >
-                  <FormGroup row>
-                    <Box 
-                      marginRight="Auto"
-                      width="100px"
-                      name="businessStatus"
-                      className={classes.boxCss}
-                      margin-right="10px">{"영업상태"}</Box>
-                    <FormControlLabel
-                      control={ 
-                        <Checkbox
-                          checked={checked.checkBox1}
-                          onChange={handleCheckBox}
-                          name="checkBox1"
-                          />}
-                          label="영업"
-                      />
-                    <FormControlLabel
-                    control={ 
-                      <Checkbox
-                        defaultChecked
-                        checked={checked.checkBox2}
-                        onChange={handleCheckBox}
-                        name="checkBox2"
-                        />}
-                        label="폐업"
-                      />
-                      <FormControlLabel
-                      control={ 
-                        <Checkbox
-                          defaultChecked
-                          checked={checked.checkBox3}
-                          onChange={handleCheckBox}
-                          name="checkBox3"
-                          />}
-                          label="휴업"
-                        />
-                    </FormGroup>
-                </Grid> */}
+              
               <Grid
                 item
                 md={12}

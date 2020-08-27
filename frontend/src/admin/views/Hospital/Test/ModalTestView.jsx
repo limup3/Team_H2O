@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Pagination from '@material-ui/lab/Pagination';
 import axios from 'axios'
 import {
   Card,
@@ -8,13 +7,11 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableHead,
   TableRow,
   TableFooter,
   Button as MuiButton,
   TablePagination,
   Paper,
-  Checkbox,
   IconButton,
   Select 
 } from '@material-ui/core';
@@ -31,7 +28,6 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 
 const tableStyles = makeStyles({
@@ -149,10 +145,6 @@ const ModalTestView = () => {
           alert("서버와의 연결이 되지 않았습니다.");
         })
         setLoading(false);
-      //   if(sort.status==={}||"Basic"){
-          
-      //   }else if(sort.status==="Asc"||"Dsc"){
-      // }
     }, [])
     const handleClose = () => {
       setShow(false)
@@ -212,15 +204,11 @@ const ModalTestView = () => {
 
           }
         )
-
-        console.log("DSC")
-        console.log(posts)
       }
         if(sort.name==="Dsc"){
         setSort({...sort, name:"Basic"})
         basicSort()
       }
-    // (sort.nowName===null||"Basic")? setSort({...sort, name:"Asc", nowName:"Asc"}) : null
     }
 
     const handleSortNo = () => {
@@ -297,7 +285,6 @@ const ModalTestView = () => {
     // ----------------------- dropdown ---------------------------
     
     const handleChangeStatus = event => {
-      // setStatus("")
       setStatus(event.target.value)
       if(event.target.value==="전체보기"){
         setSendList()
@@ -375,8 +362,6 @@ const ModalTestView = () => {
               <TableBody>
                 {/* -------------pagination----------------- */}
                   {(rowsPerPage > 0
-                    // ? sendList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    // : posts
 
                     ? sendList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     : sendList

@@ -90,7 +90,6 @@ const UserTestBody = (props) => {
         phone: phone,
         birthday: birthday
       }
-      console.log(UserJson)
       Axios
         .patch(`http://localhost:8080/user/modify/{userId}`, UserJson)
         .then(response => {

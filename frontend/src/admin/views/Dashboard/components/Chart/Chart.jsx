@@ -18,10 +18,7 @@ import {
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 import { ChartBar, ChartDounut, ChartMix } from './components';
-import { Data } from '@react-google-maps/api';
 import axios from 'axios'
-
-// import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -42,10 +39,10 @@ const Chart = props => {
  
 
   const classes = useStyles();
-  //
+
   const [anchorEl, setAnchorEl] = useState(null);
   const [chartType, setChartType] = useState("도넛형")
-  // CheckBox
+
   const [checked, setChecked] = useState({
     checkBox_Age: false,
     checkBox_Sex: false,
@@ -167,9 +164,6 @@ const Chart = props => {
           setChartData2(j)
           setChartData3(k)
           setChartValue(response.data)
-          console.log(i)
-          console.log(j)
-          console.log(k)
         }
         chartValueInput(data)
 
@@ -180,13 +174,6 @@ const Chart = props => {
         alert("서버와의 연결이 되지 않았습니다.");
       })
       setLoading(false)
-
-    console.log("유즈이펙트")
-    console.log(data)
-
-    
-    console.log("차트에서 유즈이펙트")
-    console.log(props)
   },[])
   
   //
@@ -213,7 +200,6 @@ const Chart = props => {
         >
           <MenuItem onClick={()=> {setAnchorEl(null); setChartType("도넛형"); }}>도넛형</MenuItem>
           <MenuItem onClick={()=> {setAnchorEl(null); setChartType("바형")}}>바형</MenuItem>
-          {/* <MenuItem onClick={()=> {setAnchorEl(null); setChartType("종합형")}}>종합형</MenuItem> */}
         </Menu>
         </div>}
         

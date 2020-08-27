@@ -30,7 +30,6 @@ const Dashboard = () => {
 
 
     const [loading, setLoading] = useState(false)
-    const [sendList, setSendList] =useState([])
 
     useEffect(()=>{
       setLoading(true);

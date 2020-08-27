@@ -1,7 +1,6 @@
 import React from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
-// import {Container as ContainerBase } from "components/misc/Layouts"
 import { Container } from "react-bootstrap";
 import logo from "../../helpers/images/logo.svg"
 import { ReactComponent as FacebookIcon } from "../../helpers/images/facebook-icon.svg";
@@ -9,7 +8,6 @@ import { ReactComponent as TwitterIcon } from "../../helpers/images/twitter-icon
 import { ReactComponent as YoutubeIcon } from "../../helpers/images/youtube-icon.svg";
 import "./Footer.css"
 
-// const Container = tw(ContainerBase)`bg-gray-900 text-gray-100 -mx-8 -mb-8`
 const Content = tw.div`max-w-screen-xl mx-auto py-20 lg:py-24`;
 
 const Row = tw.div`flex items-center justify-center flex-col px-8`

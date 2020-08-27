@@ -29,7 +29,6 @@ const useStyles = makeStyles(theme => ({
 const ModalTestBody = (props) => {
     const classes = useStyles();
     const {hospitalData, setClose, className} = props
-    // const {hospitalData} = props    
     const [hospitalNo, setHospitalNo] = useState(hospitalData.hospitalNo)
     const [hospitalName, setHospitalName] = useState(hospitalData.hospitalName)
     const [businessLicenseNumber, setBusinessLicenseNumber] = useState(hospitalData.businessLicenseNumber)
@@ -44,7 +43,6 @@ const ModalTestBody = (props) => {
     const [typeDetail,setTypeDetail] = useState(hospitalData.typeDetail)
     const [latitude, setLatitude] = useState(hospitalData.latitude)
     const [longitude, setLongitude] = useState(hospitalData.longitude)
-    // const [close, setClose]= useState()
     const [values, setValues] = useState([]);
     
     const [checked, setChecked] = useState({
@@ -68,12 +66,6 @@ const ModalTestBody = (props) => {
       setClose(false);
     }
     
-    // const handleChange = event => {
-    //   setValues({
-    //     ...values,
-    //     [event.target.name]: event.target.value
-    //   });
-    // };
     const handleCheckBox = event => {
       setChecked({checked, [event.target.name]: event.target.checked })
       if(event.target.checked===true){

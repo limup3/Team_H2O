@@ -39,12 +39,6 @@ const HospitalsToolbar = props => {
 
   const classes = useStyles();
 
-  // const [keyword, setKeyword] = useState()
-  // const searchKeyword = e => {
-  //   setKeyword(e.target.value)
-  //   console.log(e.target.value)
-  // }
-
   return (
     <div
       {...rest}
@@ -53,15 +47,6 @@ const HospitalsToolbar = props => {
       <div className={classes.row}
               style={{fontWeight:"bold", fontSize:"x-large"}}>병원 관리
         <span className={classes.spacer} />
-        {/* <Button 
-          className={classes.importButton}
-          >
-            Import
-        </Button>
-        <Button 
-        className={classes.exportButton}
-          >리스트 파일 확인
-        </Button> */}
         <Link to="/admin/HospitalsAdd">
         <Button
           color="primary"
@@ -71,21 +56,6 @@ const HospitalsToolbar = props => {
           </Button>
         </Link>
       </div>
-      {/* 추후 도입예정
-      <div className={classes.row}>
-        <SearchInput
-          className={classes.searchInput}
-          placeholder="병원 검색"
-          value={keyword}
-          onChange={searchKeyword}
-        />
-        <Button 
-          color="primary"
-          variant="contained"
-          onClick={searchKeyword}>
-        <SearchIcon/>
-        </Button>
-      </div> */}
     </div>
   );
 };

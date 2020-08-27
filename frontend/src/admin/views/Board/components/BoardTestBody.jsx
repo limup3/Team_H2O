@@ -28,8 +28,7 @@ const useStyles = makeStyles(theme => ({
 
 const BoardTestBody = (props) => {
     const classes = useStyles();
-    const {hospitalData, setClose, className} = props
-    // const {hospitalData} = props    
+    const {hospitalData, setClose, className} = props 
     const [hospitalNo, setHospitalNo] = useState(hospitalData.hospitalNo)
     const [hospitalName, setHospitalName] = useState(hospitalData.hospitalName)
     const [businessLicenseNumber, setBusinessLicenseNumber] = useState(hospitalData.businessLicenseNumber)
@@ -44,7 +43,6 @@ const BoardTestBody = (props) => {
     const [typeDetail,setTypeDetail] = useState(hospitalData.typeDetail)
     const [latitude, setLatitude] = useState(hospitalData.latitude)
     const [longitude, setLongitude] = useState(hospitalData.longitude)
-    // const [close, setClose]= useState()
     const [values, setValues] = useState([]);
     
     const [checked, setChecked] = useState({
@@ -67,13 +65,6 @@ const BoardTestBody = (props) => {
     const handleClose = () => {
       setClose(false);
     }
-    
-    // const handleChange = event => {
-    //   setValues({
-    //     ...values,
-    //     [event.target.name]: event.target.value
-    //   });
-    // };
     const handleCheckBox = event => {
       setChecked({checked, [event.target.name]: event.target.checked })
       if(event.target.checked===true){
