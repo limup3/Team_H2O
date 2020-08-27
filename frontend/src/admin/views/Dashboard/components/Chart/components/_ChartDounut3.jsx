@@ -1,27 +1,30 @@
 import React, {useState, useEffect} from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import data from '../../../../Doctor/data';
-import {Button} from '@material-ui/core'
+import axios from 'axios';
 
 const ChartSize = {
     height : '50px'
   }
+  
 
-
-
-const DoughnutChart = props => {
-  console.log("차트에 왔니?")
+const DoughnutChart = props => {  
   const [chart, setChart] = useState({})
-  const {chartValue, data} = props
+  const {chartValue,data} = props
+  const [showChart, setShowChart]=useState()
+  const [userData, setUserData] = useState([])
+  const [loading, setLoading] = useState('')
+  const yyyy = new Date().getFullYear()
 
+  console.log("2. data")
+  console.log(data)
 
-  const ageData = props => ({
+  const ageData = {
     labels: [
-      '10대', '20대', '30대', '40대', '50대', '60대', '70대', '80대 이상'
+      '10대 미만', '10대', '20대', '30대', '40대', '50대', '60대', '70대 이상'
     ],
     datasets: [{
       label: '연령별 이용자',
-      data: [props.chartData, props.chartData2, props.chartData3, 81, 56, 55, 40, 34],
+      data: userData,
       backgroundColor: [
       '#ff6a6d',
       '#e28965',
@@ -44,9 +47,9 @@ const DoughnutChart = props => {
       ],
       borderWidth : 1
     }]
-  })
-  
-  const sexData = data => ({
+  }
+
+  const sexData = {
     labels: ['남성', '여성'],
     datasets: [{
       label: '성별 이용자',
@@ -61,8 +64,8 @@ const DoughnutChart = props => {
       ],
       borderWidth : 1
     }]
-  });
-  
+  };
+
   const locationData = {
     labels: ['서울시 금천구', '서울시 광진구', '서울시 종로구', '서울시 마포구', '서울시 용산구'],
     datasets: [{
@@ -85,7 +88,6 @@ const DoughnutChart = props => {
       borderWidth : 1
     }]
   };
-  
 
   const daysData = {
     labels: [
@@ -93,7 +95,7 @@ const DoughnutChart = props => {
     ],
     datasets: [{
       label: '월별 이용자',
-      data: [65, 59, 80, 81, 56, 55, 40, 34, 21, 55, 78, 95],
+      data: userData,
       backgroundColor: [
         '#ff6a6d',
         '#e28965',
@@ -127,77 +129,81 @@ const DoughnutChart = props => {
   };
 
 
-
-    
-
-  useEffect(()=>{
-    console.log("useEffect")
-    
-    console.log(chartValue)
-    setChart({
-      labels: [
-        '10대', '20대', '30대', '40대', '50대', '60대', '70대', '80대 이상'
-      ],
-      datasets: [{
-        label: '연령별 이용자',
-        data: [props.chartData, props.chartData2, props.chartData3, 81, 56, 55, 40, 34],
-        backgroundColor: [
-        '#ff6a6d',
-        '#e28965',
-        '#e7cd61',
-        '#a0b8a1',
-        '#63d365',
-        '#0693e3',
-        '#c79c9f',
-        '#c78ee7'
-        ],
-        hoverBackgroundColor: [
-        '#ff6a6d',
-        '#e28965',
-        '#e7cd61',
-        '#a0b8a1',
-        '#63d365',
-        '#0693e3',
-        '#c79c9f',
-        '#c78ee7'
-        ],
-        borderWidth : 1
-      }]
-    })
-    
-
   
-    const switchCase = (param) =>{
-      switch(param){
-        case "Age": return setChart(ageData(props)) 
-        case "Sex": return setChart(sexData) 
-        case "Days": return setChart(daysData)
-        case "Location": return setChart(locationData)
+  useEffect(()=>{
+    console.log("3.data------------------")
+    console.log(data)
+    setUserData([])
+   
+        let axiosData = []
+        let count = 0
+        if(chartValue===""||"Age"){
+          for(let i=0; i<=7; i++){
+            data.forEach((chart)=>{
+              if(yyyy-parseInt(chart.birthday.substr(0,4))>=(i)*10
+                &&yyyy-parseInt(chart.birthday.substr(0,4))<(i+1)*10
+                ){
+                  count = count+1
+                }
+              }
+            )
+            axiosData.push(count)
+            count=0
           }
+          setUserData(axiosData)
+          axiosData=[]
         }
-    switchCase(chartValue, props)
+
+        if(chartValue==="Days"){
+          for(let i=0; i<=11; i++){
+            data.forEach((chart)=>{
+              if(parseInt(chart.birthday.substr(5,2))===i+1){
+                count = count+1
+                }
+              }
+            )
+            
+            axiosData.push(count)
+            count=0
+          }
+          setUserData(axiosData)
+          axiosData=[]
+        }
+        
+      
+      const switchCase = chartValue =>{
+        switch(chartValue){
+          case "Age": return setShowChart(ageData)
+          case "Sex": return setShowChart(sexData)
+          case "Days": return setShowChart(daysData)
+          case "Location": return setShowChart(locationData)
+          default: return setShowChart(ageData)
+            }
+          }
+      switchCase(chartValue)
+
   },[chartValue])
 
   
-    if(chartValue) {
-      return (
+
+    // if(chartVa lue) {
+      return(
       <div>
         <h2>{chart.title}</h2>
-        <Doughnut 
+        {chartValue===""&&<Doughnut 
           className={ChartSize}
-          data={chart}
-        />
-      </div>) 
-      }else{
-      return (
-        <div>
-          <h2>{chart.title}</h2>
-          <Doughnut 
+          data={ageData}
+        />}
+        {chartValue&&<Doughnut 
           className={ChartSize}
-            data={ageData}
-          />
-        </div>)
-      }
+          data={showChart}
+          // data={(chartValue===""||"Age")? ageData: 
+          //       (chartValue==="Sex")? sexData:
+          //       (chartValue==="Days")? daysData: 
+          //       (chartValue==="Location")? locationData: null}
+        />}
+      </div>
+      ) 
     }
 
   export default DoughnutChart
