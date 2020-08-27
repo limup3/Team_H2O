@@ -13,8 +13,8 @@ const CustomerServiceCenter = () => {
   // const [medCategory, setMedCategory] = useState('')
   const [customerCategory, setCustomerCategory] = useState('')
   const [sendList, setSendList] = useState([])
-  const [creationDate, setCreationDate] = useState('')
-  const [click, setClick] = useState(0);
+  // const [creationDate, setCreationDate] = useState('')
+  // const [click, setClick] = useState(0);
   // const [state, setState] = useState('')
   const history = useHistory()
   const [currentPage, setCurrentPage] = useState(1)
@@ -22,7 +22,6 @@ const CustomerServiceCenter = () => {
 //현재페이지
   const [postsPerPage] = useState(10)
   //한 페이지에서 보여줄 수 있는 postList 수
-  const [loading, setLoading] = useState(false)
   const indexOfLastPost = currentPage * postsPerPage;
   //해당 페이지에서 마지막 postList의 index 번호
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -45,6 +44,7 @@ const CustomerServiceCenter = () => {
       setCurrentPage(currentPage - 1);
     }
   };
+  const loading = false
 
 
   useEffect(() => {
@@ -53,8 +53,8 @@ const CustomerServiceCenter = () => {
       .then(({data}) => {
         console.log(data);
         setPostList(data);
-        setCreationDate(data);
-        setClick(data);
+        // setCreationDate(data);
+        // setClick(data);
       })
       .catch((err) => {
         throw err;

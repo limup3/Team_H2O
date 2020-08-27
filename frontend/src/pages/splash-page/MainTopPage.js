@@ -47,7 +47,8 @@ const CustomersLogoStrip = styled.div`
 `;
 
 const MainTopPage = () => {
-  const [location, setLocation] = useState("")
+
+  const [location, setLocation] = useState("세브란스병원")
   Geocode.setApiKey("AIzaSyDyYteoY6q3NQwsEHFrXfan_q_9VlIVsxk");
   Geocode.setLanguage("kr");
   Geocode.setRegion("kr");

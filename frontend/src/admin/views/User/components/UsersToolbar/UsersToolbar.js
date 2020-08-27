@@ -5,8 +5,6 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
 
-import { SearchInput } from '../../../../components';
-
 const useStyles = makeStyles(theme => ({
   root: {},
   row: {
@@ -56,12 +54,6 @@ const UsersToolbar = props => {
           </Button>
         </Link>
       </div>
-      {/* <div className={classes.row}>
-        <SearchInput
-          className={classes.searchInput}
-          placeholder="사용자 검색(Search user)"
-        />
-      </div> */}
     </div>
   );
 };

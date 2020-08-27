@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import './community.css'
-import {Button, Table,Form,Col} from "react-bootstrap";
+import {Button, Table} from "react-bootstrap";
 import axios from 'axios'
 import {useHistory} from "react-router-dom";
 import {MDBIcon} from "mdbreact";
@@ -10,14 +10,12 @@ import Posts from "./Post";
 
 const QueAn = () => {
   const [postList, setPostList] = useState([])
-  const [medCategory, setMedCategory] = useState('')
   const [questionCategory, setQuestionCategory] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
 
   const [sendList, setSendList] = useState([])
   const [creationDate, setCreationDate] = useState('')
   const [click, setClick] = useState(0);
-  const [state, setState] = useState('')
   const history = useHistory()
 
 //현재페이지

@@ -6,8 +6,12 @@ spring:
       suffix: .html
   jpa:
     show-sql: true
+
+    hibernate:
+      ddl-auto: update
+
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://127.0.0.1:3306/h2o
+    url: jdbc:mariadb://h2o.cfyalaxuh5ve.ap-northeast-2.rds.amazonaws.com/h2o
     username: h2o
-    password: 1
+    password: wjdqhqhdks!

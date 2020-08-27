@@ -83,7 +83,6 @@ const CommunityTem = () => {
 
     return (
       <>
-          <div>
               <Table
                 className="community-table"
                 responsive hover style={{ textAlign: "center" }}>
@@ -139,7 +138,6 @@ const CommunityTem = () => {
                     prevPage={prevPage}
                   />
               </div>
-          </div>
       </>
     );
 };

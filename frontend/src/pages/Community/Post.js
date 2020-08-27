@@ -20,7 +20,6 @@ const Posts = ({ sendList, loading, cate }) => {
           <td id="title" onClick={()=>setClick(click+1)}>
             <Link to={`/Community/Review/${info.boardNo}`}>{info.title}</Link>
           </td>
-          {/*<td>{info.content}</td>*/}
           <td>{info.creationDate}</td>
           <td>{info.click}</td>
         </tr>

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -94,7 +94,7 @@ const UserAdd = () => {
   }
 
   const handleCancel = () => {
-    history.push('/admin/user')
+    history.push('/admin/users')
   }
 
   return (

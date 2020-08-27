@@ -17,11 +17,8 @@ import {
 } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
-import { ChartBar, ChartDounut, ChartMix } from './components';
-import { Data } from '@react-google-maps/api';
+import { ChartBar, ChartDounut } from './components';
 import axios from 'axios'
-
-// import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -42,10 +39,10 @@ const Chart = props => {
  
 
   const classes = useStyles();
-  //
+
   const [anchorEl, setAnchorEl] = useState(null);
   const [chartType, setChartType] = useState("도넛형")
-  // CheckBox
+
   const [checked, setChecked] = useState({
     checkBox_Age: false,
     checkBox_Sex: false,
@@ -66,11 +63,10 @@ const Chart = props => {
   const [chartData2, setChartData2]= useState()
   const [chartData3, setChartData3]= useState()
   const [chartValue, setChartValue] = useState("")
-  const [yyyy,setYyyy] = useState(new Date().getFullYear())
+  const yyyy = new Date().getFullYear()
     
 
   const [userData, setUserData] = useState([])
-  const [loading, setLoading] = useState(false)
 
 
   const chartValueInput = props => {
@@ -123,6 +119,7 @@ const Chart = props => {
         case "checkBox_Sex": return chartValueInput("Sex")
         case "checkBox_Location": return chartValueInput("Location")
         case "checkBox_days": return chartValueInput("Days")
+        default: return chartValueInput("Age")
       }
     }
   }
@@ -167,9 +164,6 @@ const Chart = props => {
           setChartData2(j)
           setChartData3(k)
           setChartValue(response.data)
-          console.log(i)
-          console.log(j)
-          console.log(k)
         }
         chartValueInput(data)
 
@@ -179,14 +173,6 @@ const Chart = props => {
       .catch(error => {
         alert("서버와의 연결이 되지 않았습니다.");
       })
-      setLoading(false)
-
-    console.log("유즈이펙트")
-    console.log(data)
-
-    
-    console.log("차트에서 유즈이펙트")
-    console.log(props)
   },[])
   
   //
@@ -213,7 +199,6 @@ const Chart = props => {
         >
           <MenuItem onClick={()=> {setAnchorEl(null); setChartType("도넛형"); }}>도넛형</MenuItem>
           <MenuItem onClick={()=> {setAnchorEl(null); setChartType("바형")}}>바형</MenuItem>
-          {/* <MenuItem onClick={()=> {setAnchorEl(null); setChartType("종합형")}}>종합형</MenuItem> */}
         </Menu>
         </div>}
         
@@ -247,14 +232,14 @@ const Chart = props => {
               name="checkBox_Location" />}
             label="지역"
         />
-        {/* <FormControlLabel
+        <FormControlLabel
           control={
             <Checkbox 
               checked={checked.checkBox_days} 
               onChange={handleChange} 
               name="checkBox_days" />}
             label="기간"
-        /> */}
+        />
         </FormGroup>
       </CardActions>
       <Divider />
@@ -265,12 +250,8 @@ const Chart = props => {
             chartData = {chartData}
             chartData2 = {chartData2}
             chartData3 = {chartData3}
-            data={data}/>
-          : chartType === "바형"
-          ? <ChartBar 
-            chartValue={chartValue}
             data={data}/>: 
-          <ChartMix 
+            <ChartBar 
             chartValue={chartValue}
             data={data}/>}
       </CardContent>

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import { MDBBtn,MDBLink} from 'mdbreact';
+import { MDBBtn} from 'mdbreact';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import './map.css'
@@ -26,18 +26,7 @@ const MapModal=(props)=> {
   const history = useHistory()
   console.log(props.name)
   const [open, setOpen] = useState(false);
-  // const [infoShow, setInfoShow] = useState(false)
-  // const [searchInfoShow, setSearchInfoShow] = useState(false)
-  const [ selected, setSelected] = useState({})
-  const [ name, setName] =useState('')
-  const [ content, setContent] =useState('')
 
-  //출발
-  const [ searchedAddr,setSearchedAddr] = useState("");
-  //도착
-  const [ selectedAddr, setSelectedAddr] = useState("");
-  //우편번호
-  const [ selectedPc, setSelectedPc ] = useState("")
 
   const handleClose = () => {
     setOpen(false);

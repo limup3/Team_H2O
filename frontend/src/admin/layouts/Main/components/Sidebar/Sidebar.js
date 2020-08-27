@@ -6,7 +6,6 @@ import { Divider, Drawer } from '@material-ui/core';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import SettingsIcon from '@material-ui/icons/Settings';
 import DvrIcon from '@material-ui/icons/Dvr';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 
@@ -66,12 +65,6 @@ const Sidebar = props => {
       href: '/admin/board',
       icon: <DvrIcon/>
     },
-    
-    // {
-    //   title: '세팅',
-    //   href: '/admin/settings',
-    //   icon: <SettingsIcon />
-    // }
   ];
 
   return (

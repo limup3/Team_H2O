@@ -59,14 +59,13 @@ const PaymentResult = () => {
 
   useEffect(()=> {
 
-
     const reservationJson = {
       reservationType : selectorData.title,
       date : selectorData.selectedDate,
 
     }
 
-    if(resultType == '성공') {
+    if(resultType === '성공') {
       axios.post(`http://localhost:8080/reservation/register`, reservationJson)
       .then(res => {
         }
@@ -78,7 +77,7 @@ const PaymentResult = () => {
       )
     }
 
-  },[])
+  },[resultType])
 
 
   return (

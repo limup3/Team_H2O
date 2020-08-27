@@ -17,7 +17,7 @@ const Edit = () => {
     const [questionCategory, setQuestionCategory] = useState('')
 
     const [title, setTitle] = useState('')
-    const [creationDate, setCreationDate] =useState('')
+    // const [creationDate, setCreationDate] =useState('')
 
 
 
@@ -38,7 +38,7 @@ const Edit = () => {
     const newBoard = e => {
         e.preventDefault();
         console.log(`title ${setTitle}, category ${category}, medCategory ${medCategory}, 
-        value ${value}, creationDate ${creationDate}, questionCategory ${questionCategory}, 
+        value ${value}, questionCategory ${questionCategory}, 
         customerCategory ${customerCategory}`)
 
         const comudata ={
@@ -49,7 +49,7 @@ const Edit = () => {
             questionCategory: questionCategory,
             customerCategory: customerCategory,
             content : value,
-            creationDate : creationDate
+            // creationDate : creationDate
         }
         switch (category){
             case "자유게시판":

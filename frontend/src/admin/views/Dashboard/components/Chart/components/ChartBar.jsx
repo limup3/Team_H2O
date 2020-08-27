@@ -93,6 +93,7 @@ const ChartBar = props => {
        case "Sex": return setChart(sexData) 
        case "Days": return setChart(daysData)
        case "Location": return setChart(locationData)
+       default : setChart(ageData) 
          }
         }
     switchCase(chartValue)

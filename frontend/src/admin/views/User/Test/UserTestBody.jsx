@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import clsx from 'clsx';
@@ -13,10 +13,6 @@ import {
   Grid,
   Button,
   TextField,
-  Checkbox, 
-  FormControlLabel, 
-  FormGroup, 
-  Box
 } from '@material-ui/core';
 import Axios from 'axios';
 
@@ -29,57 +25,19 @@ const useStyles = makeStyles(theme => ({
 const UserTestBody = (props) => {
     const classes = useStyles();
     const {UserData, setClose, className} = props
-    // const {UserData} = props    
-    const [userNo, setUserNo] = useState(UserData.userNo)
     const [userId, setUserId] = useState(UserData.userId)
     const [name, setName] = useState(UserData.name);
     const [password, setPassword] = useState(UserData.password)
     const [email, setEmail] = useState(UserData.email);
     const [phone, setPhone] = useState(UserData.phone)
-    const [birthday, setBirthday] = useState(UserData.birthday)
-
-    // const [close, setClose]= useState()
-    const [values, setValues] = useState([]);
-    
-    const [checked, setChecked] = useState({
-      checkBox1 : false,
-      checkBox2 : false,
-      checkBox3 : false,
-    })
+    const [birthday, setBirthday] = useState(UserData.birthday)    
 
     const history = useHistory();
-
-    // useEffect(()=>{
-    //   switch(UserData.businessStatus){
-    //     case `영업중`: return setChecked({...checked, checkBox1:true})
-    //     case `폐업`: return setChecked({...checked, checkBox2:true})
-    //     case `휴업`: return setChecked({...checked, checkBox3:true})
-    //   }
-    // }, [])
 
 
     const handleClose = () => {
       setClose(false);
     }
-    
-    // const handleChange = event => {
-    //   setValues({
-    //     ...values,
-    //     [event.target.name]: event.target.value
-    //   });
-    // };
-    // const handleCheckBox = event => {
-    //   setChecked({checked, [event.target.name]: event.target.checked })
-    //   if(event.target.checked===true){
-    //     switch(event.target.name){
-    //       case "checkBox1": return setBusinessStatus("영업중")
-    //       case "checkBox2": return setBusinessStatus("폐업")
-    //       case "checkBox3": return setBusinessStatus("휴업")
-    //       default : return setBusinessStatus(); 
-    //     }
-        
-    //   }
-    // }
    
     const handelModify = e => {
       const UserJson = {
@@ -90,7 +48,6 @@ const UserTestBody = (props) => {
         phone: phone,
         birthday: birthday
       }
-      console.log(UserJson)
       Axios
         .patch(`http://localhost:8080/user/modify/{userId}`, UserJson)
         .then(response => {
@@ -141,7 +98,7 @@ const UserTestBody = (props) => {
                   name="userId"
                   onChange={e => setUserId(e.target.value)}
                   required
-                  value={values.userId}
+                  value={userId}
                   variant="outlined"
                 />
               </Grid>
@@ -159,53 +116,11 @@ const UserTestBody = (props) => {
                   name="password"
                   onChange={e => setPassword(e.target.value)}
                   required
-                  value={values.password}
+                  value={password}
                   variant="outlined"
                 />
               </Grid>
-              {/* <Grid
-                item
-                md={12}
-                xs={12}
-              >
-                  <FormGroup row>
-                    <Box 
-                      marginRight="Auto"
-                      width="100px"
-                      name="businessStatus"
-                      className={classes.boxCss}
-                      margin-right="10px">{"영업상태"}</Box>
-                    <FormControlLabel
-                      control={ 
-                        <Checkbox
-                          checked={checked.checkBox1}
-                          onChange={handleCheckBox}
-                          name="checkBox1"
-                          />}
-                          label="영업"
-                      />
-                    <FormControlLabel
-                    control={ 
-                      <Checkbox
-                        defaultChecked
-                        checked={checked.checkBox2}
-                        onChange={handleCheckBox}
-                        name="checkBox2"
-                        />}
-                        label="폐업"
-                      />
-                      <FormControlLabel
-                      control={ 
-                        <Checkbox
-                          defaultChecked
-                          checked={checked.checkBox3}
-                          onChange={handleCheckBox}
-                          name="checkBox3"
-                          />}
-                          label="휴업"
-                        />
-                    </FormGroup>
-                </Grid> */}
+              
               <Grid
                 item
                 md={12}
@@ -219,7 +134,7 @@ const UserTestBody = (props) => {
                   name="name"
                   onChange={e => setName(e.target.value)}
                   required
-                  value={values.name}
+                  value={name}
                   variant="outlined"
                 />
               </Grid>
@@ -236,7 +151,7 @@ const UserTestBody = (props) => {
                   name="email"
                   onChange={e => setEmail(e.target.value)}
                   required
-                  value={values.email}
+                  value={email}
                   variant="outlined"
                 />
               </Grid>
@@ -253,7 +168,7 @@ const UserTestBody = (props) => {
                   name="phone"
                   onChange={e => setPhone(e.target.value)}
                   required
-                  value={values.phone}
+                  value={phone}
                   variant="outlined"
                 />
               </Grid>
@@ -270,7 +185,7 @@ const UserTestBody = (props) => {
                   name="birthday"
                   onChange={e => setBirthday(e.target.value)}
                   required
-                  value={values.birthday}
+                  value={birthday}
                   variant="outlined"
                 />
               </Grid>
