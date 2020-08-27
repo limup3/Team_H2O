@@ -63,7 +63,7 @@ const selectStyle = makeStyles((theme) => ({
 const TablePaginationActions = (props) => {
   const classes = useStyles1();
   const theme = useTheme();
-  const { count, page, rowsPerPage, onChangePage, setTablePagination } = props;
+  const { count, page, rowsPerPage, onChangePage } = props;
   const handleFirstPageButtonClick = (event) => {
     onChangePage(event, 0);
   };
@@ -117,11 +117,8 @@ const BoardTestView = () => {
 
     const [hospitalData, setHospitalData] = useState([])
     const [posts, setPosts] = useState([])
-    const [sparePosts, setSparePosts] = useState([])
-    const [loading, setLoading] = useState(false)
     const [show, setShow] = useState(false);
     // --------------Pagination ------------------------
-    const [newPageSave, setNewPageSave] = useState()
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     // -------------------- Sort -----------------------
@@ -132,15 +129,9 @@ const BoardTestView = () => {
       click: "Basic" || "Asc" || "Dsc",
     })
     const [status, setStatus] = useState("전체보기")
-    const [category, setCategory] = useState("카테고리")
     const [sendList, setSendList] =useState([])
 
-
-    const [medCategory, setMedcategory] = useState('')
-    const [creationDate, setCreationDate] =useState('')
-
     useEffect(()=>{
-      setLoading(true);
       axios
         .get(`http://localhost:8080/board/boardList`)
         .then(response => {
@@ -150,7 +141,6 @@ const BoardTestView = () => {
         .catch(error => {
           alert("서버와의 연결이 되지 않았습니다.");
         })
-        setLoading(false);
     }, [])
     const handleClose = () => {
       setShow(false)
@@ -158,7 +148,6 @@ const BoardTestView = () => {
     // ----------------- Pagination -----------------------------
     const handleChangePage = (e, newPage) => {
       setPage(newPage);
-      setNewPageSave(newPage)
     };
     const handleChangeRowsPerPage = (e) => {
       setRowsPerPage(parseInt(e.target.value, 10));

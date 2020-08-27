@@ -46,21 +46,10 @@ const useStyles1 = makeStyles((theme) => ({
   },
 }));
 
-const selectStyle = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-}));
-
-
 const TablePaginationActions = (props) => {
   const classes = useStyles1();
   const theme = useTheme();
-  const { count, page, rowsPerPage, onChangePage, setTablePagination } = props;
+  const { count, page, rowsPerPage, onChangePage } = props;
   const handleFirstPageButtonClick = (event) => {
     onChangePage(event, 0);
   };
@@ -110,14 +99,10 @@ rowsPerPage: PropTypes.number.isRequired,
 };
 const DoctorTestView = () => {
   const tableClasses = tableStyles();
-  const selectBox = selectStyle()
 
     const [doctorData, setDoctorData] = useState([])
-    const [posts, setPosts] = useState([])
-    const [loading, setLoading] = useState(false)
     const [show, setShow] = useState(false);
     // --------------Pagination ------------------------
-    const [newPageSave, setNewPageSave] = useState()
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     // -------------------- Sort -----------------------
@@ -130,17 +115,14 @@ const DoctorTestView = () => {
     const [sendList, setSendList] =useState([])
 
     useEffect(()=>{
-      setLoading(true);
       axios
         .get(`http://localhost:8080/doctor/doctorList`)
         .then(response => {
-          setPosts(response.data)
           setSendList(response.data)
         })
         .catch(error => {
           alert("서버와의 연결이 되지 않았습니다.");
         })
-        setLoading(false);
 
     }, [])
     const handleClose = () => {
@@ -149,7 +131,6 @@ const DoctorTestView = () => {
     // ----------------- Pagination -----------------------------
     const handleChangePage = (e, newPage) => {
       setPage(newPage);
-      setNewPageSave(newPage)
     };
     const handleChangeRowsPerPage = (e) => {
       setRowsPerPage(parseInt(e.target.value, 10));

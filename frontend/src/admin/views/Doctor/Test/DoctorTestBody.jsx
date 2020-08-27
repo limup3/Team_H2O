@@ -25,8 +25,6 @@ const useStyles = makeStyles(theme => ({
 const DoctorTestBody = (props) => {
     const classes = useStyles();
     const {doctorData, setClose, className} = props
-    const [doctorNo, setDoctorNo] = useState(doctorData.doctorNo)
-    const [doctorName, setDoctorName] = useState(doctorData.doctorName)
     const [doctorsLicense, setDoctorsLicense] = useState(doctorData.doctorsLicense)
     const [hospitalName, setHospitalName] = useState(doctorData.hospitalName);
     const [position, setPosition] = useState(doctorData.position)
@@ -34,8 +32,6 @@ const DoctorTestBody = (props) => {
     const [specialized, setSpecialized] = useState(doctorData.specialized)
     const [medicalSubject, setMedicalSubject] = useState(doctorData.medicalSubject)
     const [birthday, setBirthday] = useState(doctorData.birthday)
-    const [values, setValues] = useState([]);
-
 
     const history = useHistory();
 
@@ -46,8 +42,8 @@ const DoctorTestBody = (props) => {
    
     const handelModify = e => {
       const doctorJson = {
-        doctorNo : doctorNo,
-        doctorName: doctorName,
+        doctorNo : doctorData.doctorNo,
+        doctorName: doctorData.doctorName,
         doctorsLicense: doctorsLicense,
         hospitalName: hospitalName,
         position : position,
@@ -105,7 +101,7 @@ const DoctorTestBody = (props) => {
                   name="doctorsLicense"
                   onChange={e => setDoctorsLicense(e.target.value)}
                   required
-                  value={values.doctorsLicense}
+                  value={doctorsLicense}
                   variant="outlined"
                 />
               </Grid>
@@ -122,7 +118,7 @@ const DoctorTestBody = (props) => {
                   name="hospitalName"
                   onChange={e => setHospitalName(e.target.value)}
                   required
-                  value={values.hospitalName}
+                  value={hospitalName}
                   variant="outlined"
                 />
               </Grid>
@@ -140,7 +136,7 @@ const DoctorTestBody = (props) => {
                   name="position"
                   onChange={e => setPosition(e.target.value)}
                   required
-                  value={values.position}
+                  value={position}
                   variant="outlined"
                 />
               </Grid>
@@ -157,7 +153,7 @@ const DoctorTestBody = (props) => {
                   name="detailData"
                   onChange={e => setDetailData(e.target.value)}
                   required
-                  value={values.detailData}
+                  value={detailData}
                   variant="outlined"
                 />
               </Grid>
@@ -174,7 +170,7 @@ const DoctorTestBody = (props) => {
                   name="specialized"
                   onChange={e => setSpecialized(e.target.value)}
                   required
-                  value={values.specialized}
+                  value={specialized}
                   variant="outlined"
                 />
               </Grid>
@@ -191,7 +187,7 @@ const DoctorTestBody = (props) => {
                   name="medicalSubject"
                   onChange={e => setMedicalSubject(e.target.value)}
                   required
-                  value={values.medicalSubject}
+                  value={medicalSubject}
                   variant="outlined"
                 />
               </Grid>
@@ -208,7 +204,7 @@ const DoctorTestBody = (props) => {
                   name="birthday"
                   onChange={e => setBirthday(e.target.value)}
                   required
-                  value={values.birthday}
+                  value={birthday}
                   variant="outlined"
                 />
               </Grid>

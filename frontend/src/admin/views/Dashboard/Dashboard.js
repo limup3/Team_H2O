@@ -29,10 +29,8 @@ const Dashboard = () => {
     const [boardData, setBoardData] = useState([])
 
 
-    const [loading, setLoading] = useState(false)
 
     useEffect(()=>{
-      setLoading(true);
 
       axios
       .get(`http://localhost:8080/user/userList`)
@@ -42,7 +40,6 @@ const Dashboard = () => {
       .catch(error => {
         alert("서버와의 연결이 되지 않았습니다.");
       })
-      setLoading(false);
 
       axios
         .get(`http://localhost:8080/hospital/hospitalList`)
@@ -52,7 +49,6 @@ const Dashboard = () => {
         .catch(error => {
           alert("서버와의 연결이 되지 않았습니다.");
         })
-        setLoading(false);
 
       axios
       .get(`http://localhost:8080/doctor/doctorList`)
@@ -62,7 +58,6 @@ const Dashboard = () => {
       .catch(error => {
         alert("서버와의 연결이 되지 않았습니다.");
       })
-      setLoading(false);
 
       axios
         .get(`http://localhost:8080/board/boardList`)
@@ -72,7 +67,6 @@ const Dashboard = () => {
         .catch(error => {
           alert("서버와의 연결이 되지 않았습니다.");
         })
-        setLoading(false);
 
       
     }, [])

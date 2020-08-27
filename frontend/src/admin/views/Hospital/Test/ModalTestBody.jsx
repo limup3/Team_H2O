@@ -29,8 +29,6 @@ const useStyles = makeStyles(theme => ({
 const ModalTestBody = (props) => {
     const classes = useStyles();
     const {hospitalData, setClose, className} = props
-    const [hospitalNo, setHospitalNo] = useState(hospitalData.hospitalNo)
-    const [hospitalName, setHospitalName] = useState(hospitalData.hospitalName)
     const [businessLicenseNumber, setBusinessLicenseNumber] = useState(hospitalData.businessLicenseNumber)
     const [businessStatus, setBusinessStatus] = useState(hospitalData.businessStatus);
     const [tel, setTel] = useState(hospitalData.tel)
@@ -40,10 +38,8 @@ const ModalTestBody = (props) => {
     const [hospitalRoom,setHospitalRoom] = useState(hospitalData.hospitalRoom)
     const [hospitalBed,setHospitalBed] = useState(hospitalData.hospitalBed)
     const [hospitalArea,setHospitalArea] = useState(hospitalData.hospitalArea)
-    const [typeDetail,setTypeDetail] = useState(hospitalData.typeDetail)
     const [latitude, setLatitude] = useState(hospitalData.latitude)
     const [longitude, setLongitude] = useState(hospitalData.longitude)
-    const [values, setValues] = useState([]);
     
     const [checked, setChecked] = useState({
       checkBox1 : false,
@@ -58,6 +54,7 @@ const ModalTestBody = (props) => {
         case `영업중`: return setChecked({...checked, checkBox1:true})
         case `폐업`: return setChecked({...checked, checkBox2:true})
         case `휴업`: return setChecked({...checked, checkBox3:true})
+        default : return null
       }
     }, [])
 
@@ -81,8 +78,8 @@ const ModalTestBody = (props) => {
    
     const handelModify = e => {
       const hospitalJson = {
-        hospitalNo : hospitalNo,
-        hospitalName: hospitalName,
+        hospitalNo : hospitalData.hospitalNo,
+        hospitalName: hospitalData.hospitalName,
         businessLicenseNumber: businessLicenseNumber,
         businessStatus: businessStatus,
         tel : tel,
@@ -92,7 +89,7 @@ const ModalTestBody = (props) => {
         hospitalRoom : hospitalRoom,
         hospitalBed : hospitalBed,
         hospitalArea : hospitalArea,
-        typeDetail : typeDetail,
+        typeDetail : hospitalData.typeDetail,
         latitude : latitude,
         longitude : longitude,
       }
@@ -147,7 +144,7 @@ const ModalTestBody = (props) => {
                   name="businessLicenseNumber"
                   onChange={e => setBusinessLicenseNumber(e.target.value)}
                   required
-                  value={values.businessLicenseNumber}
+                  value={businessLicenseNumber}
                   variant="outlined"
                 />
               </Grid>
@@ -164,7 +161,7 @@ const ModalTestBody = (props) => {
                   name="addr"
                   onChange={e => setAddr(e.target.value)}
                   required
-                  value={values.addr}
+                  value={addr}
                   variant="outlined"
                 />
               </Grid>
@@ -224,7 +221,7 @@ const ModalTestBody = (props) => {
                   name="hospitalType"
                   onChange={e => setHospitalType(e.target.value)}
                   required
-                  value={values.hospitalType}
+                  value={hospitalType}
                   variant="outlined"
                 />
               </Grid>
@@ -241,7 +238,7 @@ const ModalTestBody = (props) => {
                   name="medicalPeople"
                   onChange={e => setMedicalPeople(e.target.value)}
                   required
-                  value={values.medicalPeople}
+                  value={medicalPeople}
                   variant="outlined"
                 />
               </Grid>
@@ -258,7 +255,7 @@ const ModalTestBody = (props) => {
                   name="tel"
                   onChange={e => setTel(e.target.value)}
                   required
-                  value={values.tel}
+                  value={tel}
                   variant="outlined"
                 />
               </Grid>
@@ -275,7 +272,7 @@ const ModalTestBody = (props) => {
                   name="hospitalRoom"
                   onChange={e => setHospitalRoom(e.target.value)}
                   required
-                  value={values.hospitalRoom}
+                  value={hospitalRoom}
                   variant="outlined"
                 />
               </Grid>
@@ -292,7 +289,7 @@ const ModalTestBody = (props) => {
                   name="hospitalBed"
                   onChange={e => setHospitalBed(e.target.value)}
                   required
-                  value={values.hospitalBed}
+                  value={hospitalBed}
                   variant="outlined"
                 />
               </Grid>
@@ -309,7 +306,7 @@ const ModalTestBody = (props) => {
                   name="hospitalArea"
                   onChange={e => setHospitalArea(e.target.value)}
                   required
-                  value={values.hospitalArea}
+                  value={hospitalArea}
                   variant="outlined"
                 />
               </Grid>
@@ -333,7 +330,7 @@ const ModalTestBody = (props) => {
                   name="latitude"
                   onChange={e => setLatitude(e.target.value)}
                   required
-                  value={values.latitude}
+                  value={latitude}
                   variant="outlined"
                 />
               </Grid>
@@ -350,7 +347,7 @@ const ModalTestBody = (props) => {
                   name="longitude"
                   onChange={e => setLongitude(e.target.value)}
                   required
-                  value={values.longitude}
+                  value={longitude}
                   variant="outlined"
                 />
               </Grid>

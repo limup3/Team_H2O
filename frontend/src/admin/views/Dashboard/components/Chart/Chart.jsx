@@ -17,7 +17,7 @@ import {
 } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
-import { ChartBar, ChartDounut, ChartMix } from './components';
+import { ChartBar, ChartDounut } from './components';
 import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
@@ -63,11 +63,10 @@ const Chart = props => {
   const [chartData2, setChartData2]= useState()
   const [chartData3, setChartData3]= useState()
   const [chartValue, setChartValue] = useState("")
-  const [yyyy,setYyyy] = useState(new Date().getFullYear())
+  const yyyy = new Date().getFullYear()
     
 
   const [userData, setUserData] = useState([])
-  const [loading, setLoading] = useState(false)
 
 
   const chartValueInput = props => {
@@ -120,6 +119,7 @@ const Chart = props => {
         case "checkBox_Sex": return chartValueInput("Sex")
         case "checkBox_Location": return chartValueInput("Location")
         case "checkBox_days": return chartValueInput("Days")
+        default: return chartValueInput("Age")
       }
     }
   }
@@ -173,7 +173,6 @@ const Chart = props => {
       .catch(error => {
         alert("서버와의 연결이 되지 않았습니다.");
       })
-      setLoading(false)
   },[])
   
   //

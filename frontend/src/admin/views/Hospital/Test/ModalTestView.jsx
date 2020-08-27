@@ -15,7 +15,7 @@ import {
   IconButton,
   Select 
 } from '@material-ui/core';
-import { Button, Modal, PageItem, Dropdown, DropdownButton } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
 import ModalTestBody from './ModalTestBody';
 import PropTypes from 'prop-types';
 import FirstPageIcon from '@material-ui/icons/FirstPage';
@@ -63,7 +63,7 @@ const selectStyle = makeStyles((theme) => ({
 const TablePaginationActions = (props) => {
   const classes = useStyles1();
   const theme = useTheme();
-  const { count, page, rowsPerPage, onChangePage, setTablePagination } = props;
+  const { count, page, rowsPerPage, onChangePage } = props;
   const handleFirstPageButtonClick = (event) => {
     onChangePage(event, 0);
   };
@@ -117,11 +117,8 @@ const ModalTestView = () => {
 
     const [hospitalData, setHospitalData] = useState([])
     const [posts, setPosts] = useState([])
-    const [sparePosts, setSparePosts] = useState([])
-    const [loading, setLoading] = useState(false)
     const [show, setShow] = useState(false);
     // --------------Pagination ------------------------
-    const [newPageSave, setNewPageSave] = useState()
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     // -------------------- Sort -----------------------
@@ -134,7 +131,6 @@ const ModalTestView = () => {
     const [sendList, setSendList] =useState([])
 
     useEffect(()=>{
-      setLoading(true);
       axios
         .get(`http://localhost:8080/hospital/hospitalList`)
         .then(response => {
@@ -144,7 +140,6 @@ const ModalTestView = () => {
         .catch(error => {
           alert("서버와의 연결이 되지 않았습니다.");
         })
-        setLoading(false);
     }, [])
     const handleClose = () => {
       setShow(false)
@@ -152,7 +147,6 @@ const ModalTestView = () => {
     // ----------------- Pagination -----------------------------
     const handleChangePage = (e, newPage) => {
       setPage(newPage);
-      setNewPageSave(newPage)
     };
     const handleChangeRowsPerPage = (e) => {
       setRowsPerPage(parseInt(e.target.value, 10));
