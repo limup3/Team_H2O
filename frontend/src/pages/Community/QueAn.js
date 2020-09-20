@@ -50,9 +50,8 @@ const QueAn = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8080/board/list/get/questionAnswer')
+      .get('https://kmlim.shop/H2O/board/list/get/questionAnswer')
       .then(({data})=>{
-        console.log(data);
         setPostList(data);
         setCreationDate(data);
         setClick(data);
@@ -68,10 +67,8 @@ const QueAn = () => {
       setSendList(postList)
     }else{
       setSendList([])
-      console.log(e.target.value)
       postList.forEach(post=>{
         if (post.questionCategory===e.target.value) {
-          console.log(post)
           setSendList((sendList)=>[...sendList, post])
         }
       })
@@ -117,7 +114,7 @@ const QueAn = () => {
         </Table>
 
         <div className="button-right">
-          <Button variant="outline-blue " onClick={()=>{history.push('/Edit')}}><MDBIcon far icon="edit" />글쓰기</Button>
+          <Button variant="outline-blue " onClick={()=>{history.push('/H2O/Edit')}}><MDBIcon far icon="edit" />글쓰기</Button>
         </div>
         <div
           className="pagiantion-comu"

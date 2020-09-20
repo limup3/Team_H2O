@@ -24,7 +24,7 @@ const Edit = () => {
     const handleShow = () => setShow(true);
     const history = useHistory();
     const handleClose = () => {
-        history.push("/Community/userBoard")
+        history.push("/H2O/Community/userBoard")
         setShow(false);
     }
     const handleQuill = (value)=>{
@@ -37,9 +37,6 @@ const Edit = () => {
 //자료 업로드
     const newBoard = e => {
         e.preventDefault();
-        console.log(`title ${setTitle}, category ${category}, medCategory ${medCategory}, 
-        value ${value}, questionCategory ${questionCategory}, 
-        customerCategory ${customerCategory}`)
 
         const comudata ={
             // userId:accountDetail.id,
@@ -56,12 +53,10 @@ const Edit = () => {
                 if ( medCategory ==="" || title ==="" || value ===""){
                     alert("입력창을 다채워주세요");
                 }else {
-                    console.log('axios 들어옴')
                     axios
-                      .post(`http://localhost:8080/board/update`,comudata)
+                      .post(`https://kmlim.shop/H2O/board/update`,comudata)
                       .then((res)=>{
-                          console.log(res.data);
-                          window.location.href ="/Community/userBoard"
+                          window.location.href ="/H2O/Community/userBoard"
                       })
                       .catch((err)=>{
                           throw err;
@@ -72,12 +67,10 @@ const Edit = () => {
                 if ( customerCategory ==="" || title ==="" || value ===""){
                     alert("입력창을 다채워주세요");
                 }else {
-                    console.log('axios 들어옴')
                     axios
-                      .post(`http://localhost:8080/board/update`,comudata)
+                      .post(`https://kmlim.shop/H2O/board/update`,comudata)
                       .then((res)=>{
-                          console.log(res.data);
-                          window.location.href ="/Community/CustomerServiceCenter"
+                          window.location.href ="/H2O/Community/CustomerServiceCenter"
                       })
                       .catch((err)=>{
                           throw err;
@@ -88,12 +81,10 @@ const Edit = () => {
                 if ( questionCategory ==="" || title ==="" || value ===""){
                     alert("입력창을 다채워주세요");
                 }else {
-                    console.log('axios 들어옴')
                     axios
-                      .post(`http://localhost:8080/board/update`,comudata)
+                      .post(`https://kmlim.shop/H2O/board/update`,comudata)
                       .then((res)=>{
-                          console.log(res.data);
-                          window.location.href ="/Community/QueAn"
+                          window.location.href ="/H2O/Community/QueAn"
                       })
                       .catch((err)=>{
                           throw err;
@@ -225,7 +216,7 @@ const Edit = () => {
                                     </Modal.Header>
                                     <Modal.Body>입력하신 데이터를 업로드하시겠습니까?</Modal.Body>
                                     <Modal.Footer>
-                                        <Link to="/Edit">
+                                        <Link to="/H2O/Edit">
                                             <Button onClick={handleClose}>
                                                 Close
                                             </Button>
@@ -236,7 +227,7 @@ const Edit = () => {
                                     </Modal.Footer>
                                 </Modal>
                                 <Button className="Cancel" variant="danger">
-                                    <Link to="/Community/userBoard">Cancel</Link>
+                                    <Link to="/H2O/Community/userBoard">Cancel</Link>
                                 </Button>
                                 <Button className="Submit" variant="primary" onClick={handleShow}
                                 >Submit</Button>

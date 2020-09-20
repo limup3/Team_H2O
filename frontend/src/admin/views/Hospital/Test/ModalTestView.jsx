@@ -132,7 +132,7 @@ const ModalTestView = () => {
 
     useEffect(()=>{
       axios
-        .get(`http://localhost:8080/hospital/hospitalList`)
+        .get(`https://kmlim.shop/H2O/hospital/hospitalList`)
         .then(response => {
           setPosts(response.data)
           setSendList(response.data)

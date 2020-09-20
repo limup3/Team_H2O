@@ -81,7 +81,7 @@ const MainTopPage = () => {
               value={location}
               onChange={e => setLocation(e.target.value)}
               />
-              <Link to="/SearchHospital">
+              <Link to="/H2O/SearchHospital">
               <button>Click!</button>
               </Link>
             </Actions>

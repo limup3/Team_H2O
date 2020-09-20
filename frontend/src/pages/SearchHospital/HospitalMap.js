@@ -22,7 +22,7 @@ const options = {
     zoomControl: true,
 }
 
-const MAP_KEY ='AIzaSyDyYteoY6q3NQwsEHFrXfan_q_9VlIVsxk'
+const MAP_KEY = process.env.REACT_APP_GOOGLE_MAP_KEY
 //맵 키 
 const libraries = ["places"];
 //구글 맵 places 라이브러리 호출
@@ -61,7 +61,7 @@ const HospitalMap = () =>{
         },[])
 
     useEffect(()=>{
-        axios.get(`http://localhost:8080/hospital/data`)
+        axios.get(`https://kmlim.shop/H2O/hospital/data`)
         .then(response => {
             setHospitalList(response.data.list)
         })
@@ -113,7 +113,7 @@ const HospitalMap = () =>{
     const handleBack = e => {
       e.preventDefault();
       alert("로그인시 이용 가능합니다.")
-      history.push("/Login")
+      history.push("/H2O/Login")
     }
 
     function Search({panTo}) {
@@ -456,7 +456,7 @@ const HospitalMap = () =>{
                               </MDBCardText>
 
                               {doctor.id < 4 &&
-                                <MDBLink to={`/Reservation/${selected.hospitalName}/${doctor.name}/${doctor.medicalSubject}`}>
+                                <MDBLink to={`/H2O/Reservation/${selected.hospitalName}/${doctor.name}/${doctor.medicalSubject}`}>
                                 <MDBBtn
                                 style = {{
                                 right : '25px',
@@ -467,7 +467,7 @@ const HospitalMap = () =>{
                               }
                               {doctor.id > 3 &&
                                 <>
-                                <MDBLink to={`/Reservation/${selected.hospitalName}/${doctor.name}/${doctor.medicalSubject}`}>
+                                <MDBLink to={`/H2O/Reservation/${selected.hospitalName}/${doctor.name}/${doctor.medicalSubject}`}>
                                 <MDBBtn 
                                 style = {{
                                   right : '25px',
@@ -477,7 +477,7 @@ const HospitalMap = () =>{
                                 </MDBBtn>
                                 </MDBLink>
                                 
-                                <MDBLink to={`/TelReservation/${selected.hospitalName}/${doctor.name}/${doctor.medicalSubject}`}>
+                                <MDBLink to={`/H2O/TelReservation/${selected.hospitalName}/${doctor.name}/${doctor.medicalSubject}`}>
                                 <MDBBtn
                                 style = {{
                                   right : '25px',

@@ -133,7 +133,7 @@ const BoardTestView = () => {
 
     useEffect(()=>{
       axios
-        .get(`http://localhost:8080/board/boardList`)
+        .get(`https://kmlim.shop/H2O/board/boardList`)
         .then(response => {
           setPosts(response.data)
           setSendList(response.data)

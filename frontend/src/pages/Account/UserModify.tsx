@@ -53,11 +53,11 @@ const UserModify = () => {
       phone: phoneNumber,
       birthday: birthday
     }
-    axios.patch(`http://localhost:8080/user/modify/${userId}`, userJson)
+    axios.patch(`https://kmlim.shop/H2O/user/modify/${userId}`, userJson)
           .then(response => {
             alert("데이터 변경 성공")
             sessionStorage.clear()
-            history.push("/")
+            history.push("/H2O")
           }
           ).catch(
             error => {
@@ -178,7 +178,7 @@ const UserModify = () => {
             <Grid item xs>
             </Grid>
             <Grid item>
-              <Link to="/UserDelete" >
+              <Link to="/H2O/UserDelete" >
                 {"Do you want to withdraw from membership?"}
               </Link>
             </Grid>

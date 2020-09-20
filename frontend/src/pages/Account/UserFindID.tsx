@@ -52,7 +52,7 @@ const UserFindID = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    axios.get(`http://localhost:8080/user/findId?name=${name}&phone=${phone}`)
+    axios.get(`https://kmlim.shop/H2O/user/findId?name=${name}&phone=${phone}`)
     .then(response => {
       alert('성공')
       setUserId(response.data.userId);
@@ -122,12 +122,12 @@ const UserFindID = () => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link to="/UserFindPW" >
+              <Link to="/H2O/UserFindPW" >
                 {"Forgot Password?"}
               </Link>
             </Grid>
             <Grid item>
-              <Link to="/Login" >
+              <Link to="/H2O/Login" >
                 {"Already have an account? Sign in"}
               </Link>
             </Grid>

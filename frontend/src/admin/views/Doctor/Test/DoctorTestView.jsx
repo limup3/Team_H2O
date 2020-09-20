@@ -116,7 +116,7 @@ const DoctorTestView = () => {
 
     useEffect(()=>{
       axios
-        .get(`http://localhost:8080/doctor/doctorList`)
+        .get(`https://kmlim.shop/H2O/doctor/doctorList`)
         .then(response => {
           setSendList(response.data)
         })

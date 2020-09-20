@@ -53,11 +53,11 @@ const DoctorTestBody = (props) => {
         birthday : birthday
       }
       Axios
-        .patch(`http://localhost:8080/doctor/modify/${doctorsLicense}`, doctorJson)
+        .patch(`https://kmlim.shop/H2O/doctor/modify/${doctorsLicense}`, doctorJson)
         .then(response => {
           alert("병원 데이터 변경 성공")
           setClose(false);
-          history.push("/admin/doctor")
+          history.push("/H2O/admin/doctor")
 
         })
         .catch(

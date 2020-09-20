@@ -49,9 +49,8 @@ const CustomerServiceCenter = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8080/board/list/get/customerServiceCenter/')
+      .get('https://kmlim.shop/H2O/board/list/get/customerServiceCenter/')
       .then(({data}) => {
-        console.log(data);
         setPostList(data);
         // setCreationDate(data);
         // setClick(data);
@@ -68,10 +67,8 @@ const CustomerServiceCenter = () => {
 
     } else {
       setSendList([])
-      console.log(e.target.value)
       postList.forEach(post => {
         if (post.customerCategory === e.target.value) {
-          console.log(post)
           setSendList((sendList) => [...sendList, post])
         }})
       }
@@ -114,7 +111,7 @@ const CustomerServiceCenter = () => {
           </Table>
 
           <div className="button-right">
-            <Button variant="outline-blue " onClick={() => {history.push('/Edit')}}><MDBIcon far icon="edit"/>글쓰기</Button>
+            <Button variant="outline-blue " onClick={() => {history.push('/H2O/Edit')}}><MDBIcon far icon="edit"/>글쓰기</Button>
           </div>
           <div
             className="pagiantion-comu"

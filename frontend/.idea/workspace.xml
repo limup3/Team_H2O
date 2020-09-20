@@ -40,11 +40,6 @@
     <property name="ts.external.directory.path" value="C:\Users\lim_1\Desktop\Team_H2O\frontend\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\lim_1\Desktop\Team_H2O\frontend\src" />
-      <recent name="C:\Users\bit23\Desktop\king\frontend\src\pages\Ambulance" />
-      <recent name="C:\Users\lim_1\Team_H2O_Frontend\src\helpers" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\lim_1\Desktop\Team_H2O\frontend\src\pages" />
       <recent name="C:\Users\lim_1\Desktop\Team_H2O\frontend\src" />
@@ -52,7 +47,11 @@
       <recent name="C:\Users\lim_1\Team_H2O\frontend\src\pages" />
       <recent name="C:\Users\lim_1\Team_H2O\frontend\src\admin\views" />
     </key>
-
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lim_1\Desktop\Team_H2O\frontend\src" />
+      <recent name="C:\Users\bit23\Desktop\king\frontend\src\pages\Ambulance" />
+      <recent name="C:\Users\lim_1\Team_H2O_Frontend\src\helpers" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -66,19 +65,10 @@
       </list>
     </option>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="npm.start">
+    <configuration name="server.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/rtcServer/server.js" working-dir="$PROJECT_DIR$/rtcServer">
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="js.build_tools.npm">
       <command value="run" />
       <scripts>
@@ -98,6 +88,11 @@
       <envs />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.server.js" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -128,7 +123,9 @@
       <workItem from="1597590373401" duration="123000" />
       <workItem from="1597735515266" duration="856000" />
       <workItem from="1597740370346" duration="1399000" />
-
+      <workItem from="1599374400249" duration="3163000" />
+      <workItem from="1599380135454" duration="768000" />
+      <workItem from="1599835196073" duration="6057000" />
     </task>
     <servers />
   </component>

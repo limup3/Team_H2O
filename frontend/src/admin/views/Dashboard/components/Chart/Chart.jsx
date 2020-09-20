@@ -130,7 +130,7 @@ const Chart = props => {
     setChecked({...checked, checkBox_Age:true})
 
     axios
-      .get(`http://localhost:8080/user/userList`)
+      .get(`https://kmlim.shop/H2O/user/userList`)
       .then(response => {
         setUserData(response.data)
         let data = response.data

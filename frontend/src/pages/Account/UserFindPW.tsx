@@ -49,7 +49,7 @@ const UserFindPW = () => {
   const handleClose = () => setShow(false);
   const handleSubmit = e => {
     e.preventDefault();
-  axios.get(`http://localhost:8080/user/findPw?userId=${userId}&name=${userName}&phone=${phoneNumber}`)
+  axios.get(`https://kmlim.shop/H2O/user/findPw?userId=${userId}&name=${userName}&phone=${phoneNumber}`)
     .then(response => {
       alert('성공')
       setUserNo(response.data.userNo);
@@ -66,10 +66,10 @@ const UserFindPW = () => {
   const handleSaveNewPassword = e => {
     e.preventDefault();
     if( newPassword === confirmNewPassword ) {
-      axios.patch(`http://localhost:8080/user/${userNo}`, {password: newPassword})
+      axios.patch(`https://kmlim.shop/H2O/user/${userNo}`, {password: newPassword})
         .then( () => {
           alert("비밀번호가 재설정되었습니다. 다시 로그인하세요.");
-          history.push("/login");
+          history.push("/H2O/login");
         }).catch(error => { throw (error) });
     } else {
       alert("비밀번호가 일치하지 않습니다.");
@@ -148,12 +148,12 @@ const UserFindPW = () => {
        
           <Grid container>
             <Grid item xs>
-              <Link to="/UserFindID" >
+              <Link to="/H2O/UserFindID" >
                 {"Find ID ?"}
               </Link>
             </Grid>
             <Grid item>
-              <Link to="/Login" >
+              <Link to="/H2O/Login" >
                 {"Already have an account? Sign in"}
               </Link>
             </Grid>

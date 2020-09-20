@@ -24,7 +24,7 @@ const center ={
     lng:127.001699
 }
 
-const MAP_KEY ='AIzaSyDyYteoY6q3NQwsEHFrXfan_q_9VlIVsxk'
+const MAP_KEY = process.env.REACT_APP_GOOGLE_MAP_KEY
 const libraries = ["places"];
 
 
@@ -64,11 +64,9 @@ const GooMap = () =>{
     Geocode.setLanguage('ko')
     Geocode.fromLatLng(selected.lat, selected.lng).then(
         response =>{
-            console.log(response)
             const address = response.results[0].formatted_address
             const length = response.results[0].address_components.length
             const postcode = response.results[0].address_components[length-1].long_name
-            console.log(postcode.indexOf('-'))
             if(postcode.indexOf('-') !== -1){
                 setSelectedPc(postcode)
             }else{
@@ -76,10 +74,8 @@ const GooMap = () =>{
             }
             setSelectedAddr(address)
 
-            console.log(address)
         },
         error=>{
-            console.error(error)
         }
     );
 
@@ -411,7 +407,7 @@ const GooMap = () =>{
                                         <Col  className="my-1 col-auto">
                                             <Button type="initialize" className="map-inibtn"
 
-                                            ><Link to="/GooMap"/>초기화</Button>
+                                            ><Link to="/H2O/GooMap"/>초기화</Button>
                                         </Col>
                                     </div>
                             </Form.Row>

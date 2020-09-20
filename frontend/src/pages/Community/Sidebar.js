@@ -10,17 +10,17 @@ const SideBar = () => {
                 <ul className="nav">
                     <li className="<br/>">
                         <a className="nav-link">
-                            <span className="menu-title"><Link to="/Community/userBoard">자유 게시판</Link></span>
+                            <span className="menu-title"><Link to="/H2O/Community/userBoard">자유 게시판</Link></span>
                         </a>
                     </li><br/>
                     <li className="nav-item">
                         <a className="nav-link">
-                            <span className="menu-title"><Link to="/Community/CustomerServiceCenter">고객서비스센터</Link></span>
+                            <span className="menu-title"><Link to="/H2O/Community/CustomerServiceCenter">고객서비스센터</Link></span>
                         </a>
                     </li><br/>
                     <li className="nav-item">
                         <a className="nav-link">
-                            <span className="menu-title"><Link to="/Community/QueAn">Q&A</Link></span>
+                            <span className="menu-title"><Link to="/H2O/Community/QueAn">Q&A</Link></span>
                         </a>
                     </li><br/>
 

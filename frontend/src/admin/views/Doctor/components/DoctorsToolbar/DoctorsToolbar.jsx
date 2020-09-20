@@ -45,7 +45,7 @@ const DoctorsToolbar = props => {
 
         <span className={classes.spacer} />
         
-        <Link to="/admin/DoctorsAdd">
+        <Link to="/H2O/admin/DoctorsAdd">
         <Button
           color="primary"
           variant="contained"

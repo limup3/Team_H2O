@@ -93,13 +93,13 @@ const BoardTestBody = (props) => {
         longitude : longitude,
       }
       Axios
-        .patch(`http://localhost:8080/hospital/modify/${businessLicenseNumber}`, hospitalJson)
+        .patch(`https://kmlim.shop/H2O/hospital/modify/${businessLicenseNumber}`, hospitalJson)
         .then(response => {
           alert("병원 데이터 변경 성공")
           setClose(false);
           
-          history.push("/admin")
-          history.push("/admin/hospital")
+          history.push("/H2O/admin")
+          history.push("/H2O/admin/hospital")
 
         })
         .catch(

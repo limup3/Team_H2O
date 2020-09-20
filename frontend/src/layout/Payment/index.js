@@ -65,7 +65,7 @@ const Payment = (props) => {
 
     function callback(response) {
         const query = queryString.stringify(response);
-        history.push(`/payment/result?${query}`);
+        history.push(`/H2O/payment/result?${query}`);
       }
       return (
         <>

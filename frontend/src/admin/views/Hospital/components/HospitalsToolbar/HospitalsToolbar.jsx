@@ -43,7 +43,7 @@ const HospitalsToolbar = props => {
       <div className={classes.row}
               style={{fontWeight:"bold", fontSize:"x-large"}}>병원 관리
         <span className={classes.spacer} />
-        <Link to="/admin/HospitalsAdd">
+        <Link to="/H2O/admin/HospitalsAdd">
         <Button
           color="primary"
           variant="contained"

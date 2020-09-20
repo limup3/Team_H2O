@@ -42,27 +42,27 @@ const Sidebar = props => {
   const pages = [
     {
       title: '데이터 통계',
-      href: '/admin/dashboard',
+      href: '/H2O/admin/dashboard',
       icon: <DashboardIcon />
     },
     {
       title: '사용자 관리',
-      href: '/admin/users',
+      href: '/H2O/admin/users',
       icon: <PeopleIcon />
     },
     {
       title: '병원 관리',
-      href: '/admin/hospital',
+      href: '/H2O/admin/hospital',
       icon: <LocalHospitalIcon />
     },
     {
       title: '의사 관리',
-      href: '/admin/doctor',
+      href: '/H2O/admin/doctor',
       icon: <AccountBoxIcon />
     },
     {
       title: '게시판',
-      href: '/admin/board',
+      href: '/H2O/admin/board',
       icon: <DvrIcon/>
     },
   ];

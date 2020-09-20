@@ -5,7 +5,7 @@ import "@reach/combobox/styles.css";
 import {Card,CardHeader,Divider} from '@material-ui/core'
 import axios from "axios";
 
-const MAP_KEY ="AIzaSyB7sfZLERFCcGjAjkfOrmMRjf_y_Oo3KhQ"
+const MAP_KEY = process.env.REACT_APP_GOOGLE_MAP_KEY
 
 const libraries = ["places"]
 
@@ -31,7 +31,7 @@ const HospitalsMapBody = props => {
     
     useEffect(()=>{
       axios
-        .get(`http://localhost:8080/hospital/data`)
+        .get(`https://kmlim.shop/H2O/hospital/data`)
         .then(response => {
         setHospitalsMapData(response.data.list)
         })

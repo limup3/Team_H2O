@@ -50,7 +50,7 @@ const DoctorAdd = () => {
     if(doctorsLicense){
     e.preventDefault();
     axios
-      .get(`http://localhost:8080/doctor/licenseCheck/${doctorsLicense}`)
+      .get(`https://kmlim.shop/H2O/doctor/licenseCheck/${doctorsLicense}`)
       .then(response => {
         alert("이미 존재하는 면허번호 입니다.");
         setLicenseChecker("unavailable");
@@ -81,10 +81,10 @@ const DoctorAdd = () => {
     }
 
     if(licenseChecker==="available"){
-      axios.post(`http://localhost:8080/doctor/doctorAdd`, doctorJson)
+      axios.post(`https://kmlim.shop/H2O/doctor/doctorAdd`, doctorJson)
         .then(response => {
           alert("회원가입 성공 !")
-          history.push("/admin/doctor")
+          history.push("/H2O/admin/doctor")
             }
         ).catch(
           
@@ -104,7 +104,7 @@ const DoctorAdd = () => {
   }
 
   const handleCancel = () => {
-    history.push('/admin/doctor')
+    history.push('/H2O/admin/doctor')
   }
   return (
     <Container component="main" maxWidth="xs">

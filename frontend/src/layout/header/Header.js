@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
+import {Link} from "react-router-dom";
 import { css } from "styled-components/macro"; //eslint-disable-line
 import './Header.css'
 
@@ -60,26 +61,26 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
 
   const defaultLinks = [
     <NavLinks key={1} >
-      <NavLink className="navColor" href="/SearchHospital">병원찾기</NavLink>
-      <NavLink className="navColor" href="/Ambulance">응급차 호출</NavLink>
-      <NavLink className="navColor" href="/TeleMedicine" target="_blank">화상 진료</NavLink>
-      <NavLink className="navColor" href="/Community/userboard">커뮤니티</NavLink>
-      <NavLink className="navColor" href="/Admin" target="_blank">관리자(임시)</NavLink>
+      <Link to="/H2O/SearchHospital" className="navColor"><NavLink >병원찾기</NavLink></Link>
+      <Link to="/H2O/Ambulance" className="navColor"><NavLink >응급차 호출</NavLink></Link>
+      <Link to="/H2O/TeleMedicine" className="navColor"><NavLink target="_blank">화상 진료</NavLink></Link>
+      <Link to="/H2O/Community/userboard" className="navColor"><NavLink  >커뮤니티</NavLink></Link>
+      <NavLink className="navColor" href="/H2O/Admin" target="_blank">관리자(임시)</NavLink>
       {!sessionStorage.userData &&
-        <NavLink className="navColor" href="/Login" tw="lg:ml-12!">
+        <Link to="/H2O/Login" className="navColor"><NavLink  tw="lg:ml-12!">
         Login
-      </NavLink>
+      </NavLink></Link>
       }
       {sessionStorage.userData &&
-        <NavLink className="navColor" href="/" tw="lg:ml-12!" onClick={handleLogout}>
+        <Link to="/H2O" className="navColor"><NavLink tw="lg:ml-12!" onClick={handleLogout}>
         Logout
-      </NavLink>
+      </NavLink></Link>
       }
       {!sessionStorage.userData &&
-      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`}href="/SignUp">Sign Up</PrimaryLink>
+      <Link to="/H2O/SignUp"><PrimaryLink css={roundedHeaderButton && tw`rounded-full`}>Sign Up</PrimaryLink></Link>
       }
       {sessionStorage.userData &&
-      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`}href="/UserModify">MyPage</PrimaryLink>
+      <Link to="/H2O/UserModify"><PrimaryLink css={roundedHeaderButton && tw`rounded-full`}>MyPage</PrimaryLink></Link>
       }       
      
     </NavLinks>
@@ -88,10 +89,10 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
   const collapseBreakpointCss = collapseBreakPointCssMap[collapseBreakpointClass];
 
   const defaultLogoLink = (
-    <LogoLink className="navColor" href="/">
+    <Link to="/H2O" className="navColor"><LogoLink >
       <img src={logo} alt="logo" />
       H2O
-    </LogoLink>
+    </LogoLink></Link>
   );
 
   logoLink = logoLink || defaultLogoLink;

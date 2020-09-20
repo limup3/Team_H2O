@@ -44,10 +44,9 @@ const SignUp = () => {
   const [birthday, setBirthday] = useState("")
 
   const history = useHistory();
-
   const handleIdCheck = e => {
     e.preventDefault();
-    axios.get(`http://localhost:8080/user/idCheck/${userId}`)
+    axios.get(`https://kmlim.shop/user/idCheck/${userId}`)
         .then(response => {
           alert("이미 존재하는 아이디 입니다.");
           setUserId("");
@@ -66,10 +65,10 @@ const SignUp = () => {
       phone: phoneNumber,
       birthday: birthday
     }
-    axios.post(`http://localhost:8080/user/signUp`, userJson)
+    axios.post(`https://kmlim.shop/user/signUp`, userJson)
         .then(response => {
           alert("회원가입 성공 !")
-          history.push("/Login")
+          history.push("/H2O/Login")
             }
         ).catch(
           
@@ -203,7 +202,7 @@ const SignUp = () => {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link to="/Login">
+              <Link to="/H2O/Login">
                 {"Already have an account? Sign in"}
               </Link>
             </Grid>

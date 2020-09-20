@@ -40,7 +40,7 @@ const PaymentResult = () => {
 
   const handleBack = e => {
     e.preventDefault()
-    history.push('/')
+    history.push('/H2O')
     window.location.reload()
   }
   const { error_msg} = query;
@@ -66,7 +66,7 @@ const PaymentResult = () => {
     }
 
     if(resultType === '성공') {
-      axios.post(`http://localhost:8080/reservation/register`, reservationJson)
+      axios.post(`https://kmlim.shop/H2O/reservation/register`, reservationJson)
       .then(res => {
         }
       ).catch(

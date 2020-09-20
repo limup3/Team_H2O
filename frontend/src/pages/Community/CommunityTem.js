@@ -49,9 +49,8 @@ const CommunityTem = () => {
 
     useEffect(() => {
         axios
-          .get('http://localhost:8080/board/list/get/boardUser')
+          .get('https://kmlim.shop/H2O/board/list/get/boardUser')
           .then(({data})=>{
-              console.log(data);
               setPostList(data);
               setCreationDate(data);
               setClick(data);
@@ -64,15 +63,12 @@ const CommunityTem = () => {
 
     const changeCategory = (e) => {
         setMedCategory(e.target.value)
-        console.log("test")
         if (e.target.value==='전체보기'){
             setSendList(postList)
         }else{
             setSendList([])
-            console.log(e.target.value)
             postList.forEach(post=>{
                 if (post.medCategory===e.target.value) {
-                    console.log(post)
                     setSendList((sendList)=>[...sendList, post])
                 }
             })
@@ -125,7 +121,7 @@ const CommunityTem = () => {
               </Table>
 
               <div className="button-right">
-                  <Button variant="outline-blue" onClick={()=>{history.push('/Edit')}}><MDBIcon far icon="edit" />글쓰기</Button>
+                  <Button variant="outline-blue" onClick={()=>{history.push('/H2O/Edit')}}><MDBIcon far icon="edit" />글쓰기</Button>
               </div>
               <div
                 className="pagiantion-comu"

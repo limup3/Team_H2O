@@ -14,28 +14,28 @@ const TablePage = () => {
     return (
 
         <div>
-            <Route path="/Community/userBoard" exact>
+            <Route path="/H2O/Community/userBoard" exact>
                     <CommunityTem/>
             </Route>
 
-            <Route path="/Community/CustomerServiceCenter">
+            <Route path="/H2O/Community/CustomerServiceCenter">
                 <CustomerServiceCenter/>
             </Route>
 
-            <Route path="/Community/QueAn">
+            <Route path="/H2O/Community/QueAn">
                 <QueAn/>
             </Route>
 
 
-                    <Route path={`/Community/Review/:boardNo`}
+                    <Route path={`/H2O/Community/Review/:boardNo`}
                            render = {(props) => <Review {...props}/>}>
                     </Route>
 
-                    <Route path={`/Community/CSReview/:boardNo`}
+                    <Route path={`/H2O/Community/CSReview/:boardNo`}
                            render = {(props) => <CSReview {...props}/>}>
                     </Route>
 
-                    <Route path={`/Community/QAReview/:boardNo`}
+                    <Route path={`/H2O/Community/QAReview/:boardNo`}
                            render = {(props) => <QAReview {...props}/>}>
                     </Route>
 

@@ -24,9 +24,10 @@ class TeleMedicine extends React.Component {
   videoCall = new VideoCall();
 
   componentDidMount() {
-    // const socket = io(process.env.REACT_APP_SIGNALING_SERVER);
-    const socket = io.connect(process.env.REACT_APP_SIGNALING_SERVER)
-    //io(url)
+    // const socket = io.connect(process.env.REACT_APP_SIGNALING_SERVER)
+    const socket = io.connect('https://kmlim.shop:8443');
+    console.log(socket)
+    console.log(process.env.REACT_APP_SIGNALING_SERVER)
     const component = this;
     this.setState({ socket });
     const { roomId } = this.props.match.params;

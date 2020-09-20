@@ -52,7 +52,7 @@ export const loginReducer = (state = {}, action) => {
 //리듀서
 
 // export const postLoginRequest = data => async dispatch => {
-//     axios.post(`http://localhost:8080/user/login`, data)
+//     axios.post(`https://kmlim.shop/H2O/user/login`, data)
 //     .then(response => {
 //         alert("로그인 성공")
 //         dispatch(loginRequestAction(response.data))
@@ -85,11 +85,11 @@ const Login = () => {
             userId: userId,
             password: password
         }
-        axios.post(`http://localhost:8080/user/login`, userJson)
+        axios.post(`https://kmlim.shop/H2O/user/login`, userJson)
             .then(response => {
                 alert("로그인 성공 !")
                 sessionStorage.setItem("userData", JSON.stringify(response.data))
-                history.push("/")
+                history.push("/H2O")
                 }
             ).catch(
                 error => {
@@ -154,12 +154,12 @@ const Login = () => {
                     </Button>
                     <Grid container>
                         <Grid item xs>
-                            <Link to="/UserFindID" >
+                            <Link to="/H2O/UserFindID" >
                                 {"Forgot id?"}
                             </Link>
                         </Grid>
                         <Grid item>
-                            <Link to="/SignUp" >
+                            <Link to="/H2O/SignUp" >
                                 {"Don't have an account? Sign Up"}
                             </Link>
                         </Grid>

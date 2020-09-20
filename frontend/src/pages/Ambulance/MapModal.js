@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
 const MapModal=(props)=> {
   const classes = useStyles();
   const history = useHistory()
-  console.log(props.name)
   const [open, setOpen] = useState(false);
 
 
@@ -34,7 +33,7 @@ const MapModal=(props)=> {
   const handleBack = e => {
     e.preventDefault();
     alert("로그인시 이용 가능합니다.")
-    history.push("/")
+    history.push("/H2O")
   }
 
   const handleOpen = () => {
@@ -44,13 +43,13 @@ const MapModal=(props)=> {
   const emergancyButton = e =>{
     e.preventDefault();
     alert("중앙응급통제소와 연결을 위해, 전송받은 임시 비밀번호를 입력해주세요.")
-    history.push('/TeleMedicine')
+    history.push('/H2O/TeleMedicine')
   }
 
   const reservationButton = e => {
     e.preventDefault();
     alert("선택하신 예약서비스로 넘어가겠습니다.")
-    history.push(`/CarReservation/${props.content}/${props.name}/${props.startAddr}/${props.endAddr}/${props.postcode}`)
+    history.push(`/H2O/CarReservation/${props.content}/${props.name}/${props.startAddr}/${props.endAddr}/${props.postcode}`)
    
   }
 

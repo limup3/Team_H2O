@@ -15,7 +15,6 @@ import Page from './Page';
 import AdminPage from './AdminPage';
 import Payment from './layout/Payment';
 import PaymentResult from './layout/PaymentResult';
-
 //rootReducer
 
 const rootReducer = combineReducers({
@@ -28,8 +27,8 @@ const App = () => (
     <Provider store={store}>
       <Page />
       <AdminPage/>
-    <Route exact path="/payment" component={Payment} />
-    <Route exact path="/payment/result" component={PaymentResult} />
+    <Route exact path="/H2O/payment" component={Payment} />
+    <Route exact path="/H2O/payment/result" component={PaymentResult} />
     </Provider>
     </BrowserRouter>
 );

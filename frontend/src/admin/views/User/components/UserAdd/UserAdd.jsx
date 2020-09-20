@@ -44,7 +44,7 @@ const UserAdd = () => {
       if(userId){
       e.preventDefault();
       axios
-        .get(`http://localhost:8080/user/idCheck/${userId}`)
+        .get(`https://kmlim.shop/H2O/user/idCheck/${userId}`)
         .then(response => {
           alert("이미 존재하는 아이디 입니다.");
           setIdChecker("unavailable")
@@ -71,10 +71,10 @@ const UserAdd = () => {
       birthday: birthday
     }
     if(idChecker==="available"){
-      axios.post(`http://localhost:8080/user/signUp`, userJson)
+      axios.post(`https://kmlim.shop/H2O/user/signUp`, userJson)
         .then(response => {
           alert("회원가입 성공 !")
-          history.push("/admin/account")
+          history.push("/H2O/admin/account")
             }
         ).catch(
           
@@ -94,7 +94,7 @@ const UserAdd = () => {
   }
 
   const handleCancel = () => {
-    history.push('/admin/users')
+    history.push('/H2O/admin/users')
   }
 
   return (

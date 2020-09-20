@@ -30,7 +30,7 @@ io.on('connection', function (socket) {
     });
     socket.on('signal', (data) => {
         io.to(data.room).emit('desc', data.desc)
-        console.log("desc:"+JSON.stringify(data))
+        console.log("서버연결")
     })
     socket.on('disconnect', () => {
         //disconnect 이벤트는 클라이언트와의 연결이 끊어졌을 때 발생

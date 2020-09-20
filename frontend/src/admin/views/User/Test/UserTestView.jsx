@@ -118,7 +118,7 @@ const UserTestView = () => {
 
     useEffect(()=>{
       axios
-        .get(`http://localhost:8080/user/userList`)
+        .get(`https://kmlim.shop/H2O/user/userList`)
         .then(response => {
           setSendList(response.data)
         })

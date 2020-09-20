@@ -18,7 +18,7 @@ const Posts = ({ sendList, loading, cate }) => {
           {/*<td>{info.user.userId}</td>*/}
           <td>{info.medCategory}</td>
           <td id="title" onClick={()=>setClick(click+1)}>
-            <Link to={`/Community/Review/${info.boardNo}`}>{info.title}</Link>
+            <Link to={`/H2O/Community/Review/${info.boardNo}`}>{info.title}</Link>
           </td>
           <td>{info.creationDate}</td>
           <td>{info.click}</td>
@@ -36,7 +36,7 @@ const Posts = ({ sendList, loading, cate }) => {
           {/*<td>{info.user.userId}</td>*/}
           <td>{info.questionCategory}</td>
           <td id="title" onClick={()=>setClick(click+1)}>
-            <Link to={`/Community/QAReview/${info.boardNo}`}>{info.title}</Link>
+            <Link to={`/H2O/Community/QAReview/${info.boardNo}`}>{info.title}</Link>
           </td>
           {/*<td>{info.content}</td>*/}
           <td>{info.creationDate}</td>
@@ -55,7 +55,7 @@ const Posts = ({ sendList, loading, cate }) => {
             {/*<td>{info.user.userId}</td>*/}
             <td>{info.customerCategory}</td>
             <td id="title" onClick={()=>setClick(click+1)}>
-              <Link to={`/Community/CSReview/${info.boardNo}`}>{info.title}</Link>
+              <Link to={`/H2O/Community/CSReview/${info.boardNo}`}>{info.title}</Link>
             </td>
             {/*<td>{info.content}</td>*/}
             <td>{info.creationDate}</td>

@@ -33,7 +33,7 @@ const Dashboard = () => {
     useEffect(()=>{
 
       axios
-      .get(`http://localhost:8080/user/userList`)
+      .get(`https://kmlim.shop/H2O/user/userList`)
       .then(response => {
         setUserData(response.data)
       })
@@ -42,7 +42,7 @@ const Dashboard = () => {
       })
 
       axios
-        .get(`http://localhost:8080/hospital/hospitalList`)
+        .get(`https://kmlim.shop/H2O/hospital/hospitalList`)
         .then(response => {
           setHospitalData(response.data)
         })
@@ -51,7 +51,7 @@ const Dashboard = () => {
         })
 
       axios
-      .get(`http://localhost:8080/doctor/doctorList`)
+      .get(`https://kmlim.shop/H2O/doctor/doctorList`)
       .then(response => {
         setDoctorData(response.data)
       })
@@ -60,7 +60,7 @@ const Dashboard = () => {
       })
 
       axios
-        .get(`http://localhost:8080/board/boardList`)
+        .get(`https://kmlim.shop/H2O/board/boardList`)
         .then(response => {
           setBoardData(response.data)
         })

@@ -49,11 +49,11 @@ const UserDelete = () => {
     }
     if(password === JSON.parse(sessionStorage.userData).password ){
       if( password === confirmPassword ) {
-        axios.post(`http://localhost:8080/user/delete`,userJson)
+        axios.post(`https://kmlim.shop/H2O/user/delete`,userJson)
         .then(() => {
           sessionStorage.clear();
           alert("회원탈퇴 완료");
-          history.push("/");
+          history.push("/H2O");
         }).catch(
           error => { throw (error) }
         )
@@ -118,7 +118,7 @@ const UserDelete = () => {
             <Grid item xs={12}>
             </Grid>
           </Grid>
-          <Link to="/Login">
+          <Link to="/H2O/Login">
           <Button
             type="submit"
             fullWidth

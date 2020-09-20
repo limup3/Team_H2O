@@ -46,86 +46,86 @@ const AdminPage = () => {
     <Switch>
       <Redirect
         exact
-        from="/admin"
-        to="/admin/dashboard"
+        from="/H2O/admin"
+        to="/H2O/admin/dashboard"
       />
       <RouteWithLayout
         component={DashboardView}
         exact
         layout={MainLayout}
-        path="/admin/dashboard"
+        path="/H2O/admin/dashboard"
       />
       <RouteWithLayout
         component={UserListView}
         exact
         layout={MainLayout}
-        path="/admin/users"
+        path="/H2O/admin/users"
       />
       <RouteWithLayout
         component={TypographyView}
         exact
         layout={MainLayout}
-        path="/admin/typography"
+        path="/H2O/admin/typography"
       />
       <RouteWithLayout
         component={IconsView}
         exact
         layout={MainLayout}
-        path="/admin/icons"
+        path="/H2O/admin/icons"
       />
       <RouteWithLayout
         component={UserView}
         exact
         layout={MainLayout}
-        path="/admin/account"
+        path="/H2O/admin/account"
       />
       <RouteWithLayout
         component={SettingsView}
         exact
         layout={MainLayout}
-        path="/admin/settings"
+        path="/H2O/admin/settings"
       />
       <RouteWithLayout
         component={NotFoundView}
         exact
         layout={MinimalLayout}
-        path="/admin/not-found"
+        path="/H2O/admin/not-found"
       />
       <RouteWithLayout
         component={BoardView}
         exact
         layout={MainLayout}
-        path="/admin/Board"
+        path="/H2O/admin/Board"
       />
       <RouteWithLayout
         component={HospitalView}
         exact
         layout={MainLayout}
-        path="/admin/Hospital"
+        path="/H2O/admin/Hospital"
       />
       <RouteWithLayout
         component={HospitalsAdd}
         exact
         layout={MainLayout}
-        path="/admin/HospitalsAdd"
+        path="/H2O/admin/HospitalsAdd"
       />
       <RouteWithLayout
         component={DoctorView}
         exact
         layout={MainLayout}
-        path="/admin/doctor"
+        path="/H2O/admin/doctor"
       />
       <RouteWithLayout
         component={DoctorAdd}
         exact
         layout={MainLayout}
-        path="/admin/DoctorsAdd"
+        path="/H2O/admin/DoctorsAdd"
       />
       <RouteWithLayout
         component={UserAdd}
         exact
         layout={MainLayout}
-        path="/admin/UserAdd"
+        path="/H2O/admin/UserAdd"
       />
     </Switch>
     </Router>

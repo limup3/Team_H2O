@@ -6,114 +6,115 @@ import {SearchHospital} from './pages/SearchHospital'
 import {Ambulance} from './pages/Ambulance'
 import {TeleMedicine, RtcRoom} from './pages/TeleMedicine'
 import {Community, Edit} from './pages/Community'
-import {Login, SignUp, MyPage, UserModify, UserFindID, UserFindPW, UserDelete, } from './pages/Account'
+import {Login, SignUp, UserModify, UserFindID, UserFindPW, UserDelete, } from './pages/Account'
 import './pages/Community/community.css'
 import { Reservation, TelReservation } from "./pages/Reservation";
 import CarReservation from "./pages/Reservation/CarReservation";
+import { Intro } from "./intro";
 
 const Page = () => (
 
     <Switch>
             <Route path="/" exact>
+                    <Intro/>
+            </Route>
+
+            <Route path="/H2O" exact>
                     <MainTopPage/>
                     <MainBottomPage/>
                     <Footer/>
             </Route>
 
             
-            <Route path="/Reservation/:hospitalName/:name/:medicalSubject">
+            <Route path="/H2O/Reservation/:hospitalName/:name/:medicalSubject">
                     <NavBar/>
                     <Route path={`/Reservation/:hospitalName/:name/:medicalSubject`}
                        render = {(props) => <Reservation {...props}/>}>
                     </Route>
                     <Footer/>
             </Route>
-            <Route path="/TelReservation/:hospitalName/:name/:medicalSubject">
+            <Route path="/H2O/TelReservation/:hospitalName/:name/:medicalSubject">
                     <NavBar/>
-                    <Route path={`/TelReservation/:hospitalName/:name/:medicalSubject`}
+                    <Route path={`/H2O/TelReservation/:hospitalName/:name/:medicalSubject`}
                        render = {(props) => <TelReservation {...props}/>}>
                     </Route>
 
                     <Footer/>
             </Route>
-            <Route path="/CarReservation/:content/:name/:startAddr/:endAddr/:postcode">
+            <Route path="/H2O/CarReservation/:content/:name/:startAddr/:endAddr/:postcode">
                 <NavBar/>
-                <Route path={`/CarReservation/:content/:name/:startAddr/:endAddr/:postcode`}
+                <Route path={`/H2O/CarReservation/:content/:name/:startAddr/:endAddr/:postcode`}
                        render = {(props) => <CarReservation {...props}/>}>
                 </Route>
                 <Footer/>
             </Route>
 
 
-            <Route path="/Ambulance">
+            <Route path="/H2O/Ambulance">
                     <NavBar/>
                     <Ambulance/>
                     <Footer/>
             </Route>
 
-            <Route path="/Edit">
+            <Route path="/H2O/Edit">
                     <NavBar/>
                     <Edit/>
                     <Footer/>
             </Route>
 
-            <Route path="/Community">
+            <Route path="/H2O/Community">
                     <NavBar/>
                     <Community/>
                     <Footer/>
             </Route>
 
-            <Route path="/SearchHospital">
+            <Route path="/H2O/SearchHospital">
                     <NavBar/>
                     <SearchHospital/>
                     <Footer/>
             </Route>
 
-            <Route path="/Login">
+            <Route path="/H2O/Login">
                     <NavBar/>
                     <Login/>
                     <Footer/>
             </Route>
 
-            <Route path="/MyPage">
-                    <NavBar/>
-                    <MyPage/>
-                    <Footer/>
-            </Route>
 
-            <Route path="/UserModify">
+
+            <Route path="/H2O/UserModify">
                     <NavBar/>
                     <UserModify/>
                     <Footer/>
             </Route>
 
-            <Route path="/UserFIndID">
+            <Route path="/H2O/UserFIndID">
                     <NavBar/>
                     <UserFindID/>
                     <Footer/>
             </Route>
 
-            <Route path="/UserFIndPW">
+            <Route path="/H2O/UserFIndPW">
                     <NavBar/>
                     <UserFindPW/>
                     <Footer/>
             </Route>
 
-            <Route path="/UserDelete">
+            <Route path="/H2O/UserDelete">
                     <NavBar/>
                     <UserDelete/>
                     <Footer/>
             </Route>
 
-            <Route path="/SignUp">
+            <Route path="/H2O/SignUp">
                     <NavBar/>
                     <SignUp/>
                     <Footer/>
             </Route>
                   
             <React.Fragment>
-                    <Route path="/TeleMedicine" exact component={RtcRoom}/>
-                    <Route path="/TeleMedicine/:roomId" exact component={TeleMedicine}/>
+                    <Route path="/H2O/TeleMedicine" exact component={RtcRoom}/>
+                    <Route path="/H2O/TeleMedicine/:roomId" exact component={TeleMedicine}/>
             </React.Fragment>
 
     </Switch>

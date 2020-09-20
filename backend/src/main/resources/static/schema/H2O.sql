@@ -1,12 +1,12 @@
-DROP TABLE IF EXISTS Ambulance;
-DROP TABLE IF EXISTS Reservation;
-DROP TABLE IF EXISTS Board;
-DROP TABLE IF EXISTS User;
-DROP TABLE IF EXISTS Hospital;
-DROP TABLE IF EXISTS Doctor;
-DROP TABLE IF EXISTS Comments;
+DROP TABLE IF EXISTS ambulance;
+DROP TABLE IF EXISTS reservation;
+DROP TABLE IF EXISTS board;
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS hospital;
+DROP TABLE IF EXISTS doctor;
+DROP TABLE IF EXISTS comments;
 
-CREATE TABLE Ambulance
+CREATE TABLE ambulance
 (
     `Ambulance_No`    INT            NOT NULL    AUTO_INCREMENT,
     `Ambulance_Name`  VARCHAR(50)    NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE Ambulance
     `Count`           VARCHAR(45)    NULL,
     PRIMARY KEY (Ambulance_No)
 )default character set utf8 collate UTF8_GENERAL_CI;
-CREATE TABLE Reservation
+CREATE TABLE reservation
 (
     `Reservation_No`   INT             NOT NULL    AUTO_INCREMENT,
     `Reservation_Type` VARCHAR(20)     NULL,
@@ -28,7 +28,7 @@ CREATE TABLE Reservation
     `Ambulance_No`     INT             NULL,
     PRIMARY KEY (Reservation_No)
 )default character set utf8 collate UTF8_GENERAL_CI;
-CREATE TABLE Board
+CREATE TABLE board
 (
     `Board_No`       INT             NOT NULL    AUTO_INCREMENT,
     `Title`          VARCHAR(100)    NULL,
@@ -43,7 +43,7 @@ CREATE TABLE Board
     `Click`          INT             NULL,
     PRIMARY KEY (Board_No)
 )default character set utf8 collate UTF8_GENERAL_CI;
-CREATE TABLE User
+CREATE TABLE user
 (
     `User_No`           INT             NOT NULL    AUTO_INCREMENT,
     `User_Id`           VARCHAR(50)     NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE User
     `History`           VARCHAR(150)    NULL,
     PRIMARY KEY (User_No)
 )default character set utf8 collate UTF8_GENERAL_CI;
-CREATE TABLE Hospital
+CREATE TABLE hospital
 (
     `Hospital_No`      INT             NOT NULL    AUTO_INCREMENT,
     `Business_Status`  VARCHAR(10)     NULL,
@@ -74,7 +74,7 @@ CREATE TABLE Hospital
     `Business_License_Number`       VARCHAR(20)     NOT NULL,
     PRIMARY KEY (Hospital_No)
 )default character set utf8 collate UTF8_GENERAL_CI;
-CREATE TABLE Doctor
+CREATE TABLE doctor
 (
     `Doctor_No`       INT             NOT NULL    AUTO_INCREMENT,
     `Doctors_License` VARCHAR(10)     NOT NULL,
@@ -88,7 +88,7 @@ CREATE TABLE Doctor
     `Hospital_No`     INT             NULL,
     PRIMARY KEY (Doctor_No)
 )default character set utf8 collate UTF8_GENERAL_CI;
-CREATE TABLE Comments
+CREATE TABLE comments
 (
     `Comments_No`     INT             NOT NULL    AUTO_INCREMENT,
     `Content`         VARCHAR(255)    NULL,

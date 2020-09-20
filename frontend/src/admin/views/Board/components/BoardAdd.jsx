@@ -72,7 +72,7 @@ const BoardAdd = () => {
     if(businessLicenseNumber){
     e.preventDefault();
     axios
-      .get(`http://localhost:8080/hospital/BusinessLicenseCheck/${businessLicenseNumber}`)
+      .get(`https://kmlim.shop/H2O/hospital/BusinessLicenseCheck/${businessLicenseNumber}`)
       .then(response => {
         alert("이미 등록된 병원입니다.");
         setHospitalIdChecker("unavailable")
@@ -107,10 +107,10 @@ const BoardAdd = () => {
       longitude: longitude
     }
     if(hospitalIdChecker==="available"){
-      axios.post(`http://localhost:8080/hospital/hospitalAdd`, userJson)
+      axios.post(`https://kmlim.shop/H2O/hospital/hospitalAdd`, userJson)
         .then(response => {
           alert("병원 등록 성공 !")
-          history.push("/admin/hospital")
+          history.push("/H2O/admin/hospital")
             }
         ).catch(
           
@@ -131,7 +131,7 @@ const BoardAdd = () => {
   }
 
   const handleCancel = () => {
-    history.push('/admin/hospital')
+    history.push('/H2O/admin/hospital')
   }
 
   return (

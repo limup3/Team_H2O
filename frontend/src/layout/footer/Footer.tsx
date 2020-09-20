@@ -4,6 +4,7 @@ import styled from "styled-components";
 // import {Container as ContainerBase } from "components/misc/Layouts"
 import { Container } from "react-bootstrap";
 import logo from "../../helpers/images/logo.svg"
+import {Link} from "react-router-dom";
 import { ReactComponent as FacebookIcon } from "../../helpers/images/facebook-icon.svg";
 import { ReactComponent as TwitterIcon } from "../../helpers/images/twitter-icon.svg";
 import { ReactComponent as YoutubeIcon } from "../../helpers/images/youtube-icon.svg";
@@ -19,7 +20,7 @@ const LogoImg = tw.img`w-8`;
 const LogoText = tw.h5`ml-2 text-2xl font-black tracking-wider`;
 
 const LinksContainer = tw.div`mt-8 font-medium flex flex-wrap justify-center items-center flex-col sm:flex-row`
-const Link = tw.a`border-b-2 border-transparent hocus:text-gray-300 hocus:border-gray-300 pb-1 transition duration-300 mt-2 mx-4`;
+const NavLink = tw.a`border-b-2 border-transparent hocus:text-gray-300 hocus:border-gray-300 pb-1 transition duration-300 mt-2 mx-4`;
 
 const SocialLinksContainer = tw.div`mt-10`;
 const SocialLink = styled.a`
@@ -41,10 +42,10 @@ const Footer = () => (
          <LogoText>H2O</LogoText>
        </LogoContainer>
        <LinksContainer>
-         <Link className="navColor" href="/SearchHospital">병원찾기</Link>
-         <Link className="navColor" href="/Ambulance">응급차 호출</Link>
-         <Link className="navColor" href="/TeleMedicine">화상진료</Link>
-         <Link className="navColor" href="/Community/userBoard">커뮤니티</Link>
+         <Link to="/H2O/SearchHospital" className="navColor"><NavLink>병원찾기</NavLink></Link>
+         <Link to="/H2O/Ambulance" className="navColor"></Link><NavLink>응급차 호출</NavLink>
+         <Link to="/H2O/TeleMedicine" className="navColor"></Link><NavLink>화상진료</NavLink>
+         <Link to="/H2O/Community/userBoard" className="navColor"></Link><NavLink>커뮤니티</NavLink>
        </LinksContainer>
        <SocialLinksContainer>
          <SocialLink href="https://facebook.com">

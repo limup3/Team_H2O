@@ -9,7 +9,6 @@ import ReactQuill from "react-quill";
 import {MDBIcon} from "mdbreact";
 
 const Review = ({match}) => {
-  console.log(match)
   const [content, setContent] = useState('')
   const [title, setTitle] = useState('')
   const [boardNo, setBoardNo] = useState('')
@@ -25,9 +24,8 @@ const Review = ({match}) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/board/list/getOne/${match.params.boardNo}`)
+      .get(`https://kmlim.shop/H2O/board/list/getOne/${match.params.boardNo}`)
       .then((res) => {
-        console.log(`java에서 넘어온 data` + res.data.boardNo)
         setBoardNo(res.data.boardNo)
         setTitle(res.data.title)
         setContent(res.data.content)
@@ -45,7 +43,6 @@ const Review = ({match}) => {
 //게시물 수정후 업데이트
   const updateBoard = e => {
     e.preventDefault();
-    console.log(`boardNo : ${boardNo}, title : ${title}, content : ${content}`)
     // setReadOnly(false)
     const uploadData = {
     // boardNo: boardNo,
@@ -54,10 +51,9 @@ const Review = ({match}) => {
       creationDate: creationDate
     }
     axios
-      .patch(`http://localhost:8080/board/modify/${boardNo}`, uploadData)
+      .patch(`https://kmlim.shop/H2O/board/modify/${boardNo}`, uploadData)
       .then((res) => {
-        console.log(res.data);
-        history.push('/Community/userBoard')
+        history.push('/H2O/Community/userBoard')
 
       })
       .catch((err) => {
@@ -68,10 +64,7 @@ const Review = ({match}) => {
 //처음 게시물 제목클릭시 가져오는 데이터
   const getContent = e => {
     e.preventDefault();
-    console.log(`=========================`)
-    console.log(`boardNo ${boardNo}`)
     //setBoardNo(match.params.boardNo)
-    console.log(`click ${click}`)
     setReadOnly(false)
 
   }
@@ -79,10 +72,9 @@ const Review = ({match}) => {
   const deleteBoard = e => {
     e.preventDefault()
     axios
-      .delete(`http://localhost:8080/board/list/delete/${match.params.boardNo}`)
+      .delete(`https://kmlim.shop/H2O/board/list/delete/${match.params.boardNo}`)
       .then((res) => {
-        console.log(res)
-        history.push('/Community/userBoard')
+        history.push('/H2O/Community/userBoard')
       })
       .catch((err) => {
         throw err;
@@ -204,7 +196,7 @@ const Review = ({match}) => {
                   variant="outline-dark"
                   className="btn-font"
                 >
-                  <Link to='/Community/userBoard'>뒤로</Link>
+                  <Link to='/H2O/Community/userBoard'>뒤로</Link>
                 </Button>
               </div>
             }

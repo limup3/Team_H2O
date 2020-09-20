@@ -49,12 +49,12 @@ const UserTestBody = (props) => {
         birthday: birthday
       }
       Axios
-        .patch(`http://localhost:8080/user/modify/{userId}`, UserJson)
+        .patch(`https://kmlim.shop/H2O/user/modify/{userId}`, UserJson)
         .then(response => {
           alert("병원 데이터 변경 성공")
           setClose(false);
-          history.push("/admin")
-          history.push("/admin/users")
+          history.push("/H2O/admin")
+          history.push("/H2O/admin/users")
 
         })
         .catch(
